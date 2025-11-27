@@ -1,0 +1,63 @@
+name: Deploy to server
+on:
+  push:
+    branches: [ "main" ]
+    pull_request:
+      branches: [ "main" ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+      - name: Install Dependencies
+        run: composer install --optimize-autoloader --no-dev --no-progress --no-interaction --prefer-dist
+
+      - name: Install Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install Bun
+        uses: oven-sh/setup-bun@v2
+      - name: Install Node Dependencies
+        run: bun install
+      - name: Build Assets
+        run: bun run build
+
+      - name: Deploy to Staging server
+        uses: easingthemes/ssh-deploy@main
+        with:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          SOURCE: "."
+          REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
+          REMOTE_USER: ${{ secrets.REMOTE_USER }}
+          TARGET: "/home/etapsup-dev/htdocs/dev.etapsup.org"
+
+      - name: Upload production environment file
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.REMOTE_HOST }}
+          username: ${{ secrets.REMOTE_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            cat <<'EOF' > /home/etapsup-dev/htdocs/dev.etapsup.org/.env
+            ${{ secrets.ENV_FILE }}
+            EOF
+            chmod 640 /home/etapsup-dev/htdocs/dev.etapsup.org/.env
+
+      - name: Run Remote/Artisan commands
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.REMOTE_HOST }}
+          username: ${{ secrets.REMOTE_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            cd /home/etapsup-dev/htdocs/dev.etapsup.org
+            /usr/bin/php8.3 artisan migrate --force
+            /usr/bin/php8.3 artisan optimize:clear
+            /usr/bin/php8.3 artisan optimize
