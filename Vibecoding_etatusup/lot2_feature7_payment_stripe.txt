@@ -1,0 +1,116 @@
+## 🧩 Feature 7 — Module Paiement (Stripe)
+
+### 🎯 User Story
+
+**Story 1.7.1 — Paiement en ligne des frais de dossier et acompte scolarité**
+*En tant qu’étudiant (Amina)*,
+*je veux* pouvoir payer mes frais de dossier directement depuis la plateforme via Stripe,
+*afin de* finaliser ma candidature et obtenir automatiquement mon reçu.
+
+**Critères d’acceptation :**
+
+* Paiement via **Stripe Checkout** (mode test).
+* Le **montant à payer** correspond au champ `frais_dossier` de l’établissement.
+* Après paiement réussi → statut dossier = “Payé”.
+* Le reçu Stripe est accessible via un lien (`receipt_url`).
+* Liste des paiements visibles dans le tableau de bord étudiant.
+* Champ `acompte_scolarite` présent dans le modèle `etablissements` (prévu pour Sprint 2, pas encore actif).
+
+### ⚙️ Prompt Claude – Implémentation (Sprint 1)
+
+> **Mission globale :**
+> Intégrer Stripe Checkout en réutilisant la logique existante du projet cloné (Yod Invest ou Mareza).
+> Le paiement doit être fluide, sécurisé et ne pas nécessiter de refonte.
+> Avant modification, **analyse la configuration Stripe existante**, puis **adapte uniquement les parties nécessaires** pour connecter la candidature, l’établissement et le paiement.
+
+#### 🧠 Analyse préalable de l’existant
+
+* Identifier :
+
+  * `StripeController`, `PaymentController`, ou équivalent.
+  * Modèle `Application`, `Payment`.
+  * Routes API : `/api/v1/payments/create`, `/success`, `/cancel`.
+* Vérifier la configuration (`STRIPE_SECRET_KEY`, `STRIPE_PUBLIC_KEY`).
+* Observer la logique webhook (`checkout.session.completed`).
+* Diagnostic :
+
+  ```bash
+  // Diagnostic Sprint1 - Feature 1.7.1 :
+  // Contrôleur détecté : StripeController
+  // Routes existantes : /api/v1/payments/create, /success, /cancel
+  // Décision : conserver structure CheckoutSession + update auto statut "Payé"
+  ```
+
+#### ⚙️ Étapes d’implémentation
+
+**A. Frontend**
+
+* Dans `PaymentStep.vue` ou `Candidature.vue` :
+
+  * Bouton `[Payer les frais]`.
+  * Appel `POST /api/v1/payments/create` avec `application_id`, `establishment_id`, `amount`.
+  * Redirection vers `session.url` Stripe.
+  * Message de succès : “✅ Paiement réussi !”.
+
+**B. Backend**
+
+* Dans `StripeController` :
+
+  ```php
+  $session = \Stripe\Checkout\Session::create([
+      'payment_method_types' => ['card'],
+      'line_items' => [[
+          'price_data' => [
+              'currency' => 'eur',
+              'product_data' => ['name' => $establishment->name],
+              'unit_amount' => $establishment->frais_dossier * 100,
+          ],
+          'quantity' => 1,
+      ]],
+      'mode' => 'payment',
+      'success_url' => url('/payment/success?session_id={CHECKOUT_SESSION_ID}'),
+      'cancel_url' => url('/payment/cancel'),
+  ]);
+  ```
+* Webhook `checkout.session.completed` → met à jour `applications.status = 'Payé'` et stocke `receipt_url`.
+* Aucune génération de PDF locale.
+
+**C. Dashboard Étudiant**
+
+* Bloc “💳 Mes paiements” : liste date, montant, statut, lien reçu.
+* Affiche `frais_dossier` (Sprint 1).
+* Préparer champ `acompte_scolarite` (non encore payable).
+
+#### 🎨 UX / UI
+
+* Design cohérent avec les autres sections du tableau de bord.
+* Messages clairs selon le résultat du paiement :
+
+  * ✅ “Paiement validé”
+  * ⚠️ “Paiement annulé ou échoué”
+* Icônes de statut.
+
+#### 🔒 Sécurité
+
+* Clés Stripe sécurisées (server-side only).
+* Validation utilisateur connecté.
+* Pas de duplication de paiement.
+
+#### ❌ À ne pas faire
+
+* Ne pas recréer une logique de facturation interne.
+* Ne pas intégrer d’autres moyens de paiement.
+* Ne pas stocker les données de carte.
+* Ne pas casser la structure existante Stripe.
+
+#### 📘 Traçabilité
+
+```js
+// Sprint1 Update: Feature 1.7.1 — Module Paiement (Stripe + acompte_scolarite)
+```
+
+`docs/qa/TEST_REPORT.md` →
+
+```
+Section “Paiement (Stripe)” — Vérifier création session, redirection, statut Payé, lien reçu Stripe.
+``

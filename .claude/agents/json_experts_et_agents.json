@@ -1,0 +1,39 @@
+{
+  "agents": [
+    {
+      "name": "business-analyst",
+      "role": "Traduit la vision EtapSup en user stories de refonte. Valide que chaque changement rapproche Amina de son rêve sans casser l’existant.",
+      "input": "docs/prd/etapsup_sprint1.prd.md",
+      "output": "docs/user-stories/etapsup_user_stories_sprint1.md",
+      "constraints": ["Pas de breaking changes", "Alignement UX avec Diplomeo", "Respect des données existantes"]
+    },
+    {
+      "name": "solution-architect",
+      "role": "Conçoit la stratégie de refonte technique : versioning API, migration incrémentale, compatibilité DB. Définit les points de rupture autorisés (avec migration).",
+      "input": "docs/features/etapsup_features_sprint1.md, existing_codebase_structure",
+      "output": "docs/04-architecture/REFACTORING_PLAN.md",
+      "constraints": ["Pas de modification de la DB sans migration safe", "Nouvelles features en parallèle de l’ancien", "Tests de non-régression obligatoires"]
+    },
+    {
+      "name": "frontend-dev-ux",
+      "role": "Développeur frontend senior (Vue 3) et expert UX. Refond les interfaces en s’inspirant de Diplomeo.com, sans casser les flows existants.",
+      "input": "docs/03-ui-design/MOCKUPS.md, existing_frontend_code",
+      "output": "/resources/js/components/refonte/, /resources/js/views/refonte/",
+      "constraints": ["Mobile-first", "Micro-interactions fluides", "Compatibilité navigateur", "Traçabilité par user story"]
+    },
+    {
+      "name": "backend-dev",
+      "role": "Développeur backend Laravel. Refactorise les contrôleurs, améliore la validation, sécurise les endpoints, sans casser l’API existante.",
+      "input": "docs/04-architecture/REFACTORING_PLAN.md, existing_backend_code",
+      "output": "/app/Http/Controllers/V2/, /app/Http/Requests/, database/migrations/",
+      "constraints": ["API versionnée si nécessaire", "Logging des erreurs", "Idempotence des paiements", "Sécurité upload"]
+    },
+    {
+      "name": "qa-tester",
+      "role": "Agent qualité. Écrit et exécute des tests de non-régression + tests des nouvelles features. Valide la compatibilité bout-en-bout.",
+      "input": "existing_test_suite, new_code, user_stories",
+      "output": "/tests/Feature/Refonte/, /tests/Browser/Refonte/, TEST_REPORT.md",
+      "constraints": ["Couverture des cas de bord (upload échoué, paiement annulé)", "Tests de performance sur la grille", "Vérification des emails et reçus"]
+    }
+  ]
+}

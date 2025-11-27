@@ -1,0 +1,187 @@
+7 │ @import 'bootstrap/scss/functions';
+  │         ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  ╵
+    ..\..\..\..\resources\assets\scss\style.scss 7:9  root stylesheet
+
+Deprecation Warning [import]: Sass @import rules are deprecated and will be removed in Dart Sass 3.0.0.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+  ╷
+8 │ @import 'bootstrap/scss/variables';
+  │         ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  ╵
+    ..\..\..\..\resources\assets\scss\style.scss 8:9  root stylesheet
+
+Deprecation Warning [import]: Sass @import rules are deprecated and will be removed in Dart Sass 3.0.0.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+  ╷
+9 │ @import 'bootstrap/scss/variables-dark';
+  │         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  ╵
+    ..\..\..\..\resources\assets\scss\style.scss 9:9  root stylesheet
+
+Deprecation Warning [import]: Sass @import rules are deprecated and will be removed in Dart Sass 3.0.0.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+   ╷
+12 │ @import 'variables';
+   │         ^^^^^^^^^^^
+   ╵
+    ..\..\..\..\resources\assets\scss\style.scss 12:9  root stylesheet
+
+Deprecation Warning [import]: Sass @import rules are deprecated and will be removed in Dart Sass 3.0.0.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+   ╷
+13 │ @import 'variables-dark';
+   │         ^^^^^^^^^^^^^^^^
+   ╵
+    ..\..\..\..\resources\assets\scss\style.scss 13:9  root stylesheet
+
+Deprecation Warning [global-builtin]: Global built-in functions are deprecated and will be removed in Dart Sass 3.0.0.
+Use color.mix instead.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+    ╷
+207 │   @return mix(white, $color, $weight);
+    │           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ╵
+    ..\..\..\bootstrap\scss\_functions.scss 207:11    tint-color()
+    ..\..\..\bootstrap\scss\_variables.scss 79:12     @import
+    ..\..\..\..\resources\assets\scss\style.scss 8:9  root stylesheet
+
+Deprecation Warning [global-builtin]: Global built-in functions are deprecated and will be removed in Dart Sass 3.0.0.
+Use color.mix instead.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+    ╷
+212 │   @return mix(black, $color, $weight);
+    │           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ╵
+    ..\..\..\bootstrap\scss\_functions.scss 212:11    shade-color()
+    ..\..\..\bootstrap\scss\_variables.scss 84:12     @import
+    ..\..\..\..\resources\assets\scss\style.scss 8:9  root stylesheet
+
+Deprecation Warning [global-builtin]: Global built-in functions are deprecated and will be removed in Dart Sass 3.0.0.
+Use color.mix instead.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+    ╷
+342 │ $light-bg-subtle:         mix($gray-100, $white) !default;
+    │                           ^^^^^^^^^^^^^^^^^^^^^^
+    ╵
+    ..\..\..\bootstrap\scss\_variables.scss 342:27    @import
+    ..\..\..\..\resources\assets\scss\style.scss 8:9  root stylesheet
+
+Deprecation Warning [global-builtin]: Global built-in functions are deprecated and will be removed in Dart Sass 3.0.0.
+Use math.unit instead.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+   ╷
+11 │     @if $prev-num == null or unit($num) == "%" or unit($prev-num) == "%" {
+   │                              ^^^^^^^^^^
+   ╵
+    ..\..\..\bootstrap\scss\_functions.scss 11:30     -assert-ascending()
+    ..\..\..\bootstrap\scss\_variables.scss 494:1     @import
+    ..\..\..\..\resources\assets\scss\style.scss 8:9  root stylesheet
+
+Deprecation Warning [global-builtin]: Global built-in functions are deprecated and will be removed in Dart Sass 3.0.0.
+Use math.unit instead.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+   ╷
+11 │     @if $prev-num == null or unit($num) == "%" or unit($prev-num) == "%" {
+   │                                                   ^^^^^^^^^^^^^^^
+   ╵
+    ..\..\..\bootstrap\scss\_functions.scss 11:51     -assert-ascending()
+    ..\..\..\bootstrap\scss\_variables.scss 494:1     @import
+    ..\..\..\..\resources\assets\scss\style.scss 8:9  root stylesheet
+
+Deprecation Warning [color-functions]: red() is deprecated. Suggestion:
+
+color.channel($color, "red", $space: rgb)
+
+More info: https://sass-lang.com/d/color-functions
+
+    ╷
+185 │     "r": red($color),
+    │          ^^^^^^^^^^^
+    ╵
+    ..\..\..\bootstrap\scss\_functions.scss 185:10    luminance()
+    ..\..\..\bootstrap\scss\_functions.scss 174:8     contrast-ratio()
+    ..\..\..\bootstrap\scss\_functions.scss 159:22    color-contrast()
+    ..\..\..\bootstrap\scss\_variables.scss 846:42    @import
+    ..\..\..\..\resources\assets\scss\style.scss 8:9  root stylesheet
+
+Deprecation Warning [color-functions]: green() is deprecated. Suggestion:
+
+color.channel($color, "green", $space: rgb)
+
+More info: https://sass-lang.com/d/color-functions
+
+    ╷
+186 │     "g": green($color),
+    │          ^^^^^^^^^^^^^
+    ╵
+    ..\..\..\bootstrap\scss\_functions.scss 186:10    luminance()
+    ..\..\..\bootstrap\scss\_functions.scss 174:8     contrast-ratio()
+    ..\..\..\bootstrap\scss\_functions.scss 159:22    color-contrast()
+    ..\..\..\bootstrap\scss\_variables.scss 846:42    @import
+    ..\..\..\..\resources\assets\scss\style.scss 8:9  root stylesheet
+
+Deprecation Warning [color-functions]: blue() is deprecated. Suggestion:
+
+color.channel($color, "blue", $space: rgb)
+
+More info: https://sass-lang.com/d/color-functions
+
+    ╷
+187 │     "b": blue($color)
+    │          ^^^^^^^^^^^^
+    ╵
+    ..\..\..\bootstrap\scss\_functions.scss 187:10    luminance()
+    ..\..\..\bootstrap\scss\_functions.scss 174:8     contrast-ratio()
+    ..\..\..\bootstrap\scss\_functions.scss 159:22    color-contrast()
+    ..\..\..\bootstrap\scss\_variables.scss 846:42    @import
+    ..\..\..\..\resources\assets\scss\style.scss 8:9  root stylesheet
+
+Deprecation Warning [color-functions]: red() is deprecated. Suggestion:
+
+color.channel($color, "red", $space: rgb)
+
+More info: https://sass-lang.com/d/color-functions
+
+   ╷
+37 │   @return red($value), green($value), blue($value);
+   │           ^^^^^^^^^^^
+   ╵
+    ..\..\..\bootstrap\scss\_functions.scss 37:11     to-rgb()
+    ..\..\..\bootstrap\scss\_variables.scss 846:31    @import
+    ..\..\..\..\resources\assets\scss\style.scss 8:9  root stylesheet
+
+Deprecation Warning [color-functions]: green() is deprecated. Suggestion:
+
+color.channel($color, "green", $space: rgb)
+
+More info: https://sass-lang.com/d/color-functions
+
+   ╷
+37 │   @return red($value), green($value), blue($value);
+   │                        ^^^^^^^^^^^^^
+   ╵
+    ..\..\..\bootstrap\scss\_functions.scss 37:24     to-rgb()
+    ..\..\..\bootstrap\scss\_variables.scss 846:31    @import
+    ..\..\..\..\resources\assets\scss\style.scss 8:9  root stylesheet
+
+Warning: 287 repetitive deprecation warnings omitted.
+Run in verbose mode to see all warnings.

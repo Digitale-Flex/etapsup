@@ -1,0 +1,111 @@
+## 🧩 Feature 5 — Administration : Gestion des établissements
+
+### 🎯 User Story
+
+**Story 1.5.1 — Gestion des établissements partenaires**
+*En tant qu’administrateur ÉtapSup*,
+*je veux* ajouter, modifier et consulter les établissements partenaires avec leurs informations principales (localisation, spécialisation, frais, commission, etc.),
+*afin de* centraliser toutes les données scolaires et les afficher correctement côté étudiant.
+
+**Critères d’acceptation :**
+
+* Page `/admin/etablissements` accessible uniquement à l’administrateur.
+* Actions disponibles : **Ajouter**, **Modifier**, **Supprimer**, **Afficher**.
+* Champs : Nom, Pays, Ville, Logo, Site web, Spécialisation, **Frais de dossier (unique)**, **Commission (%)**, **Acompte scolarité (Sprint 2)**.
+* Fiche établissement structurée en 5 onglets : Présentation, Prérequis, Conditions financières, Programmes, Campus.
+* Synchronisation automatique avec la vue publique `/etablissements`.
+
+### ⚙️ Prompt Claude – Implémentation (Sprint 1)
+
+> **Mission globale :**
+> Mettre à jour la gestion des établissements dans le back-office admin en **réutilisant les contrôleurs, modèles et vues existants**.
+> Avant toute action, **analyse la structure actuelle** du module, puis **étends-la** sans casser les routes ni la base.
+
+#### 🧠 Analyse préalable de l’existant
+
+* Identifier :
+
+  * `AdminEtablissements.vue` ou `EstablishmentsAdmin.vue`
+  * `EstablishmentController`
+  * `Establishment` modèle
+  * Routes `GET /api/v1/establishments`, `POST /api/v1/establishments`
+* Vérifier l’upload de logos (validation, taille).
+* Diagnostic :
+
+  ```bash
+  // Diagnostic Sprint1 - Feature 1.5.1 :
+  // Composant détecté : AdminEtablissements.vue
+  // Contrôleur : EstablishmentController (CRUD complet)
+  // Champs manquants : frais_dossier, commission, acompte_scolarite
+  // Décision : étendre formulaire + migration safe add columns
+  ```
+
+#### ⚙️ Étapes d’implémentation
+
+**A. Interface admin**
+
+* `/admin/etablissements` :
+
+  * Bouton `[Ajouter un établissement]` → modal ou page dédiée.
+  * Champs : Nom *, Pays *, Ville, Logo, Site web, Spécialisation, Frais de dossier, Commission, Acompte scolarité.
+  * Actions : `[Modifier]`, `[Supprimer]`.
+  * Recherche et pagination.
+
+**B. Base de données**
+
+* Ajouter migration non destructive :
+
+  ```php
+  Schema::table('establishments', function (Blueprint $table) {
+      $table->decimal('frais_dossier', 10, 2)->nullable();
+      $table->decimal('commission', 5, 2)->nullable();
+      $table->decimal('acompte_scolarite', 10, 2)->nullable();
+  });
+  ```
+* Aucun champ supprimé.
+
+**C. Contrôleur**
+
+* Étendre `EstablishmentController` :
+
+  * Validation via Form Request.
+  * Upload logo via logique existante.
+  * Stockage simple des montants, pas de lien Stripe.
+
+**D. Vue détail**
+
+* `EstablishmentDetail.vue` :
+
+  * Onglets : Présentation, Prérequis, Conditions financières, Programmes, Campus.
+  * Edition via textarea + bouton `[Enregistrer]`.
+
+#### 🎨 UX / UI
+
+* Formulaires lisibles, boutons primaires uniformisés.
+* Feedback visuel : “✅ Établissement mis à jour avec succès”.
+* Design cohérent avec le dashboard admin.
+
+#### 🔒 Sécurité
+
+* Accès restreint (`isAdmin`).
+* Validation image (jpg/png, ≤ 2 Mo).
+* Aucune donnée sensible exposée.
+
+#### ❌ À ne pas faire
+
+* Ne pas créer de modèle “Formation”.
+* Ne pas lier les commissions à Stripe.
+* Ne pas modifier les routes API.
+* Ne pas supprimer de colonnes existantes.
+
+#### 📘 Traçabilité
+
+```js
+// Sprint1 Update: Feature 1.5.1 — Administration : Gestion des établissements (frais, commission, acompte)
+```
+
+`docs/qa/TEST_REPORT.md` →
+
+```
+Section “Admin – Établissements” — Vérifier création, édition, suppression, affichage nouveaux champs (frais, commission, acompte).
+```

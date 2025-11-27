@@ -1,0 +1,122 @@
+## 🧩 Feature 10 — Page d’accueil ÉtapSup
+
+### 🎯 User Story
+
+**Story 1.10.1 — Page d’accueil et identité de marque ÉtapSup**
+*En tant que visiteur (Amina avant inscription)*,
+*je veux* accéder à une page d’accueil claire et attrayante présentant les formations, les étapes du parcours et les offres ÉtapSup,
+*afin de* comprendre la valeur de la plateforme et démarrer mon inscription facilement.
+
+**Critères d’acceptation :**
+
+* Logo officiel ÉtapSup remplaçant tous les anciens logos (ex. “ma-reza”).
+* Présence des sections principales :
+
+  * **Nos Formations**
+  * **Comment ça marche**
+  * **Nos Tarifs** (incluant la carte “Accompagnement Premium”)
+  * **Accompagnement personnalisé**
+* CTA visibles :
+
+  * `[Découvrir nos formations]` → `/etablissements`
+  * `[Commencer mon inscription]` → `/login`
+* Design fluide, responsive, inspiré de **Diplomeo + INSEEC**.
+* Contenu statique pour le MVP, sans carrousel ni animation lourde.
+
+### ⚙️ Prompt Claude – Implémentation (Sprint 1)
+
+> **Mission globale :**
+> Mettre à jour la page d’accueil pour refléter la nouvelle identité ÉtapSup et un parcours utilisateur clair.
+> Avant toute écriture, **analyse la structure actuelle du front (Home.vue / Landing.vue)** et **adapte le contenu** sans casser la navigation ni le responsive existant.
+
+#### 🧠 Analyse préalable de l’existant
+
+* Identifier :
+
+  * `Home.vue` ou `Landing.vue`
+  * Composants enfants : `HeroSection.vue`, `FeaturesSection.vue`, `PricingSection.vue`
+  * Layout : `MainLayout.vue` ou `AppLayout.vue`
+  * Routing : route `/`
+* Vérifier si la navbar et le footer sont déjà centralisés.
+* Diagnostic :
+
+  ```bash
+  // Diagnostic Sprint1 - Feature 1.10.1 :
+  // Page actuelle : Home.vue (layout principal)
+  // Ancien logo : ma-reza.svg
+  // Sections existantes : hero, features, pricing
+  // Décision : remplacer logo, textes, CTA et ajouter carte "Accompagnement Premium"
+  ```
+
+#### ⚙️ Étapes d’implémentation
+
+**A. Identité visuelle**
+
+* Remplacer toutes les références à “ma-reza” par le logo ÉtapSup (`/assets/brand/etapsup-logo.svg`).
+* Titre de page : “Ét﻿apSup – Votre passerelle vers les études à l’étranger”.
+* Vérifier favicon et balises meta.
+
+**B. Structure de contenu**
+
+* Section **Hero (haut de page)** :
+
+  * Titre : “Votre passerelle vers les études à l’étranger.”
+  * Sous-texte : “Trouvez votre école, candidatez et partez sereinement avec ÉtapSup.”
+  * Boutons CTA :
+
+    * `[Découvrir nos formations]` → `/etablissements`
+    * `[Commencer mon inscription]` → `/login`
+* Section **Nos Formations** :
+
+  * Liste statique : Commerce, Ingénierie, Santé, Droit, Hôtellerie.
+* Section **Comment ça marche** :
+
+  * Étapes : Je découvre → Je candidate → Je paie → Je pars.
+* Section **Nos Tarifs** :
+
+  * Cartes :
+
+    * Frais de dossier
+    * Accompagnement standard
+    * **Accompagnement Premium** (ajoutée Sprint 1)
+* Section **Accompagnement personnalisé** :
+
+  * Texte court : “Bénéficie d’un suivi personnalisé et maximise tes chances de succès.”
+  * Bouton `[Découvrir]` → `/accompagnement`.
+
+**C. Routing & SEO**
+
+* Route `/` pointant vers `Home.vue`.
+* Mise à jour balises `<title>` et `<meta description>`.
+* Vérifier responsive design sur mobile.
+
+#### 🎨 UX / UI
+
+* Palette ÉtapSup : bleu #004AAD, blanc, gris clair, accent cyan.
+* Typo : Montserrat / Open Sans.
+* Hero avec fond clair ou dégradé doux.
+* Boutons contrastés, espacements aérés.
+* Inspiration **Diplomeo + INSEEC** : sobriété, équilibre, clarté.
+
+#### 🔒 Sécurité
+
+* Aucune donnée dynamique ni sensible.
+* Liens internes testés (CTA fonctionnels).
+
+#### ❌ À ne pas faire
+
+* Ne pas modifier la logique du routeur.
+* Ne pas intégrer de scripts tiers.
+* Ne pas ajouter d’animations lourdes ni carrousels.
+
+#### 📘 Traçabilité
+
+```js
+// Sprint1 Update: Feature 1.10.1 — Page d’accueil ÉtapSup (identité, CTA, Accompagnement Premium)
+```
+
+`docs/qa/TEST_REPORT.md` →
+
+```
+Section “Page d’accueil” — Vérifier affichage logo ÉtapSup, sections principales, CTA et responsive mobile.
+```

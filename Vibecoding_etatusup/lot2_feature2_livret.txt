@@ -1,0 +1,121 @@
+**Feature 2 — Livret explicatif du parcours A → Z**, mise à jour avec les ajustements demandés par Emery :
+
+👉 le livret est **administrable** (uploadable ou remplaçable via le back-office),
+👉 accessible depuis le tableau de bord étudiant,
+👉 aucune logique complexe ni différenciation par pays.
+
+---
+
+## 🧩 **Feature 2 — Livret explicatif du parcours A → Z**
+
+### 🎯 **User Story**
+
+**Story 1.2.1 — Consultation du livret d’arrivée**
+*En tant qu’étudiant (Amina)*,
+*je veux* pouvoir consulter un livret numérique expliquant les démarches à suivre,
+*afin de* comprendre clairement les étapes de ma candidature à mon arrivée.
+
+**Critères d’acceptation :**
+
+* Bouton **[Consulter mon livret d’arrivée]** dans le tableau de bord étudiant.
+* Le livret s’affiche dans une **iframe intégrée**.
+* Bouton **[Télécharger le livret]** pour récupérer la version PDF.
+* Le fichier PDF est **unique mais administrable** : l’admin peut en changer la version sans déploiement.
+* Affichage fluide, responsive, aucun reload complet de la page.
+
+---
+
+### ⚙️ **Prompt Claude – Implémentation (Sprint 1)**
+
+> **Mission globale :**
+> Mettre à jour le module “Livret explicatif” pour qu’il soit consultable par les étudiants et administrable côté back-office.
+> Tu dois **analyser d’abord le code existant**, repérer comment les fichiers statiques sont gérés (images, documents, uploads admin), puis **réutiliser cette logique** pour intégrer un champ “livret” côté admin et un affichage dans le tableau de bord étudiant.
+
+---
+
+### 🧭 **Analyse préalable de l’existant**
+
+Avant toute écriture :
+
+* Identifier :
+
+  * Le composant Vue gérant le dashboard (`Dashboard.vue` / `StudentDashboard.vue`).
+  * Les contrôleurs Laravel manipulant les fichiers (`DocumentController`, `FileUploadController`, `SettingsController`).
+  * Les routes déjà utilisées pour servir des documents statiques (`/storage/...`, `/assets/...`).
+* Vérifier si un mécanisme d’upload admin existe déjà (logos, bannières, fichiers d’information).
+* Diagnostic à rédiger :
+
+  ```bash
+  // Diagnostic Sprint1 - Feature 1.2.1 :
+  // Upload admin déjà présent (logos/visuels)
+  // Lien statique accessible via table settings
+  // Décision : réutiliser le champ settings.livret_url et composant iframe dans Dashboard.vue
+  ```
+
+---
+
+### ⚙️ **Étapes d’implémentation**
+
+**A. Back-office (admin)**
+
+* Dans `/admin/settings` :
+
+  * Ajouter champ : **“Livret explicatif (PDF)”**.
+  * Bouton `[Téléverser un nouveau livret]` → upload fichier `.pdf` (taille ≤ 10 Mo).
+  * Sauvegarder le lien dans une table `settings` (clé : `livret_url`).
+
+**B. Front-office (étudiant)**
+
+* Dans `Dashboard.vue` :
+
+  * Bouton `[Consulter mon livret d’arrivée]`.
+  * Ouvre une section avec :
+
+    ```vue
+    <iframe :src="livretUrl" class="w-full h-[80vh]" />
+    <a :href="livretUrl" download class="btn-primary mt-2">Télécharger le livret</a>
+    ```
+  * `livretUrl` provient d’un appel à `GET /api/v1/settings/livret`.
+
+**C. Sécurité et validation**
+
+* Validation côté serveur : MIME = `application/pdf`, taille ≤ 10 Mo.
+* Fichier stocké dans `/public/uploads/livrets/`.
+* Supprimer l’ancien fichier si remplacé.
+
+---
+
+### 🎨 **UX / UI**
+
+* Intégration fluide dans le dashboard (même style que “Mes candidatures”).
+* Responsive (iframe adaptative).
+* Icône livre 📘 sur le bouton.
+* Message :
+
+  * “📘 Consulte ton livret d’arrivée pour connaître chaque étape de ton parcours.”
+
+---
+
+### ❌ **À ne pas faire**
+
+* Ne pas coder plusieurs livrets (un seul fichier global).
+* Ne pas rendre le fichier accessible sans authentification.
+* Ne pas intégrer d’éditeur de texte (PDF upload only).
+
+---
+
+### 📘 **Traçabilité**
+
+Dans chaque fichier modifié :
+
+```js
+// Sprint1 Update: Feature 1.2.1 — Livret explicatif (PDF administrable)
+```
+
+Et dans `docs/qa/TEST_REPORT.md` :
+
+```
+Section “Livret explicatif” — Vérifier upload admin, affichage iframe, téléchargement étudiant.
+```
+
+---

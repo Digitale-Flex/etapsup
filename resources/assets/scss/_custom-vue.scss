@@ -1,0 +1,39 @@
+// Custom - Vue
+
+.arrow-none {
+  &:after {
+    display: none !important;
+  }
+
+  &:before {
+    display: none !important;
+  }
+}
+
+.flex-centered {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.items-center {
+  display: flex;
+  align-items: center;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.choices__item.choices__item--selectable[data-value='-1'] {
+  @extend .choices__placeholder;
+}
+
+.dropend .dropdown-menu {
+  top: 0;
+  left: 100%;
+}
+
+.b-overlay-wrap .b-overlay {
+  z-index: 1040 !important;
+}

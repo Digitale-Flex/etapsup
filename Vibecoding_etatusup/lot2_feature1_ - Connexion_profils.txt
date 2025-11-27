@@ -1,0 +1,111 @@
+ 🧩 Feature 1 — Espace Étudiant : Connexion & Profil
+
+ 🎯 User Story
+
+Story 1.1.1 — Connexion & Gestion du profil étudiant
+En tant qu’étudiant (Amina),
+je veux me connecter à mon espace personnel, voir mon profil, mes candidatures et mes paiements,
+afin de suivre facilement mes démarches et gérer mes informations sans dépendre d’un intermédiaire.
+
+Critères d’acceptation :
+
+ Authentification email + mot de passe (Sanctum).
+ Tableau de bord affichant :
+
+   👤 Mon Profil : photo, nom, email, date d’inscription.
+   📄 Mes candidatures : tableau dynamique (ID, établissement, formation, statut, date).
+   📂 Mon dossier : pièces téléversées + bouton [Ajouter une pièce].
+   💳 Mes factures : liste des paiements avec liens Stripe (receipt_url).
+ L’étudiant peut modifier sa photo (jpg/png ≤ 2 Mo).
+ Aucun changement structurel en base.
+
+---
+
+ ⚙️ Prompt Claude – Implémentation (Sprint 1)
+
+> Mission globale :
+> Mettre à jour le module Espace Étudiant en réutilisant les composants existants (`AuthController`, `Dashboard.vue`, `User` model).
+> Avant toute modification, analyse le code existant, puis étends la logique en respectant l’architecture du clone.
+
+---
+
+ 🧠 Analyse préalable de l’existant
+
+Avant toute écriture :
+
+ Parcourir :
+
+   `AuthController`, `DashboardController`, `User` model.
+   `Dashboard.vue`, `ProfileCard.vue`, `TableCandidature.vue`, `DocumentList.vue`.
+ Identifier :
+
+   Routes (`/login`, `/dashboard`, `/api/v1/...`).
+   Structures de données : `user`, `applications`, `documents`.
+   Méthodes d’affichage (Vue + Axios/Pinia).
+ Rédiger un diagnostic :
+
+  ```bash
+  // Diagnostic Sprint1 – Feature 1.1.1 :
+  // Auth → Sanctum, ProfileCard.vue actif, TableCandidature.vue existant
+  // Décision : étendre le Dashboard avec blocs Profil, Candidatures, Documents, Factures
+  ```
+
+---
+
+ ⚙️ Étapes d’implémentation
+
+A. Connexion utilisateur
+
+ Vérifier la route `POST /login`.
+ Rediriger vers `/dashboard` après succès.
+ Message clair en cas d’erreur.
+
+B. Tableau de bord étudiant
+
+ Dans `Dashboard.vue` :
+
+   Ajouter les blocs listés dans la User Story.
+   Appels API :
+
+     `/api/v1/applications?user_id={id}`
+     `/api/v1/documents?user_id={id}`
+     `/api/v1/payments?user_id={id}`
+   Bouton `[Modifier ma photo]` → `POST /api/v1/profile/photo` (2 Mo max).
+
+C. UX
+
+ Feedback visuel (toast/snackbar).
+ Mobile-first, espacements harmonisés.
+ Styles existants (Tailwind/SCSS).
+
+---
+
+ 🔒 Sécurité
+
+ Authentification via Sanctum.
+ Validation MIME + taille fichier.
+ Aucune donnée sensible exposée.
+
+---
+
+ ❌ À ne pas faire
+
+ Ne pas modifier le modèle `User`.
+ Ne pas casser la logique auth existante.
+ Ne pas créer de nouveaux contrôleurs redondants.
+
+---
+
+ 📘 Traçabilité
+
+Dans chaque fichier modifié :
+
+```js
+// Sprint1 Update: Feature 1.1.1 — Espace Étudiant (Connexion & Profil)
+```
+
+Ajouter dans `docs/qa/TEST_REPORT.md` :
+
+```
+Section “Connexion & Profil Étudiant” — Vérifier login, affichage profil, upload photo, candidatures, factures Stripe.
+```

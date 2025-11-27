@@ -1,0 +1,106 @@
+ 🧩 Feature 3 — Visualisation des établissements
+
+ 🎯 User Story
+
+Story 1.3.1 — Découverte et visualisation des établissements partenaires
+En tant qu’étudiant (Amina),
+je veux consulter la liste des établissements partenaires avec une présentation claire et moderne,
+afin de comparer les offres de formation et accéder rapidement à la fiche détaillée de l’école qui m’intéresse.
+
+Critères d’acceptation :
+
+ Une page `/etablissements` liste les écoles sous forme de cartes (grille responsive).
+ Chaque carte affiche : nom, logo, ville, type (Présentiel / Distanciel / En ligne), spécialisation, tarif.
+ Un bouton [Voir détails] ouvre la fiche établissement.
+ Fiche établissement : 5 sections textuelles max (Présentation, Prérequis & Admission, Programme, Campus & Vie étudiante, Frais de dossier).
+ Le visuel s’inspire de Diplomeo + INSEEC : lisibilité, hiérarchie visuelle et CTA clairs.
+ Aucune refonte du modèle : réutilisation du contrôleur et des entités existantes.
+
+ ⚙️ Prompt Claude – Implémentation (Sprint 1)
+
+Tu es un expert vue.js et laravel php avec plus 20 ans dexperience.
+tu developpes les briques en suivant le workflow suivant : 
+
+1. Ask : Lis la demande du feature et/ou userstory.  
+
+2. Plan  : Définis un plan clair en 5 étapes max, aligné sur les modules existants de Mareza.
+
+3. Design : Décris le parcours utilisateur (ex: `/etablissement/filtres/formulaire`) avec précision.
+
+4. Frontend  : Vérifie que les composants utilisent les technologiies
+adequates : usage de Pinia, Tailwind, accessibilité, états de chargement.
+
+5. Backend : Valide : modèle cohérent avec le MCD, usage de Form Requests, routes versionnées, contrôle d’accès.
+
+6. Connexion Front/Back  : Contrôle : appels API typés, gestion des erreurs, feedback utilisateur clair.
+
+7. Quality Validation  => Appel au profil suivant :  👤 Profil  
+Tu es un développeur full stack avec 20+ ans d’expérience, spécialisé sur Laravel (backend) et Vue.js (frontend). Tu as conçu et audité des applications transactionnelles à fort enjeu utilisateur : plateformes éducatives (type Diplomeo, Studyrama), marketplaces, e-commerce, y compris en Afrique francophone.  
+Ta cible UX s’inspire de diplomeo.com. Tu travailles avec une stack éprouvée issue du projet Mareza, que tu réutilises systématiquement en n’adaptant que ce qui est strictement nécessaire.
+
+8. Tests de Non-Régression  : Tu prends ici le profil d'un expert full stack orienté quality 
+   – Garantis que les chemins critiques (recherche, inscription, paiement) ne sont pas impactés.
+
+> Mission globale :
+> Mettre à jour la page de visualisation des établissements afin d’obtenir un rendu moderne et complet, en réutilisant les composants et données existants.
+> Avant toute modification, analyse la logique actuelle de récupération et d’affichage des établissements, puis étends la structure en respectant la même architecture, les mêmes endpoints et conventions.
+
+ 🧠 Analyse préalable de l’existant
+
+ Identifier :
+
+   `Establishments.vue` ou `EstablishmentList.vue`
+   `EstablishmentDetail.vue`
+   `EstablishmentController` côté backend
+   Routes `GET /api/v1/establishments` et `GET /api/v1/establishments/{id}`
+ Vérifier la structure : récupération des données via Axios ou Pinia, composants utilisés (`Card.vue`, `Tab.vue`).
+ Diagnostic :
+
+  ```bash
+  // Diagnostic Sprint1 - Feature 1.3.1 :
+  // Composants trouvés : Establishments.vue + EstablishmentDetail.vue
+  // API existante : GET /api/v1/establishments
+  // Décision : étendre le composant Card.vue avec nouveaux champs et CTA [Voir détails]
+  ```
+
+ ⚙️ Étapes d’implémentation
+
+A. Page liste `/etablissements`
+
+ Réutiliser le composant principal existant.
+ Ajouter / vérifier : nom, logo, type, ville, frais_dossier.
+ Bouton `[Voir détails]` → `/etablissements/{id}`.
+ Responsive grid (3 cartes desktop, 1 carte mobile).
+ Filtres par pays, type, spécialisation.
+
+B. Page détail établissement
+
+ Créer / compléter les onglets : Présentation, Prérequis & Admission, Programme, Campus, Frais de dossier.
+ Contenu textuel depuis la base `etablissements`.
+ Message “Information à venir” si vide.
+ Bouton `[Candidater]` → préremplit le formulaire candidature avec l’établissement choisi.
+
+C. Design
+
+ Inspiration Diplomeo + INSEEC : grands visuels, titres hiérarchisés, CTA visible.
+ Réutiliser `Card.vue`, `Button.vue`.
+ Espacement harmonisé, contraste lisible.
+
+ ❌ À ne pas faire
+
+ Ne pas créer de nouvelles tables.
+ Ne pas changer les routes API.
+ Ne pas ajouter de dépendances.
+ Ne pas dupliquer les composants.
+
+ 📘 Traçabilité
+
+```js
+// Sprint1 Update: Feature 1.3.1 — Visualisation des établissements (Diplomeo + INSEEC)
+```
+
+`docs/qa/TEST_REPORT.md` →
+
+```
+Section “Visualisation des établissements” — Vérifier la grille, navigation fiche détail, cohérence responsive.
+```

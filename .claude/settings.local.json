@@ -1,0 +1,21 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(bun run:*)",
+      "Bash(npm run build:*)",
+      "Bash(grep:*)",
+      "Bash(claude help)",
+      "Bash(mv:*)",
+      "WebSearch",
+      "Bash(php artisan:*)",
+      "Bash(php:*)",
+      "WebFetch(domain:diplomeo.com)",
+      "Bash(npm run dev:*)",
+      "Bash(mysql:*)",
+      "Bash(cat:*)",
+      "Bash(curl -s http://127.0.0.1:8000/)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

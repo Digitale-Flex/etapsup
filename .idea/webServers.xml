@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="00db2c05-fc64-450c-bd2c-2e730fa090f3" name="Dev" url="https://dev.ma-reza.com">
+        <fileTransfer rootFolder="/home/mareza-dev/htdocs/dev.ma-reza.com" accessType="SFTP" host="45.13.132.21" port="22" sshConfigId="c359c059-95ff-4fba-88b9-44240440797d" sshConfig="mareza-dev@45.13.132.21:22 agent" authAgent="true">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" keepAliveTimeout="0" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+      <webServer id="98d4afce-f1a1-471e-991c-dd25e58db1e6" name="Prod" url="https://ma-reza.com">
+        <fileTransfer rootFolder="/home/ma-reza/htdocs/ma-reza.com" accessType="SFTP" host="45.13.132.21" port="22" sshConfigId="f8aa67b2-491d-4d4f-94e6-53f89a85352d" sshConfig="ma-reza@45.13.132.21:22 agent" authAgent="true">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" keepAliveTimeout="0" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
