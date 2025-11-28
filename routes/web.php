@@ -44,7 +44,7 @@ Route::get('/txst', function () {
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
-// Refonte: Page Établissements (frontend uniquement - données fictives)
+// Refonte:: Page Établissements (frontend uniquement - données fictives)
 Route::get('/establishments', function () {
     return Inertia::render('Establishments/Index');
 })->name('establishments.index');
