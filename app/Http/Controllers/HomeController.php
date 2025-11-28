@@ -11,7 +11,6 @@ use App\Http\Resources\PropertyTypeResource;
 use App\Http\Resources\SubCategoryResource;
 use App\Models\City;
 use App\Models\Country;
-use App\Models\Program;
 use App\Models\RealEstate\Category;
 use App\Models\RealEstate\Equipment;
 use App\Models\RealEstate\Layout;
@@ -78,7 +77,7 @@ class HomeController extends Controller
             'totalEstablishments' => Property::count(),
             'totalStudents' => 2000, // Hardcodé pour l'instant (pas de table users students)
             'totalCountries' => Country::count(),
-            'totalPrograms' => Program::count(),
+            'totalPrograms' => Category::count(), // Domaines d'études disponibles
         ];
 
         return Inertia::render('Home/Index', [
