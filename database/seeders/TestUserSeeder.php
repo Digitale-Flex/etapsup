@@ -19,7 +19,7 @@ class TestUserSeeder extends Seeder
     public function run(): void
     {
         // 1. Étudiant
-        User::firstOrCreate(
+        $etudiant = User::firstOrCreate(
             ['email' => 'etudiant@test.com'],
             [
                 'surname' => 'Diallo',
@@ -29,9 +29,10 @@ class TestUserSeeder extends Seeder
                 'is_partner_manager' => false,
             ]
         );
+        $etudiant->assignRole('user');
 
         // 2. Admin
-        User::firstOrCreate(
+        $admin = User::firstOrCreate(
             ['email' => 'admin@test.com'],
             [
                 'surname' => 'Admin',
@@ -41,9 +42,10 @@ class TestUserSeeder extends Seeder
                 'is_partner_manager' => false,
             ]
         );
+        $admin->assignRole('admin');
 
         // 3. Partenaire/Conseiller
-        User::firstOrCreate(
+        $partenaire = User::firstOrCreate(
             ['email' => 'partenaire@test.com'],
             [
                 'surname' => 'Conseiller',
@@ -53,10 +55,11 @@ class TestUserSeeder extends Seeder
                 'is_partner_manager' => true, // Partenaire d'orientation
             ]
         );
+        $partenaire->assignRole('partner');
 
-        $this->command->info('✅ 3 utilisateurs de test créés :');
-        $this->command->info('   - etudiant@test.com / password (Amina Diallo)');
-        $this->command->info('   - admin@test.com / password (Admin EtapSup)');
-        $this->command->info('   - partenaire@test.com / password (Conseiller)');
+        $this->command->info('✅ 3 utilisateurs de test créés avec leurs rôles :');
+        $this->command->info('   - etudiant@test.com / password (Amina Diallo) [user]');
+        $this->command->info('   - admin@test.com / password (Admin EtapSup) [admin]');
+        $this->command->info('   - partenaire@test.com / password (Conseiller) [partner]');
     }
 }
