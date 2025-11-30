@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\RealEstate;
 
+use App\Enums\ApplicationStatus;
 use App\Filament\InfoLists\RealEstate\ReservationInfolist;
 use App\Filament\Resources\RealEstate\ReservationResource\Pages;
 use App\Filament\Resources\RealEstate\ReservationResource\RelationManagers;
@@ -20,11 +21,15 @@ class ReservationResource extends Resource
 {
     protected static ?string $model = Reservation::class;
 
-    protected static ?string $modelLabel = 'Réservation';
+    protected static ?string $modelLabel = 'Candidature';
 
-    protected static ?string $pluralLabel = 'Réservations';
+    protected static ?string $pluralLabel = 'Candidatures';
 
-    protected static ?string $navigationIcon = 'heroicon-o-calendar';
+    protected static ?string $navigationIcon = 'heroicon-o-academic-cap';
+
+    protected static ?string $navigationGroup = 'Gestion des Candidatures';
+
+    protected static ?int $navigationSort = 1;
 
     public static function form(Form $form): Form
     {
@@ -45,7 +50,7 @@ class ReservationResource extends Resource
                     ->limit(1)
                     ->label(''),
                 Tables\Columns\TextColumn::make('property.title')
-                    ->label('Propriété')
+                    ->label('Établissement')
                     ->limit(25)
                     ->tooltip(function (Tables\Columns\TextColumn $column): ?string {
                         $state = $column->getState();
@@ -60,27 +65,23 @@ class ReservationResource extends Resource
                     ->sortable(),
 
                 Tables\Columns\TextColumn::make('user.full_name')
-                    ->label('Utilisateur')
+                    ->label('Étudiant')
                     ->description(fn(Reservation $record): string => $record->user->email)
                     ->searchable()
                     ->sortable(),
 
-                Tables\Columns\TextColumn::make('period')
-                    ->label('Période')
-                    ->formatStateUsing(fn($record) => $record->start_date->translatedFormat('d M') . ' - ' . $record->end_date->translatedFormat('d M Y'))
-                    ->description(fn($record) => $record->start_date->diffInDays($record->end_date) . ' jours')
-                    ->sortable()
-                    ->color('primary'),
-
-                Tables\Columns\TextColumn::make('type')
+                Tables\Columns\TextColumn::make('status')
+                    ->label('Statut')
                     ->badge()
-                    ->label('Type'),
+                    ->formatStateUsing(fn (string $state): string => ApplicationStatus::translateStatus($state))
+                    ->color(fn (string $state): string => ApplicationStatus::getStatusColor($state)),
 
                 Tables\Columns\TextColumn::make('price')
-                    ->label('Montant')
+                    ->label('Frais de dossier')
                     ->money('EUR')
                     ->color('success')
-                    ->sortable(),
+                    ->sortable()
+                    ->toggleable(),
 
                 Tables\Columns\TextColumn::make('created_at')
                     ->label('Date')
@@ -89,30 +90,26 @@ class ReservationResource extends Resource
                     ->toggleable(),
             ])
             ->filters([
-                Tables\Filters\SelectFilter::make('state')
-                    ->options([
-                        'pending' => 'En attente',
-                        'confirmed' => 'Confirmée',
-                        'cancelled' => 'Annulée',
-                        'completed' => 'Terminée',
-                    ]),
+                Tables\Filters\SelectFilter::make('status')
+                    ->options(ApplicationStatus::toSelectOptions()),
 
                 Tables\Filters\Filter::make('dates')
                     ->form([
-                        Forms\Components\DatePicker::make('start_from')->label('De'),
-                        Forms\Components\DatePicker::make('start_until')->label("jusqu'à"),
+                        Forms\Components\DatePicker::make('start_from')->label('Date de début'),
+                        Forms\Components\DatePicker::make('start_until')->label("Date de fin"),
                     ])
                     ->query(function (Builder $query, array $data): Builder {
                         return $query
                             ->when(
                                 $data['start_from'],
-                                fn(Builder $query, $date): Builder => $query->whereDate('start_date', '>=', $date),
+                                fn(Builder $query, $date): Builder => $query->whereDate('created_at', '>=', $date),
                             )
                             ->when(
                                 $data['start_until'],
-                                fn(Builder $query, $date): Builder => $query->whereDate('end_date', '<=', $date),
+                                fn(Builder $query, $date): Builder => $query->whereDate('created_at', '<=', $date),
                             );
-                    }),
+                    })
+                    ->label('Période de candidature'),
 
                 Tables\Filters\TrashedFilter::make(),
             ])

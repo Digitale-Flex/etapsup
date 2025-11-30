@@ -23,7 +23,7 @@ class RegulationResource extends Resource
 
     protected static ?string $navigationIcon = 'gmdi-security-o';
 
-    protected static ?string $navigationGroup = 'Propriétés';
+    protected static ?string $navigationGroup = 'Caractéristiques établ.';
 
     public static function form(Form $form): Form
     {
@@ -106,5 +106,10 @@ class RegulationResource extends Resource
                 SoftDeletingScope::class,
                 PublishedScope::class,
             ]);
+    }
+
+    public static function shouldRegisterNavigation(): bool
+    {
+        return false; // Masqué pour simplifier l'interface admin
     }
 }

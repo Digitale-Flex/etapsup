@@ -138,10 +138,17 @@ class PropertyController extends Controller
         //
     }
 
+    /**
+     * Ajouter un avis sur un établissement
+     *
+     * @param Request $request
+     * @param $id
+     * @return RedirectResponse
+     */
     public function review(Request $request, $id): RedirectResponse
     {
         $messages = [
-            'rating.required' => 'Merci de donner une note à cette propriété',
+            'rating.required' => 'Merci de donner une note à cet établissement',
             'rating.integer' => 'La note doit être un nombre entier',
             'rating.min' => 'La note minimum est de 1 étoile',
             'rating.max' => 'La note maximum est de 5 étoiles',
@@ -159,7 +166,7 @@ class PropertyController extends Controller
 
         if ($model->ratings()->where('user_id', auth()->id())->exists()) {
             return back()->withErrors([
-                'general' => 'Vous avez déjà noté cette propriété',
+                'general' => 'Vous avez déjà noté cet établissement',
             ]);
         }
 
@@ -199,28 +206,23 @@ class PropertyController extends Controller
     }
 
     /**
-     * @param $model
-     * @param int $perPage
-     * @param mixed $page
+     * Retourne la vue de fiche détaillée établissement
+     *
+     * MAPPING ETATSUP: Property = Establishment
+     *
+     * @param $model Property (Establishment)
+     * @param int $perPage Nombre de commentaires par page
+     * @param mixed $page Page actuelle
      * @return \Inertia\Response
      */
     private function returnView($model, int $perPage, mixed $page): \Inertia\Response
     {
-        $rental_monthly_billing = false;
-
-        if (isset($model->category)) {
-            if ($model->category->id === $this->settings->rental_monthly_billing) {
-                $rental_monthly_billing = true;
-            }
-        }
-
         $totalComments = $model->comments()->whereNull('parent_id')->count();
         $hasMoreComments = $totalComments > $perPage;
 
-        return Inertia::render('RealEstate/Show', [
-            'property' => new PropertyResource($model),
-            'settings' => $this->settings,
-            'rentalMonthlyBilling' => $rental_monthly_billing,
+        // Utiliser EstablishmentResource pour éviter d'exposer les champs immobiliers
+        return Inertia::render('Establishments/Show', [
+            'establishment' => new \App\Http\Resources\EstablishmentResource($model),
             'pagination' => [
                 'current_page' => $page,
                 'per_page' => $perPage,
