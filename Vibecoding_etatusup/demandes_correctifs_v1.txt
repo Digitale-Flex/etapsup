@@ -1,4 +1,0 @@
-Le bouton dans la section 
-"Ne ratez pas cette opportunité"
-
-est verte au lieu de rouge comme au dessus

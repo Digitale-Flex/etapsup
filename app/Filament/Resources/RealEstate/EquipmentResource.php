@@ -20,7 +20,7 @@ class EquipmentResource extends Resource
     protected static ?string $pluralLabel = 'Équipements';
 
     protected static ?string $navigationIcon = 'gmdi-broadcast-on-home';
-    protected static ?string $navigationGroup = 'Propriétés';
+    protected static ?string $navigationGroup = 'Caractéristiques établ.';
 
     public static function form(Form $form): Form
     {

@@ -1,75 +1,85 @@
 <script setup lang="ts">
-// Refonte: Page Établissements style Diplomeo avec charte EtapSup (FRONTEND UNIQUEMENT)
-import { Head, Link } from '@inertiajs/vue3';
+// Refonte: Page Établissements style Diplomeo avec charte EtapSup
+// UI-Fix-2.5: Connexion avec l'API backend via Inertia props
+import { Head, Link, router } from '@inertiajs/vue3';
 import { ref } from 'vue';
 import GuestLayout from '@/Layouts/GuestLayout.vue';
 import { BContainer, BRow, BCol, BFormInput, BFormSelect, BButton } from 'bootstrap-vue-next';
 
 defineOptions({ layout: GuestLayout });
 
-// Données fictives pour l'instant
-const establishments = ref([
-    {
-        id: 1,
-        name: 'Université Cheikh Anta Diop',
-        country: 'Sénégal',
-        city: 'Dakar',
-        type: 'Université publique',
-        description: 'La plus grande université du Sénégal offrant des formations de qualité pour étudier à l\'étranger',
-        rating: 4.5
-    },
-    {
-        id: 2,
-        name: 'Université du Ghana',
-        country: 'Ghana',
-        city: 'Accra',
-        type: 'Université publique',
-        description: 'Excellence académique en Afrique de l\'Ouest pour vos études à l\'étranger',
-        rating: 4.7
-    },
-    {
-        id: 3,
-        name: 'Université Mohammed V',
-        country: 'Maroc',
-        city: 'Rabat',
-        type: 'Université publique',
-        description: 'Enseignement supérieur de qualité au Maroc pour étudier à l\'étranger',
-        rating: 4.6
-    },
-    {
-        id: 4,
-        name: 'Université de Lagos',
-        country: 'Nigeria',
-        city: 'Lagos',
-        type: 'Université publique',
-        description: 'Premier établissement nigérian pour vos projets d\'études à l\'étranger',
-        rating: 4.4
-    },
-    {
-        id: 5,
-        name: 'Université de Nairobi',
-        country: 'Kenya',
-        city: 'Nairobi',
-        type: 'Université publique',
-        description: 'Leadership en Afrique de l\'Est pour étudier à l\'étranger',
-        rating: 4.8
-    },
-    {
-        id: 6,
-        name: 'Université du Cap',
-        country: 'Afrique du Sud',
-        city: 'Le Cap',
-        type: 'Université publique',
-        description: 'Recherche et innovation de pointe pour vos études à l\'étranger',
-        rating: 4.9
-    }
-]);
+// Props reçues du contrôleur EstablishmentController
+interface Country {
+    id: string;
+    name: string;
+}
 
-const filters = ref({
-    country: '',
-    city: '',
-    type: ''
+interface Filter {
+    id: string;
+    label: string;
+}
+
+interface Establishment {
+    id: string;
+    title: string;
+    slug: string;
+    description: string;
+    city?: {
+        name: string;
+        country?: {
+            name: string;
+        };
+    };
+    propertyType?: {
+        label: string;
+    };
+    category?: {
+        label: string;
+    };
+    ratings?: {
+        average: number;
+        count: number;
+    };
+}
+
+const props = defineProps<{
+    establishments: {
+        data: Establishment[];
+        links: any[];
+        meta: any;
+    };
+    filters: {
+        countries: Country[];
+        establishment_types: Filter[];
+        training_types: Filter[];
+        career_fields: Filter[];
+        degree_levels: Filter[];
+    };
+    currentFilters: {
+        country_id?: string;
+        establishment_type_id?: string;
+        training_type_id?: string;
+        career_field_id?: string;
+        degree_level_id?: string;
+        search?: string;
+    };
+}>();
+
+// Filtres locaux
+const searchFilters = ref({
+    country_id: props.currentFilters.country_id || '',
+    career_field_id: props.currentFilters.career_field_id || '',
+    establishment_type_id: props.currentFilters.establishment_type_id || '',
+    search: props.currentFilters.search || ''
 });
+
+// Appliquer les filtres via Inertia
+const applyFilters = () => {
+    router.get(route('establishments.index'), searchFilters.value, {
+        preserveState: true,
+        preserveScroll: true
+    });
+};
 </script>
 
 <template>
@@ -116,35 +126,44 @@ const filters = ref({
                     <div class="filters-sidebar">
                         <h3 class="filters-title">Filtres</h3>
 
+                        <!-- UI-Fix-2.5: Recherche par nom -->
                         <div class="filter-group">
-                            <label class="filter-label">Pays</label>
-                            <BFormSelect v-model="filters.country" class="filter-input">
-                                <option value="">Tous les pays</option>
-                                <option value="senegal">Sénégal</option>
-                                <option value="ghana">Ghana</option>
-                                <option value="maroc">Maroc</option>
-                                <option value="nigeria">Nigeria</option>
-                                <option value="kenya">Kenya</option>
-                                <option value="south-africa">Afrique du Sud</option>
-                            </BFormSelect>
+                            <label class="filter-label">Recherche</label>
+                            <BFormInput v-model="searchFilters.search" placeholder="Nom de l'établissement..." class="filter-input" @keyup.enter="applyFilters" />
                         </div>
 
                         <div class="filter-group">
-                            <label class="filter-label">Ville</label>
-                            <BFormInput v-model="filters.city" placeholder="Rechercher une ville" class="filter-input" />
+                            <label class="filter-label">Pays</label>
+                            <BFormSelect v-model="searchFilters.country_id" class="filter-input">
+                                <option value="">Tous les pays</option>
+                                <option v-for="country in filters.countries" :key="country.id" :value="country.id">
+                                    {{ country.name }}
+                                </option>
+                            </BFormSelect>
                         </div>
 
                         <div class="filter-group">
                             <label class="filter-label">Type d'établissement</label>
-                            <BFormSelect v-model="filters.type" class="filter-input">
+                            <BFormSelect v-model="searchFilters.establishment_type_id" class="filter-input">
                                 <option value="">Tous les types</option>
-                                <option value="public">Université publique</option>
-                                <option value="private">Université privée</option>
-                                <option value="school">École spécialisée</option>
+                                <option v-for="type in filters.establishment_types" :key="type.id" :value="type.id">
+                                    {{ type.label }}
+                                </option>
                             </BFormSelect>
                         </div>
 
-                        <BButton variant="primary" class="w-100 filter-button">
+                        <!-- UI-Fix-2.5: Filtre Domaine d'études (career_fields) -->
+                        <div class="filter-group">
+                            <label class="filter-label">Domaine d'études</label>
+                            <BFormSelect v-model="searchFilters.career_field_id" class="filter-input">
+                                <option value="">Tous les domaines</option>
+                                <option v-for="field in filters.career_fields" :key="field.id" :value="field.id">
+                                    {{ field.label }}
+                                </option>
+                            </BFormSelect>
+                        </div>
+
+                        <BButton variant="primary" class="w-100 filter-button" @click="applyFilters">
                             Appliquer les filtres
                         </BButton>
                     </div>
@@ -153,12 +172,13 @@ const filters = ref({
                 <!-- Establishments Grid -->
                 <BCol lg="9">
                     <div class="results-header">
-                        <h2 class="results-count">{{ establishments.length }} établissements trouvés</h2>
+                        <h2 class="results-count">{{ establishments.meta.total }} établissement{{ establishments.meta.total > 1 ? 's' : '' }} trouvé{{ establishments.meta.total > 1 ? 's' : '' }}</h2>
                     </div>
 
-                    <BRow>
+                    <!-- UI-Fix-2.5: Affichage réel des données via props -->
+                    <BRow v-if="establishments.data.length > 0">
                         <BCol
-                            v-for="establishment in establishments"
+                            v-for="establishment in establishments.data"
                             :key="establishment.id"
                             md="6"
                             lg="4"
@@ -169,37 +189,49 @@ const filters = ref({
                                     <div class="image-placeholder">
                                         <span class="placeholder-icon">🏛️</span>
                                     </div>
-                                    <div class="establishment-rating">
+                                    <div v-if="establishment.ratings?.average" class="establishment-rating">
                                         <span class="rating-icon">⭐</span>
-                                        <span class="rating-value">{{ establishment.rating }}</span>
+                                        <span class="rating-value">{{ establishment.ratings.average.toFixed(1) }}</span>
                                     </div>
                                 </div>
 
                                 <div class="establishment-content">
-                                    <h3 class="establishment-name">{{ establishment.name }}</h3>
+                                    <h3 class="establishment-name">{{ establishment.title }}</h3>
 
                                     <div class="establishment-meta">
-                                        <div class="meta-item">
+                                        <div class="meta-item" v-if="establishment.city">
                                             <span class="meta-icon">📍</span>
-                                            <span>{{ establishment.city }}, {{ establishment.country }}</span>
+                                            <span>{{ establishment.city.name }}{{ establishment.city.country ? ', ' + establishment.city.country.name : '' }}</span>
                                         </div>
-                                        <div class="meta-item">
+                                        <div class="meta-item" v-if="establishment.propertyType">
                                             <span class="meta-icon">🎓</span>
-                                            <span>{{ establishment.type }}</span>
+                                            <span>{{ establishment.propertyType.label }}</span>
+                                        </div>
+                                        <div class="meta-item" v-if="establishment.category">
+                                            <span class="meta-icon">📚</span>
+                                            <span>{{ establishment.category.label }}</span>
                                         </div>
                                     </div>
 
                                     <p class="establishment-description">
-                                        {{ establishment.description }}
+                                        {{ establishment.description || 'Découvrez cet établissement d\'enseignement supérieur en Afrique.' }}
                                     </p>
 
-                                    <BButton variant="primary" class="w-100 establishment-cta">
+                                    <Link :href="`/establishments/${establishment.slug}`" class="btn btn-primary w-100 establishment-cta">
                                         Voir les détails
-                                    </BButton>
+                                    </Link>
                                 </div>
                             </div>
                         </BCol>
                     </BRow>
+
+                    <!-- Message si aucun établissement -->
+                    <div v-else class="no-results text-center py-5">
+                        <p class="text-muted">Aucun établissement ne correspond à vos critères de recherche.</p>
+                        <BButton variant="outline-primary" @click="searchFilters = { country_id: '', career_field_id: '', establishment_type_id: '', search: '' }; applyFilters()">
+                            Réinitialiser les filtres
+                        </BButton>
+                    </div>
                 </BCol>
             </BRow>
         </BContainer>
@@ -243,13 +275,15 @@ const filters = ref({
     text-decoration: none;
 }
 
+/* UI-Fix-2.4: Logo charte EtapSup */
 .logo-text {
     font-size: 1.75rem;
     font-weight: 800;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: #1e3a8a;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+    color: #1e3a8a;
 }
 
 .nav-menu {
@@ -264,9 +298,10 @@ const filters = ref({
     transition: color 0.2s ease;
 }
 
+/* UI-Fix-2.4: Navigation active EtapSup */
 .nav-link:hover,
 .nav-link.active {
-    color: #667eea;
+    color: #1e3a8a;
 }
 
 .nav-actions {
@@ -283,31 +318,34 @@ const filters = ref({
     transition: all 0.3s ease;
 }
 
+/* UI-Fix-2.4: Boutons navigation charte EtapSup */
 .btn-nav-login {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: #1e3a8a;
     color: white;
 }
 
 .btn-nav-login:hover {
     transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+    box-shadow: 0 5px 15px rgba(30, 58, 138, 0.3);
     color: white;
+    background: #2b4a9e;
 }
 
 .btn-nav-register {
-    background: linear-gradient(45deg, #ed2939, #cc1f2d);
+    background: #dc2626;
     color: white;
 }
 
 .btn-nav-register:hover {
     transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(237, 41, 57, 0.3);
+    box-shadow: 0 5px 15px rgba(220, 38, 38, 0.3);
     color: white;
+    background: #b91c1c;
 }
 
-/* Page Header */
+/* UI-Fix-2.4: Header charte EtapSup */
 .page-header {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: #1e3a8a;
     padding: 3rem 0;
     color: white;
     text-align: center;
@@ -367,17 +405,22 @@ const filters = ref({
     transition: all 0.2s ease;
 }
 
+/* UI-Fix-2.4: Focus filtres EtapSup */
 .filter-input:focus {
     outline: none;
-    border-color: #667eea;
+    border-color: #1e3a8a;
 }
 
 .filter-button {
-    background: linear-gradient(45deg, #ed2939, #cc1f2d);
+    background: #dc2626;
     border: none;
     padding: 0.875rem;
     font-weight: 600;
     border-radius: 0.5rem;
+}
+
+.filter-button:hover {
+    background: #b91c1c;
 }
 
 /* Results */
@@ -413,10 +456,11 @@ const filters = ref({
     height: 180px;
 }
 
+/* UI-Fix-2.4: Image placeholder charte EtapSup */
 .image-placeholder {
     width: 100%;
     height: 100%;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: #1e3a8a;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -489,12 +533,17 @@ const filters = ref({
     flex: 1;
 }
 
+/* UI-Fix-2.4: Bouton CTA charte EtapSup */
 .establishment-cta {
-    background: linear-gradient(45deg, #ed2939, #cc1f2d);
+    background: #dc2626;
     border: none;
     padding: 0.75rem;
     font-weight: 600;
     border-radius: 0.5rem;
+}
+
+.establishment-cta:hover {
+    background: #b91c1c;
 }
 
 /* Footer */

@@ -20,34 +20,38 @@ class PropertyResource extends Resource
 {
     protected static ?string $model = Property::class;
 
-    protected static ?string $modelLabel = 'Logement';
+    protected static ?string $modelLabel = 'Établissement';
 
-    protected static ?string $pluralLabel = 'Logements';
+    protected static ?string $pluralLabel = 'Établissements';
 
-    protected static ?string $navigationIcon = 'heroicon-o-home';
+    protected static ?string $navigationIcon = 'heroicon-o-academic-cap';
+
+    protected static ?string $navigationGroup = 'Gestion des Établissements';
+
+    protected static ?int $navigationSort = 1;
 
     public static function form(Form $form): Form
     {
         $settings = app(RealEstateSettings::class);
         $rentalMonthlyBillingId = $settings->rental_monthly_billing;
 
+        // Sprint1 Feature 1.5.1 — Restructuration en Tabs (navigation onglets)
         return $form
             ->schema([
-                Forms\Components\Grid::make(6)
-                    ->schema([
-                        Forms\Components\Section::make('Informations principales')
-                            ->description('Détails essentiels de la propriété')
-                            ->icon('heroicon-o-home')
-                            ->columns(12)
+                Forms\Components\Tabs::make('Gestion Établissement')
+                    ->tabs([
+                        // TAB 1 : Informations principales
+                        Forms\Components\Tabs\Tab::make('Informations principales')
+                            ->icon('heroicon-o-academic-cap')
                             ->schema([
                                 Forms\Components\Toggle::make('is_published')
-                                    ->label('Publier la propriété')
-                                    ->helperText('La propriété sera visible sur le site')
+                                    ->label('Publier l\'établissement')
+                                    ->helperText('L\'établissement sera visible sur le site')
                                     ->default(false)
                                     ->columnSpanFull(),
 
                                 Forms\Components\TextInput::make('title')
-                                    ->label('Titre')
+                                    ->label('Nom de l\'établissement')
                                     ->required()
                                     ->live(onBlur: true)
                                     ->maxLength(100)
@@ -55,7 +59,7 @@ class PropertyResource extends Resource
 
                                 Forms\Components\Select::make('property_type_id')
                                     ->relationship('propertyType', 'label')
-                                    ->label('Type de propriété')
+                                    ->label('Type d\'établissement')
                                     ->required()
                                     ->searchable()
                                     ->preload()
@@ -67,7 +71,7 @@ class PropertyResource extends Resource
 
                                 Forms\Components\Select::make('category_id')
                                     ->relationship('category', 'label')
-                                    ->label('Catégorie')
+                                    ->label('Domaine d\'études principal')
                                     ->required()
                                     ->searchable()
                                     ->preload()
@@ -81,7 +85,7 @@ class PropertyResource extends Resource
 
                                 Forms\Components\Select::make('sub_category_id')
                                     ->relationship('subCategory', 'label')
-                                    ->label('Sous catégorie')
+                                    ->label('Spécialisation')
                                     ->searchable()
                                     ->preload()
                                     ->columnSpan(6),
@@ -94,21 +98,17 @@ class PropertyResource extends Resource
                                     ->preload()
                                     ->columnSpan(6),
 
-                                Forms\Components\TextInput::make('price')
-                                    ->label('Prix')
-                                    ->numeric()
-                                    ->required()
-                                    ->prefix('€')
-                                    ->step(0.01)
-                                    ->columnSpan(3),
+                                Forms\Components\Textarea::make('address')
+                                    ->label('Adresse complète')
+                                    ->columnSpanFull(),
 
-                                Forms\Components\TextInput::make('cleaning_fees')
-                                    ->label('Frais de ménage')
+                                Forms\Components\TextInput::make('price')
+                                    ->label('Frais de scolarité annuels')
                                     ->numeric()
                                     ->required()
                                     ->prefix('€')
                                     ->step(0.01)
-                                    ->columnSpan(3),
+                                    ->columnSpan(6),
 
                                 Forms\Components\RichEditor::make('description')
                                     ->required()
@@ -119,133 +119,204 @@ class PropertyResource extends Resource
                                         'code',
                                     ])
                                     ->columnSpanFull(),
-                            ])->columnSpan(4),
+                            ])->columns(12),
 
-                        Forms\Components\Grid::make()
+                        // TAB 2 : Contact & Tarifs
+                        Forms\Components\Tabs\Tab::make('Contact & Tarifs')
+                            ->icon('heroicon-o-banknotes')
                             ->schema([
-                                Forms\Components\Section::make('Caractéristiques')
-                                    ->icon('heroicon-o-squares-2x2')
+                                Forms\Components\Section::make('Informations de contact')
+                                    ->icon('heroicon-o-phone')
+                                    ->columns(12)
                                     ->schema([
-                                        Forms\Components\Grid::make(2)
-                                            ->schema([
-                                                Forms\Components\TextInput::make('room')
-                                                    ->numeric()
-                                                    ->label('Chambres')
-                                                    ->suffix('pièce(s)')
-                                                    ->minValue(0)
-                                                    ->maxValue(20),
+                                        Forms\Components\TextInput::make('website')
+                                            ->label('Site web')
+                                            ->url()
+                                            ->columnSpan(12),
 
-                                                Forms\Components\TextInput::make('bathroom')
-                                                    ->numeric()
-                                                    ->label('Salles de bain')
-                                                    ->suffix('pièce(s)')
-                                                    ->minValue(0)
-                                                    ->maxValue(10),
+                                        Forms\Components\TextInput::make('phone')
+                                            ->label('Téléphone')
+                                            ->tel()
+                                            ->columnSpan(6),
 
-                                                Forms\Components\TextInput::make('dining_room')
-                                                    ->numeric()
-                                                    ->label('Salles à manger')
-                                                    ->suffix('pièce(s)')
-                                                    ->minValue(0)
-                                                    ->maxValue(5),
+                                        Forms\Components\TextInput::make('email')
+                                            ->label('Email')
+                                            ->email()
+                                            ->columnSpan(6),
 
-                                                Forms\Components\TextInput::make('kitchen')
-                                                    ->numeric()
-                                                    ->label('Cuisines')
-                                                    ->suffix('pièce(s)')
-                                                    ->minValue(0)
-                                                    ->maxValue(5),
+                                        Forms\Components\TextInput::make('student_count')
+                                            ->label('Nombre d\'étudiants')
+                                            ->numeric()
+                                            ->columnSpan(6),
 
-                                                Forms\Components\TextInput::make('living_room')
-                                                    ->numeric()
-                                                    ->label('Salons')
-                                                    ->suffix('pièce(s)')
-                                                    ->minValue(0)
-                                                    ->maxValue(5),
-                                            ]),
-
-                                        Forms\Components\Grid::make(2)
-                                            ->schema([
-                                                Forms\Components\Toggle::make('balcony')
-                                                    ->label('Balcon')
-                                                    ->inline(false),
-
-                                                Forms\Components\Toggle::make('outdoor_space')
-                                                    ->label('Espace extérieur')
-                                                    ->inline(false),
-                                            ]),
+                                        Forms\Components\TextInput::make('ranking')
+                                            ->label('Classement')
+                                            ->numeric()
+                                            ->columnSpan(6),
                                     ]),
 
-                                Forms\Components\Section::make('Localisation')
-                                    ->icon('heroicon-o-map-pin')
+                                Forms\Components\Section::make('Tarification')
+                                    ->icon('heroicon-o-currency-euro')
+                                    ->columns(12)
                                     ->schema([
-                                        Forms\Components\Textarea::make('address')
-                                            ->label('Adresse complète')
-                                            ->columnSpanFull(),
-                                        Forms\Components\TextInput::make('airbnb')
-                                            ->label('Lien airbnb')
-                                            ->columnSpanFull(),
-                                    ])->collapsible(),
-                            ])->columnSpan(2),
+                                        Forms\Components\TextInput::make('tuition_min')
+                                            ->label('Frais de scolarité minimum')
+                                            ->helperText('Tarif le plus bas proposé par l\'établissement')
+                                            ->numeric()
+                                            ->prefix('€')
+                                            ->step(0.01)
+                                            ->columnSpan(6),
 
-                    ]),
+                                        Forms\Components\TextInput::make('tuition_max')
+                                            ->label('Frais de scolarité maximum')
+                                            ->helperText('Tarif le plus élevé proposé par l\'établissement')
+                                            ->numeric()
+                                            ->prefix('€')
+                                            ->step(0.01)
+                                            ->columnSpan(6),
 
-                Forms\Components\Section::make('Équipements et Règlements')
-                    ->icon('heroicon-o-cog-6-tooth')
-                    ->schema([
-                        Forms\Components\Grid::make(3)
+                                        Forms\Components\TextInput::make('commission')
+                                            ->label('Commission EtapSup (%)')
+                                            ->helperText('Commission sur les candidatures (ex: 15 pour 15%)')
+                                            ->numeric()
+                                            ->suffix('%')
+                                            ->step(0.01)
+                                            ->minValue(0)
+                                            ->maxValue(100)
+                                            ->columnSpan(4),
+
+                                        Forms\Components\TextInput::make('frais_dossier')
+                                            ->label('Frais de dossier')
+                                            ->helperText('Frais de traitement du dossier de candidature')
+                                            ->numeric()
+                                            ->prefix('€')
+                                            ->step(0.01)
+                                            ->minValue(0)
+                                            ->columnSpan(4),
+
+                                        Forms\Components\TextInput::make('acompte_scolarite')
+                                            ->label('Acompte de scolarité')
+                                            ->helperText('Montant de l\'acompte à verser lors de l\'inscription')
+                                            ->numeric()
+                                            ->prefix('€')
+                                            ->step(0.01)
+                                            ->minValue(0)
+                                            ->columnSpan(4),
+                                    ]),
+                            ])->columns(1),
+
+                        // TAB 3 : Médias
+                        Forms\Components\Tabs\Tab::make('Médias')
+                            ->icon('heroicon-o-photo')
                             ->schema([
-                                Forms\Components\Select::make('equipments')
-                                    ->relationship('equipments', 'label')
-                                    ->label('Equipements')
-                                    ->multiple()
-                                    ->preload()
-                                    ->searchable(),
+                                Forms\Components\Section::make('Images de l\'établissement')
+                                    ->description('Ajoutez des photos de l\'établissement, campus, infrastructures')
+                                    ->icon('heroicon-o-camera')
+                                    ->schema([
+                                        Forms\Components\SpatieMediaLibraryFileUpload::make('images')
+                                            ->collection('images')
+                                            ->multiple()
+                                            ->maxFiles(30)
+                                            ->downloadable()
+                                            ->reorderable()
+                                            ->imageEditor()
+                                            ->responsiveImages()
+                                            ->maxSize(10024)
+                                            ->panelLayout('grid')
+                                            ->acceptedFileTypes(['image/*'])
+                                            ->columnSpanFull(),
+                                    ]),
+                            ]),
 
-                                Forms\Components\Select::make('regulations')
-                                    ->relationship('regulations', 'label')
-                                    ->label('Règlements intérieur')
-                                    ->multiple()
-                                    ->preload()
-                                    ->searchable(),
+                        // TAB 4 : Filtres & Classification
+                        Forms\Components\Tabs\Tab::make('Filtres & Classification')
+                            ->icon('heroicon-o-funnel')
+                            ->schema([
+                                Forms\Components\Section::make('Critères de recherche')
+                                    ->description('Paramètres utilisés pour filtrer et rechercher l\'établissement')
+                                    ->icon('heroicon-o-magnifying-glass')
+                                    ->columns(12)
+                                    ->schema([
+                                        Forms\Components\Select::make('establishment_type_id')
+                                            ->relationship('establishmentType', 'label')
+                                            ->label('Type d\'établissement')
+                                            ->helperText('Catégorie de l\'établissement (Université, École de commerce, etc.)')
+                                            ->searchable()
+                                            ->preload()
+                                            ->columnSpan(6),
 
-                                Forms\Components\Select::make('layouts')
-                                    ->relationship('layouts', 'label')
-                                    ->label('Amenagements')
-                                    ->multiple()
-                                    ->preload()
-                                    ->searchable(),
+                                        Forms\Components\Select::make('training_type_id')
+                                            ->relationship('trainingType', 'label')
+                                            ->label('Type de formation')
+                                            ->helperText('Mode de formation proposé (Initiale, Alternance, etc.)')
+                                            ->searchable()
+                                            ->preload()
+                                            ->columnSpan(6),
 
-                                Forms\Components\RichEditor::make('regulation')
-                                    ->label('Autres règlements intérieur')
-                                    ->required()
-                                    ->disableToolbarButtons([
-                                        'attachFiles',
-                                        'codeBlock',
-                                        'link',
-                                        'code',
-                                    ])
-                                    ->columnSpanFull(),
+                                        Forms\Components\Select::make('career_field_id')
+                                            ->relationship('careerField', 'label')
+                                            ->label('Secteur professionnel')
+                                            ->helperText('Domaine de carrière visé (Commerce, Ingénieurs, etc.)')
+                                            ->searchable()
+                                            ->preload()
+                                            ->columnSpan(6),
+
+                                        Forms\Components\Select::make('degree_level_id')
+                                            ->relationship('degreeLevel', 'label')
+                                            ->label('Niveau de diplôme')
+                                            ->helperText('Niveau de qualification délivré (Licence, Master, etc.)')
+                                            ->searchable()
+                                            ->preload()
+                                            ->columnSpan(6),
+                                    ]),
+                            ]),
+
+                        // TAB 5 : Sections détaillées
+                        Forms\Components\Tabs\Tab::make('Sections détaillées')
+                            ->icon('heroicon-o-document-text')
+                            ->schema([
+                                Forms\Components\Section::make('Contenu de la fiche établissement')
+                                    ->description('Informations affichées sur la page publique de l\'établissement')
+                                    ->icon('heroicon-o-clipboard-document-list')
+                                    ->schema([
+                                        Forms\Components\Textarea::make('section_presentation')
+                                            ->label('Présentation complète')
+                                            ->helperText('Décrivez l\'établissement en détail (max 1000 caractères)')
+                                            ->maxLength(1000)
+                                            ->rows(4)
+                                            ->columnSpanFull(),
+
+                                        Forms\Components\Textarea::make('section_prerequis')
+                                            ->label('Prérequis d\'admission')
+                                            ->helperText('Diplômes requis, niveau d\'études, notes minimales, etc. (max 1000 caractères)')
+                                            ->maxLength(1000)
+                                            ->rows(3)
+                                            ->columnSpanFull(),
+
+                                        Forms\Components\Textarea::make('section_conditions_financieres')
+                                            ->label('Conditions financières')
+                                            ->helperText('Modalités de paiement, bourses disponibles, aides financières (max 1000 caractères)')
+                                            ->maxLength(1000)
+                                            ->rows(3)
+                                            ->columnSpanFull(),
+
+                                        Forms\Components\Textarea::make('section_specialisation')
+                                            ->label('Spécialisations proposées')
+                                            ->helperText('Filières, programmes, diplômes disponibles (max 1000 caractères)')
+                                            ->maxLength(1000)
+                                            ->rows(3)
+                                            ->columnSpanFull(),
+
+                                        Forms\Components\Textarea::make('section_campus')
+                                            ->label('Informations campus')
+                                            ->helperText('Adresse, infrastructures, équipements (max 1000 caractères)')
+                                            ->maxLength(1000)
+                                            ->rows(3)
+                                            ->columnSpanFull(),
+                                    ]),
                             ]),
                     ])
-                    ->collapsible(),
-
-                Forms\Components\Section::make('Médias')
-                    ->icon('heroicon-o-photo')
-                    ->schema([
-                        Forms\Components\SpatieMediaLibraryFileUpload::make('images')
-                            ->collection('images')
-                            ->multiple()
-                            ->maxFiles(30)
-                            ->downloadable()
-                            ->reorderable()
-                            ->imageEditor()
-                            ->responsiveImages()
-                            ->maxSize(10024)
-                            ->panelLayout('grid')
-                            ->acceptedFileTypes(['image/*'])
-                            ->columnSpanFull(),
-                    ])->collapsible(),
+                    ->columnSpanFull(),
             ]);
     }
 
@@ -280,45 +351,35 @@ class PropertyResource extends Resource
                     ->sortable(),
                 Tables\Columns\TextColumn::make('price')
                     ->money('EUR')
-                    ->label('Prix')
+                    ->label('Frais de scolarité')
                     ->sortable(),
-                Tables\Columns\TextColumn::make('room')
-                    ->label('Chambres')
-                    ->numeric()
-                    ->sortable()
-                    ->alignCenter(),
-                Tables\Columns\TextColumn::make('bathroom')
-                    ->label('Salles de bain')
+                Tables\Columns\TextColumn::make('student_count')
+                    ->label('Étudiants')
                     ->numeric()
                     ->sortable()
                     ->alignCenter()
+                    ->toggleable(),
+                Tables\Columns\TextColumn::make('ranking')
+                    ->label('Classement')
+                    ->numeric()
+                    ->sortable()
+                    ->alignCenter()
+                    ->toggleable(),
+                Tables\Columns\TextColumn::make('establishmentType.label')
+                    ->label('Type')
+                    ->searchable()
+                    ->toggleable(),
+                Tables\Columns\TextColumn::make('trainingType.label')
+                    ->label('Formation')
+                    ->searchable()
                     ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('dining_room')
-                    ->label('Salles à manger')
-                    ->numeric()
-                    ->sortable()
-                    ->alignCenter()
+                Tables\Columns\TextColumn::make('careerField.label')
+                    ->label('Secteur')
+                    ->searchable()
                     ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('kitchen')
-                    ->label('Cuisine')
-                    ->numeric()
-                    ->sortable()
-                    ->alignCenter()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('living_room')
-                    ->label('Salon')
-                    ->numeric()
-                    ->sortable()
-                    ->alignCenter()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\IconColumn::make('balcony')
-                    ->label('Balcon')
-                    ->boolean()
-                    ->alignCenter(),
-                Tables\Columns\IconColumn::make('outdoor_space')
-                    ->label('E. extérieur')
-                    ->boolean()
-                    ->alignCenter()
+                Tables\Columns\TextColumn::make('degreeLevel.label')
+                    ->label('Niveau')
+                    ->searchable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\IconColumn::make('is_published')
                     ->label('Publier')
@@ -340,15 +401,56 @@ class PropertyResource extends Resource
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                Tables\Filters\TrashedFilter::make(),
+                Tables\Filters\SelectFilter::make('property_type_id')
+                    ->label('Type d\'établissement')
+                    ->relationship('propertyType', 'label')
+                    ->searchable()
+                    ->preload(),
 
-                /* ...Category::all()->map(function (Category $category) {
-                     return Tables\Filters\Filter::make($category->label)
-                         ->query(fn(Builder $query) => $query->where('category_id', $category->id))
-                         ->label($category->label);
-             })->toArray()*/
+                Tables\Filters\SelectFilter::make('category_id')
+                    ->label('Domaine d\'études')
+                    ->relationship('category', 'label')
+                    ->searchable()
+                    ->preload(),
+
+                Tables\Filters\SelectFilter::make('city_id')
+                    ->label('Ville')
+                    ->relationship('city', 'name')
+                    ->searchable()
+                    ->preload(),
+
+                Tables\Filters\SelectFilter::make('establishment_type_id')
+                    ->relationship('establishmentType', 'label')
+                    ->label('Type établissement (détail)')
+                    ->searchable()
+                    ->preload(),
+
+                Tables\Filters\SelectFilter::make('training_type_id')
+                    ->relationship('trainingType', 'label')
+                    ->label('Type de formation')
+                    ->searchable()
+                    ->preload(),
+
+                Tables\Filters\SelectFilter::make('career_field_id')
+                    ->relationship('careerField', 'label')
+                    ->label('Secteur professionnel')
+                    ->searchable()
+                    ->preload(),
+
+                Tables\Filters\SelectFilter::make('degree_level_id')
+                    ->relationship('degreeLevel', 'label')
+                    ->label('Niveau de diplôme')
+                    ->searchable()
+                    ->preload(),
+
+                Tables\Filters\Filter::make('is_published')
+                    ->label('Publiés uniquement')
+                    ->query(fn (Builder $query) => $query->where('is_published', true))
+                    ->toggle(),
+
+                Tables\Filters\TrashedFilter::make(),
             ])
-            //->filtersLayout(Tables\Enums\FiltersLayout::AboveContentCollapsible)
+            ->filtersLayout(Tables\Enums\FiltersLayout::AboveContentCollapsible)
             ->actions([
                 Tables\Actions\EditAction::make(),
             ])
@@ -364,7 +466,7 @@ class PropertyResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            PropertyResource\RelationManagers\ApplicationsRelationManager::class,
         ];
     }
 

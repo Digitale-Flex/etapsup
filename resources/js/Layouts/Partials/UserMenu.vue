@@ -77,13 +77,14 @@ const useLayout = useLayoutStore();
                 <hr class="dropdown-divider" />
             </li>
 
+            <!-- UI-Fix-3.2 & 4.1: Menu profil synchronisé avec sidebar -->
             <li>
                 <Link
-                    :href="route('dashboard.certificates.index')"
+                    :href="route('dashboard')"
                     class="dropdown-item"
                 >
-                    <BIconBookmarkCheck class="fa-fw me-2" />
-                    Mes demandes
+                    <BIconHouseCheck class="fa-fw me-2" />
+                    Mon tableau de bord
                 </Link>
             </li>
             <li>
@@ -91,8 +92,8 @@ const useLayout = useLayoutStore();
                     :href="route('dashboard.reservations.index')"
                     class="dropdown-item"
                 >
-                    <BIconHouseCheck class="fa-fw me-2" />
-                    Mes réservations
+                    <BIconBookmarkCheck class="fa-fw me-2" />
+                    Mes candidatures
                 </Link>
             </li>
             <li>

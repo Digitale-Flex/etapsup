@@ -20,11 +20,11 @@ class CityResource extends Resource
 
     protected static ?string $pluralLabel = 'Villes';
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-map-pin';
 
     protected static ?string $navigationGroup = 'Paramètres';
 
-    protected static ?int $navigationSort = 10;
+    protected static ?int $navigationSort = 9;
 
     public static function form(Form $form): Form
     {

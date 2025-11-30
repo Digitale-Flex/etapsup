@@ -3,6 +3,9 @@
 namespace App\Providers\Filament;
 
 use App\Filament\Resources\Certificate\CertificateRequestResource\Widgets\CertificateRequestTrend;
+use App\Filament\Widgets\StatsOverviewWidget;
+use App\Filament\Widgets\CountryDistributionWidget;
+use App\Filament\Widgets\LatestApplicationsWidget;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
@@ -31,10 +34,18 @@ class AdminPanelProvider extends PanelProvider
             ->profile()
             ->passwordReset()
             ->colors([
-                'primary' => Color::Teal,
+                'primary' => Color::hex('#667eea'), // Purple EtatSup
+                'danger' => Color::hex('#ed2939'),  // Red EtatSup
             ])
+            ->brandName('EtatSup Admin')
             ->brandLogo(asset('images/logo.png'))
-            ->favicon(asset('favicon.ico'))
+            ->favicon(asset('images/logo.png'))
+            ->navigationGroups([
+                'Gestion des Candidatures',
+                'Gestion des Établissements',
+                'Caractéristiques établ.',
+                'Paramètres',
+            ])
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
             ->pages([
@@ -43,6 +54,10 @@ class AdminPanelProvider extends PanelProvider
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
             ->widgets([
                 Widgets\AccountWidget::class,
+                // Sprint1 Feature 1.4.1 — Widgets Dashboard Admin
+                StatsOverviewWidget::class,
+                CountryDistributionWidget::class,
+                LatestApplicationsWidget::class,
                 CertificateRequestTrend::class,
             ])
             ->middleware([

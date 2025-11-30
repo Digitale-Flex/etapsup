@@ -561,7 +561,7 @@ Réserver ma place maintenant
 
 /* Hero Section */
 .hero-section {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #1e3a8a 0%, #1e3a8a 100%);
   position: relative;
   min-height: 100vh;
   display: flex;
@@ -680,7 +680,7 @@ Réserver ma place maintenant
 }
 
 .cta-primary {
-  background: linear-gradient(45deg, #ed2939, #cc1f2d);
+  background: linear-gradient(45deg, #dc2626, #dc2626);
   color: white;
 }
 
@@ -839,7 +839,7 @@ Réserver ma place maintenant
 
 .form-input:focus {
   outline: none;
-  border-color: #ed2939;
+  border-color: #dc2626;
   box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
 }
 
@@ -871,8 +871,8 @@ Réserver ma place maintenant
 }
 
 .consent-checkbox input[type="checkbox"]:checked + .checkmark {
-  background: #ed2939;
-  border-color: #ed2939;
+  background: #dc2626;
+  border-color: #dc2626;
 }
 
 .consent-checkbox input[type="checkbox"]:checked + .checkmark::after {
@@ -887,7 +887,7 @@ Réserver ma place maintenant
 }
 
 .consent-text a {
-  color: #ed2939;
+  color: #dc2626;
   text-decoration: none;
 }
 
@@ -896,7 +896,7 @@ Réserver ma place maintenant
 }
 
 .submit-button {
-  background: linear-gradient(45deg, #ed2939, #cc1f2d);
+  background: linear-gradient(45deg, #dc2626, #dc2626);
   border: none;
   padding: 1rem 2rem;
   font-size: 1.1rem;
@@ -973,7 +973,7 @@ Réserver ma place maintenant
   width: 50px;
   height: 50px;
   border-radius: 50%;
-  background: linear-gradient(45deg, #ed2939, #cc1f2d);
+  background: linear-gradient(45deg, #dc2626, #dc2626);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1005,7 +1005,7 @@ Réserver ma place maintenant
 .trust-number {
   font-size: 2.5rem;
   font-weight: 700;
-  color: #ed2939;
+  color: #dc2626;
   display: block;
 }
 
@@ -1018,7 +1018,7 @@ Réserver ma place maintenant
 /* Footer CTA */
 .footer-cta {
   padding: 4rem 0;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #1e3a8a 0%, #1e3a8a 100%);
   color: white;
 }
 
@@ -1213,7 +1213,7 @@ Réserver ma place maintenant
 }
 
 .auth-cta-button {
-  background: linear-gradient(45deg, #ed2939, #cc1f2d);
+  background: linear-gradient(45deg, #dc2626, #dc2626);
   border: none;
   padding: 1rem 2rem;
   font-size: 1.1rem;
@@ -1326,7 +1326,7 @@ Réserver ma place maintenant
 
 /* Main Footer EtapSup */
 .main-footer {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #1e3a8a 0%, #1e3a8a 100%);
   color: white;
   padding: 3rem 0 1.5rem;
   margin-top: 0;
@@ -1368,7 +1368,7 @@ Réserver ma place maintenant
 }
 
 .footer-links a:hover {
-  color: #ed2939;
+  color: #dc2626;
   text-decoration: underline;
 }
 

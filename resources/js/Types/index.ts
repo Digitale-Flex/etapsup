@@ -79,6 +79,8 @@ export interface Property {
     title: string;
     slug: string;
     description: string;
+    email?: string; // Contact email
+    phone?: string; // Contact phone
     room: string;
     living_room: string;
     kitchen: string;
@@ -92,9 +94,13 @@ export interface Property {
     airbnb: string;
     discount: boolean;
     regulation: string;
+    website?: string; // Site web
+    student_count?: number; // Nombre d'étudiants
+    ranking?: number; // Classement
+    regulations?: any[]; // Règlements
+    accreditations?: any[]; // Accréditations
     propertyType: PropertyType;
     equipments: Equipment[];
-    regulations: Regulation[];
     layouts: Layout[];
     comments: Comment[];
     ratings: {
@@ -171,7 +177,8 @@ export interface City {
     name: string;
     budget: number;
     country_id?: string;
-    region: Region;
+    country?: Country; // Pays
+    region: Region; // Région
 }
 export interface Partner {
     id: string;
@@ -192,6 +199,7 @@ export interface User {
     passport_number: string;
     country: Country;
     photo?: string;
+    photo_url?: string; // Alias pour photo
 }
 
 export interface PaginationLink {

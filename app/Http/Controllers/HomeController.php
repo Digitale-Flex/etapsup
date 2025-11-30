@@ -11,6 +11,7 @@ use App\Http\Resources\PropertyTypeResource;
 use App\Http\Resources\SubCategoryResource;
 use App\Models\City;
 use App\Models\Country;
+use App\Models\Program;
 use App\Models\RealEstate\Category;
 use App\Models\RealEstate\Equipment;
 use App\Models\RealEstate\Layout;
@@ -36,25 +37,23 @@ class HomeController extends Controller
     ){}
     public function index(Request $request, PropertyFilter $filter): \Inertia\Response
     {
-        // Refonte: Page d'accueil inspirée de Diplomeo.com avec charte EtatSup
-        // Récupération des données réelles depuis la base
-
-        // Établissements (Properties) avec leurs relations
-        $establishments = Property::with(['propertyType', 'city.region.country'])
-            ->where('is_published', true)
-            ->take(6)
-            ->get()
-            ->map(function($property) {
-                return [
-                    'id' => $property->hashid,
-                    'name' => $property->title,
-                    'country' => $property->city?->region?->country?->name ?? 'Non spécifié',
-                    'city' => $property->city?->name ?? 'Non spécifié',
-                    'type' => $property->propertyType?->label ?? 'Non spécifié',
-                    'description' => $property->description,
-                    'image' => $property->getFirstMediaUrl('images', 'thumb'),
-                ];
-            });
+        // Refonte Accueil Dynamique: Récupération 6 établissements réels
+        $establishments = \Illuminate\Support\Facades\Cache::remember('home_establishments', 3600, function() {
+            return Property::with([
+                'propertyType',
+                'city.region.country',
+                'ratings',
+                'programs' => fn($q) => $q->where('is_published', true)
+                    ->with(['studyField', 'degreeLevel'])
+            ])
+                ->where('is_published', true)
+                ->inRandomOrder()
+                ->limit(6)
+                ->get()
+                ->map(function($property) {
+                    return new \App\Http\Resources\EstablishmentResource($property);
+                });
+        });
 
         // Pays
         $countries = Country::select('id', 'name as name')->get();
@@ -77,7 +76,7 @@ class HomeController extends Controller
             'totalEstablishments' => Property::count(),
             'totalStudents' => 2000, // Hardcodé pour l'instant (pas de table users students)
             'totalCountries' => Country::count(),
-            'totalPrograms' => Category::count(), // Domaines d'études disponibles
+            'totalPrograms' => Program::count(),
         ];
 
         return Inertia::render('Home/Index', [

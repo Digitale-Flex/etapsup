@@ -22,7 +22,7 @@ class LayoutResource extends Resource
     protected static ?string $pluralLabel = 'Aménagements';
 
     protected static ?string $navigationIcon = 'gmdi-add-home-work-o';
-    protected static ?string $navigationGroup = 'Propriétés';
+    protected static ?string $navigationGroup = 'Caractéristiques établ.';
 
     public static function form(Form $form): Form
     {

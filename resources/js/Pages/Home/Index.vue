@@ -563,8 +563,8 @@ const handleSearch = () => {
 
 /* Variables couleurs EtapSup */
 :root {
-    --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    --accent-gradient: linear-gradient(45deg, #ed2939, #cc1f2d);
+    --primary-gradient: linear-gradient(135deg, #1e3a8a 0%, #1e3a8a 100%);
+    --accent-gradient: linear-gradient(45deg, #dc2626, #dc2626);
     --bg-light: #f8fafc;
     --text-dark: #1a202c;
     --text-gray: #64748b;
@@ -598,7 +598,7 @@ const handleSearch = () => {
 .nav-logo .logo-text {
     font-size: 1.75rem;
     font-weight: 800;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #1e3a8a 0%, #1e3a8a 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -619,7 +619,7 @@ const handleSearch = () => {
 }
 
 .nav-link:hover {
-    color: #667eea;
+    color: #1e3a8a;
 }
 
 .nav-actions {
@@ -638,7 +638,7 @@ const handleSearch = () => {
 }
 
 .btn-nav-login {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #1e3a8a 0%, #1e3a8a 100%);
     color: white;
 }
 
@@ -649,7 +649,7 @@ const handleSearch = () => {
 }
 
 .btn-nav-register {
-    background: linear-gradient(45deg, #ed2939, #cc1f2d);
+    background: linear-gradient(45deg, #dc2626, #dc2626);
     color: white;
 }
 
@@ -676,7 +676,7 @@ const handleSearch = () => {
 
 /* Hero Section */
 .hero-section {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #1e3a8a 0%, #1e3a8a 100%);
     position: relative;
     min-height: 85vh;
     display: flex;
@@ -772,12 +772,12 @@ const handleSearch = () => {
 
 .form-input:focus {
     outline: none;
-    border-color: #667eea;
+    border-color: #1e3a8a;
     box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
 }
 
 .search-button {
-    background: linear-gradient(45deg, #ed2939, #cc1f2d);
+    background: linear-gradient(45deg, #dc2626, #dc2626);
     border: none;
     padding: 0.875rem;
     font-size: 1.25rem;
@@ -900,7 +900,7 @@ const handleSearch = () => {
 .image-placeholder {
     width: 100%;
     height: 100%;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #1e3a8a 0%, #1e3a8a 100%);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -953,7 +953,7 @@ const handleSearch = () => {
 }
 
 .establishment-cta {
-    background: linear-gradient(45deg, #ed2939, #cc1f2d);
+    background: linear-gradient(45deg, #dc2626, #dc2626);
     color: white;
     border: none;
     padding: 0.75rem 1.5rem;
@@ -979,7 +979,7 @@ const handleSearch = () => {
     right: 1rem;
     width: 40px;
     height: 40px;
-    background: linear-gradient(45deg, #ed2939, #cc1f2d);
+    background: linear-gradient(45deg, #dc2626, #dc2626);
     color: white;
     border-radius: 50%;
     display: flex;
@@ -1047,7 +1047,7 @@ const handleSearch = () => {
     width: 50px;
     height: 50px;
     border-radius: 50%;
-    background: linear-gradient(45deg, #ed2939, #cc1f2d);
+    background: linear-gradient(45deg, #dc2626, #dc2626);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1093,7 +1093,7 @@ const handleSearch = () => {
 /* Footer CTA */
 .footer-cta {
     padding: 5rem 0;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #1e3a8a 0%, #1e3a8a 100%);
     color: white;
 }
 
@@ -1134,7 +1134,7 @@ const handleSearch = () => {
 }
 
 .cta-primary {
-    background: linear-gradient(45deg, #ed2939, #cc1f2d);
+    background: linear-gradient(45deg, #dc2626, #dc2626);
     color: white;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
 }
@@ -1147,14 +1147,14 @@ const handleSearch = () => {
 
 .cta-secondary {
     background: white;
-    color: #667eea;
+    color: #1e3a8a;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 }
 
 .cta-secondary:hover {
     transform: translateY(-3px);
     box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
-    color: #667eea;
+    color: #1e3a8a;
 }
 
 .button-arrow {
@@ -1208,7 +1208,7 @@ const handleSearch = () => {
 }
 
 .footer-links a:hover {
-    color: #ed2939;
+    color: #dc2626;
 }
 
 .footer-links span {

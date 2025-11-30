@@ -13,7 +13,22 @@
       "Bash(npm run dev:*)",
       "Bash(mysql:*)",
       "Bash(cat:*)",
-      "Bash(curl -s http://127.0.0.1:8000/)"
+      "Bash(curl -s http://127.0.0.1:8000/)",
+      "Bash(test:*)",
+      "Bash(composer:*)",
+      "Bash(composer.bat --version:*)",
+      "Bash(composer.bat install:*)",
+      "Bash(git pull:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git push:*)",
+      "Bash(dir:*)",
+      "Bash(git checkout:*)",
+      "Bash(rm:*)",
+      "Bash(mkdir:*)",
+      "Bash(copy:*)",
+      "Bash(cp:*)",
+      "Bash(find:*)"
     ],
     "deny": [],
     "ask": []

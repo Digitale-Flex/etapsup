@@ -14,9 +14,9 @@ class EditProperty extends EditRecord
     {
         return [
             Actions\Action::make('details')
-                ->label('Voir la page')
+                ->label('Voir l\'établissement')
                 ->icon('gmdi-open-in-new-r')
-                ->url(fn (): string => route('properties.preview', $this->record->slug))
+                ->url(fn (): string => route('establishments.show', $this->record->hashid))
                 ->openUrlInNewTab()
                 ->link(),
             Actions\DeleteAction::make(),

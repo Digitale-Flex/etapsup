@@ -5,6 +5,10 @@ namespace App\Models\RealEstate;
 use App\Models\City;
 use App\Models\Rating;
 use App\Models\Scopes\PublishedScope;
+use App\Models\Settings\EstablishmentType;
+use App\Models\Settings\TrainingType;
+use App\Models\Settings\CareerField;
+use App\Models\Settings\DegreeLevel;
 use App\Traits\ClearsResponseCache;
 use App\Traits\HasReservations;
 use Illuminate\Database\Eloquent\Attributes\ScopedBy;
@@ -24,11 +28,49 @@ use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 
 #[ScopedBy([PublishedScope::class])]
 class Property extends Model implements HasMedia
 {
     use ClearsResponseCache, HasFactory, HasHashid, HashidRouting, HasReservations, HasSlug, InteractsWithMedia, SoftDeletes;
+
+    // Constantes pour les filtres EtapSup (Sprint 1)
+    public const ESTABLISHMENT_TYPES = [
+        'Universités',
+        'Écoles de commerce',
+        'Écoles d\'ingénieurs',
+        'Écoles de médecine',
+        'Écoles de droit',
+        'Écoles hôtelières'
+    ];
+
+    public const TRAINING_TYPES = [
+        'Initiale',
+        'Alternance',
+        'Professionnelle',
+        'Certifiante',
+        'Individualisée',
+        'E-learning'
+    ];
+
+    public const CAREER_FIELDS = [
+        'Commerce',
+        'Ingénieurs',
+        'Santé',
+        'Banque',
+        'Immobilier',
+        'Communication'
+    ];
+
+    public const DEGREE_LEVELS = [
+        'CAP',
+        'Bac',
+        'BTS',
+        'Licence',
+        'Mastères',
+        'Doctorat'
+    ];
 
     protected $fillable = [
         'property_type_id',
@@ -51,6 +93,35 @@ class Property extends Model implements HasMedia
         'airbnb',
         'cleaning_fees',
         'is_published',
+        // EtatSup: Colonnes éducatives
+        'website',
+        'phone',
+        'email',
+        'student_count',
+        'ranking',
+        'tuition_min',
+        'tuition_max',
+        'accreditation_info',
+        // Sprint 1: Filtres de recherche
+        'establishment_type',
+        'training_type',
+        'career_field',
+        'degree_level',
+        // Sprint 1: Foreign keys vers Settings
+        'establishment_type_id',
+        'training_type_id',
+        'career_field_id',
+        'degree_level_id',
+        // Sprint 1: Sections fiche établissement
+        'section_presentation',
+        'section_prerequis',
+        'section_conditions_financieres',
+        'section_specialisation',
+        'section_campus',
+        // Sprint1 Feature 1.5.1: Frais et commission par établissement
+        'commission',
+        'frais_dossier',
+        'acompte_scolarite',
     ];
 
     protected function casts(): array
@@ -60,6 +131,10 @@ class Property extends Model implements HasMedia
             'outdoor_space' => 'boolean',
             'is_published' => 'boolean',
             'discount' => 'boolean',
+            // EtatSup: Casts colonnes éducatives
+            'tuition_min' => 'decimal:2',
+            'tuition_max' => 'decimal:2',
+            'accreditation_info' => 'array',
         ];
     }
 
@@ -109,6 +184,27 @@ class Property extends Model implements HasMedia
         return $this->belongsTo(City::class);
     }
 
+    // EtatSup: Relations vers Settings pour paramétrabilité
+    public function establishmentType(): BelongsTo
+    {
+        return $this->belongsTo(EstablishmentType::class);
+    }
+
+    public function trainingType(): BelongsTo
+    {
+        return $this->belongsTo(TrainingType::class);
+    }
+
+    public function careerField(): BelongsTo
+    {
+        return $this->belongsTo(CareerField::class);
+    }
+
+    public function degreeLevel(): BelongsTo
+    {
+        return $this->belongsTo(DegreeLevel::class);
+    }
+
     public function equipments(): BelongsToMany
     {
         return $this->belongsToMany(Equipment::class);
@@ -142,12 +238,12 @@ class Property extends Model implements HasMedia
     public function comments(): HasManyThrough
     {
         return $this->hasManyThrough(
-            Comment::class, // Modèle cible
-            Reservation::class, // Modèle intermédiaire
-            'property_id', // Clé étrangère sur Reservation
-            'commentable_id', // Clé étrangère sur Comment
-            'id', // Clé primaire sur Property
-            'id' // Clé primaire sur Reservation
+            Comment::class,
+            Reservation::class,
+            'property_id',
+            'commentable_id',
+            'id',
+            'id'
         )->where('commentable_type', Reservation::class);
     }
 
@@ -167,5 +263,41 @@ class Property extends Model implements HasMedia
     public function programs(): HasMany
     {
         return $this->hasMany(\App\Models\Program::class, 'establishment_id');
+    }
+
+    /**
+     * Les candidatures pour cet établissement (EtatSup Phase 4)
+     */
+    public function applications(): HasMany
+    {
+        return $this->hasMany(\App\Models\Application::class, 'property_id');
+    }
+
+    /**
+     * Accessor/Mutator pour accreditation_info (EtatSup)
+     *
+     * Garantit la structure JSON cohérente :
+     * {
+     *   "national": bool,
+     *   "international": string[],
+     *   "labels": string[]
+     * }
+     *
+     * Audit QA: Correction RISQUE 1 (validation JSON)
+     */
+    protected function accreditationInfo(): Attribute
+    {
+        return Attribute::make(
+            get: fn (?array $value) => $value ?? [
+                'national' => false,
+                'international' => [],
+                'labels' => [],
+            ],
+            set: fn (?array $value) => $value ? [
+                'national' => (bool) ($value['national'] ?? false),
+                'international' => array_values((array) ($value['international'] ?? [])),
+                'labels' => array_values((array) ($value['labels'] ?? [])),
+            ] : null,
+        );
     }
 }

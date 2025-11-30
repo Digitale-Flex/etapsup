@@ -9,42 +9,51 @@ import { BIconEnvelope, BIconTelephone } from 'bootstrap-icons-vue';
 </script>
 
 <template>
-    <footer class="bg-dark pt-5">
+    <!-- UI-Fix-1.1: Adaptation footer EtapSup -->
+    <footer class="pt-5" style="background-color: #1e3a8a;">
         <b-container>
             <b-row class="g-4">
                 <b-col lg="4">
-                    <Link href="/" class="text-3xl font-extrabold">
-                        YOD INVEST
+                    <Link href="/" class="text-3xl font-extrabold text-white">
+                        ETAPSUP
                     </Link>
-                    <p class="text-body-secondary my-3">
-                        « Réalisez votre projet immobilier. »
+                    <p class="text-white my-3 opacity-75">
+                        « Votre passerelle vers les études supérieures en Afrique. »
                     </p>
                     <p class="mb-2">
                         <a
-                            href="#"
-                            class="text-body-secondary text-primary-hover"
+                            href="mailto:contact@etapsup.com"
+                            class="text-white opacity-75 text-decoration-none"
+                            style="transition: opacity 0.2s;"
+                            onmouseover="this.style.opacity='1'"
+                            onmouseout="this.style.opacity='0.75'"
                         >
-                            <BIconTelephone class="me-2" />
-                            09 82 70 10 71
+                            <BIconEnvelope class="me-2" />
+                            contact@etapsup.com
                         </a>
                     </p>
                     <p class="mb-0">
                         <a
-                            href="#"
-                            class="text-body-secondary text-primary-hover"
+                            href="tel:+33123456789"
+                            class="text-white opacity-75 text-decoration-none"
+                            style="transition: opacity 0.2s;"
+                            onmouseover="this.style.opacity='1'"
+                            onmouseout="this.style.opacity='0.75'"
                         >
-                            <BIconEnvelope class="me-2" />
-                            contact@yod-invest.fr
+                            <BIconTelephone class="me-2" />
+                            +33 1 23 45 67 89
                         </a>
                     </p>
                 </b-col>
 
                 <b-col lg="8" class="ms-auto">
-                    <b-row class="g-4 d-flex justify-content-end">
-                        <img
-                            src="/images/logo-yod.jpg"
-                            class="img-thumbnail img-responsive logo-yod-invest"
-                        />
+                    <b-row class="g-4 d-flex justify-content-end align-items-center">
+                        <div class="text-end">
+                            <span class="text-white font-extrabold" style="font-size: 3rem; letter-spacing: 2px;">
+                                ETAPSUP
+                            </span>
+                            <p class="text-white opacity-75 mt-2">Plateforme d'orientation étudiante</p>
+                        </div>
                     </b-row>
                 </b-col>
             </b-row>
@@ -88,6 +97,7 @@ import { BIconEnvelope, BIconTelephone } from 'bootstrap-icons-vue';
                     </ul>
                 </b-col>
 
+                <!-- UI-Fix-1.1: Réseaux sociaux EtapSup -->
                 <b-col sm="5" md="6" lg="3" class="text-sm-end">
                     <h5 class="mb-2 text-white">Suivez-nous</h5>
                     <ul
@@ -95,37 +105,40 @@ import { BIconEnvelope, BIconTelephone } from 'bootstrap-icons-vue';
                     >
                         <li class="list-inline-item">
                             <a
-                                href="https://www.facebook.com/people/YOD-INVEST/100091850224201/"
-                                class="btn btn-sm bg-facebook mb-0 px-2"
+                                href="#"
+                                class="btn btn-sm mb-0 px-2"
+                                style="background-color: #dc2626;"
                                 target="_blank"
                             >
                                 <font-awesome-icon
                                     :icon="faFacebook"
-                                    class="fab fa-fw"
+                                    class="fab fa-fw text-white"
                                 />
                             </a>
                         </li>
                         <li class="list-inline-item">
                             <a
-                                href="https://www.instagram.com/yod_invest/"
-                                class="btn btn-sm bg-instagram mb-0 px-2 shadow"
+                                href="#"
+                                class="btn btn-sm mb-0 px-2 shadow"
+                                style="background-color: #dc2626;"
                                 target="_blank"
                             >
                                 <font-awesome-icon
                                     :icon="faInstagram"
-                                    class="fab fa-fw"
+                                    class="fab fa-fw text-white"
                                 />
                             </a>
                         </li>
                         <li class="list-inline-item">
                             <a
-                                href="https://www.linkedin.com/company/yod-invest-officiel/posts/?feedView=all"
-                                class="btn btn-sm bg-linkedin mb-0 px-2 shadow"
+                                href="#"
+                                class="btn btn-sm mb-0 px-2 shadow"
+                                style="background-color: #dc2626;"
                                 target="_blank"
                             >
                                 <font-awesome-icon
                                     :icon="faLinkedinIn"
-                                    class="fab fa-fw"
+                                    class="fab fa-fw text-white"
                                 />
                             </a>
                         </li>
@@ -133,33 +146,8 @@ import { BIconEnvelope, BIconTelephone } from 'bootstrap-icons-vue';
                 </b-col>
             </b-row>
 
-            <hr class="mb-0 mt-4" />
-
-            <!-- <b-row>
-               <b-container>
-                 <div
-                     class="d-lg-flex justify-content-between align-items-center py-3 text-center text-lg-start"
-                 >
-                   <div class="text-body-secondary text-primary-hover">
-                     Copyrights ©{{ currentYear }} Booking. Build by
-                     <a :href="developedByLink" class="text-body-secondary">{{ developedBy }}</a>.
-                   </div>
-                   <div class="nav mt-2 mt-lg-0">
-                     <ul class="list-inline text-primary-hover mx-auto mb-0">
-                       <li class="list-inline-item me-0">
-                         <a class="nav-link text-body-secondary py-1" href="#">Privacy policy</a>
-                       </li>
-                       <li class="list-inline-item me-0">
-                         <a class="nav-link text-body-secondary py-1" href="#">Terms and conditions</a>
-                       </li>
-                       <li class="list-inline-item me-0">
-                         <a class="nav-link text-body-secondary py-1 pe-0" href="#">Refund policy</a>
-                       </li>
-                     </ul>
-                   </div>
-                 </div>
-               </b-container>
-             </b-row>-->
+            <!-- UI-Fix-1.1: Séparateur blanc sur fond bleu -->
+            <hr class="mb-0 mt-4" style="border-color: rgba(255, 255, 255, 0.2);" />
         </b-container>
     </footer>
 </template>

@@ -178,7 +178,8 @@ const remainingImagesCount = computed(() => {
                                         : 'Réservation'
                                 }}
                             </small>
-                            <h6 class="text-success mb-0">
+                            <!-- UI-Fix-2.3: Remplacer text-success (vert) par text-primary (bleu EtapSup) -->
+                            <h6 class="text-primary mb-0">
                                 {{
                                     new Intl.NumberFormat('fr-FR', {
                                         style: 'currency',

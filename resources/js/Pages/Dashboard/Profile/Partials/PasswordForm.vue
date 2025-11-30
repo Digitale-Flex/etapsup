@@ -105,6 +105,7 @@ const submit = () => {
                     <b-button
                         variant="primary"
                         type="submit"
+                        class="btn-etapsup"
                         :loading="form.processing"
                         :disabled="form.processing || !form.isDirty"
                         >Changer le mot de passe
@@ -115,4 +116,57 @@ const submit = () => {
     </b-card>
 </template>
 
-<style scoped></style>
+<style scoped>
+/* Charte EtatSup - Perfect Pixel */
+.btn-etapsup {
+    background: linear-gradient(45deg, #dc2626, #dc2626) !important;
+    border: none !important;
+    padding: 0.75rem 2rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.btn-etapsup:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 16px rgba(237, 41, 57, 0.3);
+}
+
+.btn-etapsup:disabled {
+    opacity: 0.6;
+}
+
+/* Styling des cartes */
+:deep(.card) {
+    border-radius: 1rem;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+:deep(.card-header) {
+    background: linear-gradient(135deg, #1e3a8a 0%, #1e3a8a 100%);
+    color: white;
+    border-radius: 1rem 1rem 0 0 !important;
+    padding: 1.25rem 1.5rem;
+}
+
+:deep(.card-header-title) {
+    color: white;
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin: 0;
+}
+
+/* Inputs focus */
+:deep(.p-password input:focus),
+:deep(.p-inputtext:focus) {
+    border-color: #1e3a8a !important;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1) !important;
+}
+
+/* Labels */
+:deep(label) {
+    font-weight: 600;
+    color: #374151;
+    margin-bottom: 0.5rem;
+}
+</style>

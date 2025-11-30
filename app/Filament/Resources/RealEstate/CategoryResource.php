@@ -17,25 +17,35 @@ class CategoryResource extends Resource
 {
     protected static ?string $model = Category::class;
 
-    protected static ?string $navigationIcon = 'gmdi-category-o';
+    protected static ?string $modelLabel = 'Domaine d\'études';
 
-    protected static ?string $navigationGroup = 'Propriétés';
+    protected static ?string $pluralLabel = 'Domaines d\'études';
+
+    protected static ?string $navigationIcon = 'heroicon-o-book-open';
+
+    protected static ?string $navigationGroup = 'Paramètres';
+
+    protected static ?int $navigationSort = 14;
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
                 Forms\Components\Toggle::make('is_published')
-                    ->label('Publier')
+                    ->label('Publier le domaine')
+                    ->helperText('Le domaine sera visible dans les filtres')
                     ->required()
                     ->columnSpanFull(),
                 Forms\Components\TextInput::make('label')
-                    ->label('Nom')
-                    ->placeholder('Nom de la catégorie')
+                    ->label('Nom du domaine d\'études')
+                    ->placeholder('Ex: Sciences, Commerce, Ingénierie...')
                     ->required()
                     ->maxLength(255)
                     ->columnSpanFull(),
                 Forms\Components\Textarea::make('description')
+                    ->label('Description du domaine')
+                    ->helperText('Décrivez les formations et débours de ce domaine')
+                    ->rows(3)
                     ->columnSpanFull(),
             ]);
     }
@@ -45,10 +55,21 @@ class CategoryResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('label')
-                    ->label('Nom')
-                    ->searchable(),
+                    ->label('Domaine d\'études')
+                    ->searchable()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('description')
+                    ->label('Description')
+                    ->limit(50)
+                    ->searchable()
+                    ->toggleable(),
+                Tables\Columns\TextColumn::make('properties_count')
+                    ->label('Établissements')
+                    ->counts('properties')
+                    ->sortable()
+                    ->alignCenter(),
                 Tables\Columns\IconColumn::make('is_published')
-                    ->label('Publier')
+                    ->label('Publié')
                     ->alignCenter()
                     ->boolean(),
                 Tables\Columns\TextColumn::make('created_at')

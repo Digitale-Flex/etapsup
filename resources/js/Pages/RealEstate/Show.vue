@@ -51,91 +51,36 @@ defineProps<{
                 <b-row class="g-4 g-xl-5">
                     <b-col xl="7" class="order-1">
                         <div class="vstack gap-5">
-                            <b-card no-body class="bg-transparent">
+                            <b-card no-body class="bg-transparent border-0 shadow-etatsup">
                                 <b-card-header
-                                    class="border-bottom bg-transparent px-0 pt-0"
+                                    class="header-etatsup px-4 py-3"
                                 >
-                                    <h3 class="mb-0">
-                                        À propos du logement :
+                                    <h3 class="mb-0 text-white">
+                                        À propos de l'établissement :
                                         {{ property.propertyType.label }}
                                     </h3>
                                 </b-card-header>
 
-                                <b-card-body class="p-0 pt-4">
-                                    <h5 class="fw-light mb-4">
-                                        Principaux points forts
+                                <b-card-body class="p-4">
+                                    <h5 class="fw-bold mb-4 text-etatsup">
+                                        Informations clés
                                     </h5>
 
-                                    <div class="hstack mb-3 gap-3">
+                                    <!-- Statistiques éducatives EtatSup -->
+                                    <div class="hstack mb-4 gap-3" v-if="property.student_count || property.ranking">
                                         <div
-                                            v-if="property.living_room"
-                                            class="icon-lg bg-light h5 rounded-2"
-                                            data-bs-toggle="tooltip"
-                                            data-bs-placement="top"
-                                            title="Salon"
+                                            v-if="property.student_count"
+                                            class="stat-badge"
                                         >
-                                            <svg-icon
-                                                type="mdi"
-                                                :path="mdiSofaSingleOutline"
-                                                class="mb-1"
-                                            />
-                                            {{ property.living_room }}
+                                            <i class="bi bi-people-fill text-primary me-2"></i>
+                                            <strong>{{ property.student_count.toLocaleString() }}</strong> étudiants
                                         </div>
                                         <div
-                                            v-if="property.room"
-                                            class="icon-lg bg-light h5 rounded-2"
-                                            data-bs-toggle="tooltip"
-                                            data-bs-placement="top"
-                                            title="Chambre"
+                                            v-if="property.ranking"
+                                            class="stat-badge"
                                         >
-                                            <svg-icon
-                                                type="mdi"
-                                                :path="mdiBedOutline"
-                                                class="mb-1"
-                                            />
-                                            {{ property.room }}
-                                        </div>
-                                        <div
-                                            v-if="property.kitchen"
-                                            class="icon-lg bg-light h5 rounded-2"
-                                            data-bs-toggle="tooltip"
-                                            data-bs-placement="top"
-                                            title="Cuisine"
-                                        >
-                                            <svg-icon
-                                                type="mdi"
-                                                :path="mdiCountertopOutline"
-                                                class="mb-1"
-                                            />
-                                            {{ property.kitchen }}
-                                        </div>
-                                        <div
-                                            v-if="property.kitchen"
-                                            class="icon-lg bg-light h5 rounded-2"
-                                            data-bs-toggle="tooltip"
-                                            data-bs-placement="top"
-                                            title="Salle a manger"
-                                        >
-                                            <svg-icon
-                                                type="mdi"
-                                                :path="mdiSilverware"
-                                                class="mb-1"
-                                            />
-                                            {{ property.kitchen }}
-                                        </div>
-                                        <div
-                                            v-if="property.bathroom"
-                                            class="icon-lg bg-light h5 rounded-2"
-                                            data-bs-toggle="tooltip"
-                                            data-bs-placement="top"
-                                            title="Salle de bain"
-                                        >
-                                            <svg-icon
-                                                type="mdi"
-                                                :path="mdiBathtubOutline"
-                                                class="mb-1"
-                                            />
-                                            {{ property.bathroom }}
+                                            <i class="bi bi-trophy-fill text-warning me-2"></i>
+                                            Classement <strong>#{{ property.ranking }}</strong>
                                         </div>
                                     </div>
 
@@ -144,49 +89,40 @@ defineProps<{
                                         :max-chars="440"
                                     />
 
-                                    <div
-                                        v-if="
-                                            property.outdoor_space ||
-                                            property.balcony
-                                        "
-                                    >
-                                        <h5 class="fw-light mb-2">Avantages</h5>
-                                        <ul
-                                            class="list-group list-group-borderless mb-0"
-                                        >
-                                            <li
-                                                v-if="property.balcony"
-                                                class="list-group-item h6 fw-light d-flex mb-0"
-                                            >
-                                                <BIconPatchCheckFill
-                                                    class="text-success me-2"
-                                                />
-                                                Balcon
-                                            </li>
-                                            <li
-                                                v-if="property.outdoor_space"
-                                                class="list-group-item h6 fw-light d-flex mb-0"
-                                            >
-                                                <BIconPatchCheckFill
-                                                    class="text-success me-2"
-                                                />
-                                                Espace extérieur
-                                            </li>
-                                        </ul>
+                                    <!-- Contact établissement -->
+                                    <div v-if="property.website || property.phone || property.email" class="mt-4">
+                                        <h6 class="fw-bold text-etatsup mb-3">
+                                            <i class="bi bi-info-circle me-2"></i>
+                                            Contact
+                                        </h6>
+                                        <div class="vstack gap-2">
+                                            <a v-if="property.website" :href="property.website" target="_blank" class="contact-link">
+                                                <i class="bi bi-globe me-2"></i>
+                                                Site web officiel
+                                            </a>
+                                            <a v-if="property.phone" :href="`tel:${property.phone}`" class="contact-link">
+                                                <i class="bi bi-telephone me-2"></i>
+                                                {{ property.phone }}
+                                            </a>
+                                            <a v-if="property.email" :href="`mailto:${property.email}`" class="contact-link">
+                                                <i class="bi bi-envelope me-2"></i>
+                                                {{ property.email }}
+                                            </a>
+                                        </div>
                                     </div>
                                 </b-card-body>
                             </b-card>
 
-                            <b-card no-body class="bg-transparent">
+                            <b-card no-body class="bg-transparent border-0 shadow-etatsup">
                                 <b-card-header
-                                    class="border-bottom bg-transparent px-0 pt-0"
+                                    class="header-etatsup px-4 py-3"
                                 >
-                                    <b-card-title tag="h3" class="mb-0"
-                                        >Commodités</b-card-title
+                                    <b-card-title tag="h3" class="mb-0 text-white"
+                                        >Équipements & Services</b-card-title
                                     >
                                 </b-card-header>
 
-                                <b-card-body class="p-0 pt-4">
+                                <b-card-body class="p-4">
                                     <b-row class="g-4">
                                         <b-col
                                             sm="6"
@@ -212,7 +148,7 @@ defineProps<{
                                                 >
                                                     <font-awesome-icon
                                                         :icon="faCheckCircle"
-                                                        class="text-success me-1"
+                                                        class="text-primary me-1"
                                                     />
                                                     {{ equipment.label }}
                                                 </li>
@@ -251,16 +187,16 @@ defineProps<{
                                 </b-card-body>
                             </b-card>
 
-                            <b-card no-body class="bg-transparent">
+                            <b-card no-body class="bg-transparent border-0 shadow-etatsup">
                                 <b-card-header
-                                    class="border-bottom bg-transparent px-0 pt-0"
+                                    class="header-etatsup px-4 py-3"
                                 >
-                                    <b-card-title tag="h3" class="mb-0"
-                                        >Règlements intérieurs</b-card-title
+                                    <b-card-title tag="h3" class="mb-0 text-white"
+                                        >Règlements & Politiques</b-card-title
                                     >
                                 </b-card-header>
 
-                                <b-card-body class="p-0 pt-4">
+                                <b-card-body class="p-4">
                                     <b-row class="g-4">
                                         <b-col
                                             sm="12"
@@ -314,4 +250,58 @@ defineProps<{
     </main>
 </template>
 
-<style scoped></style>
+<style scoped>
+/* Branding EtatSup - Gradient Purple Perfect Pixel */
+.header-etatsup {
+    background: linear-gradient(135deg, #1e3a8a 0%, #1e3a8a 100%);
+    border: none;
+    border-radius: 12px 12px 0 0;
+}
+
+.shadow-etatsup {
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.text-etatsup {
+    background: linear-gradient(135deg, #1e3a8a 0%, #1e3a8a 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.stat-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    background-color: #f8fafc;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    border: 2px solid #e5e7eb;
+    transition: all 0.2s ease;
+}
+
+.stat-badge:hover {
+    border-color: #1e3a8a;
+    background-color: #f3f4f6;
+}
+
+.contact-link {
+    display: flex;
+    align-items: center;
+    padding: 0.75rem;
+    color: #64748b;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+    border: 1px solid #e5e7eb;
+}
+
+.contact-link:hover {
+    background-color: #f8fafc;
+    color: #1e3a8a;
+    border-color: #1e3a8a;
+    transform: translateX(5px);
+}
+</style>
