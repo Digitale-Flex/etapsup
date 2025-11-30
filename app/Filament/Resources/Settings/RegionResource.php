@@ -20,6 +20,8 @@ class RegionResource extends Resource
     protected static ?string $navigationGroup = 'Paramètres';
     protected static ?int $navigationSort = 9;
 
+    protected static bool $shouldRegisterNavigation = false;
+
     public static function form(Form $form): Form
     {
         return $form

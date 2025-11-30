@@ -131,6 +131,39 @@ class ReservationController extends Controller
             ])
             ->findByHashidOrFail($id);
 
+        // Détecter si c'est une candidature EtatSup (status = draft ou submitted)
+        $isApplication = in_array($model->status, ['draft', 'submitted', 'accepted', 'rejected']);
+
+        if ($isApplication) {
+            // Vue candidature EtatSup avec données JSON
+            // ✅ Fix: Récupérer state depuis la DB sans passer par le caster pour éviter l'erreur "draft"
+            $stateValue = null;
+            try {
+                $stateValue = $model->state ? (string) $model->state : null;
+            } catch (\Exception $e) {
+                // Si l'état n'existe pas dans ReservationState, utiliser la valeur brute
+                $stateValue = $model->getAttributes()['state'] ?? null;
+            }
+
+            return Inertia::render('Dashboard/Applications/Show', [
+                'application' => [
+                    'id' => $model->hashid,
+                    'status' => $model->status,
+                    'state' => $stateValue,
+                    'created_at' => $model->created_at->format('d/m/Y'),
+                    'updated_at' => $model->updated_at->format('d/m/Y'),
+                    'establishment' => [
+                        'id' => $model->property->hashid,
+                        'title' => $model->property->title,
+                        'slug' => $model->property->slug,
+                        'logo' => $model->property->getFirstMediaUrl('images', 'thumb'),
+                    ],
+                    'formData' => $model->fees, // ✅ JSON complet du formulaire
+                ],
+            ]);
+        }
+
+        // Vue réservation Mareza classique
         return Inertia::render('Dashboard/RealEstate/Show', [
             'reservation' => fn () => new ReservationResource($model),
         ]);

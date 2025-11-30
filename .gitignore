@@ -1,24 +1,71 @@
+# ===========================
+# Dossiers et fichiers systématiquement ignorés
+# ===========================
+/node_modules/
 /vendor/
-node_modules/
+.vibecoding/
+.claude/
+.idea/
+.github/
+
+# ===========================
+# Fichiers de configuration locaux / secrets
+# ===========================
+.env
+.editorconfig
+
+# ===========================
+# Fichiers de logs et erreurs
+# ===========================
 npm-debug.log
 yarn-error.log
 
-# Laravel 4 specific
+# ===========================
+# Fichiers de cache et outils
+# ===========================
+.phpunit.result.cache
+.php-cs-fixer.cache
+
+# ===========================
+# Build, dépendances et artefacts
+# ===========================
+app.zip
+bun.lock
+package-lock.json
+
+# ===========================
+# Fichiers temporaires ou inutiles
+# ===========================
+nul
+
+# ===========================
+# Laravel / Lumen
+# ===========================
+# Anciens (Laravel 4)
 bootstrap/compiled.php
 app/storage/
 
-# Laravel 5 & Lumen specific
+# Modernes (Laravel 5+ / Lumen)
 public/storage
 public/hot
-
-# Laravel 5 & Lumen specific with changed public path
 public_html/storage
 public_html/hot
-
 storage/*.key
-.env
+
+# ===========================
+# Environnements de développement
+# ===========================
 Homestead.yaml
 Homestead.json
 /.vagrant
-.phpunit.result.cache
-.php-cs-fixer.cache
+
+# ===========================
+# Dossiers personnalisés
+# ===========================
+/Vibecoding_etatusup
+
+# ===========================
+# Backups (trop volumineux pour Git)
+# ===========================
+/backup_prod/
+*.zip

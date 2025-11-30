@@ -77,12 +77,13 @@ const stateInfo = computed<StateInfo | null>(() => {
     return states[props.state.value] || null;
 });
 
+// UI-Fix-2.2: Remplacer success (vert) par primary (bleu EtapSup)
 const alertClass = computed(() => {
     const colorMap: Record<string, string> = {
         'text-warning': 'warning',
         'text-info': 'info',
         'text-danger': 'danger',
-        'text-success': 'success',
+        'text-success': 'primary', // Remplace vert par bleu EtapSup
     };
     return `alert-${colorMap[props.state.color] || 'info'}`;
 });

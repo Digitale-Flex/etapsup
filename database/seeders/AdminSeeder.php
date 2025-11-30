@@ -21,9 +21,9 @@ class AdminSeeder extends SeederOnce
                 'password' => 'w@Z@pok09!',
             ],
             [
-                'surname' => 'Mareza',
+                'surname' => 'etapsup',
                 'name' => 'Admin',
-                'email' => 'admin@ma-reza.com',
+                'email' => 'admin@dev.etapsup.org',
                 'password' => 'Pa$$dr0w!',
             ],
         ];

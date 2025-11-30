@@ -55,9 +55,9 @@ const submit = () => {
 <template>
     <AppHead title="Mon profil" />
 
-    <b-card no-body class="border">
-        <b-card-header class="border-bottom">
-            <h4 class="card-header-title">Informations Personnelles</h4>
+    <b-card no-body class="border-0 shadow-etatsup">
+        <b-card-header class="header-etatsup">
+            <h4 class="card-header-title text-white mb-0">Informations personnelles</h4>
         </b-card-header>
 
         <b-card-body>
@@ -253,6 +253,7 @@ const submit = () => {
                     <b-button
                         variant="primary"
                         type="submit"
+                        class="btn-etapsup"
                         :loading="form.processing"
                         :disabled="form.processing || !form.isDirty"
                         >Enregistrer les modifications
@@ -265,4 +266,71 @@ const submit = () => {
     <password-form class="mt-4"/>
 </template>
 
-<style scoped></style>
+<style scoped>
+/* Charte EtatSup - Perfect Pixel Purple Gradient */
+.header-etatsup {
+    background: linear-gradient(135deg, #1e3a8a 0%, #1e3a8a 100%);
+    border: none;
+    border-radius: 12px 12px 0 0;
+    padding: 1.25rem 1.5rem;
+}
+
+.shadow-etatsup {
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.btn-etapsup {
+    background: linear-gradient(135deg, #1e3a8a 0%, #1e3a8a 100%) !important;
+    border: none !important;
+    padding: 0.75rem 2rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    border-radius: 50px;
+}
+
+.btn-etapsup:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+}
+
+.btn-etapsup:disabled {
+    opacity: 0.6;
+}
+
+/* Styling des cartes */
+:deep(.card) {
+    border-radius: 1rem;
+    border: none;
+}
+
+:deep(.card-header) {
+    background: linear-gradient(135deg, #1e3a8a 0%, #1e3a8a 100%);
+    color: white;
+    border-radius: 1rem 1rem 0 0 !important;
+    padding: 1.25rem 1.5rem;
+}
+
+:deep(.card-header-title) {
+    color: white;
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin: 0;
+}
+
+/* Inputs focus */
+:deep(.p-inputtext:focus),
+:deep(.p-calendar input:focus),
+:deep(.p-dropdown:focus) {
+    border-color: #1e3a8a !important;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1) !important;
+}
+
+/* Labels */
+:deep(label) {
+    font-weight: 600;
+    color: #374151;
+    margin-bottom: 0.5rem;
+}
+</style>

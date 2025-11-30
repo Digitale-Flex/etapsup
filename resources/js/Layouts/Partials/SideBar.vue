@@ -12,21 +12,32 @@ import { computed } from 'vue';
 const page = usePage();
 const user = computed(() => page.props.auth?.user);
 
+// UI-Fix-3.1: Menu harmonisé selon spécifications EtapSup
 const menu = [
     {
-        label: 'Mes demandes',
-        link: 'dashboard.certificates.index',
-        icon: BIconListCheck,
+        label: 'Mon tableau de bord',
+        link: 'dashboard',
+        icon: BIconHouseCheck,
+        visible: true,
     },
     {
-        label: 'Mes réservations',
+        label: 'Mes candidatures', // Renommé de "Mes réservations"
         link: 'dashboard.reservations.index',
-        icon: BIconHouseCheck,
+        icon: BIconListCheck,
+        visible: true,
     },
     {
         label: 'Mon profil',
         link: 'dashboard.profile',
         icon: BIconPerson,
+        visible: true,
+    },
+    // "Mes demandes" masqué mais conservé pour compatibilité
+    {
+        label: 'Mes demandes',
+        link: 'dashboard.certificates.index',
+        icon: BIconListCheck,
+        visible: false, // Masqué
     },
 ];
 </script>
@@ -60,11 +71,12 @@ const menu = [
                     <hr />
                 </div>
 
+                <!-- UI-Fix-3.1: Filtrer éléments visibles -->
                 <ul
                     class="nav nav-pills-primary-soft flex-column"
                     id="nav-sidebar"
                 >
-                    <li v-for="(item, i) in menu" :key="i" class="nav-item">
+                    <li v-for="(item, i) in menu.filter(m => m.visible)" :key="i" class="nav-item">
                         <Link
                             class="nav-link"
                             :href="route(item.link)"

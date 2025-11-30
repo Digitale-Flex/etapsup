@@ -26,6 +26,7 @@ export interface Program {
 export interface Establishment {
     id: string;
     name: string;
+    title?: string; // Alias de name pour compatibilité avec Property
     slug: string;
     description: string;
     address: string;
@@ -35,31 +36,46 @@ export interface Establishment {
     founded_year?: number;
     student_count?: number;
     accreditation?: string;
-    
+
+    // Sprint1 Update: Feature 1.3.1 — Tarifs d'inscription
+    tuition_min?: number;
+    tuition_max?: number;
+
+    // Sprint1 Update: Feature 1.5.1 — Frais de dossier et commissions
+    frais_dossier?: number;
+    commission?: number;
+    acompte_scolarite?: number;
+
     // Relations
     country: Country;
     city: City;
     establishment_type: EstablishmentType;
     study_fields: StudyField[];
     programs: Program[];
-    
+
     // Media
     logo?: string;
     thumb: string;
     images: MediaImage[];
-    
+
     // Ratings et reviews
     ratings?: {
         average: number;
         count: number;
         distribution: string;
     };
-    
+
     // Métadonnées
     is_featured: boolean;
     is_verified: boolean;
     created_at: string;
     updated_at: string;
+
+    // Alias pour compatibilité Property (snake_case vs camelCase)
+    type?: string; // Alias de establishment_type.name
+    sectionPresentation?: string; // Description courte
+    ranking?: number; // Classement
+    studentCount?: number; // Alias de student_count
 }
 
 // Re-export geographic types for external use

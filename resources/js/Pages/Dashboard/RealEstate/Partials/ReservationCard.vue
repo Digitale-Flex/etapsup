@@ -9,19 +9,6 @@ interface Props {
 }
 const props = defineProps<Props>();
 
-const nights = computed(() => {
-    const { start_date, end_date, type } = props.reservation;
-
-    if (start_date && end_date) {
-        const unit = type === 'séjour' ? 'day' : 'month';
-        const diff = dayjs(end_date).diff(dayjs(start_date), unit);
-
-        // Ajoute 1 seulement si c'est un calcul en jours ('séjour')
-        return unit === 'day' ? diff + 1 : diff;
-    }
-    return 0;
-});
-
 const statusClass = computed(() => {
     switch (props.reservation.status.value) {
         case 'upcoming':
@@ -34,10 +21,6 @@ const statusClass = computed(() => {
             return '';
     }
 });
-
-const price = computed(() => props.reservation.fees?.price);
-
-console.log(props.reservation.fees.price);
 </script>
 
 <template>
@@ -71,11 +54,10 @@ console.log(props.reservation.fees.price);
 
                 <ul class="nav nav-divider small">
                     <li class="nav-item">
-                        {{ price }} x {{ nights }}
-                        {{ reservation.type === 'séjour' ? 'nuit(s)' : 'mois' }}
+                        📚 {{ reservation.property.propertyType?.label || 'Programme' }}
                     </li>
-                    <li class="nav-item" v-show="reservation.type === 'séjour'">
-                        {{ reservation.guests }} invité(s)
+                    <li class="nav-item">
+                        📍 {{ reservation.property.city?.name || 'Non spécifié' }}{{ reservation.property.city?.country?.name ? ', ' + reservation.property.city.country.name : '' }}
                     </li>
                 </ul>
             </div>
@@ -89,7 +71,7 @@ console.log(props.reservation.fees.price);
                     })
                 "
                 class="btn btn-primary-soft mb-0"
-                >Details</Link
+                >Voir les détails</Link
             >
 
             <p
@@ -105,44 +87,38 @@ console.log(props.reservation.fees.price);
     <b-card-body>
         <b-row class="g-3">
             <b-col sm="6" md="4">
-                <span>Date d'arrivée</span>
+                <span>📅 Date de candidature</span>
                 <h6 class="mb-0">
-                    {{ dayjs(reservation.start_date).format('DD MMM YYYY') }}
+                    {{ dayjs(reservation.created_at || reservation.start_date).format('DD MMM YYYY') }}
                 </h6>
             </b-col>
             <b-col sm="6" md="4">
-                <span>Date de départ</span>
+                <span>🎓 Domaine d'études</span>
                 <h6 class="mb-0">
-                    {{ dayjs(reservation.end_date).format('DD MMM YYYY') }}
+                    {{ reservation.property.category?.label || 'Non spécifié' }}
                 </h6>
             </b-col>
             <b-col sm="6" md="4">
-                <span>{{
-                    reservation.type === 'séjour' ? 'Payer' : 'Réservation'
-                }}</span>
+                <span>🏫 Type d'établissement</span>
                 <h6 class="mb-0">
-                    {{
-                        new Intl.NumberFormat('fr-FR', {
-                            style: 'currency',
-                            currency: 'EUR',
-                        }).format(Number(reservation.price))
-                    }}
+                    {{ reservation.property.propertyType?.label || 'Établissement' }}
                 </h6>
             </b-col>
         </b-row>
     </b-card-body>
 </template>
 
+<!-- UI-Fix-2.1: Harmonisation couleurs palette EtapSup -->
 <style scoped>
 .status-upcoming {
-    color: #ffc107;
+    color: #ffc107; /* Jaune pour À venir */
 }
 
 .status-progress {
-    color: #28a745;
+    color: #1e3a8a; /* Violet EtapSup pour En cours (remplace #28a745 vert Mareza) */
 }
 
 .status-completed {
-    color: #dc3545;
+    color: #1e3a8a; /* Bleu marine EtapSup pour Terminé (remplace #10b981 vert) */
 }
 </style>

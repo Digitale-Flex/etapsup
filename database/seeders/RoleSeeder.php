@@ -13,6 +13,7 @@ class RoleSeeder extends SeederOnce
      */
     public function run(): void
     {
+        // Sprint1 Update: Feature 1.6.1 — Ajout rôle 'manager' (Gestionnaire)
         $roles = [
             [
                 'name' => 'admin',
@@ -25,6 +26,10 @@ class RoleSeeder extends SeederOnce
             [
                 'name' => 'partner',
                 'display_name' => 'Partenaire',
+            ],
+            [
+                'name' => 'manager',
+                'display_name' => 'Gestionnaire',
             ],
         ];
 

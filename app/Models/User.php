@@ -37,9 +37,12 @@ class User extends Authenticatable implements FilamentUser, HasMedia
      *
      * @var list<string>
      */
+    // Sprint1 Feature 1.6.1 — Gestion des comptes (admin, partenaire, gestionnaire)
     protected $fillable = [
         'partner_id',
         'country_id',
+        'address_id',
+        'gender',
         'surname',
         'name',
         'email',
@@ -88,10 +91,11 @@ class User extends Authenticatable implements FilamentUser, HasMedia
             ->saveSlugsTo('slug');
     }
 
+    // Sprint1 Feature 1.6.1 — Accès panel par rôle (admin, dev, account, manager)
     public function canAccessPanel(Panel $panel): bool
     {
         if ($panel->getId() === 'admin') {
-            return $this->hasAnyRole(['admin', 'dev', 'account']);
+            return $this->hasAnyRole(['admin', 'dev', 'account', 'manager']);
         }
 
         // Accès au panel partner uniquement pour le rôle partner
@@ -100,7 +104,6 @@ class User extends Authenticatable implements FilamentUser, HasMedia
         }
 
         return false;
-       // return $this->hasRole(['admin', 'dev', 'partner']);
     }
 
     public function registerMediaCollections(): void
@@ -146,6 +149,14 @@ class User extends Authenticatable implements FilamentUser, HasMedia
     public function certificateRequests(): HasMany
     {
         return $this->hasMany(CertificateRequest::class);
+    }
+
+    /**
+     * Les candidatures de l'étudiant (EtatSup Phase 4)
+     */
+    public function applications(): HasMany
+    {
+        return $this->hasMany(Application::class, 'user_id');
     }
 
     public function country(): BelongsTo

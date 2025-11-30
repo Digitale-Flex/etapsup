@@ -360,6 +360,11 @@ class CustomSearchResource extends Resource
 
     public static function getNavigationLabel(): string
     {
-        return "Recherche personnalisées";
+        return "🔒 Recherches personnalisées";
+    }
+
+    public static function shouldRegisterNavigation(): bool
+    {
+        return false; // Désactivé - non cliquable
     }
 }

@@ -18,15 +18,15 @@ const props = defineProps<{
 </script>
 
 <template>
-    <Head title="Mes Réservation" />
+    <Head title="Mes candidatures - EtatSup" />
     <b-card no-body class="border bg-transparent">
         <b-card-header class="border-bottom bg-transparent">
-            <h5 class="card-header-title">Mes réservations</h5>
+            <h5 class="card-header-title">📝 Mes candidatures</h5>
         </b-card-header>
 
         <div v-if="!reservations.data.length" class="py-4 text-center">
             <p class="text-info mb-0">
-                Vous n'avez pas encore effectué de réservation.
+                Vous n'avez pas encore soumis de candidature. Découvrez nos établissements partenaires pour postuler.
             </p>
         </div>
 

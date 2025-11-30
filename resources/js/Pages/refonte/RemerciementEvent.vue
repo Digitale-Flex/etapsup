@@ -123,7 +123,7 @@ defineProps<{
 <style scoped>
 /* Success Hero Section */
 .success-hero {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #1e3a8a 0%, #1e3a8a 100%);
   color: white;
   padding: 6rem 0 4rem;
   text-align: center;
@@ -205,7 +205,7 @@ defineProps<{
   flex-shrink: 0;
   width: 3rem;
   height: 3rem;
-  background: linear-gradient(45deg, #ed2939, #cc1f2d);
+  background: linear-gradient(45deg, #dc2626, #dc2626);
   color: white;
   border-radius: 50%;
   display: flex;
@@ -250,7 +250,7 @@ defineProps<{
 }
 
 .auth-cta-button {
-  background: linear-gradient(45deg, #ed2939, #cc1f2d);
+  background: linear-gradient(45deg, #dc2626, #dc2626);
   border: none;
   padding: 1rem 2rem;
   font-weight: 600;

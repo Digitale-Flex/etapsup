@@ -16,7 +16,7 @@ defineProps<Tab>();
         <b-tab>
             <template #title>
                 <BIconBriefcaseFill class="fa-fw me-1" />
-                Réservation à venir
+                Candidatures à suivre
             </template>
 
             <b-card-body>

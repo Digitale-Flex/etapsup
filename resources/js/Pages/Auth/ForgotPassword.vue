@@ -120,7 +120,7 @@ const submit = () => {
 .logo-text {
     font-size: 2.5rem;
     font-weight: 800;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #1e3a8a 0%, #1e3a8a 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -156,12 +156,12 @@ const submit = () => {
 
 .form-input:focus {
     outline: none;
-    border-color: #667eea;
+    border-color: #1e3a8a;
     box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
 }
 
 .submit-button {
-    background: linear-gradient(45deg, #ed2939, #cc1f2d);
+    background: linear-gradient(45deg, #dc2626, #dc2626);
     border: none;
     padding: 1rem;
     font-size: 1.1rem;
@@ -188,7 +188,7 @@ const submit = () => {
 }
 
 .back-link:hover {
-    color: #667eea;
+    color: #1e3a8a;
 }
 
 .forgot-footer {
