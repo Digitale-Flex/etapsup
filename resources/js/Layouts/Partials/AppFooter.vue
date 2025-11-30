@@ -18,7 +18,7 @@ import { BIconEnvelope, BIconTelephone } from 'bootstrap-icons-vue';
                         ETAPSUP
                     </Link>
                     <p class="text-white my-3 opacity-75">
-                        « Votre passerelle vers les études supérieures en Afrique. »
+                        « Votre passerelle vers les études supérieures à l'étranger. »
                     </p>
                     <p class="mb-2">
                         <a
