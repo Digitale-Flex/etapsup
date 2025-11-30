@@ -386,8 +386,7 @@ const formattedAmount = computed(() => {
                         @click="goToStep(step)"
                     >
                         <div class="stepper-step-circle">
-                            <i v-if="currentStep > step" class="bi bi-check-lg"></i>
-                            <span v-else>{{ step }}</span>
+                            <span>{{ step }}</span>
                         </div>
                         <div class="stepper-step-label">
                             <span v-if="step === 1">Infos personnelles</span>

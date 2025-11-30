@@ -13,3 +13,11 @@ Route::get('/user', function (Request $request) {
 
 Route::get('/countries', [\App\Http\Controllers\LocationController::class, 'getCountries']);
 Route::get('/cities/{region}', [\App\Http\Controllers\LocationController::class, 'getCities']);
+
+// Sprint1 Feature 1.8.1 — Gestion des documents de candidature
+Route::prefix('v1')->middleware('auth:sanctum')->group(function () {
+    Route::get('/documents', [\App\Http\Controllers\Api\DocumentController::class, 'index']);
+    Route::post('/documents', [\App\Http\Controllers\Api\DocumentController::class, 'store']);
+    Route::delete('/documents/{document}', [\App\Http\Controllers\Api\DocumentController::class, 'destroy']);
+    Route::get('/documents/{document}/download', [\App\Http\Controllers\Api\DocumentController::class, 'download']);
+});
