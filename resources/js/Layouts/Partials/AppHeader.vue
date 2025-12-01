@@ -140,13 +140,13 @@ const isMobileMenu = computed(() => {
                     <!-- Profile -->
                     <UserMenu v-if="$page.props.auth?.user" />
 
-                    <!--
+                    <!-- Bouton connexion si non connecté -->
                     <Link
                         v-else
                         :href="route('login')"
-                        class="btn btn-outline-primary"
+                        class="btn btn-outline-primary btn-sm"
                         >Se connecter</Link
-                    -->
+                    >
 
                 </b-nav>
             </b-container>

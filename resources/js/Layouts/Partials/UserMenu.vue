@@ -44,7 +44,7 @@ const useLayout = useLayoutStore();
         >
             <img
                 class="avatar-img rounded-2"
-                :src="$page.props.auth?.user.photo"
+                :src="$page.props.auth?.user.photo || `https://ui-avatars.com/api/?name=${encodeURIComponent($page.props.auth?.user.name || 'U')}&background=1e3a8a&color=fff&size=128`"
                 alt="avatar"
             />
         </a>
