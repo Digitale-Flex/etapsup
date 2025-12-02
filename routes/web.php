@@ -44,6 +44,9 @@ Route::get('/txst', function () {
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
+// Refonte: Nouvelle landing page moderne inspirée de Diplomeo
+Route::get('/accueil', [HomeController::class, 'accueil'])->name('accueil');
+
 // Refonte: Page Établissements avec filtres fonctionnels (Story 1.3.1)
 Route::get('/establishments', [\App\Http\Controllers\EstablishmentController::class, 'index'])
     ->name('establishments.index');

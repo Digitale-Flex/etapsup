@@ -28,7 +28,9 @@
       "Bash(mkdir:*)",
       "Bash(copy:*)",
       "Bash(cp:*)",
-      "Bash(find:*)"
+      "Bash(find:*)",
+      "Bash(git merge:*)",
+      "Bash(curl:*)"
     ],
     "deny": [],
     "ask": []
