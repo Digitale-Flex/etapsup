@@ -50,4 +50,10 @@ class Country extends Model
     {
         return $this->hasMany(City::class);
     }
+
+    // Relation directe avec properties (via country_id)
+    public function properties(): HasMany
+    {
+        return $this->hasMany(\App\Models\RealEstate\Property::class);
+    }
 }
