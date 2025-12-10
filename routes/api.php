@@ -21,4 +21,7 @@ Route::prefix('v1')->middleware(['auth:sanctum,web'])->group(function () {
     Route::post('/documents', [\App\Http\Controllers\Api\DocumentController::class, 'store']);
     Route::delete('/documents/{document}', [\App\Http\Controllers\Api\DocumentController::class, 'destroy']);
     Route::get('/documents/{document}/download', [\App\Http\Controllers\Api\DocumentController::class, 'download']);
+
+    // Sprint1 Feature 1.2.1 — Livret explicatif
+    Route::get('/settings/livret', [\App\Http\Controllers\Api\SettingsController::class, 'livret']);
 });
