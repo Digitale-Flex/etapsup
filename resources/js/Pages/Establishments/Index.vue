@@ -31,6 +31,7 @@ interface Establishment {
     title: string;
     slug: string;
     description: string;
+    logo?: string;
     city?: {
         name: string;
         country?: {
@@ -272,7 +273,7 @@ const applyFilters = () => {
                     <!-- Message si aucun établissement -->
                     <div v-else class="no-results text-center py-5">
                         <p class="text-muted">Aucun établissement ne correspond à vos critères de recherche.</p>
-                        <BButton variant="outline-primary" @click="searchFilters = { country_id: '', career_field_id: '', establishment_type_id: '', search: '' }; applyFilters()">
+                        <BButton variant="outline-primary" @click="searchFilters = { country_id: '', city_id: '', career_field_id: '', establishment_type_id: '', search: '' }; applyFilters()">
                             Réinitialiser les filtres
                         </BButton>
                     </div>

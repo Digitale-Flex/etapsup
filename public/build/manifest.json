@@ -23,17 +23,18 @@
     "file": "assets/app-DFKI0pLU.css",
     "src": "resources/css/app.css",
     "isEntry": true,
+    "name": "app",
     "names": [
       "app.css"
     ]
   },
   "resources/js/app.ts": {
-    "file": "assets/app-D3TF61lV.js",
+    "file": "assets/app-KFoHblHR.js",
     "name": "app",
     "src": "resources/js/app.ts",
     "isEntry": true,
     "css": [
-      "assets/app-VlU94MaP.css"
+      "assets/app-DD_uDfs1.css"
     ],
     "assets": [
       "assets/primeicons-DMOk5skT.eot",

@@ -80,7 +80,7 @@ import { OhVueIcon } from "oh-vue-icons";
 import PrimeVue from "primevue/config";
 import ToastService from "primevue/toastservice";
 import { setupCalendar, DatePicker, Calendar } from "v-calendar";
-const _sfc_main$1I = /* @__PURE__ */ defineComponent({
+const _sfc_main$1J = /* @__PURE__ */ defineComponent({
   __name: "AppHead",
   __ssrInlineRender: true,
   props: { title: String },
@@ -103,13 +103,13 @@ const _sfc_main$1I = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_setup$1I = _sfc_main$1I.setup;
-_sfc_main$1I.setup = (props, ctx) => {
+const _sfc_setup$1J = _sfc_main$1J.setup;
+_sfc_main$1J.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/Components/AppHead.vue");
-  return _sfc_setup$1I ? _sfc_setup$1I(props, ctx) : void 0;
+  return _sfc_setup$1J ? _sfc_setup$1J(props, ctx) : void 0;
 };
-const _sfc_main$1H = /* @__PURE__ */ defineComponent({
+const _sfc_main$1I = /* @__PURE__ */ defineComponent({
   __name: "CustomStickyElement",
   __ssrInlineRender: true,
   props: {
@@ -140,14 +140,14 @@ const _sfc_main$1H = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_setup$1H = _sfc_main$1H.setup;
-_sfc_main$1H.setup = (props, ctx) => {
+const _sfc_setup$1I = _sfc_main$1I.setup;
+_sfc_main$1I.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/Components/CustomStickyElement.vue");
-  return _sfc_setup$1H ? _sfc_setup$1H(props, ctx) : void 0;
+  return _sfc_setup$1I ? _sfc_setup$1I(props, ctx) : void 0;
 };
 const MAX_FILE_SIZE = 5 * 1024 * 1024;
-const _sfc_main$1G = /* @__PURE__ */ defineComponent({
+const _sfc_main$1H = /* @__PURE__ */ defineComponent({
   __name: "DocumentUploader",
   __ssrInlineRender: true,
   props: {
@@ -432,15 +432,15 @@ const _export_sfc = (sfc, props) => {
   }
   return target;
 };
-const _sfc_setup$1G = _sfc_main$1G.setup;
-_sfc_main$1G.setup = (props, ctx) => {
+const _sfc_setup$1H = _sfc_main$1H.setup;
+_sfc_main$1H.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/Components/DocumentUploader.vue");
-  return _sfc_setup$1G ? _sfc_setup$1G(props, ctx) : void 0;
+  return _sfc_setup$1H ? _sfc_setup$1H(props, ctx) : void 0;
 };
-const DocumentUploader = /* @__PURE__ */ _export_sfc(_sfc_main$1G, [["__scopeId", "data-v-4fa93a3c"]]);
+const DocumentUploader = /* @__PURE__ */ _export_sfc(_sfc_main$1H, [["__scopeId", "data-v-4fa93a3c"]]);
 const totalSteps = 6;
-const _sfc_main$1F = /* @__PURE__ */ defineComponent({
+const _sfc_main$1G = /* @__PURE__ */ defineComponent({
   __name: "ApplicationForm",
   __ssrInlineRender: true,
   props: {
@@ -744,64 +744,58 @@ const _sfc_main$1F = /* @__PURE__ */ defineComponent({
       }, _attrs), {
         default: withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
-            _push2(`<div class="card-header-etatsup" data-v-57c7ddde${_scopeId}><h5 class="mb-0 text-white" data-v-57c7ddde${_scopeId}><i class="bi bi-file-earmark-text me-2" data-v-57c7ddde${_scopeId}></i> Formulaire de candidature - ${ssrInterpolate(__props.establishment.title)}</h5></div>`);
+            _push2(`<div class="card-header-etatsup" data-v-86897dcd${_scopeId}><h5 class="mb-0 text-white" data-v-86897dcd${_scopeId}><i class="bi bi-file-earmark-text me-2" data-v-86897dcd${_scopeId}></i> Formulaire de candidature - ${ssrInterpolate(__props.establishment.title)}</h5></div>`);
             _push2(ssrRenderComponent(_component_BCardBody, { class: "p-0" }, {
               default: withCtx((_2, _push3, _parent3, _scopeId2) => {
                 if (_push3) {
-                  _push3(`<div class="stepper-container" data-v-57c7ddde${_scopeId2}><div class="stepper-progress" data-v-57c7ddde${_scopeId2}><div class="stepper-progress-bar" style="${ssrRenderStyle({ width: progressPercentage.value + "%" })}" data-v-57c7ddde${_scopeId2}></div></div><div class="stepper-steps" data-v-57c7ddde${_scopeId2}><!--[-->`);
+                  _push3(`<div class="stepper-container" data-v-86897dcd${_scopeId2}><div class="stepper-progress" data-v-86897dcd${_scopeId2}><div class="stepper-progress-bar" style="${ssrRenderStyle({ width: progressPercentage.value + "%" })}" data-v-86897dcd${_scopeId2}></div></div><div class="stepper-steps" data-v-86897dcd${_scopeId2}><!--[-->`);
                   ssrRenderList(totalSteps, (step) => {
                     _push3(`<div class="${ssrRenderClass([{
                       "active": currentStep.value === step,
                       "completed": currentStep.value > step
-                    }, "stepper-step"])}" data-v-57c7ddde${_scopeId2}><div class="stepper-step-circle" data-v-57c7ddde${_scopeId2}>`);
-                    if (currentStep.value > step) {
-                      _push3(`<i class="bi bi-check-lg" data-v-57c7ddde${_scopeId2}></i>`);
-                    } else {
-                      _push3(`<span data-v-57c7ddde${_scopeId2}>${ssrInterpolate(step)}</span>`);
-                    }
-                    _push3(`</div><div class="stepper-step-label" data-v-57c7ddde${_scopeId2}>`);
+                    }, "stepper-step"])}" data-v-86897dcd${_scopeId2}><div class="stepper-step-circle" data-v-86897dcd${_scopeId2}><span data-v-86897dcd${_scopeId2}>${ssrInterpolate(step)}</span></div><div class="stepper-step-label" data-v-86897dcd${_scopeId2}>`);
                     if (step === 1) {
-                      _push3(`<span data-v-57c7ddde${_scopeId2}>Infos personnelles</span>`);
+                      _push3(`<span data-v-86897dcd${_scopeId2}>Infos personnelles</span>`);
                     } else {
                       _push3(`<!---->`);
                     }
                     if (step === 2) {
-                      _push3(`<span data-v-57c7ddde${_scopeId2}>Formation</span>`);
+                      _push3(`<span data-v-86897dcd${_scopeId2}>Formation</span>`);
                     } else {
                       _push3(`<!---->`);
                     }
                     if (step === 3) {
-                      _push3(`<span data-v-57c7ddde${_scopeId2}>Langues</span>`);
+                      _push3(`<span data-v-86897dcd${_scopeId2}>Langues</span>`);
                     } else {
                       _push3(`<!---->`);
                     }
                     if (step === 4) {
-                      _push3(`<span data-v-57c7ddde${_scopeId2}>Motivation</span>`);
+                      _push3(`<span data-v-86897dcd${_scopeId2}>Motivation</span>`);
                     } else {
                       _push3(`<!---->`);
                     }
                     if (step === 5) {
-                      _push3(`<span data-v-57c7ddde${_scopeId2}>Documents</span>`);
+                      _push3(`<span data-v-86897dcd${_scopeId2}>Documents</span>`);
                     } else {
                       _push3(`<!---->`);
                     }
                     if (step === 6) {
-                      _push3(`<span data-v-57c7ddde${_scopeId2}>Paiement</span>`);
+                      _push3(`<span data-v-86897dcd${_scopeId2}>Paiement</span>`);
                     } else {
                       _push3(`<!---->`);
                     }
                     _push3(`</div></div>`);
                   });
-                  _push3(`<!--]--></div></div><div class="form-content" data-v-57c7ddde${_scopeId2}><form data-v-57c7ddde${_scopeId2}>`);
+                  _push3(`<!--]--></div></div><div class="form-content" data-v-86897dcd${_scopeId2}><form data-v-86897dcd${_scopeId2}>`);
                   if (currentStep.value === 1) {
-                    _push3(`<div class="form-section" data-v-57c7ddde${_scopeId2}><h6 class="section-title" data-v-57c7ddde${_scopeId2}><i class="bi bi-person-circle me-2" data-v-57c7ddde${_scopeId2}></i> 1. Informations personnelles </h6>`);
+                    _push3(`<div class="form-section" data-v-86897dcd${_scopeId2}><h6 class="section-title" data-v-86897dcd${_scopeId2}><i class="bi bi-person-circle me-2" data-v-86897dcd${_scopeId2}></i> 1. Informations personnelles </h6>`);
                     _push3(ssrRenderComponent(_component_BRow, { class: "g-3" }, {
                       default: withCtx((_3, _push4, _parent4, _scopeId3) => {
                         if (_push4) {
                           _push4(ssrRenderComponent(_component_BCol, { md: "6" }, {
                             default: withCtx((_4, _push5, _parent5, _scopeId4) => {
                               if (_push5) {
-                                _push5(`<label class="form-label-etatsup required" data-v-57c7ddde${_scopeId4}>Nom</label>`);
+                                _push5(`<label class="form-label-etatsup required" data-v-86897dcd${_scopeId4}>Nom</label>`);
                                 _push5(ssrRenderComponent(_component_BFormInput, {
                                   modelValue: unref(form).surname,
                                   "onUpdate:modelValue": ($event) => unref(form).surname = $event,
@@ -810,7 +804,7 @@ const _sfc_main$1F = /* @__PURE__ */ defineComponent({
                                   onBlur: unref(v$).surname?.$touch
                                 }, null, _parent5, _scopeId4));
                                 if (unref(v$).surname?.$error) {
-                                  _push5(`<div class="invalid-feedback d-block" data-v-57c7ddde${_scopeId4}> Le nom est requis (min. 2 caractères) </div>`);
+                                  _push5(`<div class="invalid-feedback d-block" data-v-86897dcd${_scopeId4}> Le nom est requis (min. 2 caractères) </div>`);
                                 } else {
                                   _push5(`<!---->`);
                                 }
@@ -836,7 +830,7 @@ const _sfc_main$1F = /* @__PURE__ */ defineComponent({
                           _push4(ssrRenderComponent(_component_BCol, { md: "6" }, {
                             default: withCtx((_4, _push5, _parent5, _scopeId4) => {
                               if (_push5) {
-                                _push5(`<label class="form-label-etatsup required" data-v-57c7ddde${_scopeId4}>Prénom</label>`);
+                                _push5(`<label class="form-label-etatsup required" data-v-86897dcd${_scopeId4}>Prénom</label>`);
                                 _push5(ssrRenderComponent(_component_BFormInput, {
                                   modelValue: unref(form).name,
                                   "onUpdate:modelValue": ($event) => unref(form).name = $event,
@@ -845,7 +839,7 @@ const _sfc_main$1F = /* @__PURE__ */ defineComponent({
                                   onBlur: unref(v$).name?.$touch
                                 }, null, _parent5, _scopeId4));
                                 if (unref(v$).name?.$error) {
-                                  _push5(`<div class="invalid-feedback d-block" data-v-57c7ddde${_scopeId4}> Le prénom est requis (min. 2 caractères) </div>`);
+                                  _push5(`<div class="invalid-feedback d-block" data-v-86897dcd${_scopeId4}> Le prénom est requis (min. 2 caractères) </div>`);
                                 } else {
                                   _push5(`<!---->`);
                                 }
@@ -871,7 +865,7 @@ const _sfc_main$1F = /* @__PURE__ */ defineComponent({
                           _push4(ssrRenderComponent(_component_BCol, { md: "4" }, {
                             default: withCtx((_4, _push5, _parent5, _scopeId4) => {
                               if (_push5) {
-                                _push5(`<label class="form-label-etatsup required" data-v-57c7ddde${_scopeId4}>Sexe</label>`);
+                                _push5(`<label class="form-label-etatsup required" data-v-86897dcd${_scopeId4}>Sexe</label>`);
                                 _push5(ssrRenderComponent(_component_BFormSelect, {
                                   modelValue: unref(form).gender,
                                   "onUpdate:modelValue": ($event) => unref(form).gender = $event,
@@ -899,7 +893,7 @@ const _sfc_main$1F = /* @__PURE__ */ defineComponent({
                           _push4(ssrRenderComponent(_component_BCol, { md: "4" }, {
                             default: withCtx((_4, _push5, _parent5, _scopeId4) => {
                               if (_push5) {
-                                _push5(`<label class="form-label-etatsup required" data-v-57c7ddde${_scopeId4}>Date de naissance</label>`);
+                                _push5(`<label class="form-label-etatsup required" data-v-86897dcd${_scopeId4}>Date de naissance</label>`);
                                 _push5(ssrRenderComponent(_component_BFormInput, {
                                   modelValue: unref(form).date_of_birth,
                                   "onUpdate:modelValue": ($event) => unref(form).date_of_birth = $event,
@@ -927,7 +921,7 @@ const _sfc_main$1F = /* @__PURE__ */ defineComponent({
                           _push4(ssrRenderComponent(_component_BCol, { md: "4" }, {
                             default: withCtx((_4, _push5, _parent5, _scopeId4) => {
                               if (_push5) {
-                                _push5(`<label class="form-label-etatsup required" data-v-57c7ddde${_scopeId4}>Nationalité</label>`);
+                                _push5(`<label class="form-label-etatsup required" data-v-86897dcd${_scopeId4}>Nationalité</label>`);
                                 _push5(ssrRenderComponent(_component_BFormInput, {
                                   modelValue: unref(form).nationality,
                                   "onUpdate:modelValue": ($event) => unref(form).nationality = $event,
@@ -955,7 +949,7 @@ const _sfc_main$1F = /* @__PURE__ */ defineComponent({
                           _push4(ssrRenderComponent(_component_BCol, { md: "6" }, {
                             default: withCtx((_4, _push5, _parent5, _scopeId4) => {
                               if (_push5) {
-                                _push5(`<label class="form-label-etatsup required" data-v-57c7ddde${_scopeId4}>Pays de naissance</label>`);
+                                _push5(`<label class="form-label-etatsup required" data-v-86897dcd${_scopeId4}>Pays de naissance</label>`);
                                 _push5(ssrRenderComponent(_component_BFormInput, {
                                   modelValue: unref(form).country_of_birth,
                                   "onUpdate:modelValue": ($event) => unref(form).country_of_birth = $event,
@@ -981,7 +975,7 @@ const _sfc_main$1F = /* @__PURE__ */ defineComponent({
                           _push4(ssrRenderComponent(_component_BCol, { md: "6" }, {
                             default: withCtx((_4, _push5, _parent5, _scopeId4) => {
                               if (_push5) {
-                                _push5(`<label class="form-label-etatsup required" data-v-57c7ddde${_scopeId4}>Ville de naissance</label>`);
+                                _push5(`<label class="form-label-etatsup required" data-v-86897dcd${_scopeId4}>Ville de naissance</label>`);
                                 _push5(ssrRenderComponent(_component_BFormInput, {
                                   modelValue: unref(form).city_of_birth,
                                   "onUpdate:modelValue": ($event) => unref(form).city_of_birth = $event,
@@ -1007,7 +1001,7 @@ const _sfc_main$1F = /* @__PURE__ */ defineComponent({
                           _push4(ssrRenderComponent(_component_BCol, { cols: "12" }, {
                             default: withCtx((_4, _push5, _parent5, _scopeId4) => {
                               if (_push5) {
-                                _push5(`<label class="form-label-etatsup required" data-v-57c7ddde${_scopeId4}>Adresse actuelle</label>`);
+                                _push5(`<label class="form-label-etatsup required" data-v-86897dcd${_scopeId4}>Adresse actuelle</label>`);
                                 _push5(ssrRenderComponent(_component_BFormInput, {
                                   modelValue: unref(form).address,
                                   "onUpdate:modelValue": ($event) => unref(form).address = $event,
@@ -1033,7 +1027,7 @@ const _sfc_main$1F = /* @__PURE__ */ defineComponent({
                           _push4(ssrRenderComponent(_component_BCol, { md: "4" }, {
                             default: withCtx((_4, _push5, _parent5, _scopeId4) => {
                               if (_push5) {
-                                _push5(`<label class="form-label-etatsup required" data-v-57c7ddde${_scopeId4}>Code postal</label>`);
+                                _push5(`<label class="form-label-etatsup required" data-v-86897dcd${_scopeId4}>Code postal</label>`);
                                 _push5(ssrRenderComponent(_component_BFormInput, {
                                   modelValue: unref(form).postal_code,
                                   "onUpdate:modelValue": ($event) => unref(form).postal_code = $event,
@@ -1059,7 +1053,7 @@ const _sfc_main$1F = /* @__PURE__ */ defineComponent({
                           _push4(ssrRenderComponent(_component_BCol, { md: "4" }, {
                             default: withCtx((_4, _push5, _parent5, _scopeId4) => {
                               if (_push5) {
-                                _push5(`<label class="form-label-etatsup" data-v-57c7ddde${_scopeId4}>Ville</label>`);
+                                _push5(`<label class="form-label-etatsup" data-v-86897dcd${_scopeId4}>Ville</label>`);
                                 _push5(ssrRenderComponent(_component_BFormInput, {
                                   modelValue: unref(form).city,
                                   "onUpdate:modelValue": ($event) => unref(form).city = $event,
@@ -1083,7 +1077,7 @@ const _sfc_main$1F = /* @__PURE__ */ defineComponent({
                           _push4(ssrRenderComponent(_component_BCol, { md: "4" }, {
                             default: withCtx((_4, _push5, _parent5, _scopeId4) => {
                               if (_push5) {
-                                _push5(`<label class="form-label-etatsup required" data-v-57c7ddde${_scopeId4}>Pays</label>`);
+                                _push5(`<label class="form-label-etatsup required" data-v-86897dcd${_scopeId4}>Pays</label>`);
                                 _push5(ssrRenderComponent(_component_BFormInput, {
                                   modelValue: unref(form).country,
                                   "onUpdate:modelValue": ($event) => unref(form).country = $event,
@@ -1109,7 +1103,7 @@ const _sfc_main$1F = /* @__PURE__ */ defineComponent({
                           _push4(ssrRenderComponent(_component_BCol, { md: "6" }, {
                             default: withCtx((_4, _push5, _parent5, _scopeId4) => {
                               if (_push5) {
-                                _push5(`<label class="form-label-etatsup required" data-v-57c7ddde${_scopeId4}>Email</label>`);
+                                _push5(`<label class="form-label-etatsup required" data-v-86897dcd${_scopeId4}>Email</label>`);
                                 _push5(ssrRenderComponent(_component_BFormInput, {
                                   modelValue: unref(form).email,
                                   "onUpdate:modelValue": ($event) => unref(form).email = $event,
@@ -1137,7 +1131,7 @@ const _sfc_main$1F = /* @__PURE__ */ defineComponent({
                           _push4(ssrRenderComponent(_component_BCol, { md: "6" }, {
                             default: withCtx((_4, _push5, _parent5, _scopeId4) => {
                               if (_push5) {
-                                _push5(`<label class="form-label-etatsup required" data-v-57c7ddde${_scopeId4}>Portable</label>`);
+                                _push5(`<label class="form-label-etatsup required" data-v-86897dcd${_scopeId4}>Portable</label>`);
                                 _push5(ssrRenderComponent(_component_BFormInput, {
                                   modelValue: unref(form).phone,
                                   "onUpdate:modelValue": ($event) => unref(form).phone = $event,
@@ -1167,7 +1161,7 @@ const _sfc_main$1F = /* @__PURE__ */ defineComponent({
                           _push4(ssrRenderComponent(_component_BCol, { cols: "12" }, {
                             default: withCtx((_4, _push5, _parent5, _scopeId4) => {
                               if (_push5) {
-                                _push5(`<label class="form-label-etatsup" data-v-57c7ddde${_scopeId4}>Courriel des parents (optionnel)</label>`);
+                                _push5(`<label class="form-label-etatsup" data-v-86897dcd${_scopeId4}>Courriel des parents (optionnel)</label>`);
                                 _push5(ssrRenderComponent(_component_BFormInput, {
                                   modelValue: unref(form).parent_email,
                                   "onUpdate:modelValue": ($event) => unref(form).parent_email = $event,
@@ -1394,14 +1388,14 @@ const _sfc_main$1F = /* @__PURE__ */ defineComponent({
                     _push3(`<!---->`);
                   }
                   if (currentStep.value === 2) {
-                    _push3(`<div class="form-section" data-v-57c7ddde${_scopeId2}><h6 class="section-title" data-v-57c7ddde${_scopeId2}><i class="bi bi-mortarboard me-2" data-v-57c7ddde${_scopeId2}></i> 2. Formation </h6>`);
+                    _push3(`<div class="form-section" data-v-86897dcd${_scopeId2}><h6 class="section-title" data-v-86897dcd${_scopeId2}><i class="bi bi-mortarboard me-2" data-v-86897dcd${_scopeId2}></i> 2. Formation </h6>`);
                     _push3(ssrRenderComponent(_component_BRow, { class: "g-3" }, {
                       default: withCtx((_3, _push4, _parent4, _scopeId3) => {
                         if (_push4) {
                           _push4(ssrRenderComponent(_component_BCol, { md: "8" }, {
                             default: withCtx((_4, _push5, _parent5, _scopeId4) => {
                               if (_push5) {
-                                _push5(`<label class="form-label-etatsup required" data-v-57c7ddde${_scopeId4}>Diplôme en cours d&#39;obtention (ou dernier diplôme obtenu)</label>`);
+                                _push5(`<label class="form-label-etatsup required" data-v-86897dcd${_scopeId4}>Diplôme en cours d&#39;obtention (ou dernier diplôme obtenu)</label>`);
                                 _push5(ssrRenderComponent(_component_BFormInput, {
                                   modelValue: unref(form).current_diploma,
                                   "onUpdate:modelValue": ($event) => unref(form).current_diploma = $event,
@@ -1429,7 +1423,7 @@ const _sfc_main$1F = /* @__PURE__ */ defineComponent({
                           _push4(ssrRenderComponent(_component_BCol, { md: "4" }, {
                             default: withCtx((_4, _push5, _parent5, _scopeId4) => {
                               if (_push5) {
-                                _push5(`<label class="form-label-etatsup required" data-v-57c7ddde${_scopeId4}>Année du diplôme</label>`);
+                                _push5(`<label class="form-label-etatsup required" data-v-86897dcd${_scopeId4}>Année du diplôme</label>`);
                                 _push5(ssrRenderComponent(_component_BFormInput, {
                                   modelValue: unref(form).diploma_year,
                                   "onUpdate:modelValue": ($event) => unref(form).diploma_year = $event,
@@ -1461,7 +1455,7 @@ const _sfc_main$1F = /* @__PURE__ */ defineComponent({
                           _push4(ssrRenderComponent(_component_BCol, { cols: "12" }, {
                             default: withCtx((_4, _push5, _parent5, _scopeId4) => {
                               if (_push5) {
-                                _push5(`<label class="form-label-etatsup required" data-v-57c7ddde${_scopeId4}>Nombre d&#39;années de premier cycle validé</label>`);
+                                _push5(`<label class="form-label-etatsup required" data-v-86897dcd${_scopeId4}>Nombre d&#39;années de premier cycle validé</label>`);
                                 _push5(ssrRenderComponent(_component_BFormSelect, {
                                   modelValue: unref(form).years_validated,
                                   "onUpdate:modelValue": ($event) => unref(form).years_validated = $event,
@@ -1489,7 +1483,7 @@ const _sfc_main$1F = /* @__PURE__ */ defineComponent({
                           _push4(ssrRenderComponent(_component_BCol, { md: "6" }, {
                             default: withCtx((_4, _push5, _parent5, _scopeId4) => {
                               if (_push5) {
-                                _push5(`<label class="form-label-etatsup required" data-v-57c7ddde${_scopeId4}>Établissement antérieur</label>`);
+                                _push5(`<label class="form-label-etatsup required" data-v-86897dcd${_scopeId4}>Établissement antérieur</label>`);
                                 _push5(ssrRenderComponent(_component_BFormInput, {
                                   modelValue: unref(form).previous_institution,
                                   "onUpdate:modelValue": ($event) => unref(form).previous_institution = $event,
@@ -1517,7 +1511,7 @@ const _sfc_main$1F = /* @__PURE__ */ defineComponent({
                           _push4(ssrRenderComponent(_component_BCol, { md: "3" }, {
                             default: withCtx((_4, _push5, _parent5, _scopeId4) => {
                               if (_push5) {
-                                _push5(`<label class="form-label-etatsup required" data-v-57c7ddde${_scopeId4}>Ville</label>`);
+                                _push5(`<label class="form-label-etatsup required" data-v-86897dcd${_scopeId4}>Ville</label>`);
                                 _push5(ssrRenderComponent(_component_BFormInput, {
                                   modelValue: unref(form).institution_city,
                                   "onUpdate:modelValue": ($event) => unref(form).institution_city = $event,
@@ -1543,7 +1537,7 @@ const _sfc_main$1F = /* @__PURE__ */ defineComponent({
                           _push4(ssrRenderComponent(_component_BCol, { md: "3" }, {
                             default: withCtx((_4, _push5, _parent5, _scopeId4) => {
                               if (_push5) {
-                                _push5(`<label class="form-label-etatsup required" data-v-57c7ddde${_scopeId4}>Pays</label>`);
+                                _push5(`<label class="form-label-etatsup required" data-v-86897dcd${_scopeId4}>Pays</label>`);
                                 _push5(ssrRenderComponent(_component_BFormInput, {
                                   modelValue: unref(form).institution_country,
                                   "onUpdate:modelValue": ($event) => unref(form).institution_country = $event,
@@ -1662,14 +1656,14 @@ const _sfc_main$1F = /* @__PURE__ */ defineComponent({
                     _push3(`<!---->`);
                   }
                   if (currentStep.value === 3) {
-                    _push3(`<div class="form-section" data-v-57c7ddde${_scopeId2}><h6 class="section-title" data-v-57c7ddde${_scopeId2}><i class="bi bi-translate me-2" data-v-57c7ddde${_scopeId2}></i> 3. Compétences linguistiques </h6>`);
+                    _push3(`<div class="form-section" data-v-86897dcd${_scopeId2}><h6 class="section-title" data-v-86897dcd${_scopeId2}><i class="bi bi-translate me-2" data-v-86897dcd${_scopeId2}></i> 3. Compétences linguistiques </h6>`);
                     _push3(ssrRenderComponent(_component_BRow, { class: "g-3" }, {
                       default: withCtx((_3, _push4, _parent4, _scopeId3) => {
                         if (_push4) {
                           _push4(ssrRenderComponent(_component_BCol, { cols: "12" }, {
                             default: withCtx((_4, _push5, _parent5, _scopeId4) => {
                               if (_push5) {
-                                _push5(`<label class="form-label-etatsup required" data-v-57c7ddde${_scopeId4}>Langue maternelle</label>`);
+                                _push5(`<label class="form-label-etatsup required" data-v-86897dcd${_scopeId4}>Langue maternelle</label>`);
                                 _push5(ssrRenderComponent(_component_BFormSelect, {
                                   modelValue: unref(form).mother_tongue,
                                   "onUpdate:modelValue": ($event) => unref(form).mother_tongue = $event,
@@ -1700,7 +1694,7 @@ const _sfc_main$1F = /* @__PURE__ */ defineComponent({
                           }, {
                             default: withCtx((_4, _push5, _parent5, _scopeId4) => {
                               if (_push5) {
-                                _push5(`<div class="info-box" data-v-57c7ddde${_scopeId4}><i class="bi bi-info-circle me-2" data-v-57c7ddde${_scopeId4}></i><strong data-v-57c7ddde${_scopeId4}>Pour les non-anglophones :</strong> Indiquez votre niveau d&#39;anglais </div>`);
+                                _push5(`<div class="info-box" data-v-86897dcd${_scopeId4}><i class="bi bi-info-circle me-2" data-v-86897dcd${_scopeId4}></i><strong data-v-86897dcd${_scopeId4}>Pour les non-anglophones :</strong> Indiquez votre niveau d&#39;anglais </div>`);
                               } else {
                                 return [
                                   createVNode("div", { class: "info-box" }, [
@@ -1716,7 +1710,7 @@ const _sfc_main$1F = /* @__PURE__ */ defineComponent({
                           _push4(ssrRenderComponent(_component_BCol, { md: "6" }, {
                             default: withCtx((_4, _push5, _parent5, _scopeId4) => {
                               if (_push5) {
-                                _push5(`<label class="form-label-etatsup" data-v-57c7ddde${_scopeId4}>Test d&#39;anglais</label>`);
+                                _push5(`<label class="form-label-etatsup" data-v-86897dcd${_scopeId4}>Test d&#39;anglais</label>`);
                                 _push5(ssrRenderComponent(_component_BFormSelect, {
                                   modelValue: unref(form).english_test,
                                   "onUpdate:modelValue": ($event) => unref(form).english_test = $event,
@@ -1740,7 +1734,7 @@ const _sfc_main$1F = /* @__PURE__ */ defineComponent({
                           _push4(ssrRenderComponent(_component_BCol, { md: "6" }, {
                             default: withCtx((_4, _push5, _parent5, _scopeId4) => {
                               if (_push5) {
-                                _push5(`<label class="form-label-etatsup" data-v-57c7ddde${_scopeId4}>Niveau obtenu</label>`);
+                                _push5(`<label class="form-label-etatsup" data-v-86897dcd${_scopeId4}>Niveau obtenu</label>`);
                                 _push5(ssrRenderComponent(_component_BFormInput, {
                                   modelValue: unref(form).english_level,
                                   "onUpdate:modelValue": ($event) => unref(form).english_level = $event,
@@ -1767,7 +1761,7 @@ const _sfc_main$1F = /* @__PURE__ */ defineComponent({
                           }, {
                             default: withCtx((_4, _push5, _parent5, _scopeId4) => {
                               if (_push5) {
-                                _push5(`<div class="info-box" data-v-57c7ddde${_scopeId4}><i class="bi bi-info-circle me-2" data-v-57c7ddde${_scopeId4}></i><strong data-v-57c7ddde${_scopeId4}>Pour les non-francophones :</strong> Indiquez votre niveau de français </div>`);
+                                _push5(`<div class="info-box" data-v-86897dcd${_scopeId4}><i class="bi bi-info-circle me-2" data-v-86897dcd${_scopeId4}></i><strong data-v-86897dcd${_scopeId4}>Pour les non-francophones :</strong> Indiquez votre niveau de français </div>`);
                               } else {
                                 return [
                                   createVNode("div", { class: "info-box" }, [
@@ -1783,7 +1777,7 @@ const _sfc_main$1F = /* @__PURE__ */ defineComponent({
                           _push4(ssrRenderComponent(_component_BCol, { md: "6" }, {
                             default: withCtx((_4, _push5, _parent5, _scopeId4) => {
                               if (_push5) {
-                                _push5(`<label class="form-label-etatsup" data-v-57c7ddde${_scopeId4}>Test de français</label>`);
+                                _push5(`<label class="form-label-etatsup" data-v-86897dcd${_scopeId4}>Test de français</label>`);
                                 _push5(ssrRenderComponent(_component_BFormSelect, {
                                   modelValue: unref(form).french_test,
                                   "onUpdate:modelValue": ($event) => unref(form).french_test = $event,
@@ -1807,7 +1801,7 @@ const _sfc_main$1F = /* @__PURE__ */ defineComponent({
                           _push4(ssrRenderComponent(_component_BCol, { md: "6" }, {
                             default: withCtx((_4, _push5, _parent5, _scopeId4) => {
                               if (_push5) {
-                                _push5(`<label class="form-label-etatsup" data-v-57c7ddde${_scopeId4}>Niveau obtenu</label>`);
+                                _push5(`<label class="form-label-etatsup" data-v-86897dcd${_scopeId4}>Niveau obtenu</label>`);
                                 _push5(ssrRenderComponent(_component_BFormInput, {
                                   modelValue: unref(form).french_level,
                                   "onUpdate:modelValue": ($event) => unref(form).french_level = $event,
@@ -1928,14 +1922,14 @@ const _sfc_main$1F = /* @__PURE__ */ defineComponent({
                     _push3(`<!---->`);
                   }
                   if (currentStep.value === 4) {
-                    _push3(`<div class="form-section" data-v-57c7ddde${_scopeId2}><h6 class="section-title" data-v-57c7ddde${_scopeId2}><i class="bi bi-heart me-2" data-v-57c7ddde${_scopeId2}></i> 4. Lettre de motivation </h6>`);
+                    _push3(`<div class="form-section" data-v-86897dcd${_scopeId2}><h6 class="section-title" data-v-86897dcd${_scopeId2}><i class="bi bi-heart me-2" data-v-86897dcd${_scopeId2}></i> 4. Lettre de motivation </h6>`);
                     _push3(ssrRenderComponent(_component_BRow, { class: "g-3" }, {
                       default: withCtx((_3, _push4, _parent4, _scopeId3) => {
                         if (_push4) {
                           _push4(ssrRenderComponent(_component_BCol, { cols: "12" }, {
                             default: withCtx((_4, _push5, _parent5, _scopeId4) => {
                               if (_push5) {
-                                _push5(`<label class="form-label-etatsup required" data-v-57c7ddde${_scopeId4}> Pourquoi souhaitez-vous intégrer cet établissement ? </label>`);
+                                _push5(`<label class="form-label-etatsup required" data-v-86897dcd${_scopeId4}> Pourquoi souhaitez-vous intégrer cet établissement ? </label>`);
                                 _push5(ssrRenderComponent(_component_BFormTextarea, {
                                   modelValue: unref(form).motivation,
                                   "onUpdate:modelValue": ($event) => unref(form).motivation = $event,
@@ -1945,9 +1939,9 @@ const _sfc_main$1F = /* @__PURE__ */ defineComponent({
                                   placeholder: "Expliquez vos motivations, vos objectifs professionnels, et pourquoi vous avez choisi cet établissement...",
                                   onBlur: unref(v$).motivation?.$touch
                                 }, null, _parent5, _scopeId4));
-                                _push5(`<small class="text-muted" data-v-57c7ddde${_scopeId4}>${ssrInterpolate(unref(form).motivation.length)} / 2000 caractères (minimum 100) </small>`);
+                                _push5(`<small class="text-muted" data-v-86897dcd${_scopeId4}>${ssrInterpolate(unref(form).motivation.length)} / 2000 caractères (minimum 100) </small>`);
                                 if (unref(v$).motivation?.$error) {
-                                  _push5(`<div class="invalid-feedback d-block" data-v-57c7ddde${_scopeId4}> La motivation doit contenir entre 100 et 2000 caractères </div>`);
+                                  _push5(`<div class="invalid-feedback d-block" data-v-86897dcd${_scopeId4}> La motivation doit contenir entre 100 et 2000 caractères </div>`);
                                 } else {
                                   _push5(`<!---->`);
                                 }
@@ -1976,7 +1970,7 @@ const _sfc_main$1F = /* @__PURE__ */ defineComponent({
                           _push4(ssrRenderComponent(_component_BCol, { md: "6" }, {
                             default: withCtx((_4, _push5, _parent5, _scopeId4) => {
                               if (_push5) {
-                                _push5(`<label class="form-label-etatsup required" data-v-57c7ddde${_scopeId4}>Lieu</label>`);
+                                _push5(`<label class="form-label-etatsup required" data-v-86897dcd${_scopeId4}>Lieu</label>`);
                                 _push5(ssrRenderComponent(_component_BFormInput, {
                                   modelValue: unref(form).application_location,
                                   "onUpdate:modelValue": ($event) => unref(form).application_location = $event,
@@ -2004,7 +1998,7 @@ const _sfc_main$1F = /* @__PURE__ */ defineComponent({
                           _push4(ssrRenderComponent(_component_BCol, { md: "6" }, {
                             default: withCtx((_4, _push5, _parent5, _scopeId4) => {
                               if (_push5) {
-                                _push5(`<label class="form-label-etatsup" data-v-57c7ddde${_scopeId4}>Date</label>`);
+                                _push5(`<label class="form-label-etatsup" data-v-86897dcd${_scopeId4}>Date</label>`);
                                 _push5(ssrRenderComponent(_component_BFormInput, {
                                   modelValue: unref(form).application_date,
                                   "onUpdate:modelValue": ($event) => unref(form).application_date = $event,
@@ -2086,7 +2080,7 @@ const _sfc_main$1F = /* @__PURE__ */ defineComponent({
                     _push3(`<!---->`);
                   }
                   if (currentStep.value === 5) {
-                    _push3(`<div class="form-section" data-v-57c7ddde${_scopeId2}><h6 class="section-title" data-v-57c7ddde${_scopeId2}><i class="bi bi-file-earmark-arrow-up me-2" data-v-57c7ddde${_scopeId2}></i> 5. Pièces justificatives </h6>`);
+                    _push3(`<div class="form-section" data-v-86897dcd${_scopeId2}><h6 class="section-title" data-v-86897dcd${_scopeId2}><i class="bi bi-file-earmark-arrow-up me-2" data-v-86897dcd${_scopeId2}></i> 5. Pièces justificatives </h6>`);
                     _push3(ssrRenderComponent(DocumentUploader, {
                       ref_key: "documentUploaderRef",
                       ref: documentUploaderRef,
@@ -2099,7 +2093,7 @@ const _sfc_main$1F = /* @__PURE__ */ defineComponent({
                     _push3(`<!---->`);
                   }
                   if (currentStep.value === 6) {
-                    _push3(`<div class="form-section" data-v-57c7ddde${_scopeId2}><h6 class="section-title" data-v-57c7ddde${_scopeId2}><i class="bi bi-credit-card me-2" data-v-57c7ddde${_scopeId2}></i> 6. Paiement des frais de dossier </h6>`);
+                    _push3(`<div class="form-section" data-v-86897dcd${_scopeId2}><h6 class="section-title" data-v-86897dcd${_scopeId2}><i class="bi bi-credit-card me-2" data-v-86897dcd${_scopeId2}></i> 6. Paiement des frais de dossier </h6>`);
                     _push3(ssrRenderComponent(_component_BAlert, {
                       variant: "info",
                       "model-value": true,
@@ -2107,7 +2101,7 @@ const _sfc_main$1F = /* @__PURE__ */ defineComponent({
                     }, {
                       default: withCtx((_3, _push4, _parent4, _scopeId3) => {
                         if (_push4) {
-                          _push4(`<i class="bi bi-info-circle me-2" data-v-57c7ddde${_scopeId3}></i><strong data-v-57c7ddde${_scopeId3}>Frais de dossier :</strong> ${ssrInterpolate(formattedAmount.value)} € (paiement sécurisé via Stripe) `);
+                          _push4(`<i class="bi bi-info-circle me-2" data-v-86897dcd${_scopeId3}></i><strong data-v-86897dcd${_scopeId3}>Frais de dossier :</strong> ${ssrInterpolate(formattedAmount.value)} € (paiement sécurisé via Stripe) `);
                         } else {
                           return [
                             createVNode("i", { class: "bi bi-info-circle me-2" }),
@@ -2124,7 +2118,7 @@ const _sfc_main$1F = /* @__PURE__ */ defineComponent({
                           _push4(ssrRenderComponent(_component_BCol, { cols: "12" }, {
                             default: withCtx((_4, _push5, _parent5, _scopeId4) => {
                               if (_push5) {
-                                _push5(`<label class="form-label-etatsup required" data-v-57c7ddde${_scopeId4}>Carte bancaire</label><div class="stripe-card-element" data-v-57c7ddde${_scopeId4}></div><small class="text-muted mt-2 d-block" data-v-57c7ddde${_scopeId4}><i class="bi bi-lock-fill me-1" data-v-57c7ddde${_scopeId4}></i> Paiement 100% sécurisé avec chiffrement SSL </small>`);
+                                _push5(`<label class="form-label-etatsup required" data-v-86897dcd${_scopeId4}>Carte bancaire</label><div class="stripe-card-element" data-v-86897dcd${_scopeId4}></div><small class="text-muted mt-2 d-block" data-v-86897dcd${_scopeId4}><i class="bi bi-lock-fill me-1" data-v-86897dcd${_scopeId4}></i> Paiement 100% sécurisé avec chiffrement SSL </small>`);
                               } else {
                                 return [
                                   createVNode("label", { class: "form-label-etatsup required" }, "Carte bancaire"),
@@ -2152,7 +2146,7 @@ const _sfc_main$1F = /* @__PURE__ */ defineComponent({
                                   }, {
                                     default: withCtx((_5, _push6, _parent6, _scopeId5) => {
                                       if (_push6) {
-                                        _push6(`<i class="bi bi-exclamation-triangle me-2" data-v-57c7ddde${_scopeId5}></i> ${ssrInterpolate(errorMessage.value)}`);
+                                        _push6(`<i class="bi bi-exclamation-triangle me-2" data-v-86897dcd${_scopeId5}></i> ${ssrInterpolate(errorMessage.value)}`);
                                       } else {
                                         return [
                                           createVNode("i", { class: "bi bi-exclamation-triangle me-2" }),
@@ -2185,7 +2179,7 @@ const _sfc_main$1F = /* @__PURE__ */ defineComponent({
                           _push4(ssrRenderComponent(_component_BCol, { cols: "12" }, {
                             default: withCtx((_4, _push5, _parent5, _scopeId4) => {
                               if (_push5) {
-                                _push5(`<div class="payment-summary p-3 bg-light rounded" data-v-57c7ddde${_scopeId4}><div class="d-flex justify-content-between align-items-center" data-v-57c7ddde${_scopeId4}><span class="fw-bold" data-v-57c7ddde${_scopeId4}>Total à payer</span><span class="h4 mb-0 text-primary fw-bold" data-v-57c7ddde${_scopeId4}>${ssrInterpolate(formattedAmount.value)} €</span></div></div>`);
+                                _push5(`<div class="payment-summary p-3 bg-light rounded" data-v-86897dcd${_scopeId4}><div class="d-flex justify-content-between align-items-center" data-v-86897dcd${_scopeId4}><span class="fw-bold" data-v-86897dcd${_scopeId4}>Total à payer</span><span class="h4 mb-0 text-primary fw-bold" data-v-86897dcd${_scopeId4}>${ssrInterpolate(formattedAmount.value)} €</span></div></div>`);
                               } else {
                                 return [
                                   createVNode("div", { class: "payment-summary p-3 bg-light rounded" }, [
@@ -2254,7 +2248,7 @@ const _sfc_main$1F = /* @__PURE__ */ defineComponent({
                   } else {
                     _push3(`<!---->`);
                   }
-                  _push3(`<div class="form-navigation" data-v-57c7ddde${_scopeId2}><div class="left-buttons" data-v-57c7ddde${_scopeId2}>`);
+                  _push3(`<div class="form-navigation" data-v-86897dcd${_scopeId2}><div class="left-buttons" data-v-86897dcd${_scopeId2}>`);
                   if (currentStep.value > 1) {
                     _push3(ssrRenderComponent(_component_BButton, {
                       type: "button",
@@ -2264,7 +2258,7 @@ const _sfc_main$1F = /* @__PURE__ */ defineComponent({
                     }, {
                       default: withCtx((_3, _push4, _parent4, _scopeId3) => {
                         if (_push4) {
-                          _push4(`<i class="bi bi-arrow-left me-2" data-v-57c7ddde${_scopeId3}></i> Précédent `);
+                          _push4(`<i class="bi bi-arrow-left me-2" data-v-86897dcd${_scopeId3}></i> Précédent `);
                         } else {
                           return [
                             createVNode("i", { class: "bi bi-arrow-left me-2" }),
@@ -2277,7 +2271,7 @@ const _sfc_main$1F = /* @__PURE__ */ defineComponent({
                   } else {
                     _push3(`<!---->`);
                   }
-                  _push3(`</div><div class="right-buttons" data-v-57c7ddde${_scopeId2}>`);
+                  _push3(`</div><div class="right-buttons" data-v-86897dcd${_scopeId2}>`);
                   _push3(ssrRenderComponent(_component_BButton, {
                     type: "button",
                     variant: "outline-secondary",
@@ -2286,7 +2280,7 @@ const _sfc_main$1F = /* @__PURE__ */ defineComponent({
                   }, {
                     default: withCtx((_3, _push4, _parent4, _scopeId3) => {
                       if (_push4) {
-                        _push4(`<i class="bi bi-bookmark me-2" data-v-57c7ddde${_scopeId3}></i> Finaliser plus tard `);
+                        _push4(`<i class="bi bi-bookmark me-2" data-v-86897dcd${_scopeId3}></i> Finaliser plus tard `);
                       } else {
                         return [
                           createVNode("i", { class: "bi bi-bookmark me-2" }),
@@ -2304,7 +2298,7 @@ const _sfc_main$1F = /* @__PURE__ */ defineComponent({
                     }, {
                       default: withCtx((_3, _push4, _parent4, _scopeId3) => {
                         if (_push4) {
-                          _push4(` Suivant <i class="bi bi-arrow-right ms-2" data-v-57c7ddde${_scopeId3}></i>`);
+                          _push4(` Suivant <i class="bi bi-arrow-right ms-2" data-v-86897dcd${_scopeId3}></i>`);
                         } else {
                           return [
                             createTextVNode(" Suivant "),
@@ -2327,9 +2321,9 @@ const _sfc_main$1F = /* @__PURE__ */ defineComponent({
                       default: withCtx((_3, _push4, _parent4, _scopeId3) => {
                         if (_push4) {
                           if (processing.value) {
-                            _push4(`<span data-v-57c7ddde${_scopeId3}><span class="spinner-border spinner-border-sm me-2" data-v-57c7ddde${_scopeId3}></span> Envoi en cours... </span>`);
+                            _push4(`<span data-v-86897dcd${_scopeId3}><span class="spinner-border spinner-border-sm me-2" data-v-86897dcd${_scopeId3}></span> Envoi en cours... </span>`);
                           } else {
-                            _push4(`<span data-v-57c7ddde${_scopeId3}><i class="bi bi-send me-2" data-v-57c7ddde${_scopeId3}></i> Soumettre ma candidature </span>`);
+                            _push4(`<span data-v-86897dcd${_scopeId3}><i class="bi bi-send me-2" data-v-86897dcd${_scopeId3}></i> Soumettre ma candidature </span>`);
                           }
                         } else {
                           return [
@@ -2369,10 +2363,7 @@ const _sfc_main$1F = /* @__PURE__ */ defineComponent({
                             onClick: ($event) => goToStep(step)
                           }, [
                             createVNode("div", { class: "stepper-step-circle" }, [
-                              currentStep.value > step ? (openBlock(), createBlock("i", {
-                                key: 0,
-                                class: "bi bi-check-lg"
-                              })) : (openBlock(), createBlock("span", { key: 1 }, toDisplayString(step), 1))
+                              createVNode("span", null, toDisplayString(step), 1)
                             ]),
                             createVNode("div", { class: "stepper-step-label" }, [
                               step === 1 ? (openBlock(), createBlock("span", { key: 0 }, "Infos personnelles")) : createCommentVNode("", true),
@@ -3041,10 +3032,7 @@ const _sfc_main$1F = /* @__PURE__ */ defineComponent({
                           onClick: ($event) => goToStep(step)
                         }, [
                           createVNode("div", { class: "stepper-step-circle" }, [
-                            currentStep.value > step ? (openBlock(), createBlock("i", {
-                              key: 0,
-                              class: "bi bi-check-lg"
-                            })) : (openBlock(), createBlock("span", { key: 1 }, toDisplayString(step), 1))
+                            createVNode("span", null, toDisplayString(step), 1)
                           ]),
                           createVNode("div", { class: "stepper-step-label" }, [
                             step === 1 ? (openBlock(), createBlock("span", { key: 0 }, "Infos personnelles")) : createCommentVNode("", true),
@@ -3691,18 +3679,18 @@ const _sfc_main$1F = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_setup$1F = _sfc_main$1F.setup;
-_sfc_main$1F.setup = (props, ctx) => {
+const _sfc_setup$1G = _sfc_main$1G.setup;
+_sfc_main$1G.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/Pages/Applications/Partials/ApplicationForm.vue");
-  return _sfc_setup$1F ? _sfc_setup$1F(props, ctx) : void 0;
+  return _sfc_setup$1G ? _sfc_setup$1G(props, ctx) : void 0;
 };
-const ApplicationForm = /* @__PURE__ */ _export_sfc(_sfc_main$1F, [["__scopeId", "data-v-57c7ddde"]]);
+const ApplicationForm = /* @__PURE__ */ _export_sfc(_sfc_main$1G, [["__scopeId", "data-v-86897dcd"]]);
 const __vite_glob_0_1 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: ApplicationForm
 }, Symbol.toStringTag, { value: "Module" }));
-const _sfc_main$1E = /* @__PURE__ */ defineComponent({
+const _sfc_main$1F = /* @__PURE__ */ defineComponent({
   __name: "EstablishmentCard",
   __ssrInlineRender: true,
   props: {
@@ -3898,18 +3886,18 @@ const _sfc_main$1E = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_setup$1E = _sfc_main$1E.setup;
-_sfc_main$1E.setup = (props, ctx) => {
+const _sfc_setup$1F = _sfc_main$1F.setup;
+_sfc_main$1F.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/Pages/Applications/Partials/EstablishmentCard.vue");
-  return _sfc_setup$1E ? _sfc_setup$1E(props, ctx) : void 0;
+  return _sfc_setup$1F ? _sfc_setup$1F(props, ctx) : void 0;
 };
-const EstablishmentCard = /* @__PURE__ */ _export_sfc(_sfc_main$1E, [["__scopeId", "data-v-c8aefcc3"]]);
+const EstablishmentCard = /* @__PURE__ */ _export_sfc(_sfc_main$1F, [["__scopeId", "data-v-c8aefcc3"]]);
 const __vite_glob_0_2 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: EstablishmentCard
 }, Symbol.toStringTag, { value: "Module" }));
-const _sfc_main$1D = /* @__PURE__ */ defineComponent({
+const _sfc_main$1E = /* @__PURE__ */ defineComponent({
   __name: "Hero",
   __ssrInlineRender: true,
   props: {
@@ -4298,18 +4286,18 @@ const _sfc_main$1D = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_setup$1D = _sfc_main$1D.setup;
-_sfc_main$1D.setup = (props, ctx) => {
+const _sfc_setup$1E = _sfc_main$1E.setup;
+_sfc_main$1E.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/Pages/Applications/Partials/Hero.vue");
-  return _sfc_setup$1D ? _sfc_setup$1D(props, ctx) : void 0;
+  return _sfc_setup$1E ? _sfc_setup$1E(props, ctx) : void 0;
 };
-const Hero = /* @__PURE__ */ _export_sfc(_sfc_main$1D, [["__scopeId", "data-v-a3ecc395"]]);
+const Hero = /* @__PURE__ */ _export_sfc(_sfc_main$1E, [["__scopeId", "data-v-a3ecc395"]]);
 const __vite_glob_0_3 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: Hero
 }, Symbol.toStringTag, { value: "Module" }));
-const _sfc_main$1C = /* @__PURE__ */ defineComponent({
+const _sfc_main$1D = /* @__PURE__ */ defineComponent({
   __name: "Create",
   __ssrInlineRender: true,
   props: {
@@ -4327,7 +4315,7 @@ const _sfc_main$1C = /* @__PURE__ */ defineComponent({
       const _component_BCard = BCard;
       const _component_BCardBody = BCardBody;
       _push(`<!--[-->`);
-      _push(ssrRenderComponent(_sfc_main$1I, {
+      _push(ssrRenderComponent(_sfc_main$1J, {
         title: `Candidature - ${__props.establishment.title}`
       }, {
         default: withCtx((_, _push2, _parent2, _scopeId) => {
@@ -4378,7 +4366,7 @@ const _sfc_main$1C = /* @__PURE__ */ defineComponent({
                     _: 1
                   }, _parent3, _scopeId2));
                   _push3(`<aside class="col-xl-4" data-v-ec653ca9${_scopeId2}><div class="vstack gap-4" data-v-ec653ca9${_scopeId2}>`);
-                  _push3(ssrRenderComponent(_sfc_main$1H, {
+                  _push3(ssrRenderComponent(_sfc_main$1I, {
                     id: "establishment-info",
                     "data-sticky": "",
                     "data-margin-top": "100",
@@ -4590,7 +4578,7 @@ const _sfc_main$1C = /* @__PURE__ */ defineComponent({
                     }),
                     createVNode("aside", { class: "col-xl-4" }, [
                       createVNode("div", { class: "vstack gap-4" }, [
-                        createVNode(_sfc_main$1H, {
+                        createVNode(_sfc_main$1I, {
                           id: "establishment-info",
                           "data-sticky": "",
                           "data-margin-top": "100",
@@ -4679,7 +4667,7 @@ const _sfc_main$1C = /* @__PURE__ */ defineComponent({
                   }),
                   createVNode("aside", { class: "col-xl-4" }, [
                     createVNode("div", { class: "vstack gap-4" }, [
-                      createVNode(_sfc_main$1H, {
+                      createVNode(_sfc_main$1I, {
                         id: "establishment-info",
                         "data-sticky": "",
                         "data-margin-top": "100",
@@ -4757,18 +4745,18 @@ const _sfc_main$1C = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_setup$1C = _sfc_main$1C.setup;
-_sfc_main$1C.setup = (props, ctx) => {
+const _sfc_setup$1D = _sfc_main$1D.setup;
+_sfc_main$1D.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/Pages/Applications/Create.vue");
-  return _sfc_setup$1C ? _sfc_setup$1C(props, ctx) : void 0;
+  return _sfc_setup$1D ? _sfc_setup$1D(props, ctx) : void 0;
 };
-const Create = /* @__PURE__ */ _export_sfc(_sfc_main$1C, [["__scopeId", "data-v-ec653ca9"]]);
+const Create = /* @__PURE__ */ _export_sfc(_sfc_main$1D, [["__scopeId", "data-v-ec653ca9"]]);
 const __vite_glob_0_0 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: Create
 }, Symbol.toStringTag, { value: "Module" }));
-const _sfc_main$1B = /* @__PURE__ */ defineComponent({
+const _sfc_main$1C = /* @__PURE__ */ defineComponent({
   __name: "PasswordInput",
   __ssrInlineRender: true,
   props: {
@@ -4812,11 +4800,11 @@ const _sfc_main$1B = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_setup$1B = _sfc_main$1B.setup;
-_sfc_main$1B.setup = (props, ctx) => {
+const _sfc_setup$1C = _sfc_main$1C.setup;
+_sfc_main$1C.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/Components/PasswordInput.vue");
-  return _sfc_setup$1B ? _sfc_setup$1B(props, ctx) : void 0;
+  return _sfc_setup$1C ? _sfc_setup$1C(props, ctx) : void 0;
 };
 const changeHTMLAttribute = (attribute, value) => {
   if (document.body) document.getElementsByTagName("html")[0].setAttribute(attribute, value);
@@ -4849,7 +4837,7 @@ const useLayoutStore = defineStore("layout_store", () => {
     setDir
   };
 });
-const _sfc_main$1A = /* @__PURE__ */ defineComponent({
+const _sfc_main$1B = /* @__PURE__ */ defineComponent({
   __name: "GuestLayout",
   __ssrInlineRender: true,
   setup(__props) {
@@ -4864,14 +4852,14 @@ const _sfc_main$1A = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_setup$1A = _sfc_main$1A.setup;
-_sfc_main$1A.setup = (props, ctx) => {
+const _sfc_setup$1B = _sfc_main$1B.setup;
+_sfc_main$1B.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/Layouts/GuestLayout.vue");
-  return _sfc_setup$1A ? _sfc_setup$1A(props, ctx) : void 0;
+  return _sfc_setup$1B ? _sfc_setup$1B(props, ctx) : void 0;
 };
-const _sfc_main$1z = /* @__PURE__ */ defineComponent({
-  ...{ layout: _sfc_main$1A },
+const _sfc_main$1A = /* @__PURE__ */ defineComponent({
+  ...{ layout: _sfc_main$1B },
   __name: "ConfirmPassword",
   __ssrInlineRender: true,
   setup(__props) {
@@ -4902,7 +4890,7 @@ const _sfc_main$1z = /* @__PURE__ */ defineComponent({
                     default: withCtx((_3, _push4, _parent4, _scopeId3) => {
                       if (_push4) {
                         _push4(`<div class="confirm-card" data-v-549251bd${_scopeId3}><div class="text-center mb-4" data-v-549251bd${_scopeId3}><h2 class="logo-text" data-v-549251bd${_scopeId3}>EtapSup</h2><div class="confirm-icon" data-v-549251bd${_scopeId3}>🔒</div><h1 class="confirm-title" data-v-549251bd${_scopeId3}>Zone sécurisée</h1><p class="confirm-subtitle" data-v-549251bd${_scopeId3}> Ceci est une zone sécurisée de l&#39;application. Veuillez confirmer votre mot de passe avant de continuer. </p></div><form class="confirm-form" data-v-549251bd${_scopeId3}>`);
-                        _push4(ssrRenderComponent(_sfc_main$1B, {
+                        _push4(ssrRenderComponent(_sfc_main$1C, {
                           modelValue: unref(form).password,
                           "onUpdate:modelValue": ($event) => unref(form).password = $event,
                           error: unref(form).errors.password,
@@ -4951,7 +4939,7 @@ const _sfc_main$1z = /* @__PURE__ */ defineComponent({
                               onSubmit: withModifiers(submit, ["prevent"]),
                               class: "confirm-form"
                             }, [
-                              createVNode(_sfc_main$1B, {
+                              createVNode(_sfc_main$1C, {
                                 modelValue: unref(form).password,
                                 "onUpdate:modelValue": ($event) => unref(form).password = $event,
                                 error: unref(form).errors.password,
@@ -5001,7 +4989,7 @@ const _sfc_main$1z = /* @__PURE__ */ defineComponent({
                             onSubmit: withModifiers(submit, ["prevent"]),
                             class: "confirm-form"
                           }, [
-                            createVNode(_sfc_main$1B, {
+                            createVNode(_sfc_main$1C, {
                               modelValue: unref(form).password,
                               "onUpdate:modelValue": ($event) => unref(form).password = $event,
                               error: unref(form).errors.password,
@@ -5056,7 +5044,7 @@ const _sfc_main$1z = /* @__PURE__ */ defineComponent({
                           onSubmit: withModifiers(submit, ["prevent"]),
                           class: "confirm-form"
                         }, [
-                          createVNode(_sfc_main$1B, {
+                          createVNode(_sfc_main$1C, {
                             modelValue: unref(form).password,
                             "onUpdate:modelValue": ($event) => unref(form).password = $event,
                             error: unref(form).errors.password,
@@ -5098,18 +5086,18 @@ const _sfc_main$1z = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_setup$1z = _sfc_main$1z.setup;
-_sfc_main$1z.setup = (props, ctx) => {
+const _sfc_setup$1A = _sfc_main$1A.setup;
+_sfc_main$1A.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/Pages/Auth/ConfirmPassword.vue");
-  return _sfc_setup$1z ? _sfc_setup$1z(props, ctx) : void 0;
+  return _sfc_setup$1A ? _sfc_setup$1A(props, ctx) : void 0;
 };
-const ConfirmPassword = /* @__PURE__ */ _export_sfc(_sfc_main$1z, [["__scopeId", "data-v-549251bd"]]);
+const ConfirmPassword = /* @__PURE__ */ _export_sfc(_sfc_main$1A, [["__scopeId", "data-v-549251bd"]]);
 const __vite_glob_0_4 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: ConfirmPassword
 }, Symbol.toStringTag, { value: "Module" }));
-const _sfc_main$1y = /* @__PURE__ */ defineComponent({
+const _sfc_main$1z = /* @__PURE__ */ defineComponent({
   __name: "ForgotPassword",
   __ssrInlineRender: true,
   props: {
@@ -5528,19 +5516,19 @@ const _sfc_main$1y = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_setup$1y = _sfc_main$1y.setup;
-_sfc_main$1y.setup = (props, ctx) => {
+const _sfc_setup$1z = _sfc_main$1z.setup;
+_sfc_main$1z.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/Pages/Auth/ForgotPassword.vue");
-  return _sfc_setup$1y ? _sfc_setup$1y(props, ctx) : void 0;
+  return _sfc_setup$1z ? _sfc_setup$1z(props, ctx) : void 0;
 };
-const ForgotPassword = /* @__PURE__ */ _export_sfc(_sfc_main$1y, [["__scopeId", "data-v-5cd06055"]]);
+const ForgotPassword = /* @__PURE__ */ _export_sfc(_sfc_main$1z, [["__scopeId", "data-v-5cd06055"]]);
 const __vite_glob_0_5 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: ForgotPassword
 }, Symbol.toStringTag, { value: "Module" }));
-const _sfc_main$1x = /* @__PURE__ */ defineComponent({
-  ...{ layout: _sfc_main$1A },
+const _sfc_main$1y = /* @__PURE__ */ defineComponent({
+  ...{ layout: _sfc_main$1B },
   __name: "Login",
   __ssrInlineRender: true,
   props: {
@@ -5668,7 +5656,7 @@ const _sfc_main$1x = /* @__PURE__ */ defineComponent({
                         }, {
                           default: withCtx((_4, _push5, _parent5, _scopeId4) => {
                             if (_push5) {
-                              _push5(ssrRenderComponent(_sfc_main$1B, {
+                              _push5(ssrRenderComponent(_sfc_main$1C, {
                                 modelValue: unref(form).password,
                                 "onUpdate:modelValue": ($event) => unref(form).password = $event,
                                 error: unref(form).errors.password,
@@ -5682,7 +5670,7 @@ const _sfc_main$1x = /* @__PURE__ */ defineComponent({
                               }, null, _parent5, _scopeId4));
                             } else {
                               return [
-                                createVNode(_sfc_main$1B, {
+                                createVNode(_sfc_main$1C, {
                                   modelValue: unref(form).password,
                                   "onUpdate:modelValue": ($event) => unref(form).password = $event,
                                   error: unref(form).errors.password,
@@ -5847,7 +5835,7 @@ const _sfc_main$1x = /* @__PURE__ */ defineComponent({
                                 class: "mb-3"
                               }, {
                                 default: withCtx(() => [
-                                  createVNode(_sfc_main$1B, {
+                                  createVNode(_sfc_main$1C, {
                                     modelValue: unref(form).password,
                                     "onUpdate:modelValue": ($event) => unref(form).password = $event,
                                     error: unref(form).errors.password,
@@ -5989,7 +5977,7 @@ const _sfc_main$1x = /* @__PURE__ */ defineComponent({
                               class: "mb-3"
                             }, {
                               default: withCtx(() => [
-                                createVNode(_sfc_main$1B, {
+                                createVNode(_sfc_main$1C, {
                                   modelValue: unref(form).password,
                                   "onUpdate:modelValue": ($event) => unref(form).password = $event,
                                   error: unref(form).errors.password,
@@ -6136,7 +6124,7 @@ const _sfc_main$1x = /* @__PURE__ */ defineComponent({
                             class: "mb-3"
                           }, {
                             default: withCtx(() => [
-                              createVNode(_sfc_main$1B, {
+                              createVNode(_sfc_main$1C, {
                                 modelValue: unref(form).password,
                                 "onUpdate:modelValue": ($event) => unref(form).password = $event,
                                 error: unref(form).errors.password,
@@ -6227,19 +6215,19 @@ const _sfc_main$1x = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_setup$1x = _sfc_main$1x.setup;
-_sfc_main$1x.setup = (props, ctx) => {
+const _sfc_setup$1y = _sfc_main$1y.setup;
+_sfc_main$1y.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/Pages/Auth/Login.vue");
-  return _sfc_setup$1x ? _sfc_setup$1x(props, ctx) : void 0;
+  return _sfc_setup$1y ? _sfc_setup$1y(props, ctx) : void 0;
 };
-const Login = /* @__PURE__ */ _export_sfc(_sfc_main$1x, [["__scopeId", "data-v-c172df35"]]);
+const Login = /* @__PURE__ */ _export_sfc(_sfc_main$1y, [["__scopeId", "data-v-c172df35"]]);
 const __vite_glob_0_6 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: Login
 }, Symbol.toStringTag, { value: "Module" }));
-const _sfc_main$1w = /* @__PURE__ */ defineComponent({
-  ...{ layout: _sfc_main$1A },
+const _sfc_main$1x = /* @__PURE__ */ defineComponent({
+  ...{ layout: _sfc_main$1B },
   __name: "Register",
   __ssrInlineRender: true,
   setup(__props) {
@@ -6625,7 +6613,7 @@ const _sfc_main$1w = /* @__PURE__ */ defineComponent({
                         }, {
                           default: withCtx((_4, _push5, _parent5, _scopeId4) => {
                             if (_push5) {
-                              _push5(ssrRenderComponent(_sfc_main$1B, {
+                              _push5(ssrRenderComponent(_sfc_main$1C, {
                                 modelValue: unref(form).password,
                                 "onUpdate:modelValue": ($event) => unref(form).password = $event,
                                 error: unref(form).errors.password,
@@ -6642,7 +6630,7 @@ const _sfc_main$1w = /* @__PURE__ */ defineComponent({
                               _push5(`<small class="text-muted" data-v-f70b6cba${_scopeId4}>Le mot de passe doit contenir au moins 8 caractères</small>`);
                             } else {
                               return [
-                                createVNode(_sfc_main$1B, {
+                                createVNode(_sfc_main$1C, {
                                   modelValue: unref(form).password,
                                   "onUpdate:modelValue": ($event) => unref(form).password = $event,
                                   error: unref(form).errors.password,
@@ -6857,7 +6845,7 @@ const _sfc_main$1w = /* @__PURE__ */ defineComponent({
                                 class: "mb-3"
                               }, {
                                 default: withCtx(() => [
-                                  createVNode(_sfc_main$1B, {
+                                  createVNode(_sfc_main$1C, {
                                     modelValue: unref(form).password,
                                     "onUpdate:modelValue": ($event) => unref(form).password = $event,
                                     error: unref(form).errors.password,
@@ -7058,7 +7046,7 @@ const _sfc_main$1w = /* @__PURE__ */ defineComponent({
                               class: "mb-3"
                             }, {
                               default: withCtx(() => [
-                                createVNode(_sfc_main$1B, {
+                                createVNode(_sfc_main$1C, {
                                   modelValue: unref(form).password,
                                   "onUpdate:modelValue": ($event) => unref(form).password = $event,
                                   error: unref(form).errors.password,
@@ -7264,7 +7252,7 @@ const _sfc_main$1w = /* @__PURE__ */ defineComponent({
                             class: "mb-3"
                           }, {
                             default: withCtx(() => [
-                              createVNode(_sfc_main$1B, {
+                              createVNode(_sfc_main$1C, {
                                 modelValue: unref(form).password,
                                 "onUpdate:modelValue": ($event) => unref(form).password = $event,
                                 error: unref(form).errors.password,
@@ -7348,19 +7336,19 @@ const _sfc_main$1w = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_setup$1w = _sfc_main$1w.setup;
-_sfc_main$1w.setup = (props, ctx) => {
+const _sfc_setup$1x = _sfc_main$1x.setup;
+_sfc_main$1x.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/Pages/Auth/Register.vue");
-  return _sfc_setup$1w ? _sfc_setup$1w(props, ctx) : void 0;
+  return _sfc_setup$1x ? _sfc_setup$1x(props, ctx) : void 0;
 };
-const Register = /* @__PURE__ */ _export_sfc(_sfc_main$1w, [["__scopeId", "data-v-f70b6cba"]]);
+const Register = /* @__PURE__ */ _export_sfc(_sfc_main$1x, [["__scopeId", "data-v-f70b6cba"]]);
 const __vite_glob_0_7 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: Register
 }, Symbol.toStringTag, { value: "Module" }));
-const _sfc_main$1v = /* @__PURE__ */ defineComponent({
-  ...{ layout: _sfc_main$1A },
+const _sfc_main$1w = /* @__PURE__ */ defineComponent({
+  ...{ layout: _sfc_main$1B },
   __name: "ResetPassword",
   __ssrInlineRender: true,
   props: {
@@ -7478,7 +7466,7 @@ const _sfc_main$1v = /* @__PURE__ */ defineComponent({
                         }, {
                           default: withCtx((_4, _push5, _parent5, _scopeId4) => {
                             if (_push5) {
-                              _push5(ssrRenderComponent(_sfc_main$1B, {
+                              _push5(ssrRenderComponent(_sfc_main$1C, {
                                 modelValue: unref(form).password,
                                 "onUpdate:modelValue": ($event) => unref(form).password = $event,
                                 error: unref(form).errors.password,
@@ -7492,7 +7480,7 @@ const _sfc_main$1v = /* @__PURE__ */ defineComponent({
                               }, null, _parent5, _scopeId4));
                             } else {
                               return [
-                                createVNode(_sfc_main$1B, {
+                                createVNode(_sfc_main$1C, {
                                   modelValue: unref(form).password,
                                   "onUpdate:modelValue": ($event) => unref(form).password = $event,
                                   error: unref(form).errors.password,
@@ -7516,7 +7504,7 @@ const _sfc_main$1v = /* @__PURE__ */ defineComponent({
                         }, {
                           default: withCtx((_4, _push5, _parent5, _scopeId4) => {
                             if (_push5) {
-                              _push5(ssrRenderComponent(_sfc_main$1B, {
+                              _push5(ssrRenderComponent(_sfc_main$1C, {
                                 modelValue: unref(form).password_confirmation,
                                 "onUpdate:modelValue": ($event) => unref(form).password_confirmation = $event,
                                 error: unref(form).errors.password_confirmation,
@@ -7530,7 +7518,7 @@ const _sfc_main$1v = /* @__PURE__ */ defineComponent({
                               }, null, _parent5, _scopeId4));
                             } else {
                               return [
-                                createVNode(_sfc_main$1B, {
+                                createVNode(_sfc_main$1C, {
                                   modelValue: unref(form).password_confirmation,
                                   "onUpdate:modelValue": ($event) => unref(form).password_confirmation = $event,
                                   error: unref(form).errors.password_confirmation,
@@ -7637,7 +7625,7 @@ const _sfc_main$1v = /* @__PURE__ */ defineComponent({
                                 class: "mb-3"
                               }, {
                                 default: withCtx(() => [
-                                  createVNode(_sfc_main$1B, {
+                                  createVNode(_sfc_main$1C, {
                                     modelValue: unref(form).password,
                                     "onUpdate:modelValue": ($event) => unref(form).password = $event,
                                     error: unref(form).errors.password,
@@ -7658,7 +7646,7 @@ const _sfc_main$1v = /* @__PURE__ */ defineComponent({
                                 class: "mb-4"
                               }, {
                                 default: withCtx(() => [
-                                  createVNode(_sfc_main$1B, {
+                                  createVNode(_sfc_main$1C, {
                                     modelValue: unref(form).password_confirmation,
                                     "onUpdate:modelValue": ($event) => unref(form).password_confirmation = $event,
                                     error: unref(form).errors.password_confirmation,
@@ -7759,7 +7747,7 @@ const _sfc_main$1v = /* @__PURE__ */ defineComponent({
                               class: "mb-3"
                             }, {
                               default: withCtx(() => [
-                                createVNode(_sfc_main$1B, {
+                                createVNode(_sfc_main$1C, {
                                   modelValue: unref(form).password,
                                   "onUpdate:modelValue": ($event) => unref(form).password = $event,
                                   error: unref(form).errors.password,
@@ -7780,7 +7768,7 @@ const _sfc_main$1v = /* @__PURE__ */ defineComponent({
                               class: "mb-4"
                             }, {
                               default: withCtx(() => [
-                                createVNode(_sfc_main$1B, {
+                                createVNode(_sfc_main$1C, {
                                   modelValue: unref(form).password_confirmation,
                                   "onUpdate:modelValue": ($event) => unref(form).password_confirmation = $event,
                                   error: unref(form).errors.password_confirmation,
@@ -7886,7 +7874,7 @@ const _sfc_main$1v = /* @__PURE__ */ defineComponent({
                             class: "mb-3"
                           }, {
                             default: withCtx(() => [
-                              createVNode(_sfc_main$1B, {
+                              createVNode(_sfc_main$1C, {
                                 modelValue: unref(form).password,
                                 "onUpdate:modelValue": ($event) => unref(form).password = $event,
                                 error: unref(form).errors.password,
@@ -7907,7 +7895,7 @@ const _sfc_main$1v = /* @__PURE__ */ defineComponent({
                             class: "mb-4"
                           }, {
                             default: withCtx(() => [
-                              createVNode(_sfc_main$1B, {
+                              createVNode(_sfc_main$1C, {
                                 modelValue: unref(form).password_confirmation,
                                 "onUpdate:modelValue": ($event) => unref(form).password_confirmation = $event,
                                 error: unref(form).errors.password_confirmation,
@@ -7962,19 +7950,19 @@ const _sfc_main$1v = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_setup$1v = _sfc_main$1v.setup;
-_sfc_main$1v.setup = (props, ctx) => {
+const _sfc_setup$1w = _sfc_main$1w.setup;
+_sfc_main$1w.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/Pages/Auth/ResetPassword.vue");
-  return _sfc_setup$1v ? _sfc_setup$1v(props, ctx) : void 0;
+  return _sfc_setup$1w ? _sfc_setup$1w(props, ctx) : void 0;
 };
-const ResetPassword = /* @__PURE__ */ _export_sfc(_sfc_main$1v, [["__scopeId", "data-v-661b442a"]]);
+const ResetPassword = /* @__PURE__ */ _export_sfc(_sfc_main$1w, [["__scopeId", "data-v-661b442a"]]);
 const __vite_glob_0_8 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: ResetPassword
 }, Symbol.toStringTag, { value: "Module" }));
-const _sfc_main$1u = /* @__PURE__ */ defineComponent({
-  ...{ layout: _sfc_main$1A },
+const _sfc_main$1v = /* @__PURE__ */ defineComponent({
+  ...{ layout: _sfc_main$1B },
   __name: "VerifyEmail",
   __ssrInlineRender: true,
   props: {
@@ -8334,18 +8322,18 @@ const _sfc_main$1u = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_setup$1u = _sfc_main$1u.setup;
-_sfc_main$1u.setup = (props, ctx) => {
+const _sfc_setup$1v = _sfc_main$1v.setup;
+_sfc_main$1v.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/Pages/Auth/VerifyEmail.vue");
-  return _sfc_setup$1u ? _sfc_setup$1u(props, ctx) : void 0;
+  return _sfc_setup$1v ? _sfc_setup$1v(props, ctx) : void 0;
 };
-const VerifyEmail = /* @__PURE__ */ _export_sfc(_sfc_main$1u, [["__scopeId", "data-v-cad9f4a2"]]);
+const VerifyEmail = /* @__PURE__ */ _export_sfc(_sfc_main$1v, [["__scopeId", "data-v-cad9f4a2"]]);
 const __vite_glob_0_9 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: VerifyEmail
 }, Symbol.toStringTag, { value: "Module" }));
-const _sfc_main$1t = /* @__PURE__ */ defineComponent({
+const _sfc_main$1u = /* @__PURE__ */ defineComponent({
   __name: "CustomTinySlider",
   __ssrInlineRender: true,
   props: {
@@ -8382,13 +8370,13 @@ const _sfc_main$1t = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_setup$1t = _sfc_main$1t.setup;
-_sfc_main$1t.setup = (props, ctx) => {
+const _sfc_setup$1u = _sfc_main$1u.setup;
+_sfc_main$1u.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/Components/CustomTinySlider.vue");
-  return _sfc_setup$1t ? _sfc_setup$1t(props, ctx) : void 0;
+  return _sfc_setup$1u ? _sfc_setup$1u(props, ctx) : void 0;
 };
-const _sfc_main$1s = /* @__PURE__ */ defineComponent({
+const _sfc_main$1t = /* @__PURE__ */ defineComponent({
   __name: "Index",
   __ssrInlineRender: true,
   setup(__props) {
@@ -8456,7 +8444,7 @@ const _sfc_main$1s = /* @__PURE__ */ defineComponent({
       const _component_b_col = BCol;
       const _component_font_awesome_icon = resolveComponent("font-awesome-icon");
       _push(`<!--[-->`);
-      _push(ssrRenderComponent(_sfc_main$1I, {
+      _push(ssrRenderComponent(_sfc_main$1J, {
         title: content.title
       }, {
         default: withCtx((_, _push2, _parent2, _scopeId) => {
@@ -9603,7 +9591,7 @@ const _sfc_main$1s = /* @__PURE__ */ defineComponent({
                     default: withCtx((_3, _push4, _parent4, _scopeId3) => {
                       if (_push4) {
                         _push4(`<div class="tiny-slider dots-primary"${_scopeId3}>`);
-                        _push4(ssrRenderComponent(_sfc_main$1t, {
+                        _push4(ssrRenderComponent(_sfc_main$1u, {
                           class: "tiny-slider-testSlide",
                           id: "tesimonial-slider",
                           settings: testimonialSliderSettings
@@ -9707,7 +9695,7 @@ const _sfc_main$1s = /* @__PURE__ */ defineComponent({
                       } else {
                         return [
                           createVNode("div", { class: "tiny-slider dots-primary" }, [
-                            createVNode(_sfc_main$1t, {
+                            createVNode(_sfc_main$1u, {
                               class: "tiny-slider-testSlide",
                               id: "tesimonial-slider",
                               settings: testimonialSliderSettings
@@ -9781,7 +9769,7 @@ const _sfc_main$1s = /* @__PURE__ */ defineComponent({
                     }, {
                       default: withCtx(() => [
                         createVNode("div", { class: "tiny-slider dots-primary" }, [
-                          createVNode(_sfc_main$1t, {
+                          createVNode(_sfc_main$1u, {
                             class: "tiny-slider-testSlide",
                             id: "tesimonial-slider",
                             settings: testimonialSliderSettings
@@ -9915,7 +9903,7 @@ const _sfc_main$1s = /* @__PURE__ */ defineComponent({
                     }, {
                       default: withCtx(() => [
                         createVNode("div", { class: "tiny-slider dots-primary" }, [
-                          createVNode(_sfc_main$1t, {
+                          createVNode(_sfc_main$1u, {
                             class: "tiny-slider-testSlide",
                             id: "tesimonial-slider",
                             settings: testimonialSliderSettings
@@ -9991,17 +9979,17 @@ const _sfc_main$1s = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_setup$1s = _sfc_main$1s.setup;
-_sfc_main$1s.setup = (props, ctx) => {
+const _sfc_setup$1t = _sfc_main$1t.setup;
+_sfc_main$1t.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/Pages/Certificate/Index.vue");
-  return _sfc_setup$1s ? _sfc_setup$1s(props, ctx) : void 0;
+  return _sfc_setup$1t ? _sfc_setup$1t(props, ctx) : void 0;
 };
 const __vite_glob_0_10 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  default: _sfc_main$1s
+  default: _sfc_main$1t
 }, Symbol.toStringTag, { value: "Module" }));
-const _sfc_main$1r = /* @__PURE__ */ defineComponent({
+const _sfc_main$1s = /* @__PURE__ */ defineComponent({
   __name: "CityListBox",
   __ssrInlineRender: true,
   props: {
@@ -10047,17 +10035,17 @@ const _sfc_main$1r = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_setup$1r = _sfc_main$1r.setup;
-_sfc_main$1r.setup = (props, ctx) => {
+const _sfc_setup$1s = _sfc_main$1s.setup;
+_sfc_main$1s.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/Pages/Certificate/Partials/CityListBox.vue");
-  return _sfc_setup$1r ? _sfc_setup$1r(props, ctx) : void 0;
+  return _sfc_setup$1s ? _sfc_setup$1s(props, ctx) : void 0;
 };
 const __vite_glob_0_13 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  default: _sfc_main$1r
+  default: _sfc_main$1s
 }, Symbol.toStringTag, { value: "Module" }));
-const _sfc_main$1q = /* @__PURE__ */ defineComponent({
+const _sfc_main$1r = /* @__PURE__ */ defineComponent({
   __name: "FormLater",
   __ssrInlineRender: true,
   props: {
@@ -13926,17 +13914,17 @@ const _sfc_main$1q = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_setup$1q = _sfc_main$1q.setup;
-_sfc_main$1q.setup = (props, ctx) => {
+const _sfc_setup$1r = _sfc_main$1r.setup;
+_sfc_main$1r.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/Pages/Certificate/Partials/FormLater.vue");
-  return _sfc_setup$1q ? _sfc_setup$1q(props, ctx) : void 0;
+  return _sfc_setup$1r ? _sfc_setup$1r(props, ctx) : void 0;
 };
 const __vite_glob_0_14 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  default: _sfc_main$1q
+  default: _sfc_main$1r
 }, Symbol.toStringTag, { value: "Module" }));
-const _sfc_main$1p = /* @__PURE__ */ defineComponent({
+const _sfc_main$1q = /* @__PURE__ */ defineComponent({
   __name: "Later",
   __ssrInlineRender: true,
   props: {
@@ -13958,7 +13946,7 @@ const _sfc_main$1p = /* @__PURE__ */ defineComponent({
       const _component_b_col = BCol;
       const _component_b_card_body = BCardBody;
       _push(`<!--[-->`);
-      _push(ssrRenderComponent(_sfc_main$1I, {
+      _push(ssrRenderComponent(_sfc_main$1J, {
         title: seoMeta.title
       }, {
         default: withCtx((_, _push2, _parent2, _scopeId) => {
@@ -14308,7 +14296,7 @@ const _sfc_main$1p = /* @__PURE__ */ defineComponent({
                     default: withCtx((_3, _push4, _parent4, _scopeId3) => {
                       if (_push4) {
                         _push4(`<div class="vstack gap-5"${_scopeId3}>`);
-                        _push4(ssrRenderComponent(_sfc_main$1q, {
+                        _push4(ssrRenderComponent(_sfc_main$1r, {
                           countries: __props.countries,
                           partners: __props.partners,
                           cities: __props.cities,
@@ -14319,7 +14307,7 @@ const _sfc_main$1p = /* @__PURE__ */ defineComponent({
                       } else {
                         return [
                           createVNode("div", { class: "vstack gap-5" }, [
-                            createVNode(_sfc_main$1q, {
+                            createVNode(_sfc_main$1r, {
                               countries: __props.countries,
                               partners: __props.partners,
                               cities: __props.cities,
@@ -14348,10 +14336,10 @@ const _sfc_main$1p = /* @__PURE__ */ defineComponent({
                           }),
                           default: withCtx((_4, _push5, _parent5, _scopeId4) => {
                             if (_push5) {
-                              _push5(ssrRenderComponent(_sfc_main$1r, { cities: __props.cities }, null, _parent5, _scopeId4));
+                              _push5(ssrRenderComponent(_sfc_main$1s, { cities: __props.cities }, null, _parent5, _scopeId4));
                             } else {
                               return [
-                                createVNode(_sfc_main$1r, { cities: __props.cities }, null, 8, ["cities"])
+                                createVNode(_sfc_main$1s, { cities: __props.cities }, null, 8, ["cities"])
                               ];
                             }
                           }),
@@ -14364,7 +14352,7 @@ const _sfc_main$1p = /* @__PURE__ */ defineComponent({
                               createVNode("div", null, "Chargement...")
                             ]),
                             default: withCtx(() => [
-                              createVNode(_sfc_main$1r, { cities: __props.cities }, null, 8, ["cities"])
+                              createVNode(_sfc_main$1s, { cities: __props.cities }, null, 8, ["cities"])
                             ]),
                             _: 1
                           })
@@ -14379,7 +14367,7 @@ const _sfc_main$1p = /* @__PURE__ */ defineComponent({
                     createVNode(_component_b_col, { xl: "8" }, {
                       default: withCtx(() => [
                         createVNode("div", { class: "vstack gap-5" }, [
-                          createVNode(_sfc_main$1q, {
+                          createVNode(_sfc_main$1r, {
                             countries: __props.countries,
                             partners: __props.partners,
                             cities: __props.cities,
@@ -14398,7 +14386,7 @@ const _sfc_main$1p = /* @__PURE__ */ defineComponent({
                               createVNode("div", null, "Chargement...")
                             ]),
                             default: withCtx(() => [
-                              createVNode(_sfc_main$1r, { cities: __props.cities }, null, 8, ["cities"])
+                              createVNode(_sfc_main$1s, { cities: __props.cities }, null, 8, ["cities"])
                             ]),
                             _: 1
                           })
@@ -14418,7 +14406,7 @@ const _sfc_main$1p = /* @__PURE__ */ defineComponent({
                   createVNode(_component_b_col, { xl: "8" }, {
                     default: withCtx(() => [
                       createVNode("div", { class: "vstack gap-5" }, [
-                        createVNode(_sfc_main$1q, {
+                        createVNode(_sfc_main$1r, {
                           countries: __props.countries,
                           partners: __props.partners,
                           cities: __props.cities,
@@ -14437,7 +14425,7 @@ const _sfc_main$1p = /* @__PURE__ */ defineComponent({
                             createVNode("div", null, "Chargement...")
                           ]),
                           default: withCtx(() => [
-                            createVNode(_sfc_main$1r, { cities: __props.cities }, null, 8, ["cities"])
+                            createVNode(_sfc_main$1s, { cities: __props.cities }, null, 8, ["cities"])
                           ]),
                           _: 1
                         })
@@ -14457,17 +14445,17 @@ const _sfc_main$1p = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_setup$1p = _sfc_main$1p.setup;
-_sfc_main$1p.setup = (props, ctx) => {
+const _sfc_setup$1q = _sfc_main$1q.setup;
+_sfc_main$1q.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/Pages/Certificate/Later.vue");
-  return _sfc_setup$1p ? _sfc_setup$1p(props, ctx) : void 0;
+  return _sfc_setup$1q ? _sfc_setup$1q(props, ctx) : void 0;
 };
 const __vite_glob_0_11 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  default: _sfc_main$1p
+  default: _sfc_main$1q
 }, Symbol.toStringTag, { value: "Module" }));
-const _sfc_main$1o = /* @__PURE__ */ defineComponent({
+const _sfc_main$1p = /* @__PURE__ */ defineComponent({
   __name: "Option",
   __ssrInlineRender: true,
   setup(__props) {
@@ -14497,7 +14485,7 @@ const _sfc_main$1o = /* @__PURE__ */ defineComponent({
       const _component_b_col = BCol;
       const _component_font_awesome_icon = resolveComponent("font-awesome-icon");
       _push(`<!--[-->`);
-      _push(ssrRenderComponent(_sfc_main$1I, { title: "Demande d'attestation de logement" }, null, _parent));
+      _push(ssrRenderComponent(_sfc_main$1J, { title: "Demande d'attestation de logement" }, null, _parent));
       _push(`<div class="bg-light py-24" styles="padding: 100px 0">`);
       _push(ssrRenderComponent(_component_b_container, null, {
         default: withCtx((_, _push2, _parent2, _scopeId) => {
@@ -14651,17 +14639,17 @@ const _sfc_main$1o = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_setup$1o = _sfc_main$1o.setup;
-_sfc_main$1o.setup = (props, ctx) => {
+const _sfc_setup$1p = _sfc_main$1p.setup;
+_sfc_main$1p.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/Pages/Certificate/Option.vue");
-  return _sfc_setup$1o ? _sfc_setup$1o(props, ctx) : void 0;
+  return _sfc_setup$1p ? _sfc_setup$1p(props, ctx) : void 0;
 };
 const __vite_glob_0_12 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  default: _sfc_main$1o
+  default: _sfc_main$1p
 }, Symbol.toStringTag, { value: "Module" }));
-const _sfc_main$1n = /* @__PURE__ */ defineComponent({
+const _sfc_main$1o = /* @__PURE__ */ defineComponent({
   __name: "FormPay",
   __ssrInlineRender: true,
   props: {
@@ -18659,18 +18647,18 @@ const _sfc_main$1n = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_setup$1n = _sfc_main$1n.setup;
-_sfc_main$1n.setup = (props, ctx) => {
+const _sfc_setup$1o = _sfc_main$1o.setup;
+_sfc_main$1o.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/Pages/Certificate/Partials/FormPay.vue");
-  return _sfc_setup$1n ? _sfc_setup$1n(props, ctx) : void 0;
+  return _sfc_setup$1o ? _sfc_setup$1o(props, ctx) : void 0;
 };
-const FormPay = /* @__PURE__ */ _export_sfc(_sfc_main$1n, [["__scopeId", "data-v-478570fd"]]);
+const FormPay = /* @__PURE__ */ _export_sfc(_sfc_main$1o, [["__scopeId", "data-v-478570fd"]]);
 const __vite_glob_0_15 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: FormPay
 }, Symbol.toStringTag, { value: "Module" }));
-const _sfc_main$1m = /* @__PURE__ */ defineComponent({
+const _sfc_main$1n = /* @__PURE__ */ defineComponent({
   __name: "Pay",
   __ssrInlineRender: true,
   props: {
@@ -18692,7 +18680,7 @@ const _sfc_main$1m = /* @__PURE__ */ defineComponent({
       const _component_b_col = BCol;
       const _component_b_card_body = BCardBody;
       _push(`<!--[-->`);
-      _push(ssrRenderComponent(_sfc_main$1I, {
+      _push(ssrRenderComponent(_sfc_main$1J, {
         title: seoMeta.title
       }, {
         default: withCtx((_, _push2, _parent2, _scopeId) => {
@@ -19070,10 +19058,10 @@ const _sfc_main$1m = /* @__PURE__ */ defineComponent({
                   _push3(ssrRenderComponent(_component_b_row, { class: "g-4" }, {
                     default: withCtx((_3, _push4, _parent4, _scopeId3) => {
                       if (_push4) {
-                        _push4(ssrRenderComponent(_sfc_main$1r, { cities: __props.cities }, null, _parent4, _scopeId3));
+                        _push4(ssrRenderComponent(_sfc_main$1s, { cities: __props.cities }, null, _parent4, _scopeId3));
                       } else {
                         return [
-                          createVNode(_sfc_main$1r, { cities: __props.cities }, null, 8, ["cities"])
+                          createVNode(_sfc_main$1s, { cities: __props.cities }, null, 8, ["cities"])
                         ];
                       }
                     }),
@@ -19099,7 +19087,7 @@ const _sfc_main$1m = /* @__PURE__ */ defineComponent({
                     createVNode("aside", { class: "col-xl-4" }, [
                       createVNode(_component_b_row, { class: "g-4" }, {
                         default: withCtx(() => [
-                          createVNode(_sfc_main$1r, { cities: __props.cities }, null, 8, ["cities"])
+                          createVNode(_sfc_main$1s, { cities: __props.cities }, null, 8, ["cities"])
                         ]),
                         _: 1
                       })
@@ -19130,7 +19118,7 @@ const _sfc_main$1m = /* @__PURE__ */ defineComponent({
                   createVNode("aside", { class: "col-xl-4" }, [
                     createVNode(_component_b_row, { class: "g-4" }, {
                       default: withCtx(() => [
-                        createVNode(_sfc_main$1r, { cities: __props.cities }, null, 8, ["cities"])
+                        createVNode(_sfc_main$1s, { cities: __props.cities }, null, 8, ["cities"])
                       ]),
                       _: 1
                     })
@@ -19147,15 +19135,15 @@ const _sfc_main$1m = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_setup$1m = _sfc_main$1m.setup;
-_sfc_main$1m.setup = (props, ctx) => {
+const _sfc_setup$1n = _sfc_main$1n.setup;
+_sfc_main$1n.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/Pages/Certificate/Pay.vue");
-  return _sfc_setup$1m ? _sfc_setup$1m(props, ctx) : void 0;
+  return _sfc_setup$1n ? _sfc_setup$1n(props, ctx) : void 0;
 };
 const __vite_glob_0_16 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  default: _sfc_main$1m
+  default: _sfc_main$1n
 }, Symbol.toStringTag, { value: "Module" }));
 const { useRegle: useCustomRegle } = defineRegleConfig({
   rules: () => {
@@ -19292,7 +19280,7 @@ const useCustomSearchStore = defineStore("customSearchStore", () => {
     validateForm
   };
 });
-const _sfc_main$1l = /* @__PURE__ */ defineComponent({
+const _sfc_main$1m = /* @__PURE__ */ defineComponent({
   __name: "PartnerCoupon",
   __ssrInlineRender: true,
   setup(__props) {
@@ -19423,14 +19411,14 @@ const _sfc_main$1l = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_setup$1l = _sfc_main$1l.setup;
-_sfc_main$1l.setup = (props, ctx) => {
+const _sfc_setup$1m = _sfc_main$1m.setup;
+_sfc_main$1m.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/Components/PartnerCoupon.vue");
-  return _sfc_setup$1l ? _sfc_setup$1l(props, ctx) : void 0;
+  return _sfc_setup$1m ? _sfc_setup$1m(props, ctx) : void 0;
 };
-const PartnerCoupon = /* @__PURE__ */ _export_sfc(_sfc_main$1l, [["__scopeId", "data-v-9107b804"]]);
-const _sfc_main$1k = /* @__PURE__ */ defineComponent({
+const PartnerCoupon = /* @__PURE__ */ _export_sfc(_sfc_main$1m, [["__scopeId", "data-v-9107b804"]]);
+const _sfc_main$1l = /* @__PURE__ */ defineComponent({
   __name: "CustomerSearchInfo",
   __ssrInlineRender: true,
   props: {
@@ -20446,17 +20434,17 @@ const _sfc_main$1k = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_setup$1k = _sfc_main$1k.setup;
-_sfc_main$1k.setup = (props, ctx) => {
+const _sfc_setup$1l = _sfc_main$1l.setup;
+_sfc_main$1l.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/Pages/CustomSearch/components/CustomerSearchInfo.vue");
-  return _sfc_setup$1k ? _sfc_setup$1k(props, ctx) : void 0;
+  return _sfc_setup$1l ? _sfc_setup$1l(props, ctx) : void 0;
 };
 const __vite_glob_0_20 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  default: _sfc_main$1k
+  default: _sfc_main$1l
 }, Symbol.toStringTag, { value: "Module" }));
-const _sfc_main$1j = /* @__PURE__ */ defineComponent({
+const _sfc_main$1k = /* @__PURE__ */ defineComponent({
   __name: "CustomSearchPersonalInfo",
   __ssrInlineRender: true,
   props: {
@@ -21689,17 +21677,17 @@ const _sfc_main$1j = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_setup$1j = _sfc_main$1j.setup;
-_sfc_main$1j.setup = (props, ctx) => {
+const _sfc_setup$1k = _sfc_main$1k.setup;
+_sfc_main$1k.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/Pages/CustomSearch/components/CustomSearchPersonalInfo.vue");
-  return _sfc_setup$1j ? _sfc_setup$1j(props, ctx) : void 0;
+  return _sfc_setup$1k ? _sfc_setup$1k(props, ctx) : void 0;
 };
 const __vite_glob_0_18 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  default: _sfc_main$1j
+  default: _sfc_main$1k
 }, Symbol.toStringTag, { value: "Module" }));
-const _sfc_main$1i = /* @__PURE__ */ defineComponent({
+const _sfc_main$1j = /* @__PURE__ */ defineComponent({
   __name: "CustomSearchSelectBar",
   __ssrInlineRender: true,
   props: {
@@ -22954,18 +22942,18 @@ const _sfc_main$1i = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_setup$1i = _sfc_main$1i.setup;
-_sfc_main$1i.setup = (props, ctx) => {
+const _sfc_setup$1j = _sfc_main$1j.setup;
+_sfc_main$1j.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/Pages/CustomSearch/components/CustomSearchSelectBar.vue");
-  return _sfc_setup$1i ? _sfc_setup$1i(props, ctx) : void 0;
+  return _sfc_setup$1j ? _sfc_setup$1j(props, ctx) : void 0;
 };
-const CustomSearchSelectBar = /* @__PURE__ */ _export_sfc(_sfc_main$1i, [["__scopeId", "data-v-062d78fe"]]);
+const CustomSearchSelectBar = /* @__PURE__ */ _export_sfc(_sfc_main$1j, [["__scopeId", "data-v-062d78fe"]]);
 const __vite_glob_0_19 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: CustomSearchSelectBar
 }, Symbol.toStringTag, { value: "Module" }));
-const _sfc_main$1h = /* @__PURE__ */ defineComponent({
+const _sfc_main$1i = /* @__PURE__ */ defineComponent({
   __name: "Index",
   __ssrInlineRender: true,
   props: {
@@ -23092,7 +23080,7 @@ const _sfc_main$1h = /* @__PURE__ */ defineComponent({
       const _component_Message = __unplugin_components_7;
       const _component_b_button = BButton;
       _push(`<!--[-->`);
-      _push(ssrRenderComponent(_sfc_main$1I, {
+      _push(ssrRenderComponent(_sfc_main$1J, {
         title: content.title
       }, {
         default: withCtx((_, _push2, _parent2, _scopeId) => {
@@ -23314,13 +23302,13 @@ const _sfc_main$1h = /* @__PURE__ */ defineComponent({
               layouts: __props.layouts,
               cities: __props.cities
             }, null, _parent2, _scopeId));
-            _push2(ssrRenderComponent(_sfc_main$1k, {
+            _push2(ssrRenderComponent(_sfc_main$1l, {
               partners: __props.partners,
               rentalDeposits: __props.rentalDeposits,
               countries: __props.countries,
               class: "mb-4"
             }, null, _parent2, _scopeId));
-            _push2(ssrRenderComponent(_sfc_main$1j, {
+            _push2(ssrRenderComponent(_sfc_main$1k, {
               user: __props.user,
               countries: __props.countries,
               partners: __props.partners,
@@ -23673,13 +23661,13 @@ const _sfc_main$1h = /* @__PURE__ */ defineComponent({
                 layouts: __props.layouts,
                 cities: __props.cities
               }, null, 8, ["types", "categories", "layouts", "cities"]),
-              createVNode(_sfc_main$1k, {
+              createVNode(_sfc_main$1l, {
                 partners: __props.partners,
                 rentalDeposits: __props.rentalDeposits,
                 countries: __props.countries,
                 class: "mb-4"
               }, null, 8, ["partners", "rentalDeposits", "countries"]),
-              createVNode(_sfc_main$1j, {
+              createVNode(_sfc_main$1k, {
                 user: __props.user,
                 countries: __props.countries,
                 partners: __props.partners,
@@ -23786,18 +23774,18 @@ const _sfc_main$1h = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_setup$1h = _sfc_main$1h.setup;
-_sfc_main$1h.setup = (props, ctx) => {
+const _sfc_setup$1i = _sfc_main$1i.setup;
+_sfc_main$1i.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/Pages/CustomSearch/Index.vue");
-  return _sfc_setup$1h ? _sfc_setup$1h(props, ctx) : void 0;
+  return _sfc_setup$1i ? _sfc_setup$1i(props, ctx) : void 0;
 };
-const Index$5 = /* @__PURE__ */ _export_sfc(_sfc_main$1h, [["__scopeId", "data-v-df2e84a7"]]);
+const Index$5 = /* @__PURE__ */ _export_sfc(_sfc_main$1i, [["__scopeId", "data-v-df2e84a7"]]);
 const __vite_glob_0_17 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: Index$5
 }, Symbol.toStringTag, { value: "Module" }));
-const _sfc_main$1g = /* @__PURE__ */ defineComponent({
+const _sfc_main$1h = /* @__PURE__ */ defineComponent({
   __name: "CustomDropDown",
   __ssrInlineRender: true,
   props: {
@@ -23831,13 +23819,13 @@ const _sfc_main$1g = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_setup$1g = _sfc_main$1g.setup;
-_sfc_main$1g.setup = (props, ctx) => {
+const _sfc_setup$1h = _sfc_main$1h.setup;
+_sfc_main$1h.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/Components/CustomDropDown.vue");
-  return _sfc_setup$1g ? _sfc_setup$1g(props, ctx) : void 0;
+  return _sfc_setup$1h ? _sfc_setup$1h(props, ctx) : void 0;
 };
-const _sfc_main$1f = /* @__PURE__ */ defineComponent({
+const _sfc_main$1g = /* @__PURE__ */ defineComponent({
   __name: "UserMenu",
   __ssrInlineRender: true,
   setup(__props) {
@@ -23858,13 +23846,13 @@ const _sfc_main$1f = /* @__PURE__ */ defineComponent({
     const useLayout = useLayoutStore();
     return (_ctx, _push, _parent, _attrs) => {
       const _directive_b_tooltip = vBTooltip;
-      _push(ssrRenderComponent(_sfc_main$1g, mergeProps({
+      _push(ssrRenderComponent(_sfc_main$1h, mergeProps({
         is: "li",
         "custom-class": "nav-item ms-3"
       }, _attrs), {
         default: withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
-            _push2(`<a class="avatar avatar-sm p-0" href="#" role="button" data-bs-auto-close="outside" data-bs-display="static" data-bs-toggle="dropdown" aria-expanded="false"${_scopeId}><img class="avatar-img rounded-2"${ssrRenderAttr("src", _ctx.$page.props.auth?.user.photo)} alt="avatar"${_scopeId}></a><ul class="dropdown-menu dropdown-animation dropdown-menu-end pt-3 shadow" aria-labelledby="profileDropdown"${_scopeId}><li class="px-2 pb-2"${_scopeId}><div class="d-flex align-items-center"${_scopeId}><div class="avatar me-3"${_scopeId}><img class="avatar-img rounded-circle shadow"${ssrRenderAttr("src", _ctx.$page.props.auth?.user.photo)} alt="avatar"${_scopeId}></div><div${_scopeId}><a class="h6 mt-sm-0 mt-2" href="#"${_scopeId}>${ssrInterpolate(_ctx.$page.props.auth?.user.name)}</a><p class="small m-0"${_scopeId}>${ssrInterpolate(_ctx.$page.props.auth?.user.email)}</p></div></div></li><li${_scopeId}><hr class="dropdown-divider"${_scopeId}></li><li${_scopeId}>`);
+            _push2(`<a class="avatar avatar-sm p-0" href="#" role="button" data-bs-auto-close="outside" data-bs-display="static" data-bs-toggle="dropdown" aria-expanded="false"${_scopeId}><img class="avatar-img rounded-2"${ssrRenderAttr("src", _ctx.$page.props.auth?.user.photo || `https://ui-avatars.com/api/?name=${encodeURIComponent(_ctx.$page.props.auth?.user.name || "U")}&background=1e3a8a&color=fff&size=128`)} alt="avatar"${_scopeId}></a><ul class="dropdown-menu dropdown-animation dropdown-menu-end pt-3 shadow" aria-labelledby="profileDropdown"${_scopeId}><li class="px-2 pb-2"${_scopeId}><div class="d-flex align-items-center"${_scopeId}><div class="avatar me-3"${_scopeId}><img class="avatar-img rounded-circle shadow"${ssrRenderAttr("src", _ctx.$page.props.auth?.user.photo)} alt="avatar"${_scopeId}></div><div${_scopeId}><a class="h6 mt-sm-0 mt-2" href="#"${_scopeId}>${ssrInterpolate(_ctx.$page.props.auth?.user.name)}</a><p class="small m-0"${_scopeId}>${ssrInterpolate(_ctx.$page.props.auth?.user.email)}</p></div></div></li><li${_scopeId}><hr class="dropdown-divider"${_scopeId}></li><li${_scopeId}>`);
             _push2(ssrRenderComponent(unref(Link), {
               href: _ctx.route("dashboard"),
               class: "dropdown-item"
@@ -23964,7 +23952,7 @@ const _sfc_main$1f = /* @__PURE__ */ defineComponent({
               }, [
                 createVNode("img", {
                   class: "avatar-img rounded-2",
-                  src: _ctx.$page.props.auth?.user.photo,
+                  src: _ctx.$page.props.auth?.user.photo || `https://ui-avatars.com/api/?name=${encodeURIComponent(_ctx.$page.props.auth?.user.name || "U")}&background=1e3a8a&color=fff&size=128`,
                   alt: "avatar"
                 }, null, 8, ["src"])
               ]),
@@ -24079,13 +24067,13 @@ const _sfc_main$1f = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_setup$1f = _sfc_main$1f.setup;
-_sfc_main$1f.setup = (props, ctx) => {
+const _sfc_setup$1g = _sfc_main$1g.setup;
+_sfc_main$1g.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/Layouts/Partials/UserMenu.vue");
-  return _sfc_setup$1f ? _sfc_setup$1f(props, ctx) : void 0;
+  return _sfc_setup$1g ? _sfc_setup$1g(props, ctx) : void 0;
 };
-const _sfc_main$1e = /* @__PURE__ */ defineComponent({
+const _sfc_main$1f = /* @__PURE__ */ defineComponent({
   __name: "Logo",
   __ssrInlineRender: true,
   props: {
@@ -24133,14 +24121,14 @@ const _sfc_main$1e = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_setup$1e = _sfc_main$1e.setup;
-_sfc_main$1e.setup = (props, ctx) => {
+const _sfc_setup$1f = _sfc_main$1f.setup;
+_sfc_main$1f.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/Components/Logo.vue");
-  return _sfc_setup$1e ? _sfc_setup$1e(props, ctx) : void 0;
+  return _sfc_setup$1f ? _sfc_setup$1f(props, ctx) : void 0;
 };
-const Logo = /* @__PURE__ */ _export_sfc(_sfc_main$1e, [["__scopeId", "data-v-a12b9f98"]]);
-const _sfc_main$1d = /* @__PURE__ */ defineComponent({
+const Logo = /* @__PURE__ */ _export_sfc(_sfc_main$1f, [["__scopeId", "data-v-a12b9f98"]]);
+const _sfc_main$1e = /* @__PURE__ */ defineComponent({
   __name: "Dashboard",
   __ssrInlineRender: true,
   props: {
@@ -24282,7 +24270,7 @@ const _sfc_main$1d = /* @__PURE__ */ defineComponent({
               }),
               _: 1
             }, _parent2, _scopeId));
-            _push2(ssrRenderComponent(_sfc_main$1f, null, null, _parent2, _scopeId));
+            _push2(ssrRenderComponent(_sfc_main$1g, null, null, _parent2, _scopeId));
             _push2(`</div>`);
           } else {
             return [
@@ -24299,7 +24287,7 @@ const _sfc_main$1d = /* @__PURE__ */ defineComponent({
                   ]),
                   _: 1
                 }),
-                createVNode(_sfc_main$1f)
+                createVNode(_sfc_main$1g)
               ])
             ];
           }
@@ -25686,18 +25674,18 @@ const _sfc_main$1d = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_setup$1d = _sfc_main$1d.setup;
-_sfc_main$1d.setup = (props, ctx) => {
+const _sfc_setup$1e = _sfc_main$1e.setup;
+_sfc_main$1e.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/Pages/Dashboard.vue");
-  return _sfc_setup$1d ? _sfc_setup$1d(props, ctx) : void 0;
+  return _sfc_setup$1e ? _sfc_setup$1e(props, ctx) : void 0;
 };
-const Dashboard = /* @__PURE__ */ _export_sfc(_sfc_main$1d, [["__scopeId", "data-v-2d980f60"]]);
+const Dashboard = /* @__PURE__ */ _export_sfc(_sfc_main$1e, [["__scopeId", "data-v-2d980f60"]]);
 const __vite_glob_0_21 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: Dashboard
 }, Symbol.toStringTag, { value: "Module" }));
-const _sfc_main$1c = /* @__PURE__ */ defineComponent({
+const _sfc_main$1d = /* @__PURE__ */ defineComponent({
   __name: "LogoBox",
   __ssrInlineRender: true,
   props: {
@@ -25753,11 +25741,11 @@ const _sfc_main$1c = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_setup$1c = _sfc_main$1c.setup;
-_sfc_main$1c.setup = (props, ctx) => {
+const _sfc_setup$1d = _sfc_main$1d.setup;
+_sfc_main$1d.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/Components/LogoBox.vue");
-  return _sfc_setup$1c ? _sfc_setup$1c(props, ctx) : void 0;
+  return _sfc_setup$1d ? _sfc_setup$1d(props, ctx) : void 0;
 };
 const bookingHomeMenuItems = [
   {
@@ -25801,7 +25789,7 @@ const APP_MENU_ITEMS = [
 const getAppMenuItems = () => {
   return APP_MENU_ITEMS;
 };
-const _sfc_main$1b = /* @__PURE__ */ defineComponent({
+const _sfc_main$1c = /* @__PURE__ */ defineComponent({
   __name: "MenuItemLink",
   __ssrInlineRender: true,
   props: {
@@ -25830,13 +25818,13 @@ const _sfc_main$1b = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_setup$1b = _sfc_main$1b.setup;
-_sfc_main$1b.setup = (props, ctx) => {
+const _sfc_setup$1c = _sfc_main$1c.setup;
+_sfc_main$1c.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/Components/Navbar/MenuItemLink.vue");
-  return _sfc_setup$1b ? _sfc_setup$1b(props, ctx) : void 0;
+  return _sfc_setup$1c ? _sfc_setup$1c(props, ctx) : void 0;
 };
-const _sfc_main$1a = /* @__PURE__ */ defineComponent({
+const _sfc_main$1b = /* @__PURE__ */ defineComponent({
   __name: "MenuItem",
   __ssrInlineRender: true,
   props: {
@@ -25848,7 +25836,7 @@ const _sfc_main$1a = /* @__PURE__ */ defineComponent({
   setup(__props) {
     return (_ctx, _push, _parent, _attrs) => {
       _push(`<li${ssrRenderAttrs(_attrs)}>`);
-      _push(ssrRenderComponent(_sfc_main$1b, {
+      _push(ssrRenderComponent(_sfc_main$1c, {
         item: __props.item,
         "link-class": __props.linkClass
       }, null, _parent));
@@ -25856,13 +25844,13 @@ const _sfc_main$1a = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_setup$1a = _sfc_main$1a.setup;
-_sfc_main$1a.setup = (props, ctx) => {
+const _sfc_setup$1b = _sfc_main$1b.setup;
+_sfc_main$1b.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/Components/Navbar/MenuItem.vue");
-  return _sfc_setup$1a ? _sfc_setup$1a(props, ctx) : void 0;
+  return _sfc_setup$1b ? _sfc_setup$1b(props, ctx) : void 0;
 };
-const _sfc_main$19 = /* @__PURE__ */ defineComponent({
+const _sfc_main$1a = /* @__PURE__ */ defineComponent({
   __name: "MenuItemWithChildren",
   __ssrInlineRender: true,
   props: {
@@ -25903,7 +25891,7 @@ const _sfc_main$19 = /* @__PURE__ */ defineComponent({
             "link-class": "dropdown-item dropdown-toggle arrow-none d-flex align-items-center justify-content-between"
           }, null, _parent));
         } else {
-          _push(ssrRenderComponent(_sfc_main$1a, {
+          _push(ssrRenderComponent(_sfc_main$1b, {
             item: child,
             "link-class": "py-2"
           }, null, _parent));
@@ -25914,13 +25902,13 @@ const _sfc_main$19 = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_setup$19 = _sfc_main$19.setup;
-_sfc_main$19.setup = (props, ctx) => {
+const _sfc_setup$1a = _sfc_main$1a.setup;
+_sfc_main$1a.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/Components/Navbar/MenuItemWithChildren.vue");
-  return _sfc_setup$19 ? _sfc_setup$19(props, ctx) : void 0;
+  return _sfc_setup$1a ? _sfc_setup$1a(props, ctx) : void 0;
 };
-const _sfc_main$18 = /* @__PURE__ */ defineComponent({
+const _sfc_main$19 = /* @__PURE__ */ defineComponent({
   __name: "AppMenu",
   __ssrInlineRender: true,
   props: {
@@ -26102,14 +26090,14 @@ const _sfc_main$18 = /* @__PURE__ */ defineComponent({
             ssrRenderList(unref(menuItems), (item) => {
               _push2(`<!--[-->`);
               if (item.children) {
-                _push2(ssrRenderComponent(_sfc_main$19, {
+                _push2(ssrRenderComponent(_sfc_main$1a, {
                   item,
                   level: 0,
                   "item-class": "nav-item",
                   "link-class": "nav-link arrow-none d-flex align-items-center gap-1 justify-content-between"
                 }, null, _parent2, _scopeId));
               } else {
-                _push2(ssrRenderComponent(_sfc_main$1a, {
+                _push2(ssrRenderComponent(_sfc_main$1b, {
                   item,
                   "link-class": "nav-link"
                 }, null, _parent2, _scopeId));
@@ -26192,13 +26180,13 @@ const _sfc_main$18 = /* @__PURE__ */ defineComponent({
                   return openBlock(), createBlock(Fragment, {
                     key: item.key
                   }, [
-                    item.children ? (openBlock(), createBlock(_sfc_main$19, {
+                    item.children ? (openBlock(), createBlock(_sfc_main$1a, {
                       key: 0,
                       item,
                       level: 0,
                       "item-class": "nav-item",
                       "link-class": "nav-link arrow-none d-flex align-items-center gap-1 justify-content-between"
-                    }, null, 8, ["item"])) : (openBlock(), createBlock(_sfc_main$1a, {
+                    }, null, 8, ["item"])) : (openBlock(), createBlock(_sfc_main$1b, {
                       key: 1,
                       item,
                       "link-class": "nav-link"
@@ -26229,13 +26217,13 @@ const _sfc_main$18 = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_setup$18 = _sfc_main$18.setup;
-_sfc_main$18.setup = (props, ctx) => {
+const _sfc_setup$19 = _sfc_main$19.setup;
+_sfc_main$19.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/Components/Navbar/AppMenu.vue");
-  return _sfc_setup$18 ? _sfc_setup$18(props, ctx) : void 0;
+  return _sfc_setup$19 ? _sfc_setup$19(props, ctx) : void 0;
 };
-const _sfc_main$17 = /* @__PURE__ */ defineComponent({
+const _sfc_main$18 = /* @__PURE__ */ defineComponent({
   __name: "MobileMenuItemLink",
   __ssrInlineRender: true,
   props: {
@@ -26264,13 +26252,13 @@ const _sfc_main$17 = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_setup$17 = _sfc_main$17.setup;
-_sfc_main$17.setup = (props, ctx) => {
+const _sfc_setup$18 = _sfc_main$18.setup;
+_sfc_main$18.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/Components/Navbar/mobile-menu/MobileMenuItemLink.vue");
-  return _sfc_setup$17 ? _sfc_setup$17(props, ctx) : void 0;
+  return _sfc_setup$18 ? _sfc_setup$18(props, ctx) : void 0;
 };
-const _sfc_main$16 = /* @__PURE__ */ defineComponent({
+const _sfc_main$17 = /* @__PURE__ */ defineComponent({
   __name: "MobileMenuItem",
   __ssrInlineRender: true,
   props: {
@@ -26282,7 +26270,7 @@ const _sfc_main$16 = /* @__PURE__ */ defineComponent({
   setup(__props) {
     return (_ctx, _push, _parent, _attrs) => {
       _push(`<li${ssrRenderAttrs(mergeProps({ class: __props.itemClass }, _attrs))}>`);
-      _push(ssrRenderComponent(_sfc_main$17, {
+      _push(ssrRenderComponent(_sfc_main$18, {
         item: __props.item,
         "link-class": __props.linkClass
       }, null, _parent));
@@ -26290,13 +26278,13 @@ const _sfc_main$16 = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_setup$16 = _sfc_main$16.setup;
-_sfc_main$16.setup = (props, ctx) => {
+const _sfc_setup$17 = _sfc_main$17.setup;
+_sfc_main$17.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/Components/Navbar/mobile-menu/MobileMenuItem.vue");
-  return _sfc_setup$16 ? _sfc_setup$16(props, ctx) : void 0;
+  return _sfc_setup$17 ? _sfc_setup$17(props, ctx) : void 0;
 };
-const _sfc_main$15 = /* @__PURE__ */ defineComponent({
+const _sfc_main$16 = /* @__PURE__ */ defineComponent({
   __name: "MobileMenuItemWithChildren",
   __ssrInlineRender: true,
   props: {
@@ -26351,7 +26339,7 @@ const _sfc_main$15 = /* @__PURE__ */ defineComponent({
                   "link-class": "py-2"
                 }, null, _parent2, _scopeId));
               } else {
-                _push2(ssrRenderComponent(_sfc_main$16, {
+                _push2(ssrRenderComponent(_sfc_main$17, {
                   item: child,
                   "item-class": __props.itemClass,
                   class: "mx-3",
@@ -26373,7 +26361,7 @@ const _sfc_main$15 = /* @__PURE__ */ defineComponent({
                     level: __props.level + 1,
                     "item-class": "mx-3",
                     "link-class": "py-2"
-                  }, null, 8, ["item", "level"])) : (openBlock(), createBlock(_sfc_main$16, {
+                  }, null, 8, ["item", "level"])) : (openBlock(), createBlock(_sfc_main$17, {
                     key: 1,
                     item: child,
                     "item-class": __props.itemClass,
@@ -26391,13 +26379,13 @@ const _sfc_main$15 = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_setup$15 = _sfc_main$15.setup;
-_sfc_main$15.setup = (props, ctx) => {
+const _sfc_setup$16 = _sfc_main$16.setup;
+_sfc_main$16.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/Components/Navbar/mobile-menu/MobileMenuItemWithChildren.vue");
-  return _sfc_setup$15 ? _sfc_setup$15(props, ctx) : void 0;
+  return _sfc_setup$16 ? _sfc_setup$16(props, ctx) : void 0;
 };
-const _sfc_main$14 = /* @__PURE__ */ defineComponent({
+const _sfc_main$15 = /* @__PURE__ */ defineComponent({
   __name: "MobileMenu",
   __ssrInlineRender: true,
   props: {
@@ -26569,12 +26557,12 @@ const _sfc_main$14 = /* @__PURE__ */ defineComponent({
                   ssrRenderList(unref(menuItems), (item) => {
                     _push3(`<!--[-->`);
                     if (item.children) {
-                      _push3(ssrRenderComponent(_sfc_main$15, {
+                      _push3(ssrRenderComponent(_sfc_main$16, {
                         item,
                         level: 1
                       }, null, _parent3, _scopeId2));
                     } else {
-                      _push3(ssrRenderComponent(_sfc_main$16, { item }, null, _parent3, _scopeId2));
+                      _push3(ssrRenderComponent(_sfc_main$17, { item }, null, _parent3, _scopeId2));
                     }
                     _push3(`<!--]-->`);
                   });
@@ -26585,11 +26573,11 @@ const _sfc_main$14 = /* @__PURE__ */ defineComponent({
                       return openBlock(), createBlock(Fragment, {
                         key: item.key
                       }, [
-                        item.children ? (openBlock(), createBlock(_sfc_main$15, {
+                        item.children ? (openBlock(), createBlock(_sfc_main$16, {
                           key: 0,
                           item,
                           level: 1
-                        }, null, 8, ["item"])) : (openBlock(), createBlock(_sfc_main$16, {
+                        }, null, 8, ["item"])) : (openBlock(), createBlock(_sfc_main$17, {
                           key: 1,
                           item
                         }, null, 8, ["item"]))
@@ -26669,11 +26657,11 @@ const _sfc_main$14 = /* @__PURE__ */ defineComponent({
                     return openBlock(), createBlock(Fragment, {
                       key: item.key
                     }, [
-                      item.children ? (openBlock(), createBlock(_sfc_main$15, {
+                      item.children ? (openBlock(), createBlock(_sfc_main$16, {
                         key: 0,
                         item,
                         level: 1
-                      }, null, 8, ["item"])) : (openBlock(), createBlock(_sfc_main$16, {
+                      }, null, 8, ["item"])) : (openBlock(), createBlock(_sfc_main$17, {
                         key: 1,
                         item
                       }, null, 8, ["item"]))
@@ -26690,13 +26678,13 @@ const _sfc_main$14 = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_setup$14 = _sfc_main$14.setup;
-_sfc_main$14.setup = (props, ctx) => {
+const _sfc_setup$15 = _sfc_main$15.setup;
+_sfc_main$15.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/Components/Navbar/mobile-menu/MobileMenu.vue");
-  return _sfc_setup$14 ? _sfc_setup$14(props, ctx) : void 0;
+  return _sfc_setup$15 ? _sfc_setup$15(props, ctx) : void 0;
 };
-const _sfc_main$13 = /* @__PURE__ */ defineComponent({
+const _sfc_main$14 = /* @__PURE__ */ defineComponent({
   __name: "AppHeader",
   __ssrInlineRender: true,
   setup(__props) {
@@ -26722,7 +26710,7 @@ const _sfc_main$13 = /* @__PURE__ */ defineComponent({
       _push(ssrRenderComponent(_component_b_container, null, {
         default: withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
-            _push2(ssrRenderComponent(_sfc_main$1c, null, null, _parent2, _scopeId));
+            _push2(ssrRenderComponent(_sfc_main$1d, null, null, _parent2, _scopeId));
             if (isMobileMenu.value) {
               _push2(`<button${ssrRenderAttrs(mergeProps({
                 class: "navbar-toggler ms-sm-0 p-sm-2 ms-auto p-0",
@@ -26733,8 +26721,8 @@ const _sfc_main$13 = /* @__PURE__ */ defineComponent({
             }
             if (isMobileMenu.value) {
               _push2(`<!--[-->`);
-              _push2(ssrRenderComponent(_sfc_main$14, { "show-extra-pages": "" }, null, _parent2, _scopeId));
-              _push2(ssrRenderComponent(_sfc_main$18, { "show-extra-pages": "" }, null, _parent2, _scopeId));
+              _push2(ssrRenderComponent(_sfc_main$15, { "show-extra-pages": "" }, null, _parent2, _scopeId));
+              _push2(ssrRenderComponent(_sfc_main$19, { "show-extra-pages": "" }, null, _parent2, _scopeId));
               _push2(`<!--]-->`);
             } else {
               _push2(`<!---->`);
@@ -26742,7 +26730,7 @@ const _sfc_main$13 = /* @__PURE__ */ defineComponent({
             _push2(ssrRenderComponent(_component_b_nav, { class: "align-items-center list-unstyled ms-xl-auto flex-row" }, {
               default: withCtx((_2, _push3, _parent3, _scopeId2) => {
                 if (_push3) {
-                  _push3(ssrRenderComponent(_sfc_main$1g, {
+                  _push3(ssrRenderComponent(_sfc_main$1h, {
                     is: "li",
                     "custom-class": "nav-item ms-0 ms-md-3 d-none"
                   }, {
@@ -26872,13 +26860,27 @@ const _sfc_main$13 = /* @__PURE__ */ defineComponent({
                     _: 1
                   }, _parent3, _scopeId2));
                   if (_ctx.$page.props.auth?.user) {
-                    _push3(ssrRenderComponent(_sfc_main$1f, null, null, _parent3, _scopeId2));
+                    _push3(ssrRenderComponent(_sfc_main$1g, null, null, _parent3, _scopeId2));
                   } else {
-                    _push3(`<!---->`);
+                    _push3(ssrRenderComponent(unref(Link), {
+                      href: _ctx.route("login"),
+                      class: "btn btn-outline-primary btn-sm"
+                    }, {
+                      default: withCtx((_3, _push4, _parent4, _scopeId3) => {
+                        if (_push4) {
+                          _push4(`Se connecter`);
+                        } else {
+                          return [
+                            createTextVNode("Se connecter")
+                          ];
+                        }
+                      }),
+                      _: 1
+                    }, _parent3, _scopeId2));
                   }
                 } else {
                   return [
-                    createVNode(_sfc_main$1g, {
+                    createVNode(_sfc_main$1h, {
                       is: "li",
                       "custom-class": "nav-item ms-0 ms-md-3 d-none"
                     }, {
@@ -26929,7 +26931,16 @@ const _sfc_main$13 = /* @__PURE__ */ defineComponent({
                       ]),
                       _: 1
                     }),
-                    _ctx.$page.props.auth?.user ? (openBlock(), createBlock(_sfc_main$1f, { key: 0 })) : createCommentVNode("", true)
+                    _ctx.$page.props.auth?.user ? (openBlock(), createBlock(_sfc_main$1g, { key: 0 })) : (openBlock(), createBlock(unref(Link), {
+                      key: 1,
+                      href: _ctx.route("login"),
+                      class: "btn btn-outline-primary btn-sm"
+                    }, {
+                      default: withCtx(() => [
+                        createTextVNode("Se connecter")
+                      ]),
+                      _: 1
+                    }, 8, ["href"]))
                   ];
                 }
               }),
@@ -26937,7 +26948,7 @@ const _sfc_main$13 = /* @__PURE__ */ defineComponent({
             }, _parent2, _scopeId));
           } else {
             return [
-              createVNode(_sfc_main$1c),
+              createVNode(_sfc_main$1d),
               isMobileMenu.value ? withDirectives((openBlock(), createBlock("button", {
                 key: 0,
                 class: "navbar-toggler ms-sm-0 p-sm-2 ms-auto p-0",
@@ -26953,12 +26964,12 @@ const _sfc_main$13 = /* @__PURE__ */ defineComponent({
                 [_directive_b_toggle, "navbar-collapse"]
               ]) : createCommentVNode("", true),
               isMobileMenu.value ? (openBlock(), createBlock(Fragment, { key: 1 }, [
-                createVNode(_sfc_main$14, { "show-extra-pages": "" }),
-                createVNode(_sfc_main$18, { "show-extra-pages": "" })
+                createVNode(_sfc_main$15, { "show-extra-pages": "" }),
+                createVNode(_sfc_main$19, { "show-extra-pages": "" })
               ], 64)) : createCommentVNode("", true),
               createVNode(_component_b_nav, { class: "align-items-center list-unstyled ms-xl-auto flex-row" }, {
                 default: withCtx(() => [
-                  createVNode(_sfc_main$1g, {
+                  createVNode(_sfc_main$1h, {
                     is: "li",
                     "custom-class": "nav-item ms-0 ms-md-3 d-none"
                   }, {
@@ -27009,7 +27020,16 @@ const _sfc_main$13 = /* @__PURE__ */ defineComponent({
                     ]),
                     _: 1
                   }),
-                  _ctx.$page.props.auth?.user ? (openBlock(), createBlock(_sfc_main$1f, { key: 0 })) : createCommentVNode("", true)
+                  _ctx.$page.props.auth?.user ? (openBlock(), createBlock(_sfc_main$1g, { key: 0 })) : (openBlock(), createBlock(unref(Link), {
+                    key: 1,
+                    href: _ctx.route("login"),
+                    class: "btn btn-outline-primary btn-sm"
+                  }, {
+                    default: withCtx(() => [
+                      createTextVNode("Se connecter")
+                    ]),
+                    _: 1
+                  }, 8, ["href"]))
                 ]),
                 _: 1
               })
@@ -27022,13 +27042,13 @@ const _sfc_main$13 = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_setup$13 = _sfc_main$13.setup;
-_sfc_main$13.setup = (props, ctx) => {
+const _sfc_setup$14 = _sfc_main$14.setup;
+_sfc_main$14.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/Layouts/Partials/AppHeader.vue");
-  return _sfc_setup$13 ? _sfc_setup$13(props, ctx) : void 0;
+  return _sfc_setup$14 ? _sfc_setup$14(props, ctx) : void 0;
 };
-const _sfc_main$12 = /* @__PURE__ */ defineComponent({
+const _sfc_main$13 = /* @__PURE__ */ defineComponent({
   __name: "AppFooter",
   __ssrInlineRender: true,
   setup(__props) {
@@ -27040,7 +27060,7 @@ const _sfc_main$12 = /* @__PURE__ */ defineComponent({
       _push(`<footer${ssrRenderAttrs(mergeProps({
         class: "pt-5",
         style: { "background-color": "#1e3a8a" }
-      }, _attrs))} data-v-38683d60>`);
+      }, _attrs))} data-v-59b84a2f>`);
       _push(ssrRenderComponent(_component_b_container, null, {
         default: withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
@@ -27065,9 +27085,9 @@ const _sfc_main$12 = /* @__PURE__ */ defineComponent({
                           }),
                           _: 1
                         }, _parent4, _scopeId3));
-                        _push4(`<p class="text-white my-3 opacity-75" data-v-38683d60${_scopeId3}> « Votre passerelle vers les études supérieures en Afrique. » </p><p class="mb-2" data-v-38683d60${_scopeId3}><a href="mailto:contact@etapsup.com" class="text-white opacity-75 text-decoration-none" style="${ssrRenderStyle({ "transition": "opacity 0.2s" })}" onmouseover="this.style.opacity=&#39;1&#39;" onmouseout="this.style.opacity=&#39;0.75&#39;" data-v-38683d60${_scopeId3}>`);
+                        _push4(`<p class="text-white my-3 opacity-75" data-v-59b84a2f${_scopeId3}> « Votre passerelle vers les études supérieures à l&#39;étranger. » </p><p class="mb-2" data-v-59b84a2f${_scopeId3}><a href="mailto:contact@etapsup.com" class="text-white opacity-75 text-decoration-none" style="${ssrRenderStyle({ "transition": "opacity 0.2s" })}" onmouseover="this.style.opacity=&#39;1&#39;" onmouseout="this.style.opacity=&#39;0.75&#39;" data-v-59b84a2f${_scopeId3}>`);
                         _push4(ssrRenderComponent(unref(BIconEnvelope), { class: "me-2" }, null, _parent4, _scopeId3));
-                        _push4(` contact@etapsup.com </a></p><p class="mb-0" data-v-38683d60${_scopeId3}><a href="tel:+33123456789" class="text-white opacity-75 text-decoration-none" style="${ssrRenderStyle({ "transition": "opacity 0.2s" })}" onmouseover="this.style.opacity=&#39;1&#39;" onmouseout="this.style.opacity=&#39;0.75&#39;" data-v-38683d60${_scopeId3}>`);
+                        _push4(` contact@etapsup.com </a></p><p class="mb-0" data-v-59b84a2f${_scopeId3}><a href="tel:+33123456789" class="text-white opacity-75 text-decoration-none" style="${ssrRenderStyle({ "transition": "opacity 0.2s" })}" onmouseover="this.style.opacity=&#39;1&#39;" onmouseout="this.style.opacity=&#39;0.75&#39;" data-v-59b84a2f${_scopeId3}>`);
                         _push4(ssrRenderComponent(unref(BIconTelephone), { class: "me-2" }, null, _parent4, _scopeId3));
                         _push4(` +33 1 23 45 67 89 </a></p>`);
                       } else {
@@ -27081,7 +27101,7 @@ const _sfc_main$12 = /* @__PURE__ */ defineComponent({
                             ]),
                             _: 1
                           }),
-                          createVNode("p", { class: "text-white my-3 opacity-75" }, " « Votre passerelle vers les études supérieures en Afrique. » "),
+                          createVNode("p", { class: "text-white my-3 opacity-75" }, " « Votre passerelle vers les études supérieures à l'étranger. » "),
                           createVNode("p", { class: "mb-2" }, [
                             createVNode("a", {
                               href: "mailto:contact@etapsup.com",
@@ -27120,7 +27140,7 @@ const _sfc_main$12 = /* @__PURE__ */ defineComponent({
                         _push4(ssrRenderComponent(_component_b_row, { class: "g-4 d-flex justify-content-end align-items-center" }, {
                           default: withCtx((_4, _push5, _parent5, _scopeId4) => {
                             if (_push5) {
-                              _push5(`<div class="text-end" data-v-38683d60${_scopeId4}><span class="text-white font-extrabold" style="${ssrRenderStyle({ "font-size": "3rem", "letter-spacing": "2px" })}" data-v-38683d60${_scopeId4}> ETAPSUP </span><p class="text-white opacity-75 mt-2" data-v-38683d60${_scopeId4}>Plateforme d&#39;orientation étudiante</p></div>`);
+                              _push5(`<div class="text-end" data-v-59b84a2f${_scopeId4}><span class="text-white font-extrabold" style="${ssrRenderStyle({ "font-size": "3rem", "letter-spacing": "2px" })}" data-v-59b84a2f${_scopeId4}> ETAPSUP </span><p class="text-white opacity-75 mt-2" data-v-59b84a2f${_scopeId4}>Plateforme d&#39;orientation étudiante</p></div>`);
                             } else {
                               return [
                                 createVNode("div", { class: "text-end" }, [
@@ -27167,7 +27187,7 @@ const _sfc_main$12 = /* @__PURE__ */ defineComponent({
                           ]),
                           _: 1
                         }),
-                        createVNode("p", { class: "text-white my-3 opacity-75" }, " « Votre passerelle vers les études supérieures en Afrique. » "),
+                        createVNode("p", { class: "text-white my-3 opacity-75" }, " « Votre passerelle vers les études supérieures à l'étranger. » "),
                         createVNode("p", { class: "mb-2" }, [
                           createVNode("a", {
                             href: "mailto:contact@etapsup.com",
@@ -27230,7 +27250,7 @@ const _sfc_main$12 = /* @__PURE__ */ defineComponent({
                   }, {
                     default: withCtx((_3, _push4, _parent4, _scopeId3) => {
                       if (_push4) {
-                        _push4(`<h5 class="mb-2 text-white" data-v-38683d60${_scopeId3}>Paiement et sécurité</h5><ul class="list-inline mb-0 mt-3" data-v-38683d60${_scopeId3}><li class="list-inline-item" data-v-38683d60${_scopeId3}><a href="#" data-v-38683d60${_scopeId3}><img src="/images/front/element/paypal.svg" class="h-30px" alt="" data-v-38683d60${_scopeId3}></a></li><li class="list-inline-item" data-v-38683d60${_scopeId3}><a href="#" data-v-38683d60${_scopeId3}><img src="/images/front/element/visa.svg" class="h-30px" alt="" data-v-38683d60${_scopeId3}></a></li><li class="list-inline-item" data-v-38683d60${_scopeId3}><a href="#" data-v-38683d60${_scopeId3}><img src="/images/front/element/mastercard.svg" class="h-30px" alt="" data-v-38683d60${_scopeId3}></a></li><li class="list-inline-item" data-v-38683d60${_scopeId3}><a href="#" data-v-38683d60${_scopeId3}><img src="/images/front/element/expresscard.svg" class="h-30px" alt="" data-v-38683d60${_scopeId3}></a></li></ul>`);
+                        _push4(`<h5 class="mb-2 text-white" data-v-59b84a2f${_scopeId3}>Paiement et sécurité</h5><ul class="list-inline mb-0 mt-3" data-v-59b84a2f${_scopeId3}><li class="list-inline-item" data-v-59b84a2f${_scopeId3}><a href="#" data-v-59b84a2f${_scopeId3}><img src="/images/front/element/paypal.svg" class="h-30px" alt="" data-v-59b84a2f${_scopeId3}></a></li><li class="list-inline-item" data-v-59b84a2f${_scopeId3}><a href="#" data-v-59b84a2f${_scopeId3}><img src="/images/front/element/visa.svg" class="h-30px" alt="" data-v-59b84a2f${_scopeId3}></a></li><li class="list-inline-item" data-v-59b84a2f${_scopeId3}><a href="#" data-v-59b84a2f${_scopeId3}><img src="/images/front/element/mastercard.svg" class="h-30px" alt="" data-v-59b84a2f${_scopeId3}></a></li><li class="list-inline-item" data-v-59b84a2f${_scopeId3}><a href="#" data-v-59b84a2f${_scopeId3}><img src="/images/front/element/expresscard.svg" class="h-30px" alt="" data-v-59b84a2f${_scopeId3}></a></li></ul>`);
                       } else {
                         return [
                           createVNode("h5", { class: "mb-2 text-white" }, "Paiement et sécurité"),
@@ -27285,17 +27305,17 @@ const _sfc_main$12 = /* @__PURE__ */ defineComponent({
                   }, {
                     default: withCtx((_3, _push4, _parent4, _scopeId3) => {
                       if (_push4) {
-                        _push4(`<h5 class="mb-2 text-white" data-v-38683d60${_scopeId3}>Suivez-nous</h5><ul class="list-inline hstack justify-content-end mb-0 mt-3 gap-1" data-v-38683d60${_scopeId3}><li class="list-inline-item" data-v-38683d60${_scopeId3}><a href="#" class="btn btn-sm mb-0 px-2" style="${ssrRenderStyle({ "background-color": "#dc2626" })}" target="_blank" data-v-38683d60${_scopeId3}>`);
+                        _push4(`<h5 class="mb-2 text-white" data-v-59b84a2f${_scopeId3}>Suivez-nous</h5><ul class="list-inline hstack justify-content-end mb-0 mt-3 gap-1" data-v-59b84a2f${_scopeId3}><li class="list-inline-item" data-v-59b84a2f${_scopeId3}><a href="#" class="btn btn-sm mb-0 px-2" style="${ssrRenderStyle({ "background-color": "#dc2626" })}" target="_blank" data-v-59b84a2f${_scopeId3}>`);
                         _push4(ssrRenderComponent(_component_font_awesome_icon, {
                           icon: unref(faFacebook),
                           class: "fab fa-fw text-white"
                         }, null, _parent4, _scopeId3));
-                        _push4(`</a></li><li class="list-inline-item" data-v-38683d60${_scopeId3}><a href="#" class="btn btn-sm mb-0 px-2 shadow" style="${ssrRenderStyle({ "background-color": "#dc2626" })}" target="_blank" data-v-38683d60${_scopeId3}>`);
+                        _push4(`</a></li><li class="list-inline-item" data-v-59b84a2f${_scopeId3}><a href="#" class="btn btn-sm mb-0 px-2 shadow" style="${ssrRenderStyle({ "background-color": "#dc2626" })}" target="_blank" data-v-59b84a2f${_scopeId3}>`);
                         _push4(ssrRenderComponent(_component_font_awesome_icon, {
                           icon: unref(faInstagram),
                           class: "fab fa-fw text-white"
                         }, null, _parent4, _scopeId3));
-                        _push4(`</a></li><li class="list-inline-item" data-v-38683d60${_scopeId3}><a href="#" class="btn btn-sm mb-0 px-2 shadow" style="${ssrRenderStyle({ "background-color": "#dc2626" })}" target="_blank" data-v-38683d60${_scopeId3}>`);
+                        _push4(`</a></li><li class="list-inline-item" data-v-59b84a2f${_scopeId3}><a href="#" class="btn btn-sm mb-0 px-2 shadow" style="${ssrRenderStyle({ "background-color": "#dc2626" })}" target="_blank" data-v-59b84a2f${_scopeId3}>`);
                         _push4(ssrRenderComponent(_component_font_awesome_icon, {
                           icon: unref(faLinkedinIn),
                           class: "fab fa-fw text-white"
@@ -27457,7 +27477,7 @@ const _sfc_main$12 = /* @__PURE__ */ defineComponent({
               }),
               _: 1
             }, _parent2, _scopeId));
-            _push2(`<hr class="mb-0 mt-4" style="${ssrRenderStyle({ "border-color": "rgba(255, 255, 255, 0.2)" })}" data-v-38683d60${_scopeId}>`);
+            _push2(`<hr class="mb-0 mt-4" style="${ssrRenderStyle({ "border-color": "rgba(255, 255, 255, 0.2)" })}" data-v-59b84a2f${_scopeId}>`);
           } else {
             return [
               createVNode(_component_b_row, { class: "g-4" }, {
@@ -27473,7 +27493,7 @@ const _sfc_main$12 = /* @__PURE__ */ defineComponent({
                         ]),
                         _: 1
                       }),
-                      createVNode("p", { class: "text-white my-3 opacity-75" }, " « Votre passerelle vers les études supérieures en Afrique. » "),
+                      createVNode("p", { class: "text-white my-3 opacity-75" }, " « Votre passerelle vers les études supérieures à l'étranger. » "),
                       createVNode("p", { class: "mb-2" }, [
                         createVNode("a", {
                           href: "mailto:contact@etapsup.com",
@@ -27642,14 +27662,14 @@ const _sfc_main$12 = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_setup$12 = _sfc_main$12.setup;
-_sfc_main$12.setup = (props, ctx) => {
+const _sfc_setup$13 = _sfc_main$13.setup;
+_sfc_main$13.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/Layouts/Partials/AppFooter.vue");
-  return _sfc_setup$12 ? _sfc_setup$12(props, ctx) : void 0;
+  return _sfc_setup$13 ? _sfc_setup$13(props, ctx) : void 0;
 };
-const AppFooter = /* @__PURE__ */ _export_sfc(_sfc_main$12, [["__scopeId", "data-v-38683d60"]]);
-const _sfc_main$11 = /* @__PURE__ */ defineComponent({
+const AppFooter = /* @__PURE__ */ _export_sfc(_sfc_main$13, [["__scopeId", "data-v-59b84a2f"]]);
+const _sfc_main$12 = /* @__PURE__ */ defineComponent({
   __name: "BackToTop",
   __ssrInlineRender: true,
   setup(__props) {
@@ -27676,13 +27696,13 @@ const _sfc_main$11 = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_setup$11 = _sfc_main$11.setup;
-_sfc_main$11.setup = (props, ctx) => {
+const _sfc_setup$12 = _sfc_main$12.setup;
+_sfc_main$12.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/Components/BackToTop.vue");
-  return _sfc_setup$11 ? _sfc_setup$11(props, ctx) : void 0;
+  return _sfc_setup$12 ? _sfc_setup$12(props, ctx) : void 0;
 };
-const _sfc_main$10 = /* @__PURE__ */ defineComponent({
+const _sfc_main$11 = /* @__PURE__ */ defineComponent({
   __name: "SideBar",
   __ssrInlineRender: true,
   setup(__props) {
@@ -28021,13 +28041,13 @@ const _sfc_main$10 = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_setup$10 = _sfc_main$10.setup;
-_sfc_main$10.setup = (props, ctx) => {
+const _sfc_setup$11 = _sfc_main$11.setup;
+_sfc_main$11.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/Layouts/Partials/SideBar.vue");
-  return _sfc_setup$10 ? _sfc_setup$10(props, ctx) : void 0;
+  return _sfc_setup$11 ? _sfc_setup$11(props, ctx) : void 0;
 };
-const _sfc_main$$ = /* @__PURE__ */ defineComponent({
+const _sfc_main$10 = /* @__PURE__ */ defineComponent({
   __name: "DashboardLayout",
   __ssrInlineRender: true,
   setup(__props) {
@@ -28046,7 +28066,7 @@ const _sfc_main$$ = /* @__PURE__ */ defineComponent({
       const _component_font_awesome_icon = resolveComponent("font-awesome-icon");
       const _component_Toast = __unplugin_components_4;
       _push(`<div${ssrRenderAttrs(_attrs)}>`);
-      _push(ssrRenderComponent(_sfc_main$13, null, null, _parent));
+      _push(ssrRenderComponent(_sfc_main$14, null, null, _parent));
       _push(`<main><section class="pt-3">`);
       _push(ssrRenderComponent(_component_b_container, null, {
         default: withCtx((_, _push2, _parent2, _scopeId) => {
@@ -28054,7 +28074,7 @@ const _sfc_main$$ = /* @__PURE__ */ defineComponent({
             _push2(ssrRenderComponent(_component_b_row, null, {
               default: withCtx((_2, _push3, _parent3, _scopeId2) => {
                 if (_push3) {
-                  _push3(ssrRenderComponent(_sfc_main$10, null, null, _parent3, _scopeId2));
+                  _push3(ssrRenderComponent(_sfc_main$11, null, null, _parent3, _scopeId2));
                   _push3(ssrRenderComponent(_component_b_col, {
                     lg: "8",
                     xl: "9"
@@ -28107,7 +28127,7 @@ const _sfc_main$$ = /* @__PURE__ */ defineComponent({
                   }, _parent3, _scopeId2));
                 } else {
                   return [
-                    createVNode(_sfc_main$10),
+                    createVNode(_sfc_main$11),
                     createVNode(_component_b_col, {
                       lg: "8",
                       xl: "9"
@@ -28140,7 +28160,7 @@ const _sfc_main$$ = /* @__PURE__ */ defineComponent({
             return [
               createVNode(_component_b_row, null, {
                 default: withCtx(() => [
-                  createVNode(_sfc_main$10),
+                  createVNode(_sfc_main$11),
                   createVNode(_component_b_col, {
                     lg: "8",
                     xl: "9"
@@ -28174,19 +28194,19 @@ const _sfc_main$$ = /* @__PURE__ */ defineComponent({
       }, _parent));
       _push(`</section></main>`);
       _push(ssrRenderComponent(AppFooter, null, null, _parent));
-      _push(ssrRenderComponent(_sfc_main$11, null, null, _parent));
+      _push(ssrRenderComponent(_sfc_main$12, null, null, _parent));
       _push(`</div>`);
     };
   }
 });
-const _sfc_setup$$ = _sfc_main$$.setup;
-_sfc_main$$.setup = (props, ctx) => {
+const _sfc_setup$10 = _sfc_main$10.setup;
+_sfc_main$10.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/Layouts/DashboardLayout.vue");
-  return _sfc_setup$$ ? _sfc_setup$$(props, ctx) : void 0;
+  return _sfc_setup$10 ? _sfc_setup$10(props, ctx) : void 0;
 };
-const _sfc_main$_ = /* @__PURE__ */ defineComponent({
-  ...{ layout: _sfc_main$$ },
+const _sfc_main$$ = /* @__PURE__ */ defineComponent({
+  ...{ layout: _sfc_main$10 },
   __name: "Show",
   __ssrInlineRender: true,
   props: {
@@ -30656,18 +30676,18 @@ const _sfc_main$_ = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_setup$_ = _sfc_main$_.setup;
-_sfc_main$_.setup = (props, ctx) => {
+const _sfc_setup$$ = _sfc_main$$.setup;
+_sfc_main$$.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/Pages/Dashboard/Applications/Show.vue");
-  return _sfc_setup$_ ? _sfc_setup$_(props, ctx) : void 0;
+  return _sfc_setup$$ ? _sfc_setup$$(props, ctx) : void 0;
 };
-const Show$2 = /* @__PURE__ */ _export_sfc(_sfc_main$_, [["__scopeId", "data-v-ec036cf6"]]);
+const Show$2 = /* @__PURE__ */ _export_sfc(_sfc_main$$, [["__scopeId", "data-v-ec036cf6"]]);
 const __vite_glob_0_22 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: Show$2
 }, Symbol.toStringTag, { value: "Module" }));
-const _sfc_main$Z = /* @__PURE__ */ defineComponent({
+const _sfc_main$_ = /* @__PURE__ */ defineComponent({
   __name: "Pagination",
   __ssrInlineRender: true,
   props: {
@@ -30780,14 +30800,14 @@ const _sfc_main$Z = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_setup$Z = _sfc_main$Z.setup;
-_sfc_main$Z.setup = (props, ctx) => {
+const _sfc_setup$_ = _sfc_main$_.setup;
+_sfc_main$_.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/Components/Pagination.vue");
-  return _sfc_setup$Z ? _sfc_setup$Z(props, ctx) : void 0;
+  return _sfc_setup$_ ? _sfc_setup$_(props, ctx) : void 0;
 };
-const _sfc_main$Y = /* @__PURE__ */ defineComponent({
-  ...{ layout: _sfc_main$$ },
+const _sfc_main$Z = /* @__PURE__ */ defineComponent({
+  ...{ layout: _sfc_main$10 },
   __name: "Index",
   __ssrInlineRender: true,
   props: {
@@ -31112,7 +31132,7 @@ const _sfc_main$Y = /* @__PURE__ */ defineComponent({
                           });
                           _push4(`<!--]-->`);
                         }
-                        _push4(ssrRenderComponent(_sfc_main$Z, {
+                        _push4(ssrRenderComponent(_sfc_main$_, {
                           pagination: __props.certificateRequests.meta
                         }, null, _parent4, _scopeId3));
                         _push4(`</div>`);
@@ -31201,7 +31221,7 @@ const _sfc_main$Y = /* @__PURE__ */ defineComponent({
                                 _: 2
                               }, 1024);
                             }), 128)),
-                            createVNode(_sfc_main$Z, {
+                            createVNode(_sfc_main$_, {
                               pagination: __props.certificateRequests.meta
                             }, null, 8, ["pagination"])
                           ])
@@ -31300,7 +31320,7 @@ const _sfc_main$Y = /* @__PURE__ */ defineComponent({
                               _: 2
                             }, 1024);
                           }), 128)),
-                          createVNode(_sfc_main$Z, {
+                          createVNode(_sfc_main$_, {
                             pagination: __props.certificateRequests.meta
                           }, null, 8, ["pagination"])
                         ])
@@ -31410,7 +31430,7 @@ const _sfc_main$Y = /* @__PURE__ */ defineComponent({
                             _: 2
                           }, 1024);
                         }), 128)),
-                        createVNode(_sfc_main$Z, {
+                        createVNode(_sfc_main$_, {
                           pagination: __props.certificateRequests.meta
                         }, null, 8, ["pagination"])
                       ])
@@ -31429,15 +31449,15 @@ const _sfc_main$Y = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_setup$Y = _sfc_main$Y.setup;
-_sfc_main$Y.setup = (props, ctx) => {
+const _sfc_setup$Z = _sfc_main$Z.setup;
+_sfc_main$Z.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/Pages/Dashboard/CertificateRequest/Index.vue");
-  return _sfc_setup$Y ? _sfc_setup$Y(props, ctx) : void 0;
+  return _sfc_setup$Z ? _sfc_setup$Z(props, ctx) : void 0;
 };
 const __vite_glob_0_23 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  default: _sfc_main$Y
+  default: _sfc_main$Z
 }, Symbol.toStringTag, { value: "Module" }));
 const formatCurrency = (amount) => {
   return new Intl.NumberFormat("fr-FR", {
@@ -31445,7 +31465,7 @@ const formatCurrency = (amount) => {
     currency: "EUR"
   }).format(amount);
 };
-const _sfc_main$X = /* @__PURE__ */ defineComponent({
+const _sfc_main$Y = /* @__PURE__ */ defineComponent({
   __name: "PaymentStatus",
   __ssrInlineRender: true,
   props: {
@@ -31849,18 +31869,18 @@ const _sfc_main$X = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_setup$X = _sfc_main$X.setup;
-_sfc_main$X.setup = (props, ctx) => {
+const _sfc_setup$Y = _sfc_main$Y.setup;
+_sfc_main$Y.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/Pages/Dashboard/CertificateRequest/Partials/PaymentStatus.vue");
-  return _sfc_setup$X ? _sfc_setup$X(props, ctx) : void 0;
+  return _sfc_setup$Y ? _sfc_setup$Y(props, ctx) : void 0;
 };
 const __vite_glob_0_24 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  default: _sfc_main$X
+  default: _sfc_main$Y
 }, Symbol.toStringTag, { value: "Module" }));
-const _sfc_main$W = /* @__PURE__ */ defineComponent({
-  ...{ layout: _sfc_main$$ },
+const _sfc_main$X = /* @__PURE__ */ defineComponent({
+  ...{ layout: _sfc_main$10 },
   __name: "Show",
   __ssrInlineRender: true,
   props: {
@@ -31897,7 +31917,7 @@ const _sfc_main$W = /* @__PURE__ */ defineComponent({
       const _component_b_row = BRow;
       const _component_b_col = BCol;
       _push(`<!--[-->`);
-      _push(ssrRenderComponent(_sfc_main$1I, {
+      _push(ssrRenderComponent(_sfc_main$1J, {
         title: `${__props.certificateRequest.genre.name + ", " + __props.certificateRequest.city.name}`
       }, null, _parent));
       _push(ssrRenderComponent(_component_b_card, {
@@ -31921,7 +31941,7 @@ const _sfc_main$W = /* @__PURE__ */ defineComponent({
             _push2(ssrRenderComponent(_component_b_card_body, null, {
               default: withCtx((_2, _push3, _parent3, _scopeId2) => {
                 if (_push3) {
-                  _push3(ssrRenderComponent(_sfc_main$X, {
+                  _push3(ssrRenderComponent(_sfc_main$Y, {
                     state: __props.certificateRequest.state,
                     id: __props.certificateRequest.id,
                     file: __props.certificateRequest?.file,
@@ -32157,7 +32177,7 @@ const _sfc_main$W = /* @__PURE__ */ defineComponent({
                   }, _parent3, _scopeId2));
                 } else {
                   return [
-                    createVNode(_sfc_main$X, {
+                    createVNode(_sfc_main$Y, {
                       state: __props.certificateRequest.state,
                       id: __props.certificateRequest.id,
                       file: __props.certificateRequest?.file,
@@ -32280,7 +32300,7 @@ const _sfc_main$W = /* @__PURE__ */ defineComponent({
               }),
               createVNode(_component_b_card_body, null, {
                 default: withCtx(() => [
-                  createVNode(_sfc_main$X, {
+                  createVNode(_sfc_main$Y, {
                     state: __props.certificateRequest.state,
                     id: __props.certificateRequest.id,
                     file: __props.certificateRequest?.file,
@@ -32400,18 +32420,18 @@ const _sfc_main$W = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_setup$W = _sfc_main$W.setup;
-_sfc_main$W.setup = (props, ctx) => {
+const _sfc_setup$X = _sfc_main$X.setup;
+_sfc_main$X.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/Pages/Dashboard/CertificateRequest/Show.vue");
-  return _sfc_setup$W ? _sfc_setup$W(props, ctx) : void 0;
+  return _sfc_setup$X ? _sfc_setup$X(props, ctx) : void 0;
 };
 const __vite_glob_0_25 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  default: _sfc_main$W
+  default: _sfc_main$X
 }, Symbol.toStringTag, { value: "Module" }));
-const _sfc_main$V = /* @__PURE__ */ defineComponent({
-  ...{ layout: _sfc_main$$ },
+const _sfc_main$W = /* @__PURE__ */ defineComponent({
+  ...{ layout: _sfc_main$10 },
   __name: "Index",
   __ssrInlineRender: true,
   setup(__props) {
@@ -32422,17 +32442,17 @@ const _sfc_main$V = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_setup$V = _sfc_main$V.setup;
-_sfc_main$V.setup = (props, ctx) => {
+const _sfc_setup$W = _sfc_main$W.setup;
+_sfc_main$W.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/Pages/Dashboard/CustomSearch/Index.vue");
-  return _sfc_setup$V ? _sfc_setup$V(props, ctx) : void 0;
+  return _sfc_setup$W ? _sfc_setup$W(props, ctx) : void 0;
 };
 const __vite_glob_0_26 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  default: _sfc_main$V
+  default: _sfc_main$W
 }, Symbol.toStringTag, { value: "Module" }));
-const _sfc_main$U = /* @__PURE__ */ defineComponent({
+const _sfc_main$V = /* @__PURE__ */ defineComponent({
   __name: "PasswordForm",
   __ssrInlineRender: true,
   setup(__props) {
@@ -33103,19 +33123,19 @@ const _sfc_main$U = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_setup$U = _sfc_main$U.setup;
-_sfc_main$U.setup = (props, ctx) => {
+const _sfc_setup$V = _sfc_main$V.setup;
+_sfc_main$V.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/Pages/Dashboard/Profile/Partials/PasswordForm.vue");
-  return _sfc_setup$U ? _sfc_setup$U(props, ctx) : void 0;
+  return _sfc_setup$V ? _sfc_setup$V(props, ctx) : void 0;
 };
-const PasswordForm = /* @__PURE__ */ _export_sfc(_sfc_main$U, [["__scopeId", "data-v-8f91a83a"]]);
+const PasswordForm = /* @__PURE__ */ _export_sfc(_sfc_main$V, [["__scopeId", "data-v-8f91a83a"]]);
 const __vite_glob_0_28 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: PasswordForm
 }, Symbol.toStringTag, { value: "Module" }));
-const _sfc_main$T = /* @__PURE__ */ defineComponent({
-  ...{ layout: _sfc_main$$ },
+const _sfc_main$U = /* @__PURE__ */ defineComponent({
+  ...{ layout: _sfc_main$10 },
   __name: "Index",
   __ssrInlineRender: true,
   props: {
@@ -33159,7 +33179,7 @@ const _sfc_main$T = /* @__PURE__ */ defineComponent({
       const _component_Select = __unplugin_components_9;
       const _component_b_button = BButton;
       _push(`<!--[-->`);
-      _push(ssrRenderComponent(_sfc_main$1I, { title: "Mon profil" }, null, _parent));
+      _push(ssrRenderComponent(_sfc_main$1J, { title: "Mon profil" }, null, _parent));
       _push(ssrRenderComponent(_component_b_card, {
         "no-body": "",
         class: "border-0 shadow-etatsup"
@@ -34626,18 +34646,18 @@ const _sfc_main$T = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_setup$T = _sfc_main$T.setup;
-_sfc_main$T.setup = (props, ctx) => {
+const _sfc_setup$U = _sfc_main$U.setup;
+_sfc_main$U.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/Pages/Dashboard/Profile/Index.vue");
-  return _sfc_setup$T ? _sfc_setup$T(props, ctx) : void 0;
+  return _sfc_setup$U ? _sfc_setup$U(props, ctx) : void 0;
 };
-const Index$4 = /* @__PURE__ */ _export_sfc(_sfc_main$T, [["__scopeId", "data-v-72e1b160"]]);
+const Index$4 = /* @__PURE__ */ _export_sfc(_sfc_main$U, [["__scopeId", "data-v-72e1b160"]]);
 const __vite_glob_0_27 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: Index$4
 }, Symbol.toStringTag, { value: "Module" }));
-const _sfc_main$S = /* @__PURE__ */ defineComponent({
+const _sfc_main$T = /* @__PURE__ */ defineComponent({
   __name: "ReservationCard",
   __ssrInlineRender: true,
   props: {
@@ -34956,18 +34976,18 @@ const _sfc_main$S = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_setup$S = _sfc_main$S.setup;
-_sfc_main$S.setup = (props, ctx) => {
+const _sfc_setup$T = _sfc_main$T.setup;
+_sfc_main$T.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/Pages/Dashboard/RealEstate/Partials/ReservationCard.vue");
-  return _sfc_setup$S ? _sfc_setup$S(props, ctx) : void 0;
+  return _sfc_setup$T ? _sfc_setup$T(props, ctx) : void 0;
 };
-const ReservationCard = /* @__PURE__ */ _export_sfc(_sfc_main$S, [["__scopeId", "data-v-8584fd18"]]);
+const ReservationCard = /* @__PURE__ */ _export_sfc(_sfc_main$T, [["__scopeId", "data-v-8584fd18"]]);
 const __vite_glob_0_30 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: ReservationCard
 }, Symbol.toStringTag, { value: "Module" }));
-const _sfc_main$R = /* @__PURE__ */ defineComponent({
+const _sfc_main$S = /* @__PURE__ */ defineComponent({
   __name: "ReservationTabs",
   __ssrInlineRender: true,
   props: {
@@ -35098,18 +35118,18 @@ const _sfc_main$R = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_setup$R = _sfc_main$R.setup;
-_sfc_main$R.setup = (props, ctx) => {
+const _sfc_setup$S = _sfc_main$S.setup;
+_sfc_main$S.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/Pages/Dashboard/RealEstate/Partials/ReservationTabs.vue");
-  return _sfc_setup$R ? _sfc_setup$R(props, ctx) : void 0;
+  return _sfc_setup$S ? _sfc_setup$S(props, ctx) : void 0;
 };
 const __vite_glob_0_32 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  default: _sfc_main$R
+  default: _sfc_main$S
 }, Symbol.toStringTag, { value: "Module" }));
-const _sfc_main$Q = /* @__PURE__ */ defineComponent({
-  ...{ layout: _sfc_main$$ },
+const _sfc_main$R = /* @__PURE__ */ defineComponent({
+  ...{ layout: _sfc_main$10 },
   __name: "Index",
   __ssrInlineRender: true,
   props: {
@@ -35142,7 +35162,7 @@ const _sfc_main$Q = /* @__PURE__ */ defineComponent({
             if (!__props.reservations.data.length) {
               _push2(`<div class="py-4 text-center"${_scopeId}><p class="text-info mb-0"${_scopeId}> Vous n&#39;avez pas encore soumis de candidature. Découvrez nos établissements partenaires pour postuler. </p></div>`);
             } else {
-              _push2(ssrRenderComponent(_sfc_main$R, {
+              _push2(ssrRenderComponent(_sfc_main$S, {
                 reservations: __props.reservations.data
               }, null, _parent2, _scopeId));
             }
@@ -35159,7 +35179,7 @@ const _sfc_main$Q = /* @__PURE__ */ defineComponent({
                 class: "py-4 text-center"
               }, [
                 createVNode("p", { class: "text-info mb-0" }, " Vous n'avez pas encore soumis de candidature. Découvrez nos établissements partenaires pour postuler. ")
-              ])) : (openBlock(), createBlock(_sfc_main$R, {
+              ])) : (openBlock(), createBlock(_sfc_main$S, {
                 key: 1,
                 reservations: __props.reservations.data
               }, null, 8, ["reservations"]))
@@ -35168,7 +35188,7 @@ const _sfc_main$Q = /* @__PURE__ */ defineComponent({
         }),
         _: 1
       }, _parent));
-      _push(ssrRenderComponent(_sfc_main$Z, {
+      _push(ssrRenderComponent(_sfc_main$_, {
         class: "mt-5",
         pagination: __props.reservations.meta
       }, null, _parent));
@@ -35176,17 +35196,17 @@ const _sfc_main$Q = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_setup$Q = _sfc_main$Q.setup;
-_sfc_main$Q.setup = (props, ctx) => {
+const _sfc_setup$R = _sfc_main$R.setup;
+_sfc_main$R.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/Pages/Dashboard/RealEstate/Index.vue");
-  return _sfc_setup$Q ? _sfc_setup$Q(props, ctx) : void 0;
+  return _sfc_setup$R ? _sfc_setup$R(props, ctx) : void 0;
 };
 const __vite_glob_0_29 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  default: _sfc_main$Q
+  default: _sfc_main$R
 }, Symbol.toStringTag, { value: "Module" }));
-const _sfc_main$P = /* @__PURE__ */ defineComponent({
+const _sfc_main$Q = /* @__PURE__ */ defineComponent({
   __name: "ReservationReview",
   __ssrInlineRender: true,
   props: {
@@ -36233,17 +36253,17 @@ const _sfc_main$P = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_setup$P = _sfc_main$P.setup;
-_sfc_main$P.setup = (props, ctx) => {
+const _sfc_setup$Q = _sfc_main$Q.setup;
+_sfc_main$Q.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/Pages/Dashboard/RealEstate/Partials/ReservationReview.vue");
-  return _sfc_setup$P ? _sfc_setup$P(props, ctx) : void 0;
+  return _sfc_setup$Q ? _sfc_setup$Q(props, ctx) : void 0;
 };
 const __vite_glob_0_31 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  default: _sfc_main$P
+  default: _sfc_main$Q
 }, Symbol.toStringTag, { value: "Module" }));
-const _sfc_main$O = /* @__PURE__ */ defineComponent({
+const _sfc_main$P = /* @__PURE__ */ defineComponent({
   __name: "CustomGLightbox",
   __ssrInlineRender: true,
   props: {
@@ -36281,13 +36301,13 @@ const _sfc_main$O = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_setup$O = _sfc_main$O.setup;
-_sfc_main$O.setup = (props, ctx) => {
+const _sfc_setup$P = _sfc_main$P.setup;
+_sfc_main$P.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/Components/CustomGLightbox.vue");
-  return _sfc_setup$O ? _sfc_setup$O(props, ctx) : void 0;
+  return _sfc_setup$P ? _sfc_setup$P(props, ctx) : void 0;
 };
-const _sfc_main$N = /* @__PURE__ */ defineComponent({
+const _sfc_main$O = /* @__PURE__ */ defineComponent({
   __name: "TextClamp",
   __ssrInlineRender: true,
   props: {
@@ -36479,14 +36499,14 @@ const _sfc_main$N = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_setup$N = _sfc_main$N.setup;
-_sfc_main$N.setup = (props, ctx) => {
+const _sfc_setup$O = _sfc_main$O.setup;
+_sfc_main$O.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/Components/TextClamp.vue");
-  return _sfc_setup$N ? _sfc_setup$N(props, ctx) : void 0;
+  return _sfc_setup$O ? _sfc_setup$O(props, ctx) : void 0;
 };
-const _sfc_main$M = /* @__PURE__ */ defineComponent({
-  ...{ layout: _sfc_main$$ },
+const _sfc_main$N = /* @__PURE__ */ defineComponent({
+  ...{ layout: _sfc_main$10 },
   __name: "Show",
   __ssrInlineRender: true,
   props: {
@@ -36527,7 +36547,7 @@ const _sfc_main$M = /* @__PURE__ */ defineComponent({
                           }, {
                             default: withCtx((_4, _push5, _parent5, _scopeId4) => {
                               if (_push5) {
-                                _push5(ssrRenderComponent(_sfc_main$O, { link: image }, {
+                                _push5(ssrRenderComponent(_sfc_main$P, { link: image }, {
                                   default: withCtx((_5, _push6, _parent6, _scopeId5) => {
                                     if (_push6) {
                                       _push6(ssrRenderComponent(_component_b_card, {
@@ -36583,7 +36603,7 @@ const _sfc_main$M = /* @__PURE__ */ defineComponent({
                                 }, _parent5, _scopeId4));
                               } else {
                                 return [
-                                  createVNode(_sfc_main$O, { link: image }, {
+                                  createVNode(_sfc_main$P, { link: image }, {
                                     default: withCtx(() => [
                                       createVNode(_component_b_card, {
                                         "no-body": "",
@@ -36677,7 +36697,7 @@ const _sfc_main$M = /* @__PURE__ */ defineComponent({
                               key: idx
                             }, {
                               default: withCtx(() => [
-                                createVNode(_sfc_main$O, { link: image }, {
+                                createVNode(_sfc_main$P, { link: image }, {
                                   default: withCtx(() => [
                                     createVNode(_component_b_card, {
                                       "no-body": "",
@@ -36745,7 +36765,7 @@ const _sfc_main$M = /* @__PURE__ */ defineComponent({
                             key: idx
                           }, {
                             default: withCtx(() => [
-                              createVNode(_sfc_main$O, { link: image }, {
+                              createVNode(_sfc_main$P, { link: image }, {
                                 default: withCtx(() => [
                                   createVNode(_component_b_card, {
                                     "no-body": "",
@@ -36832,7 +36852,7 @@ const _sfc_main$M = /* @__PURE__ */ defineComponent({
                   _push3(`<small class="fw-bold items-center"${_scopeId2}>`);
                   _push3(ssrRenderComponent(unref(BIconGeoAlt), { class: "mb-1 me-2" }, null, _parent3, _scopeId2));
                   _push3(` ${ssrInterpolate(__props.reservation.property.address)}</small><p class="mb-4 mt-3"${_scopeId2}>`);
-                  _push3(ssrRenderComponent(_sfc_main$N, {
+                  _push3(ssrRenderComponent(_sfc_main$O, {
                     text: __props.reservation.property.description,
                     "max-lines": 3,
                     "auto-resize": ""
@@ -36989,7 +37009,7 @@ const _sfc_main$M = /* @__PURE__ */ defineComponent({
                       createTextVNode(" " + toDisplayString(__props.reservation.property.address), 1)
                     ]),
                     createVNode("p", { class: "mb-4 mt-3" }, [
-                      createVNode(_sfc_main$N, {
+                      createVNode(_sfc_main$O, {
                         text: __props.reservation.property.description,
                         "max-lines": 3,
                         "auto-resize": ""
@@ -37132,13 +37152,13 @@ const _sfc_main$M = /* @__PURE__ */ defineComponent({
             _push2(ssrRenderComponent(_component_b_col, null, {
               default: withCtx((_2, _push3, _parent3, _scopeId2) => {
                 if (_push3) {
-                  _push3(ssrRenderComponent(_sfc_main$P, {
+                  _push3(ssrRenderComponent(_sfc_main$Q, {
                     reservation: __props.reservation,
                     "can-review": ""
                   }, null, _parent3, _scopeId2));
                 } else {
                   return [
-                    createVNode(_sfc_main$P, {
+                    createVNode(_sfc_main$Q, {
                       reservation: __props.reservation,
                       "can-review": ""
                     }, null, 8, ["reservation"])
@@ -37159,7 +37179,7 @@ const _sfc_main$M = /* @__PURE__ */ defineComponent({
                           key: idx
                         }, {
                           default: withCtx(() => [
-                            createVNode(_sfc_main$O, { link: image }, {
+                            createVNode(_sfc_main$P, { link: image }, {
                               default: withCtx(() => [
                                 createVNode(_component_b_card, {
                                   "no-body": "",
@@ -37239,7 +37259,7 @@ const _sfc_main$M = /* @__PURE__ */ defineComponent({
                     createTextVNode(" " + toDisplayString(__props.reservation.property.address), 1)
                   ]),
                   createVNode("p", { class: "mb-4 mt-3" }, [
-                    createVNode(_sfc_main$N, {
+                    createVNode(_sfc_main$O, {
                       text: __props.reservation.property.description,
                       "max-lines": 3,
                       "auto-resize": ""
@@ -37367,7 +37387,7 @@ const _sfc_main$M = /* @__PURE__ */ defineComponent({
               }),
               createVNode(_component_b_col, null, {
                 default: withCtx(() => [
-                  createVNode(_sfc_main$P, {
+                  createVNode(_sfc_main$Q, {
                     reservation: __props.reservation,
                     "can-review": ""
                   }, null, 8, ["reservation"])
@@ -37383,18 +37403,18 @@ const _sfc_main$M = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_setup$M = _sfc_main$M.setup;
-_sfc_main$M.setup = (props, ctx) => {
+const _sfc_setup$N = _sfc_main$N.setup;
+_sfc_main$N.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/Pages/Dashboard/RealEstate/Show.vue");
-  return _sfc_setup$M ? _sfc_setup$M(props, ctx) : void 0;
+  return _sfc_setup$N ? _sfc_setup$N(props, ctx) : void 0;
 };
 const __vite_glob_0_33 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  default: _sfc_main$M
+  default: _sfc_main$N
 }, Symbol.toStringTag, { value: "Module" }));
-const _sfc_main$L = /* @__PURE__ */ defineComponent({
-  ...{ layout: _sfc_main$1A },
+const _sfc_main$M = /* @__PURE__ */ defineComponent({
+  ...{ layout: _sfc_main$1B },
   __name: "Index",
   __ssrInlineRender: true,
   props: {
@@ -37406,10 +37426,18 @@ const _sfc_main$L = /* @__PURE__ */ defineComponent({
     const props = __props;
     const searchFilters = ref({
       country_id: props.currentFilters.country_id || "",
+      city_id: props.currentFilters.city_id || "",
       career_field_id: props.currentFilters.career_field_id || "",
       establishment_type_id: props.currentFilters.establishment_type_id || "",
       search: props.currentFilters.search || ""
     });
+    const filteredCities = computed(() => {
+      if (!searchFilters.value.country_id) return [];
+      return props.filters.cities.filter((city) => city.country_id == searchFilters.value.country_id);
+    });
+    const onCountryChange = () => {
+      searchFilters.value.city_id = "";
+    };
     const applyFilters = () => {
       router.get(route("establishments.index"), searchFilters.value, {
         preserveState: true,
@@ -37421,7 +37449,7 @@ const _sfc_main$L = /* @__PURE__ */ defineComponent({
       _push(ssrRenderComponent(unref(Head), { title: "Établissements - EtapSup" }, {
         default: withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
-            _push2(`<meta name="description" content="Découvrez nos établissements partenaires pour étudier à l&#39;étranger. Plus de 150 universités et écoles dans le monde." data-v-3ea7d2b6${_scopeId}>`);
+            _push2(`<meta name="description" content="Découvrez nos établissements partenaires pour étudier à l&#39;étranger. Plus de 150 universités et écoles dans le monde." data-v-64487964${_scopeId}>`);
           } else {
             return [
               createVNode("meta", {
@@ -37433,18 +37461,18 @@ const _sfc_main$L = /* @__PURE__ */ defineComponent({
         }),
         _: 1
       }, _parent));
-      _push(`<div class="establishments-page" data-v-3ea7d2b6><nav class="main-navigation" data-v-3ea7d2b6>`);
+      _push(`<div class="establishments-page" data-v-64487964><nav class="main-navigation" data-v-64487964>`);
       _push(ssrRenderComponent(unref(BContainer$1), null, {
         default: withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
-            _push2(`<div class="nav-content" data-v-3ea7d2b6${_scopeId}>`);
+            _push2(`<div class="nav-content" data-v-64487964${_scopeId}>`);
             _push2(ssrRenderComponent(unref(Link), {
               href: "/",
               class: "nav-logo"
             }, {
               default: withCtx((_2, _push3, _parent3, _scopeId2) => {
                 if (_push3) {
-                  _push3(`<span class="logo-text" data-v-3ea7d2b6${_scopeId2}>EtapSup</span>`);
+                  _push3(`<span class="logo-text" data-v-64487964${_scopeId2}>EtapSup</span>`);
                 } else {
                   return [
                     createVNode("span", { class: "logo-text" }, "EtapSup")
@@ -37453,7 +37481,7 @@ const _sfc_main$L = /* @__PURE__ */ defineComponent({
               }),
               _: 1
             }, _parent2, _scopeId));
-            _push2(`<div class="nav-menu" data-v-3ea7d2b6${_scopeId}>`);
+            _push2(`<div class="nav-menu" data-v-64487964${_scopeId}>`);
             _push2(ssrRenderComponent(unref(Link), {
               href: "/",
               class: "nav-link"
@@ -37499,37 +37527,45 @@ const _sfc_main$L = /* @__PURE__ */ defineComponent({
               }),
               _: 1
             }, _parent2, _scopeId));
-            _push2(`</div><div class="nav-actions" data-v-3ea7d2b6${_scopeId}>`);
-            _push2(ssrRenderComponent(unref(Link), {
-              href: "/login",
-              class: "btn-nav btn-nav-login"
-            }, {
-              default: withCtx((_2, _push3, _parent3, _scopeId2) => {
-                if (_push3) {
-                  _push3(`Connexion`);
-                } else {
-                  return [
-                    createTextVNode("Connexion")
-                  ];
-                }
-              }),
-              _: 1
-            }, _parent2, _scopeId));
-            _push2(ssrRenderComponent(unref(Link), {
-              href: "/register",
-              class: "btn-nav btn-nav-register"
-            }, {
-              default: withCtx((_2, _push3, _parent3, _scopeId2) => {
-                if (_push3) {
-                  _push3(`Inscription`);
-                } else {
-                  return [
-                    createTextVNode("Inscription")
-                  ];
-                }
-              }),
-              _: 1
-            }, _parent2, _scopeId));
+            _push2(`</div><div class="nav-actions" data-v-64487964${_scopeId}>`);
+            if (_ctx.$page.props.auth?.user) {
+              _push2(`<div class="user-menu-wrapper" data-v-64487964${_scopeId}>`);
+              _push2(ssrRenderComponent(_sfc_main$1g, null, null, _parent2, _scopeId));
+              _push2(`</div>`);
+            } else {
+              _push2(`<!--[-->`);
+              _push2(ssrRenderComponent(unref(Link), {
+                href: "/login",
+                class: "btn-nav btn-nav-login"
+              }, {
+                default: withCtx((_2, _push3, _parent3, _scopeId2) => {
+                  if (_push3) {
+                    _push3(`Connexion`);
+                  } else {
+                    return [
+                      createTextVNode("Connexion")
+                    ];
+                  }
+                }),
+                _: 1
+              }, _parent2, _scopeId));
+              _push2(ssrRenderComponent(unref(Link), {
+                href: "/register",
+                class: "btn-nav btn-nav-register"
+              }, {
+                default: withCtx((_2, _push3, _parent3, _scopeId2) => {
+                  if (_push3) {
+                    _push3(`Inscription`);
+                  } else {
+                    return [
+                      createTextVNode("Inscription")
+                    ];
+                  }
+                }),
+                _: 1
+              }, _parent2, _scopeId));
+              _push2(`<!--]-->`);
+            }
             _push2(`</div></div>`);
           } else {
             return [
@@ -37573,24 +37609,31 @@ const _sfc_main$L = /* @__PURE__ */ defineComponent({
                   })
                 ]),
                 createVNode("div", { class: "nav-actions" }, [
-                  createVNode(unref(Link), {
-                    href: "/login",
-                    class: "btn-nav btn-nav-login"
-                  }, {
-                    default: withCtx(() => [
-                      createTextVNode("Connexion")
-                    ]),
-                    _: 1
-                  }),
-                  createVNode(unref(Link), {
-                    href: "/register",
-                    class: "btn-nav btn-nav-register"
-                  }, {
-                    default: withCtx(() => [
-                      createTextVNode("Inscription")
-                    ]),
-                    _: 1
-                  })
+                  _ctx.$page.props.auth?.user ? (openBlock(), createBlock("div", {
+                    key: 0,
+                    class: "user-menu-wrapper"
+                  }, [
+                    createVNode(_sfc_main$1g)
+                  ])) : (openBlock(), createBlock(Fragment, { key: 1 }, [
+                    createVNode(unref(Link), {
+                      href: "/login",
+                      class: "btn-nav btn-nav-login"
+                    }, {
+                      default: withCtx(() => [
+                        createTextVNode("Connexion")
+                      ]),
+                      _: 1
+                    }),
+                    createVNode(unref(Link), {
+                      href: "/register",
+                      class: "btn-nav btn-nav-register"
+                    }, {
+                      default: withCtx(() => [
+                        createTextVNode("Inscription")
+                      ]),
+                      _: 1
+                    })
+                  ], 64))
                 ])
               ])
             ];
@@ -37598,11 +37641,11 @@ const _sfc_main$L = /* @__PURE__ */ defineComponent({
         }),
         _: 1
       }, _parent));
-      _push(`</nav><div class="page-header" data-v-3ea7d2b6>`);
+      _push(`</nav><div class="page-header" data-v-64487964>`);
       _push(ssrRenderComponent(unref(BContainer$1), null, {
         default: withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
-            _push2(`<h1 class="page-title" data-v-3ea7d2b6${_scopeId}>Trouvez votre établissement idéal</h1><p class="page-subtitle" data-v-3ea7d2b6${_scopeId}>Plus de 150 établissements partenaires pour réaliser votre rêve d&#39;étudier à l&#39;étranger</p>`);
+            _push2(`<h1 class="page-title" data-v-64487964${_scopeId}>Trouvez votre établissement idéal</h1><p class="page-subtitle" data-v-64487964${_scopeId}>Plus de 150 établissements partenaires pour réaliser votre rêve d&#39;étudier à l&#39;étranger</p>`);
           } else {
             return [
               createVNode("h1", { class: "page-title" }, "Trouvez votre établissement idéal"),
@@ -37625,7 +37668,7 @@ const _sfc_main$L = /* @__PURE__ */ defineComponent({
                   }, {
                     default: withCtx((_3, _push4, _parent4, _scopeId3) => {
                       if (_push4) {
-                        _push4(`<div class="filters-sidebar" data-v-3ea7d2b6${_scopeId3}><h3 class="filters-title" data-v-3ea7d2b6${_scopeId3}>Filtres</h3><div class="filter-group" data-v-3ea7d2b6${_scopeId3}><label class="filter-label" data-v-3ea7d2b6${_scopeId3}>Recherche</label>`);
+                        _push4(`<div class="filters-sidebar" data-v-64487964${_scopeId3}><h3 class="filters-title" data-v-64487964${_scopeId3}>Filtres</h3><div class="filter-group" data-v-64487964${_scopeId3}><label class="filter-label" data-v-64487964${_scopeId3}>Recherche</label>`);
                         _push4(ssrRenderComponent(unref(BFormInput$1), {
                           modelValue: searchFilters.value.search,
                           "onUpdate:modelValue": ($event) => searchFilters.value.search = $event,
@@ -37633,17 +37676,18 @@ const _sfc_main$L = /* @__PURE__ */ defineComponent({
                           class: "filter-input",
                           onKeyup: applyFilters
                         }, null, _parent4, _scopeId3));
-                        _push4(`</div><div class="filter-group" data-v-3ea7d2b6${_scopeId3}><label class="filter-label" data-v-3ea7d2b6${_scopeId3}>Pays</label>`);
+                        _push4(`</div><div class="filter-group" data-v-64487964${_scopeId3}><label class="filter-label" data-v-64487964${_scopeId3}>Pays</label>`);
                         _push4(ssrRenderComponent(unref(BFormSelect$1), {
                           modelValue: searchFilters.value.country_id,
                           "onUpdate:modelValue": ($event) => searchFilters.value.country_id = $event,
-                          class: "filter-input"
+                          class: "filter-input",
+                          onChange: onCountryChange
                         }, {
                           default: withCtx((_4, _push5, _parent5, _scopeId4) => {
                             if (_push5) {
-                              _push5(`<option value="" data-v-3ea7d2b6${_scopeId4}>Tous les pays</option><!--[-->`);
+                              _push5(`<option value="" data-v-64487964${_scopeId4}>Tous les pays</option><!--[-->`);
                               ssrRenderList(__props.filters.countries, (country) => {
-                                _push5(`<option${ssrRenderAttr("value", country.id)} data-v-3ea7d2b6${_scopeId4}>${ssrInterpolate(country.name)}</option>`);
+                                _push5(`<option${ssrRenderAttr("value", country.id)} data-v-64487964${_scopeId4}>${ssrInterpolate(country.name)}</option>`);
                               });
                               _push5(`<!--]-->`);
                             } else {
@@ -37660,7 +37704,35 @@ const _sfc_main$L = /* @__PURE__ */ defineComponent({
                           }),
                           _: 1
                         }, _parent4, _scopeId3));
-                        _push4(`</div><div class="filter-group" data-v-3ea7d2b6${_scopeId3}><label class="filter-label" data-v-3ea7d2b6${_scopeId3}>Type d&#39;établissement</label>`);
+                        _push4(`</div><div class="filter-group" data-v-64487964${_scopeId3}><label class="filter-label" data-v-64487964${_scopeId3}>Ville</label>`);
+                        _push4(ssrRenderComponent(unref(BFormSelect$1), {
+                          modelValue: searchFilters.value.city_id,
+                          "onUpdate:modelValue": ($event) => searchFilters.value.city_id = $event,
+                          class: "filter-input",
+                          disabled: !searchFilters.value.country_id
+                        }, {
+                          default: withCtx((_4, _push5, _parent5, _scopeId4) => {
+                            if (_push5) {
+                              _push5(`<option value="" data-v-64487964${_scopeId4}>Toutes les villes</option><!--[-->`);
+                              ssrRenderList(filteredCities.value, (city) => {
+                                _push5(`<option${ssrRenderAttr("value", city.id)} data-v-64487964${_scopeId4}>${ssrInterpolate(city.name)}</option>`);
+                              });
+                              _push5(`<!--]-->`);
+                            } else {
+                              return [
+                                createVNode("option", { value: "" }, "Toutes les villes"),
+                                (openBlock(true), createBlock(Fragment, null, renderList(filteredCities.value, (city) => {
+                                  return openBlock(), createBlock("option", {
+                                    key: city.id,
+                                    value: city.id
+                                  }, toDisplayString(city.name), 9, ["value"]);
+                                }), 128))
+                              ];
+                            }
+                          }),
+                          _: 1
+                        }, _parent4, _scopeId3));
+                        _push4(`</div><div class="filter-group" data-v-64487964${_scopeId3}><label class="filter-label" data-v-64487964${_scopeId3}>Type d&#39;établissement</label>`);
                         _push4(ssrRenderComponent(unref(BFormSelect$1), {
                           modelValue: searchFilters.value.establishment_type_id,
                           "onUpdate:modelValue": ($event) => searchFilters.value.establishment_type_id = $event,
@@ -37668,9 +37740,9 @@ const _sfc_main$L = /* @__PURE__ */ defineComponent({
                         }, {
                           default: withCtx((_4, _push5, _parent5, _scopeId4) => {
                             if (_push5) {
-                              _push5(`<option value="" data-v-3ea7d2b6${_scopeId4}>Tous les types</option><!--[-->`);
+                              _push5(`<option value="" data-v-64487964${_scopeId4}>Tous les types</option><!--[-->`);
                               ssrRenderList(__props.filters.establishment_types, (type) => {
-                                _push5(`<option${ssrRenderAttr("value", type.id)} data-v-3ea7d2b6${_scopeId4}>${ssrInterpolate(type.label)}</option>`);
+                                _push5(`<option${ssrRenderAttr("value", type.id)} data-v-64487964${_scopeId4}>${ssrInterpolate(type.label)}</option>`);
                               });
                               _push5(`<!--]-->`);
                             } else {
@@ -37687,7 +37759,7 @@ const _sfc_main$L = /* @__PURE__ */ defineComponent({
                           }),
                           _: 1
                         }, _parent4, _scopeId3));
-                        _push4(`</div><div class="filter-group" data-v-3ea7d2b6${_scopeId3}><label class="filter-label" data-v-3ea7d2b6${_scopeId3}>Domaine d&#39;études</label>`);
+                        _push4(`</div><div class="filter-group" data-v-64487964${_scopeId3}><label class="filter-label" data-v-64487964${_scopeId3}>Domaine d&#39;études</label>`);
                         _push4(ssrRenderComponent(unref(BFormSelect$1), {
                           modelValue: searchFilters.value.career_field_id,
                           "onUpdate:modelValue": ($event) => searchFilters.value.career_field_id = $event,
@@ -37695,9 +37767,9 @@ const _sfc_main$L = /* @__PURE__ */ defineComponent({
                         }, {
                           default: withCtx((_4, _push5, _parent5, _scopeId4) => {
                             if (_push5) {
-                              _push5(`<option value="" data-v-3ea7d2b6${_scopeId4}>Tous les domaines</option><!--[-->`);
+                              _push5(`<option value="" data-v-64487964${_scopeId4}>Tous les domaines</option><!--[-->`);
                               ssrRenderList(__props.filters.career_fields, (field) => {
-                                _push5(`<option${ssrRenderAttr("value", field.id)} data-v-3ea7d2b6${_scopeId4}>${ssrInterpolate(field.label)}</option>`);
+                                _push5(`<option${ssrRenderAttr("value", field.id)} data-v-64487964${_scopeId4}>${ssrInterpolate(field.label)}</option>`);
                               });
                               _push5(`<!--]-->`);
                             } else {
@@ -37751,7 +37823,8 @@ const _sfc_main$L = /* @__PURE__ */ defineComponent({
                               createVNode(unref(BFormSelect$1), {
                                 modelValue: searchFilters.value.country_id,
                                 "onUpdate:modelValue": ($event) => searchFilters.value.country_id = $event,
-                                class: "filter-input"
+                                class: "filter-input",
+                                onChange: onCountryChange
                               }, {
                                 default: withCtx(() => [
                                   createVNode("option", { value: "" }, "Tous les pays"),
@@ -37764,6 +37837,26 @@ const _sfc_main$L = /* @__PURE__ */ defineComponent({
                                 ]),
                                 _: 1
                               }, 8, ["modelValue", "onUpdate:modelValue"])
+                            ]),
+                            createVNode("div", { class: "filter-group" }, [
+                              createVNode("label", { class: "filter-label" }, "Ville"),
+                              createVNode(unref(BFormSelect$1), {
+                                modelValue: searchFilters.value.city_id,
+                                "onUpdate:modelValue": ($event) => searchFilters.value.city_id = $event,
+                                class: "filter-input",
+                                disabled: !searchFilters.value.country_id
+                              }, {
+                                default: withCtx(() => [
+                                  createVNode("option", { value: "" }, "Toutes les villes"),
+                                  (openBlock(true), createBlock(Fragment, null, renderList(filteredCities.value, (city) => {
+                                    return openBlock(), createBlock("option", {
+                                      key: city.id,
+                                      value: city.id
+                                    }, toDisplayString(city.name), 9, ["value"]);
+                                  }), 128))
+                                ]),
+                                _: 1
+                              }, 8, ["modelValue", "onUpdate:modelValue", "disabled"])
                             ]),
                             createVNode("div", { class: "filter-group" }, [
                               createVNode("label", { class: "filter-label" }, "Type d'établissement"),
@@ -37822,8 +37915,14 @@ const _sfc_main$L = /* @__PURE__ */ defineComponent({
                   _push3(ssrRenderComponent(unref(BCol$1), { lg: "9" }, {
                     default: withCtx((_3, _push4, _parent4, _scopeId3) => {
                       if (_push4) {
-                        _push4(`<div class="results-header" data-v-3ea7d2b6${_scopeId3}><h2 class="results-count" data-v-3ea7d2b6${_scopeId3}>${ssrInterpolate(__props.establishments.meta.total)} établissement${ssrInterpolate(__props.establishments.meta.total > 1 ? "s" : "")} trouvé${ssrInterpolate(__props.establishments.meta.total > 1 ? "s" : "")}</h2></div>`);
-                        if (__props.establishments.data.length > 0) {
+                        _push4(`<div class="results-header" data-v-64487964${_scopeId3}>`);
+                        if (__props.establishments?.meta?.total !== void 0) {
+                          _push4(`<h2 class="results-count" data-v-64487964${_scopeId3}>${ssrInterpolate(__props.establishments.meta.total)} établissement${ssrInterpolate(__props.establishments.meta.total > 1 ? "s" : "")} trouvé${ssrInterpolate(__props.establishments.meta.total > 1 ? "s" : "")}</h2>`);
+                        } else {
+                          _push4(`<!---->`);
+                        }
+                        _push4(`</div>`);
+                        if (__props.establishments?.data?.length > 0) {
                           _push4(ssrRenderComponent(unref(BRow$1), null, {
                             default: withCtx((_4, _push5, _parent5, _scopeId4) => {
                               if (_push5) {
@@ -37837,29 +37936,34 @@ const _sfc_main$L = /* @__PURE__ */ defineComponent({
                                   }, {
                                     default: withCtx((_5, _push6, _parent6, _scopeId5) => {
                                       if (_push6) {
-                                        _push6(`<div class="establishment-card" data-v-3ea7d2b6${_scopeId5}><div class="establishment-image" data-v-3ea7d2b6${_scopeId5}><div class="image-placeholder" data-v-3ea7d2b6${_scopeId5}><span class="placeholder-icon" data-v-3ea7d2b6${_scopeId5}>🏛️</span></div>`);
+                                        _push6(`<div class="establishment-card" data-v-64487964${_scopeId5}><div class="establishment-image" data-v-64487964${_scopeId5}>`);
+                                        if (establishment.logo) {
+                                          _push6(`<img${ssrRenderAttr("src", establishment.logo)}${ssrRenderAttr("alt", establishment.title)} class="establishment-img" data-v-64487964${_scopeId5}>`);
+                                        } else {
+                                          _push6(`<div class="image-placeholder" data-v-64487964${_scopeId5}><span class="placeholder-icon" data-v-64487964${_scopeId5}>🏛️</span></div>`);
+                                        }
                                         if (establishment.ratings?.average) {
-                                          _push6(`<div class="establishment-rating" data-v-3ea7d2b6${_scopeId5}><span class="rating-icon" data-v-3ea7d2b6${_scopeId5}>⭐</span><span class="rating-value" data-v-3ea7d2b6${_scopeId5}>${ssrInterpolate(establishment.ratings.average.toFixed(1))}</span></div>`);
+                                          _push6(`<div class="establishment-rating" data-v-64487964${_scopeId5}><span class="rating-icon" data-v-64487964${_scopeId5}>⭐</span><span class="rating-value" data-v-64487964${_scopeId5}>${ssrInterpolate(establishment.ratings.average.toFixed(1))}</span></div>`);
                                         } else {
                                           _push6(`<!---->`);
                                         }
-                                        _push6(`</div><div class="establishment-content" data-v-3ea7d2b6${_scopeId5}><h3 class="establishment-name" data-v-3ea7d2b6${_scopeId5}>${ssrInterpolate(establishment.title)}</h3><div class="establishment-meta" data-v-3ea7d2b6${_scopeId5}>`);
+                                        _push6(`</div><div class="establishment-content" data-v-64487964${_scopeId5}><h3 class="establishment-name" data-v-64487964${_scopeId5}>${ssrInterpolate(establishment.title)}</h3><div class="establishment-meta" data-v-64487964${_scopeId5}>`);
                                         if (establishment.city) {
-                                          _push6(`<div class="meta-item" data-v-3ea7d2b6${_scopeId5}><span class="meta-icon" data-v-3ea7d2b6${_scopeId5}>📍</span><span data-v-3ea7d2b6${_scopeId5}>${ssrInterpolate(establishment.city.name)}${ssrInterpolate(establishment.city.country ? ", " + establishment.city.country.name : "")}</span></div>`);
+                                          _push6(`<div class="meta-item" data-v-64487964${_scopeId5}><span class="meta-icon" data-v-64487964${_scopeId5}>📍</span><span data-v-64487964${_scopeId5}>${ssrInterpolate(establishment.city.name)}${ssrInterpolate(establishment.city.country ? ", " + establishment.city.country.name : "")}</span></div>`);
                                         } else {
                                           _push6(`<!---->`);
                                         }
                                         if (establishment.propertyType) {
-                                          _push6(`<div class="meta-item" data-v-3ea7d2b6${_scopeId5}><span class="meta-icon" data-v-3ea7d2b6${_scopeId5}>🎓</span><span data-v-3ea7d2b6${_scopeId5}>${ssrInterpolate(establishment.propertyType.label)}</span></div>`);
+                                          _push6(`<div class="meta-item" data-v-64487964${_scopeId5}><span class="meta-icon" data-v-64487964${_scopeId5}>🎓</span><span data-v-64487964${_scopeId5}>${ssrInterpolate(establishment.propertyType.label)}</span></div>`);
                                         } else {
                                           _push6(`<!---->`);
                                         }
                                         if (establishment.category) {
-                                          _push6(`<div class="meta-item" data-v-3ea7d2b6${_scopeId5}><span class="meta-icon" data-v-3ea7d2b6${_scopeId5}>📚</span><span data-v-3ea7d2b6${_scopeId5}>${ssrInterpolate(establishment.category.label)}</span></div>`);
+                                          _push6(`<div class="meta-item" data-v-64487964${_scopeId5}><span class="meta-icon" data-v-64487964${_scopeId5}>📚</span><span data-v-64487964${_scopeId5}>${ssrInterpolate(establishment.category.label)}</span></div>`);
                                         } else {
                                           _push6(`<!---->`);
                                         }
-                                        _push6(`</div><p class="establishment-description" data-v-3ea7d2b6${_scopeId5}>${ssrInterpolate(establishment.description || "Découvrez cet établissement d'enseignement supérieur en Afrique.")}</p>`);
+                                        _push6(`</div><p class="establishment-description" data-v-64487964${_scopeId5}>${ssrInterpolate(establishment.description || "Découvrez cet établissement d'enseignement supérieur en Afrique.")}</p>`);
                                         _push6(ssrRenderComponent(unref(Link), {
                                           href: `/establishments/${establishment.slug}`,
                                           class: "btn btn-primary w-100 establishment-cta"
@@ -37880,11 +37984,19 @@ const _sfc_main$L = /* @__PURE__ */ defineComponent({
                                         return [
                                           createVNode("div", { class: "establishment-card" }, [
                                             createVNode("div", { class: "establishment-image" }, [
-                                              createVNode("div", { class: "image-placeholder" }, [
-                                                createVNode("span", { class: "placeholder-icon" }, "🏛️")
-                                              ]),
-                                              establishment.ratings?.average ? (openBlock(), createBlock("div", {
+                                              establishment.logo ? (openBlock(), createBlock("img", {
                                                 key: 0,
+                                                src: establishment.logo,
+                                                alt: establishment.title,
+                                                class: "establishment-img"
+                                              }, null, 8, ["src", "alt"])) : (openBlock(), createBlock("div", {
+                                                key: 1,
+                                                class: "image-placeholder"
+                                              }, [
+                                                createVNode("span", { class: "placeholder-icon" }, "🏛️")
+                                              ])),
+                                              establishment.ratings?.average ? (openBlock(), createBlock("div", {
+                                                key: 2,
                                                 class: "establishment-rating"
                                               }, [
                                                 createVNode("span", { class: "rating-icon" }, "⭐"),
@@ -37947,11 +38059,19 @@ const _sfc_main$L = /* @__PURE__ */ defineComponent({
                                       default: withCtx(() => [
                                         createVNode("div", { class: "establishment-card" }, [
                                           createVNode("div", { class: "establishment-image" }, [
-                                            createVNode("div", { class: "image-placeholder" }, [
-                                              createVNode("span", { class: "placeholder-icon" }, "🏛️")
-                                            ]),
-                                            establishment.ratings?.average ? (openBlock(), createBlock("div", {
+                                            establishment.logo ? (openBlock(), createBlock("img", {
                                               key: 0,
+                                              src: establishment.logo,
+                                              alt: establishment.title,
+                                              class: "establishment-img"
+                                            }, null, 8, ["src", "alt"])) : (openBlock(), createBlock("div", {
+                                              key: 1,
+                                              class: "image-placeholder"
+                                            }, [
+                                              createVNode("span", { class: "placeholder-icon" }, "🏛️")
+                                            ])),
+                                            establishment.ratings?.average ? (openBlock(), createBlock("div", {
+                                              key: 2,
                                               class: "establishment-rating"
                                             }, [
                                               createVNode("span", { class: "rating-icon" }, "⭐"),
@@ -38005,11 +38125,11 @@ const _sfc_main$L = /* @__PURE__ */ defineComponent({
                             _: 1
                           }, _parent4, _scopeId3));
                         } else {
-                          _push4(`<div class="no-results text-center py-5" data-v-3ea7d2b6${_scopeId3}><p class="text-muted" data-v-3ea7d2b6${_scopeId3}>Aucun établissement ne correspond à vos critères de recherche.</p>`);
+                          _push4(`<div class="no-results text-center py-5" data-v-64487964${_scopeId3}><p class="text-muted" data-v-64487964${_scopeId3}>Aucun établissement ne correspond à vos critères de recherche.</p>`);
                           _push4(ssrRenderComponent(unref(BButton$1), {
                             variant: "outline-primary",
                             onClick: ($event) => {
-                              searchFilters.value = { country_id: "", career_field_id: "", establishment_type_id: "", search: "" };
+                              searchFilters.value = { country_id: "", city_id: "", career_field_id: "", establishment_type_id: "", search: "" };
                               applyFilters();
                             }
                           }, {
@@ -38029,9 +38149,12 @@ const _sfc_main$L = /* @__PURE__ */ defineComponent({
                       } else {
                         return [
                           createVNode("div", { class: "results-header" }, [
-                            createVNode("h2", { class: "results-count" }, toDisplayString(__props.establishments.meta.total) + " établissement" + toDisplayString(__props.establishments.meta.total > 1 ? "s" : "") + " trouvé" + toDisplayString(__props.establishments.meta.total > 1 ? "s" : ""), 1)
+                            __props.establishments?.meta?.total !== void 0 ? (openBlock(), createBlock("h2", {
+                              key: 0,
+                              class: "results-count"
+                            }, toDisplayString(__props.establishments.meta.total) + " établissement" + toDisplayString(__props.establishments.meta.total > 1 ? "s" : "") + " trouvé" + toDisplayString(__props.establishments.meta.total > 1 ? "s" : ""), 1)) : createCommentVNode("", true)
                           ]),
-                          __props.establishments.data.length > 0 ? (openBlock(), createBlock(unref(BRow$1), { key: 0 }, {
+                          __props.establishments?.data?.length > 0 ? (openBlock(), createBlock(unref(BRow$1), { key: 0 }, {
                             default: withCtx(() => [
                               (openBlock(true), createBlock(Fragment, null, renderList(__props.establishments.data, (establishment) => {
                                 return openBlock(), createBlock(unref(BCol$1), {
@@ -38043,11 +38166,19 @@ const _sfc_main$L = /* @__PURE__ */ defineComponent({
                                   default: withCtx(() => [
                                     createVNode("div", { class: "establishment-card" }, [
                                       createVNode("div", { class: "establishment-image" }, [
-                                        createVNode("div", { class: "image-placeholder" }, [
-                                          createVNode("span", { class: "placeholder-icon" }, "🏛️")
-                                        ]),
-                                        establishment.ratings?.average ? (openBlock(), createBlock("div", {
+                                        establishment.logo ? (openBlock(), createBlock("img", {
                                           key: 0,
+                                          src: establishment.logo,
+                                          alt: establishment.title,
+                                          class: "establishment-img"
+                                        }, null, 8, ["src", "alt"])) : (openBlock(), createBlock("div", {
+                                          key: 1,
+                                          class: "image-placeholder"
+                                        }, [
+                                          createVNode("span", { class: "placeholder-icon" }, "🏛️")
+                                        ])),
+                                        establishment.ratings?.average ? (openBlock(), createBlock("div", {
+                                          key: 2,
                                           class: "establishment-rating"
                                         }, [
                                           createVNode("span", { class: "rating-icon" }, "⭐"),
@@ -38105,7 +38236,7 @@ const _sfc_main$L = /* @__PURE__ */ defineComponent({
                             createVNode(unref(BButton$1), {
                               variant: "outline-primary",
                               onClick: ($event) => {
-                                searchFilters.value = { country_id: "", career_field_id: "", establishment_type_id: "", search: "" };
+                                searchFilters.value = { country_id: "", city_id: "", career_field_id: "", establishment_type_id: "", search: "" };
                                 applyFilters();
                               }
                             }, {
@@ -38144,7 +38275,8 @@ const _sfc_main$L = /* @__PURE__ */ defineComponent({
                             createVNode(unref(BFormSelect$1), {
                               modelValue: searchFilters.value.country_id,
                               "onUpdate:modelValue": ($event) => searchFilters.value.country_id = $event,
-                              class: "filter-input"
+                              class: "filter-input",
+                              onChange: onCountryChange
                             }, {
                               default: withCtx(() => [
                                 createVNode("option", { value: "" }, "Tous les pays"),
@@ -38157,6 +38289,26 @@ const _sfc_main$L = /* @__PURE__ */ defineComponent({
                               ]),
                               _: 1
                             }, 8, ["modelValue", "onUpdate:modelValue"])
+                          ]),
+                          createVNode("div", { class: "filter-group" }, [
+                            createVNode("label", { class: "filter-label" }, "Ville"),
+                            createVNode(unref(BFormSelect$1), {
+                              modelValue: searchFilters.value.city_id,
+                              "onUpdate:modelValue": ($event) => searchFilters.value.city_id = $event,
+                              class: "filter-input",
+                              disabled: !searchFilters.value.country_id
+                            }, {
+                              default: withCtx(() => [
+                                createVNode("option", { value: "" }, "Toutes les villes"),
+                                (openBlock(true), createBlock(Fragment, null, renderList(filteredCities.value, (city) => {
+                                  return openBlock(), createBlock("option", {
+                                    key: city.id,
+                                    value: city.id
+                                  }, toDisplayString(city.name), 9, ["value"]);
+                                }), 128))
+                              ]),
+                              _: 1
+                            }, 8, ["modelValue", "onUpdate:modelValue", "disabled"])
                           ]),
                           createVNode("div", { class: "filter-group" }, [
                             createVNode("label", { class: "filter-label" }, "Type d'établissement"),
@@ -38213,9 +38365,12 @@ const _sfc_main$L = /* @__PURE__ */ defineComponent({
                     createVNode(unref(BCol$1), { lg: "9" }, {
                       default: withCtx(() => [
                         createVNode("div", { class: "results-header" }, [
-                          createVNode("h2", { class: "results-count" }, toDisplayString(__props.establishments.meta.total) + " établissement" + toDisplayString(__props.establishments.meta.total > 1 ? "s" : "") + " trouvé" + toDisplayString(__props.establishments.meta.total > 1 ? "s" : ""), 1)
+                          __props.establishments?.meta?.total !== void 0 ? (openBlock(), createBlock("h2", {
+                            key: 0,
+                            class: "results-count"
+                          }, toDisplayString(__props.establishments.meta.total) + " établissement" + toDisplayString(__props.establishments.meta.total > 1 ? "s" : "") + " trouvé" + toDisplayString(__props.establishments.meta.total > 1 ? "s" : ""), 1)) : createCommentVNode("", true)
                         ]),
-                        __props.establishments.data.length > 0 ? (openBlock(), createBlock(unref(BRow$1), { key: 0 }, {
+                        __props.establishments?.data?.length > 0 ? (openBlock(), createBlock(unref(BRow$1), { key: 0 }, {
                           default: withCtx(() => [
                             (openBlock(true), createBlock(Fragment, null, renderList(__props.establishments.data, (establishment) => {
                               return openBlock(), createBlock(unref(BCol$1), {
@@ -38227,11 +38382,19 @@ const _sfc_main$L = /* @__PURE__ */ defineComponent({
                                 default: withCtx(() => [
                                   createVNode("div", { class: "establishment-card" }, [
                                     createVNode("div", { class: "establishment-image" }, [
-                                      createVNode("div", { class: "image-placeholder" }, [
-                                        createVNode("span", { class: "placeholder-icon" }, "🏛️")
-                                      ]),
-                                      establishment.ratings?.average ? (openBlock(), createBlock("div", {
+                                      establishment.logo ? (openBlock(), createBlock("img", {
                                         key: 0,
+                                        src: establishment.logo,
+                                        alt: establishment.title,
+                                        class: "establishment-img"
+                                      }, null, 8, ["src", "alt"])) : (openBlock(), createBlock("div", {
+                                        key: 1,
+                                        class: "image-placeholder"
+                                      }, [
+                                        createVNode("span", { class: "placeholder-icon" }, "🏛️")
+                                      ])),
+                                      establishment.ratings?.average ? (openBlock(), createBlock("div", {
+                                        key: 2,
                                         class: "establishment-rating"
                                       }, [
                                         createVNode("span", { class: "rating-icon" }, "⭐"),
@@ -38289,7 +38452,7 @@ const _sfc_main$L = /* @__PURE__ */ defineComponent({
                           createVNode(unref(BButton$1), {
                             variant: "outline-primary",
                             onClick: ($event) => {
-                              searchFilters.value = { country_id: "", career_field_id: "", establishment_type_id: "", search: "" };
+                              searchFilters.value = { country_id: "", city_id: "", career_field_id: "", establishment_type_id: "", search: "" };
                               applyFilters();
                             }
                           }, {
@@ -38333,7 +38496,8 @@ const _sfc_main$L = /* @__PURE__ */ defineComponent({
                           createVNode(unref(BFormSelect$1), {
                             modelValue: searchFilters.value.country_id,
                             "onUpdate:modelValue": ($event) => searchFilters.value.country_id = $event,
-                            class: "filter-input"
+                            class: "filter-input",
+                            onChange: onCountryChange
                           }, {
                             default: withCtx(() => [
                               createVNode("option", { value: "" }, "Tous les pays"),
@@ -38346,6 +38510,26 @@ const _sfc_main$L = /* @__PURE__ */ defineComponent({
                             ]),
                             _: 1
                           }, 8, ["modelValue", "onUpdate:modelValue"])
+                        ]),
+                        createVNode("div", { class: "filter-group" }, [
+                          createVNode("label", { class: "filter-label" }, "Ville"),
+                          createVNode(unref(BFormSelect$1), {
+                            modelValue: searchFilters.value.city_id,
+                            "onUpdate:modelValue": ($event) => searchFilters.value.city_id = $event,
+                            class: "filter-input",
+                            disabled: !searchFilters.value.country_id
+                          }, {
+                            default: withCtx(() => [
+                              createVNode("option", { value: "" }, "Toutes les villes"),
+                              (openBlock(true), createBlock(Fragment, null, renderList(filteredCities.value, (city) => {
+                                return openBlock(), createBlock("option", {
+                                  key: city.id,
+                                  value: city.id
+                                }, toDisplayString(city.name), 9, ["value"]);
+                              }), 128))
+                            ]),
+                            _: 1
+                          }, 8, ["modelValue", "onUpdate:modelValue", "disabled"])
                         ]),
                         createVNode("div", { class: "filter-group" }, [
                           createVNode("label", { class: "filter-label" }, "Type d'établissement"),
@@ -38402,9 +38586,12 @@ const _sfc_main$L = /* @__PURE__ */ defineComponent({
                   createVNode(unref(BCol$1), { lg: "9" }, {
                     default: withCtx(() => [
                       createVNode("div", { class: "results-header" }, [
-                        createVNode("h2", { class: "results-count" }, toDisplayString(__props.establishments.meta.total) + " établissement" + toDisplayString(__props.establishments.meta.total > 1 ? "s" : "") + " trouvé" + toDisplayString(__props.establishments.meta.total > 1 ? "s" : ""), 1)
+                        __props.establishments?.meta?.total !== void 0 ? (openBlock(), createBlock("h2", {
+                          key: 0,
+                          class: "results-count"
+                        }, toDisplayString(__props.establishments.meta.total) + " établissement" + toDisplayString(__props.establishments.meta.total > 1 ? "s" : "") + " trouvé" + toDisplayString(__props.establishments.meta.total > 1 ? "s" : ""), 1)) : createCommentVNode("", true)
                       ]),
-                      __props.establishments.data.length > 0 ? (openBlock(), createBlock(unref(BRow$1), { key: 0 }, {
+                      __props.establishments?.data?.length > 0 ? (openBlock(), createBlock(unref(BRow$1), { key: 0 }, {
                         default: withCtx(() => [
                           (openBlock(true), createBlock(Fragment, null, renderList(__props.establishments.data, (establishment) => {
                             return openBlock(), createBlock(unref(BCol$1), {
@@ -38416,11 +38603,19 @@ const _sfc_main$L = /* @__PURE__ */ defineComponent({
                               default: withCtx(() => [
                                 createVNode("div", { class: "establishment-card" }, [
                                   createVNode("div", { class: "establishment-image" }, [
-                                    createVNode("div", { class: "image-placeholder" }, [
-                                      createVNode("span", { class: "placeholder-icon" }, "🏛️")
-                                    ]),
-                                    establishment.ratings?.average ? (openBlock(), createBlock("div", {
+                                    establishment.logo ? (openBlock(), createBlock("img", {
                                       key: 0,
+                                      src: establishment.logo,
+                                      alt: establishment.title,
+                                      class: "establishment-img"
+                                    }, null, 8, ["src", "alt"])) : (openBlock(), createBlock("div", {
+                                      key: 1,
+                                      class: "image-placeholder"
+                                    }, [
+                                      createVNode("span", { class: "placeholder-icon" }, "🏛️")
+                                    ])),
+                                    establishment.ratings?.average ? (openBlock(), createBlock("div", {
+                                      key: 2,
                                       class: "establishment-rating"
                                     }, [
                                       createVNode("span", { class: "rating-icon" }, "⭐"),
@@ -38478,7 +38673,7 @@ const _sfc_main$L = /* @__PURE__ */ defineComponent({
                         createVNode(unref(BButton$1), {
                           variant: "outline-primary",
                           onClick: ($event) => {
-                            searchFilters.value = { country_id: "", career_field_id: "", establishment_type_id: "", search: "" };
+                            searchFilters.value = { country_id: "", city_id: "", career_field_id: "", establishment_type_id: "", search: "" };
                             applyFilters();
                           }
                         }, {
@@ -38499,11 +38694,11 @@ const _sfc_main$L = /* @__PURE__ */ defineComponent({
         }),
         _: 1
       }, _parent));
-      _push(`<footer class="main-footer" data-v-3ea7d2b6>`);
+      _push(`<footer class="main-footer" data-v-64487964>`);
       _push(ssrRenderComponent(unref(BContainer$1), null, {
         default: withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
-            _push2(`<div class="footer-content text-center" data-v-3ea7d2b6${_scopeId}><p class="mb-0" data-v-3ea7d2b6${_scopeId}>© 2025 EtapSup. Tous droits réservés.</p></div>`);
+            _push2(`<div class="footer-content text-center" data-v-64487964${_scopeId}><p class="mb-0" data-v-64487964${_scopeId}>© 2025 EtapSup. Tous droits réservés.</p></div>`);
           } else {
             return [
               createVNode("div", { class: "footer-content text-center" }, [
@@ -38518,13 +38713,13 @@ const _sfc_main$L = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_setup$L = _sfc_main$L.setup;
-_sfc_main$L.setup = (props, ctx) => {
+const _sfc_setup$M = _sfc_main$M.setup;
+_sfc_main$M.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/Pages/Establishments/Index.vue");
-  return _sfc_setup$L ? _sfc_setup$L(props, ctx) : void 0;
+  return _sfc_setup$M ? _sfc_setup$M(props, ctx) : void 0;
 };
-const Index$3 = /* @__PURE__ */ _export_sfc(_sfc_main$L, [["__scopeId", "data-v-3ea7d2b6"]]);
+const Index$3 = /* @__PURE__ */ _export_sfc(_sfc_main$M, [["__scopeId", "data-v-64487964"]]);
 const __vite_glob_0_34 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: Index$3
@@ -38543,7 +38738,7 @@ const types = {
     viewbox: "0 0 0 0"
   }
 };
-const _sfc_main$K = {
+const _sfc_main$L = {
   name: "icon",
   props: {
     type: String,
@@ -38583,14 +38778,14 @@ function _sfc_ssrRender$4(_ctx, _push, _parent, _attrs, $props, $setup, $data, $
     style: $options.styles
   }, _attrs))} data-v-76aa6b74><path${ssrRenderAttr("d", $props.path)} data-v-76aa6b74></path></svg>`);
 }
-const _sfc_setup$K = _sfc_main$K.setup;
-_sfc_main$K.setup = (props, ctx) => {
+const _sfc_setup$L = _sfc_main$L.setup;
+_sfc_main$L.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("node_modules/@jamescoyle/vue-icon/lib/svg-icon.vue");
-  return _sfc_setup$K ? _sfc_setup$K(props, ctx) : void 0;
+  return _sfc_setup$L ? _sfc_setup$L(props, ctx) : void 0;
 };
-const SvgIcon = /* @__PURE__ */ _export_sfc(_sfc_main$K, [["ssrRender", _sfc_ssrRender$4], ["__scopeId", "data-v-76aa6b74"]]);
-const _sfc_main$J = /* @__PURE__ */ defineComponent({
+const SvgIcon = /* @__PURE__ */ _export_sfc(_sfc_main$L, [["ssrRender", _sfc_ssrRender$4], ["__scopeId", "data-v-76aa6b74"]]);
+const _sfc_main$K = /* @__PURE__ */ defineComponent({
   __name: "ExpandableContent",
   __ssrInlineRender: true,
   props: {
@@ -38652,15 +38847,15 @@ const _sfc_main$J = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_setup$J = _sfc_main$J.setup;
-_sfc_main$J.setup = (props, ctx) => {
+const _sfc_setup$K = _sfc_main$K.setup;
+_sfc_main$K.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/Components/ExpandableContent.vue");
-  return _sfc_setup$J ? _sfc_setup$J(props, ctx) : void 0;
+  return _sfc_setup$K ? _sfc_setup$K(props, ctx) : void 0;
 };
-const ExpandableContent = /* @__PURE__ */ _export_sfc(_sfc_main$J, [["__scopeId", "data-v-10b11032"]]);
-const _sfc_main$I = /* @__PURE__ */ defineComponent({
-  ...{ layout: _sfc_main$1A },
+const ExpandableContent = /* @__PURE__ */ _export_sfc(_sfc_main$K, [["__scopeId", "data-v-10b11032"]]);
+const _sfc_main$J = /* @__PURE__ */ defineComponent({
+  ...{ layout: _sfc_main$1B },
   __name: "Show",
   __ssrInlineRender: true,
   props: {
@@ -38708,7 +38903,7 @@ const _sfc_main$I = /* @__PURE__ */ defineComponent({
     };
     return (_ctx, _push, _parent, _attrs) => {
       _push(`<!--[-->`);
-      _push(ssrRenderComponent(_sfc_main$1I, {
+      _push(ssrRenderComponent(_sfc_main$1J, {
         title: __props.establishment.title
       }, {
         default: withCtx((_, _push2, _parent2, _scopeId) => {
@@ -42957,19 +43152,1242 @@ const _sfc_main$I = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_setup$I = _sfc_main$I.setup;
-_sfc_main$I.setup = (props, ctx) => {
+const _sfc_setup$J = _sfc_main$J.setup;
+_sfc_main$J.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/Pages/Establishments/Show.vue");
-  return _sfc_setup$I ? _sfc_setup$I(props, ctx) : void 0;
+  return _sfc_setup$J ? _sfc_setup$J(props, ctx) : void 0;
 };
-const Show$1 = /* @__PURE__ */ _export_sfc(_sfc_main$I, [["__scopeId", "data-v-8e96c5f6"]]);
+const Show$1 = /* @__PURE__ */ _export_sfc(_sfc_main$J, [["__scopeId", "data-v-8e96c5f6"]]);
 const __vite_glob_0_35 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: Show$1
 }, Symbol.toStringTag, { value: "Module" }));
+const _sfc_main$I = /* @__PURE__ */ defineComponent({
+  ...{ layout: _sfc_main$1B },
+  __name: "Accueil",
+  __ssrInlineRender: true,
+  props: {
+    establishments: { default: () => [] },
+    stats: { default: () => ({
+      totalEstablishments: 150,
+      totalStudents: 2500,
+      totalCountries: 15,
+      totalPrograms: 520
+    }) },
+    countries: { default: () => [] },
+    studyFields: { default: () => [] }
+  },
+  setup(__props) {
+    const searchForm = ref({
+      country: "",
+      study_field: "",
+      keywords: ""
+    });
+    const handleSearch = () => {
+      router.get("/establishments", searchForm.value);
+    };
+    const isVisible = ref(false);
+    onMounted(() => {
+      setTimeout(() => {
+        isVisible.value = true;
+      }, 100);
+    });
+    const popularFields = [
+      { icon: "💼", name: "Commerce & Gestion", slug: "commerce" },
+      { icon: "⚕️", name: "Santé & Médecine", slug: "sante" },
+      { icon: "💻", name: "Informatique & Tech", slug: "informatique" },
+      { icon: "🎨", name: "Arts & Design", slug: "arts" },
+      { icon: "⚖️", name: "Droit & Sciences Po", slug: "droit" },
+      { icon: "🔬", name: "Sciences & Ingénierie", slug: "sciences" },
+      { icon: "🌍", name: "Environnement", slug: "environnement" },
+      { icon: "🎓", name: "Éducation & Formation", slug: "education" }
+    ];
+    const benefits = [
+      {
+        icon: "🎯",
+        title: "Orientation personnalisée",
+        description: "Un accompagnement sur-mesure pour trouver la formation qui vous correspond"
+      },
+      {
+        icon: "🌍",
+        title: "Réseau international",
+        description: "Plus de 150 établissements partenaires dans 15 pays africains"
+      },
+      {
+        icon: "✅",
+        title: "Candidature simplifiée",
+        description: "Postulez en quelques clics avec un dossier unique pour tous vos choix"
+      },
+      {
+        icon: "🤝",
+        title: "Suivi complet",
+        description: "De la recherche jusqu'à votre inscription, nous vous accompagnons"
+      }
+    ];
+    const testimonials = [
+      {
+        name: "Aminata D.",
+        country: "Sénégal",
+        photo: "https://ui-avatars.com/api/?name=Aminata+D&background=1e3a8a&color=fff&size=128",
+        text: "Grâce à EtapSup, j'ai trouvé la formation parfaite au Ghana. Le processus était simple et rapide !",
+        rating: 5
+      },
+      {
+        name: "Kofi M.",
+        country: "Ghana",
+        photo: "https://ui-avatars.com/api/?name=Kofi+M&background=dc2626&color=fff&size=128",
+        text: "L'accompagnement personnalisé m'a aidé à choisir parmi plusieurs options. Merci EtapSup !",
+        rating: 5
+      },
+      {
+        name: "Fatima B.",
+        country: "Côte d'Ivoire",
+        photo: "https://ui-avatars.com/api/?name=Fatima+B&background=1e3a8a&color=fff&size=128",
+        text: "Service excellent, réponses rapides. Je recommande vivement pour les études à l'étranger.",
+        rating: 5
+      }
+    ];
+    return (_ctx, _push, _parent, _attrs) => {
+      _push(`<!--[-->`);
+      _push(ssrRenderComponent(unref(Head), { title: "EtapSup - Votre passerelle vers les études supérieures à l'étranger" }, null, _parent));
+      _push(`<div class="landing-page" data-v-2867a92e><section class="${ssrRenderClass([{ "is-visible": isVisible.value }, "hero-section"])}" data-v-2867a92e>`);
+      _push(ssrRenderComponent(unref(BContainer$1), null, {
+        default: withCtx((_, _push2, _parent2, _scopeId) => {
+          if (_push2) {
+            _push2(ssrRenderComponent(unref(BRow$1), { class: "align-items-center min-vh-75" }, {
+              default: withCtx((_2, _push3, _parent3, _scopeId2) => {
+                if (_push3) {
+                  _push3(ssrRenderComponent(unref(BCol$1), {
+                    lg: "7",
+                    class: "hero-content"
+                  }, {
+                    default: withCtx((_3, _push4, _parent4, _scopeId3) => {
+                      if (_push4) {
+                        _push4(`<div class="badge-new mb-3" data-v-2867a92e${_scopeId3}><span class="badge-pulse" data-v-2867a92e${_scopeId3}></span> Nouveau : Accompagnement Premium disponible </div><h1 class="hero-title" data-v-2867a92e${_scopeId3}> Trouvez votre formation <span class="text-gradient" data-v-2867a92e${_scopeId3}>à l&#39;étranger</span></h1><p class="hero-subtitle" data-v-2867a92e${_scopeId3}> Plus de 150 établissements partenaires dans 15 pays africains. <br class="d-none d-md-block" data-v-2867a92e${_scopeId3}> Postulez en quelques clics avec un accompagnement personnalisé. </p><div class="search-card" data-v-2867a92e${_scopeId3}><form class="search-form" data-v-2867a92e${_scopeId3}><div class="search-field" data-v-2867a92e${_scopeId3}><label class="search-label" data-v-2867a92e${_scopeId3}><i class="bi bi-flag" data-v-2867a92e${_scopeId3}></i> Pays </label>`);
+                        _push4(ssrRenderComponent(unref(BFormSelect$1), {
+                          modelValue: searchForm.value.country,
+                          "onUpdate:modelValue": ($event) => searchForm.value.country = $event,
+                          options: [
+                            { value: "", text: "Tous les pays" },
+                            ...__props.countries.map((c2) => ({ value: c2.id, text: c2.name }))
+                          ],
+                          class: "search-select"
+                        }, null, _parent4, _scopeId3));
+                        _push4(`</div><div class="search-field" data-v-2867a92e${_scopeId3}><label class="search-label" data-v-2867a92e${_scopeId3}><i class="bi bi-book" data-v-2867a92e${_scopeId3}></i> Domaine d&#39;études </label>`);
+                        _push4(ssrRenderComponent(unref(BFormSelect$1), {
+                          modelValue: searchForm.value.study_field,
+                          "onUpdate:modelValue": ($event) => searchForm.value.study_field = $event,
+                          options: [
+                            { value: "", text: "Tous les domaines" },
+                            ...__props.studyFields.map((f2) => ({ value: f2.id, text: f2.name }))
+                          ],
+                          class: "search-select"
+                        }, null, _parent4, _scopeId3));
+                        _push4(`</div><div class="search-field flex-grow-1" data-v-2867a92e${_scopeId3}><label class="search-label" data-v-2867a92e${_scopeId3}><i class="bi bi-search" data-v-2867a92e${_scopeId3}></i> Mots-clés </label>`);
+                        _push4(ssrRenderComponent(unref(BFormInput$1), {
+                          modelValue: searchForm.value.keywords,
+                          "onUpdate:modelValue": ($event) => searchForm.value.keywords = $event,
+                          placeholder: "Ex: Médecine, Commerce, Informatique...",
+                          class: "search-input"
+                        }, null, _parent4, _scopeId3));
+                        _push4(`</div>`);
+                        _push4(ssrRenderComponent(unref(BButton$1), {
+                          type: "submit",
+                          class: "btn-search"
+                        }, {
+                          default: withCtx((_4, _push5, _parent5, _scopeId4) => {
+                            if (_push5) {
+                              _push5(`<i class="bi bi-search me-2" data-v-2867a92e${_scopeId4}></i> Rechercher `);
+                            } else {
+                              return [
+                                createVNode("i", { class: "bi bi-search me-2" }),
+                                createTextVNode(" Rechercher ")
+                              ];
+                            }
+                          }),
+                          _: 1
+                        }, _parent4, _scopeId3));
+                        _push4(`</form></div><div class="stats-row" data-v-2867a92e${_scopeId3}><div class="stat-item" data-v-2867a92e${_scopeId3}><div class="stat-value" data-v-2867a92e${_scopeId3}>${ssrInterpolate(__props.stats.totalEstablishments)}+</div><div class="stat-label" data-v-2867a92e${_scopeId3}>Établissements</div></div><div class="stat-item" data-v-2867a92e${_scopeId3}><div class="stat-value" data-v-2867a92e${_scopeId3}>${ssrInterpolate(__props.stats.totalStudents)}+</div><div class="stat-label" data-v-2867a92e${_scopeId3}>Étudiants accompagnés</div></div><div class="stat-item" data-v-2867a92e${_scopeId3}><div class="stat-value" data-v-2867a92e${_scopeId3}>${ssrInterpolate(__props.stats.totalCountries)}</div><div class="stat-label" data-v-2867a92e${_scopeId3}>Pays</div></div></div>`);
+                      } else {
+                        return [
+                          createVNode("div", { class: "badge-new mb-3" }, [
+                            createVNode("span", { class: "badge-pulse" }),
+                            createTextVNode(" Nouveau : Accompagnement Premium disponible ")
+                          ]),
+                          createVNode("h1", { class: "hero-title" }, [
+                            createTextVNode(" Trouvez votre formation "),
+                            createVNode("span", { class: "text-gradient" }, "à l'étranger")
+                          ]),
+                          createVNode("p", { class: "hero-subtitle" }, [
+                            createTextVNode(" Plus de 150 établissements partenaires dans 15 pays africains. "),
+                            createVNode("br", { class: "d-none d-md-block" }),
+                            createTextVNode(" Postulez en quelques clics avec un accompagnement personnalisé. ")
+                          ]),
+                          createVNode("div", { class: "search-card" }, [
+                            createVNode("form", {
+                              onSubmit: withModifiers(handleSearch, ["prevent"]),
+                              class: "search-form"
+                            }, [
+                              createVNode("div", { class: "search-field" }, [
+                                createVNode("label", { class: "search-label" }, [
+                                  createVNode("i", { class: "bi bi-flag" }),
+                                  createTextVNode(" Pays ")
+                                ]),
+                                createVNode(unref(BFormSelect$1), {
+                                  modelValue: searchForm.value.country,
+                                  "onUpdate:modelValue": ($event) => searchForm.value.country = $event,
+                                  options: [
+                                    { value: "", text: "Tous les pays" },
+                                    ...__props.countries.map((c2) => ({ value: c2.id, text: c2.name }))
+                                  ],
+                                  class: "search-select"
+                                }, null, 8, ["modelValue", "onUpdate:modelValue", "options"])
+                              ]),
+                              createVNode("div", { class: "search-field" }, [
+                                createVNode("label", { class: "search-label" }, [
+                                  createVNode("i", { class: "bi bi-book" }),
+                                  createTextVNode(" Domaine d'études ")
+                                ]),
+                                createVNode(unref(BFormSelect$1), {
+                                  modelValue: searchForm.value.study_field,
+                                  "onUpdate:modelValue": ($event) => searchForm.value.study_field = $event,
+                                  options: [
+                                    { value: "", text: "Tous les domaines" },
+                                    ...__props.studyFields.map((f2) => ({ value: f2.id, text: f2.name }))
+                                  ],
+                                  class: "search-select"
+                                }, null, 8, ["modelValue", "onUpdate:modelValue", "options"])
+                              ]),
+                              createVNode("div", { class: "search-field flex-grow-1" }, [
+                                createVNode("label", { class: "search-label" }, [
+                                  createVNode("i", { class: "bi bi-search" }),
+                                  createTextVNode(" Mots-clés ")
+                                ]),
+                                createVNode(unref(BFormInput$1), {
+                                  modelValue: searchForm.value.keywords,
+                                  "onUpdate:modelValue": ($event) => searchForm.value.keywords = $event,
+                                  placeholder: "Ex: Médecine, Commerce, Informatique...",
+                                  class: "search-input"
+                                }, null, 8, ["modelValue", "onUpdate:modelValue"])
+                              ]),
+                              createVNode(unref(BButton$1), {
+                                type: "submit",
+                                class: "btn-search"
+                              }, {
+                                default: withCtx(() => [
+                                  createVNode("i", { class: "bi bi-search me-2" }),
+                                  createTextVNode(" Rechercher ")
+                                ]),
+                                _: 1
+                              })
+                            ], 32)
+                          ]),
+                          createVNode("div", { class: "stats-row" }, [
+                            createVNode("div", { class: "stat-item" }, [
+                              createVNode("div", { class: "stat-value" }, toDisplayString(__props.stats.totalEstablishments) + "+", 1),
+                              createVNode("div", { class: "stat-label" }, "Établissements")
+                            ]),
+                            createVNode("div", { class: "stat-item" }, [
+                              createVNode("div", { class: "stat-value" }, toDisplayString(__props.stats.totalStudents) + "+", 1),
+                              createVNode("div", { class: "stat-label" }, "Étudiants accompagnés")
+                            ]),
+                            createVNode("div", { class: "stat-item" }, [
+                              createVNode("div", { class: "stat-value" }, toDisplayString(__props.stats.totalCountries), 1),
+                              createVNode("div", { class: "stat-label" }, "Pays")
+                            ])
+                          ])
+                        ];
+                      }
+                    }),
+                    _: 1
+                  }, _parent3, _scopeId2));
+                  _push3(ssrRenderComponent(unref(BCol$1), {
+                    lg: "5",
+                    class: "d-none d-lg-block"
+                  }, {
+                    default: withCtx((_3, _push4, _parent4, _scopeId3) => {
+                      if (_push4) {
+                        _push4(`<div class="hero-illustration" data-v-2867a92e${_scopeId3}><div class="floating-card card-1" data-v-2867a92e${_scopeId3}><i class="bi bi-mortarboard-fill" data-v-2867a92e${_scopeId3}></i><span data-v-2867a92e${_scopeId3}>Licence</span></div><div class="floating-card card-2" data-v-2867a92e${_scopeId3}><i class="bi bi-book-fill" data-v-2867a92e${_scopeId3}></i><span data-v-2867a92e${_scopeId3}>Master</span></div><div class="floating-card card-3" data-v-2867a92e${_scopeId3}><i class="bi bi-award-fill" data-v-2867a92e${_scopeId3}></i><span data-v-2867a92e${_scopeId3}>Doctorat</span></div><div class="hero-blob" data-v-2867a92e${_scopeId3}></div></div>`);
+                      } else {
+                        return [
+                          createVNode("div", { class: "hero-illustration" }, [
+                            createVNode("div", { class: "floating-card card-1" }, [
+                              createVNode("i", { class: "bi bi-mortarboard-fill" }),
+                              createVNode("span", null, "Licence")
+                            ]),
+                            createVNode("div", { class: "floating-card card-2" }, [
+                              createVNode("i", { class: "bi bi-book-fill" }),
+                              createVNode("span", null, "Master")
+                            ]),
+                            createVNode("div", { class: "floating-card card-3" }, [
+                              createVNode("i", { class: "bi bi-award-fill" }),
+                              createVNode("span", null, "Doctorat")
+                            ]),
+                            createVNode("div", { class: "hero-blob" })
+                          ])
+                        ];
+                      }
+                    }),
+                    _: 1
+                  }, _parent3, _scopeId2));
+                } else {
+                  return [
+                    createVNode(unref(BCol$1), {
+                      lg: "7",
+                      class: "hero-content"
+                    }, {
+                      default: withCtx(() => [
+                        createVNode("div", { class: "badge-new mb-3" }, [
+                          createVNode("span", { class: "badge-pulse" }),
+                          createTextVNode(" Nouveau : Accompagnement Premium disponible ")
+                        ]),
+                        createVNode("h1", { class: "hero-title" }, [
+                          createTextVNode(" Trouvez votre formation "),
+                          createVNode("span", { class: "text-gradient" }, "à l'étranger")
+                        ]),
+                        createVNode("p", { class: "hero-subtitle" }, [
+                          createTextVNode(" Plus de 150 établissements partenaires dans 15 pays africains. "),
+                          createVNode("br", { class: "d-none d-md-block" }),
+                          createTextVNode(" Postulez en quelques clics avec un accompagnement personnalisé. ")
+                        ]),
+                        createVNode("div", { class: "search-card" }, [
+                          createVNode("form", {
+                            onSubmit: withModifiers(handleSearch, ["prevent"]),
+                            class: "search-form"
+                          }, [
+                            createVNode("div", { class: "search-field" }, [
+                              createVNode("label", { class: "search-label" }, [
+                                createVNode("i", { class: "bi bi-flag" }),
+                                createTextVNode(" Pays ")
+                              ]),
+                              createVNode(unref(BFormSelect$1), {
+                                modelValue: searchForm.value.country,
+                                "onUpdate:modelValue": ($event) => searchForm.value.country = $event,
+                                options: [
+                                  { value: "", text: "Tous les pays" },
+                                  ...__props.countries.map((c2) => ({ value: c2.id, text: c2.name }))
+                                ],
+                                class: "search-select"
+                              }, null, 8, ["modelValue", "onUpdate:modelValue", "options"])
+                            ]),
+                            createVNode("div", { class: "search-field" }, [
+                              createVNode("label", { class: "search-label" }, [
+                                createVNode("i", { class: "bi bi-book" }),
+                                createTextVNode(" Domaine d'études ")
+                              ]),
+                              createVNode(unref(BFormSelect$1), {
+                                modelValue: searchForm.value.study_field,
+                                "onUpdate:modelValue": ($event) => searchForm.value.study_field = $event,
+                                options: [
+                                  { value: "", text: "Tous les domaines" },
+                                  ...__props.studyFields.map((f2) => ({ value: f2.id, text: f2.name }))
+                                ],
+                                class: "search-select"
+                              }, null, 8, ["modelValue", "onUpdate:modelValue", "options"])
+                            ]),
+                            createVNode("div", { class: "search-field flex-grow-1" }, [
+                              createVNode("label", { class: "search-label" }, [
+                                createVNode("i", { class: "bi bi-search" }),
+                                createTextVNode(" Mots-clés ")
+                              ]),
+                              createVNode(unref(BFormInput$1), {
+                                modelValue: searchForm.value.keywords,
+                                "onUpdate:modelValue": ($event) => searchForm.value.keywords = $event,
+                                placeholder: "Ex: Médecine, Commerce, Informatique...",
+                                class: "search-input"
+                              }, null, 8, ["modelValue", "onUpdate:modelValue"])
+                            ]),
+                            createVNode(unref(BButton$1), {
+                              type: "submit",
+                              class: "btn-search"
+                            }, {
+                              default: withCtx(() => [
+                                createVNode("i", { class: "bi bi-search me-2" }),
+                                createTextVNode(" Rechercher ")
+                              ]),
+                              _: 1
+                            })
+                          ], 32)
+                        ]),
+                        createVNode("div", { class: "stats-row" }, [
+                          createVNode("div", { class: "stat-item" }, [
+                            createVNode("div", { class: "stat-value" }, toDisplayString(__props.stats.totalEstablishments) + "+", 1),
+                            createVNode("div", { class: "stat-label" }, "Établissements")
+                          ]),
+                          createVNode("div", { class: "stat-item" }, [
+                            createVNode("div", { class: "stat-value" }, toDisplayString(__props.stats.totalStudents) + "+", 1),
+                            createVNode("div", { class: "stat-label" }, "Étudiants accompagnés")
+                          ]),
+                          createVNode("div", { class: "stat-item" }, [
+                            createVNode("div", { class: "stat-value" }, toDisplayString(__props.stats.totalCountries), 1),
+                            createVNode("div", { class: "stat-label" }, "Pays")
+                          ])
+                        ])
+                      ]),
+                      _: 1
+                    }),
+                    createVNode(unref(BCol$1), {
+                      lg: "5",
+                      class: "d-none d-lg-block"
+                    }, {
+                      default: withCtx(() => [
+                        createVNode("div", { class: "hero-illustration" }, [
+                          createVNode("div", { class: "floating-card card-1" }, [
+                            createVNode("i", { class: "bi bi-mortarboard-fill" }),
+                            createVNode("span", null, "Licence")
+                          ]),
+                          createVNode("div", { class: "floating-card card-2" }, [
+                            createVNode("i", { class: "bi bi-book-fill" }),
+                            createVNode("span", null, "Master")
+                          ]),
+                          createVNode("div", { class: "floating-card card-3" }, [
+                            createVNode("i", { class: "bi bi-award-fill" }),
+                            createVNode("span", null, "Doctorat")
+                          ]),
+                          createVNode("div", { class: "hero-blob" })
+                        ])
+                      ]),
+                      _: 1
+                    })
+                  ];
+                }
+              }),
+              _: 1
+            }, _parent2, _scopeId));
+          } else {
+            return [
+              createVNode(unref(BRow$1), { class: "align-items-center min-vh-75" }, {
+                default: withCtx(() => [
+                  createVNode(unref(BCol$1), {
+                    lg: "7",
+                    class: "hero-content"
+                  }, {
+                    default: withCtx(() => [
+                      createVNode("div", { class: "badge-new mb-3" }, [
+                        createVNode("span", { class: "badge-pulse" }),
+                        createTextVNode(" Nouveau : Accompagnement Premium disponible ")
+                      ]),
+                      createVNode("h1", { class: "hero-title" }, [
+                        createTextVNode(" Trouvez votre formation "),
+                        createVNode("span", { class: "text-gradient" }, "à l'étranger")
+                      ]),
+                      createVNode("p", { class: "hero-subtitle" }, [
+                        createTextVNode(" Plus de 150 établissements partenaires dans 15 pays africains. "),
+                        createVNode("br", { class: "d-none d-md-block" }),
+                        createTextVNode(" Postulez en quelques clics avec un accompagnement personnalisé. ")
+                      ]),
+                      createVNode("div", { class: "search-card" }, [
+                        createVNode("form", {
+                          onSubmit: withModifiers(handleSearch, ["prevent"]),
+                          class: "search-form"
+                        }, [
+                          createVNode("div", { class: "search-field" }, [
+                            createVNode("label", { class: "search-label" }, [
+                              createVNode("i", { class: "bi bi-flag" }),
+                              createTextVNode(" Pays ")
+                            ]),
+                            createVNode(unref(BFormSelect$1), {
+                              modelValue: searchForm.value.country,
+                              "onUpdate:modelValue": ($event) => searchForm.value.country = $event,
+                              options: [
+                                { value: "", text: "Tous les pays" },
+                                ...__props.countries.map((c2) => ({ value: c2.id, text: c2.name }))
+                              ],
+                              class: "search-select"
+                            }, null, 8, ["modelValue", "onUpdate:modelValue", "options"])
+                          ]),
+                          createVNode("div", { class: "search-field" }, [
+                            createVNode("label", { class: "search-label" }, [
+                              createVNode("i", { class: "bi bi-book" }),
+                              createTextVNode(" Domaine d'études ")
+                            ]),
+                            createVNode(unref(BFormSelect$1), {
+                              modelValue: searchForm.value.study_field,
+                              "onUpdate:modelValue": ($event) => searchForm.value.study_field = $event,
+                              options: [
+                                { value: "", text: "Tous les domaines" },
+                                ...__props.studyFields.map((f2) => ({ value: f2.id, text: f2.name }))
+                              ],
+                              class: "search-select"
+                            }, null, 8, ["modelValue", "onUpdate:modelValue", "options"])
+                          ]),
+                          createVNode("div", { class: "search-field flex-grow-1" }, [
+                            createVNode("label", { class: "search-label" }, [
+                              createVNode("i", { class: "bi bi-search" }),
+                              createTextVNode(" Mots-clés ")
+                            ]),
+                            createVNode(unref(BFormInput$1), {
+                              modelValue: searchForm.value.keywords,
+                              "onUpdate:modelValue": ($event) => searchForm.value.keywords = $event,
+                              placeholder: "Ex: Médecine, Commerce, Informatique...",
+                              class: "search-input"
+                            }, null, 8, ["modelValue", "onUpdate:modelValue"])
+                          ]),
+                          createVNode(unref(BButton$1), {
+                            type: "submit",
+                            class: "btn-search"
+                          }, {
+                            default: withCtx(() => [
+                              createVNode("i", { class: "bi bi-search me-2" }),
+                              createTextVNode(" Rechercher ")
+                            ]),
+                            _: 1
+                          })
+                        ], 32)
+                      ]),
+                      createVNode("div", { class: "stats-row" }, [
+                        createVNode("div", { class: "stat-item" }, [
+                          createVNode("div", { class: "stat-value" }, toDisplayString(__props.stats.totalEstablishments) + "+", 1),
+                          createVNode("div", { class: "stat-label" }, "Établissements")
+                        ]),
+                        createVNode("div", { class: "stat-item" }, [
+                          createVNode("div", { class: "stat-value" }, toDisplayString(__props.stats.totalStudents) + "+", 1),
+                          createVNode("div", { class: "stat-label" }, "Étudiants accompagnés")
+                        ]),
+                        createVNode("div", { class: "stat-item" }, [
+                          createVNode("div", { class: "stat-value" }, toDisplayString(__props.stats.totalCountries), 1),
+                          createVNode("div", { class: "stat-label" }, "Pays")
+                        ])
+                      ])
+                    ]),
+                    _: 1
+                  }),
+                  createVNode(unref(BCol$1), {
+                    lg: "5",
+                    class: "d-none d-lg-block"
+                  }, {
+                    default: withCtx(() => [
+                      createVNode("div", { class: "hero-illustration" }, [
+                        createVNode("div", { class: "floating-card card-1" }, [
+                          createVNode("i", { class: "bi bi-mortarboard-fill" }),
+                          createVNode("span", null, "Licence")
+                        ]),
+                        createVNode("div", { class: "floating-card card-2" }, [
+                          createVNode("i", { class: "bi bi-book-fill" }),
+                          createVNode("span", null, "Master")
+                        ]),
+                        createVNode("div", { class: "floating-card card-3" }, [
+                          createVNode("i", { class: "bi bi-award-fill" }),
+                          createVNode("span", null, "Doctorat")
+                        ]),
+                        createVNode("div", { class: "hero-blob" })
+                      ])
+                    ]),
+                    _: 1
+                  })
+                ]),
+                _: 1
+              })
+            ];
+          }
+        }),
+        _: 1
+      }, _parent));
+      _push(`</section><section class="study-fields-section" data-v-2867a92e>`);
+      _push(ssrRenderComponent(unref(BContainer$1), null, {
+        default: withCtx((_, _push2, _parent2, _scopeId) => {
+          if (_push2) {
+            _push2(`<div class="section-header text-center" data-v-2867a92e${_scopeId}><h2 class="section-title" data-v-2867a92e${_scopeId}>Explorez les domaines d&#39;études</h2><p class="section-subtitle" data-v-2867a92e${_scopeId}>Découvrez les formations les plus recherchées</p></div><div class="fields-grid" data-v-2867a92e${_scopeId}><!--[-->`);
+            ssrRenderList(popularFields, (field) => {
+              _push2(ssrRenderComponent(unref(Link), {
+                key: field.slug,
+                href: `/establishments?field=${field.slug}`,
+                class: "field-card"
+              }, {
+                default: withCtx((_2, _push3, _parent3, _scopeId2) => {
+                  if (_push3) {
+                    _push3(`<div class="field-icon" data-v-2867a92e${_scopeId2}>${ssrInterpolate(field.icon)}</div><div class="field-name" data-v-2867a92e${_scopeId2}>${ssrInterpolate(field.name)}</div><i class="bi bi-arrow-right field-arrow" data-v-2867a92e${_scopeId2}></i>`);
+                  } else {
+                    return [
+                      createVNode("div", { class: "field-icon" }, toDisplayString(field.icon), 1),
+                      createVNode("div", { class: "field-name" }, toDisplayString(field.name), 1),
+                      createVNode("i", { class: "bi bi-arrow-right field-arrow" })
+                    ];
+                  }
+                }),
+                _: 2
+              }, _parent2, _scopeId));
+            });
+            _push2(`<!--]--></div>`);
+          } else {
+            return [
+              createVNode("div", { class: "section-header text-center" }, [
+                createVNode("h2", { class: "section-title" }, "Explorez les domaines d'études"),
+                createVNode("p", { class: "section-subtitle" }, "Découvrez les formations les plus recherchées")
+              ]),
+              createVNode("div", { class: "fields-grid" }, [
+                (openBlock(), createBlock(Fragment, null, renderList(popularFields, (field) => {
+                  return createVNode(unref(Link), {
+                    key: field.slug,
+                    href: `/establishments?field=${field.slug}`,
+                    class: "field-card"
+                  }, {
+                    default: withCtx(() => [
+                      createVNode("div", { class: "field-icon" }, toDisplayString(field.icon), 1),
+                      createVNode("div", { class: "field-name" }, toDisplayString(field.name), 1),
+                      createVNode("i", { class: "bi bi-arrow-right field-arrow" })
+                    ]),
+                    _: 2
+                  }, 1032, ["href"]);
+                }), 64))
+              ])
+            ];
+          }
+        }),
+        _: 1
+      }, _parent));
+      _push(`</section>`);
+      if (__props.establishments.length > 0) {
+        _push(`<section class="establishments-section" data-v-2867a92e>`);
+        _push(ssrRenderComponent(unref(BContainer$1), null, {
+          default: withCtx((_, _push2, _parent2, _scopeId) => {
+            if (_push2) {
+              _push2(`<div class="section-header" data-v-2867a92e${_scopeId}><div data-v-2867a92e${_scopeId}><h2 class="section-title" data-v-2867a92e${_scopeId}>Établissements à la une</h2><p class="section-subtitle" data-v-2867a92e${_scopeId}>Les meilleures universités et écoles partenaires</p></div>`);
+              _push2(ssrRenderComponent(unref(Link), {
+                href: "/establishments",
+                class: "btn-view-all"
+              }, {
+                default: withCtx((_2, _push3, _parent3, _scopeId2) => {
+                  if (_push3) {
+                    _push3(` Voir tout <i class="bi bi-arrow-right ms-2" data-v-2867a92e${_scopeId2}></i>`);
+                  } else {
+                    return [
+                      createTextVNode(" Voir tout "),
+                      createVNode("i", { class: "bi bi-arrow-right ms-2" })
+                    ];
+                  }
+                }),
+                _: 1
+              }, _parent2, _scopeId));
+              _push2(`</div>`);
+              _push2(ssrRenderComponent(unref(BRow$1), { class: "g-4" }, {
+                default: withCtx((_2, _push3, _parent3, _scopeId2) => {
+                  if (_push3) {
+                    _push3(`<!--[-->`);
+                    ssrRenderList(__props.establishments.slice(0, 6), (establishment) => {
+                      _push3(ssrRenderComponent(unref(BCol$1), {
+                        key: establishment.id,
+                        md: "6",
+                        lg: "4"
+                      }, {
+                        default: withCtx((_3, _push4, _parent4, _scopeId3) => {
+                          if (_push4) {
+                            _push4(ssrRenderComponent(unref(Link), {
+                              href: `/establishments/${establishment.slug}`,
+                              class: "establishment-card"
+                            }, {
+                              default: withCtx((_4, _push5, _parent5, _scopeId4) => {
+                                if (_push5) {
+                                  _push5(`<div class="establishment-image" data-v-2867a92e${_scopeId4}><img${ssrRenderAttr("src", establishment.thumb || establishment.logo || "https://via.placeholder.com/400x240?text=EtapSup")}${ssrRenderAttr("alt", establishment.title)} data-v-2867a92e${_scopeId4}>`);
+                                  if (establishment.ranking) {
+                                    _push5(`<div class="establishment-badge" data-v-2867a92e${_scopeId4}><i class="bi bi-star-fill" data-v-2867a92e${_scopeId4}></i> Top ${ssrInterpolate(establishment.ranking)}</div>`);
+                                  } else {
+                                    _push5(`<!---->`);
+                                  }
+                                  _push5(`</div><div class="establishment-body" data-v-2867a92e${_scopeId4}><h3 class="establishment-title" data-v-2867a92e${_scopeId4}>${ssrInterpolate(establishment.title)}</h3><div class="establishment-meta" data-v-2867a92e${_scopeId4}><span class="meta-item" data-v-2867a92e${_scopeId4}><i class="bi bi-geo-alt-fill" data-v-2867a92e${_scopeId4}></i> ${ssrInterpolate(establishment.city)}, ${ssrInterpolate(establishment.country)}</span>`);
+                                  if (establishment.studentCount) {
+                                    _push5(`<span class="meta-item" data-v-2867a92e${_scopeId4}><i class="bi bi-people-fill" data-v-2867a92e${_scopeId4}></i> ${ssrInterpolate(establishment.studentCount)} étudiants </span>`);
+                                  } else {
+                                    _push5(`<!---->`);
+                                  }
+                                  _push5(`</div><div class="establishment-type" data-v-2867a92e${_scopeId4}>${ssrInterpolate(establishment.type)}</div></div>`);
+                                } else {
+                                  return [
+                                    createVNode("div", { class: "establishment-image" }, [
+                                      createVNode("img", {
+                                        src: establishment.thumb || establishment.logo || "https://via.placeholder.com/400x240?text=EtapSup",
+                                        alt: establishment.title
+                                      }, null, 8, ["src", "alt"]),
+                                      establishment.ranking ? (openBlock(), createBlock("div", {
+                                        key: 0,
+                                        class: "establishment-badge"
+                                      }, [
+                                        createVNode("i", { class: "bi bi-star-fill" }),
+                                        createTextVNode(" Top " + toDisplayString(establishment.ranking), 1)
+                                      ])) : createCommentVNode("", true)
+                                    ]),
+                                    createVNode("div", { class: "establishment-body" }, [
+                                      createVNode("h3", { class: "establishment-title" }, toDisplayString(establishment.title), 1),
+                                      createVNode("div", { class: "establishment-meta" }, [
+                                        createVNode("span", { class: "meta-item" }, [
+                                          createVNode("i", { class: "bi bi-geo-alt-fill" }),
+                                          createTextVNode(" " + toDisplayString(establishment.city) + ", " + toDisplayString(establishment.country), 1)
+                                        ]),
+                                        establishment.studentCount ? (openBlock(), createBlock("span", {
+                                          key: 0,
+                                          class: "meta-item"
+                                        }, [
+                                          createVNode("i", { class: "bi bi-people-fill" }),
+                                          createTextVNode(" " + toDisplayString(establishment.studentCount) + " étudiants ", 1)
+                                        ])) : createCommentVNode("", true)
+                                      ]),
+                                      createVNode("div", { class: "establishment-type" }, toDisplayString(establishment.type), 1)
+                                    ])
+                                  ];
+                                }
+                              }),
+                              _: 2
+                            }, _parent4, _scopeId3));
+                          } else {
+                            return [
+                              createVNode(unref(Link), {
+                                href: `/establishments/${establishment.slug}`,
+                                class: "establishment-card"
+                              }, {
+                                default: withCtx(() => [
+                                  createVNode("div", { class: "establishment-image" }, [
+                                    createVNode("img", {
+                                      src: establishment.thumb || establishment.logo || "https://via.placeholder.com/400x240?text=EtapSup",
+                                      alt: establishment.title
+                                    }, null, 8, ["src", "alt"]),
+                                    establishment.ranking ? (openBlock(), createBlock("div", {
+                                      key: 0,
+                                      class: "establishment-badge"
+                                    }, [
+                                      createVNode("i", { class: "bi bi-star-fill" }),
+                                      createTextVNode(" Top " + toDisplayString(establishment.ranking), 1)
+                                    ])) : createCommentVNode("", true)
+                                  ]),
+                                  createVNode("div", { class: "establishment-body" }, [
+                                    createVNode("h3", { class: "establishment-title" }, toDisplayString(establishment.title), 1),
+                                    createVNode("div", { class: "establishment-meta" }, [
+                                      createVNode("span", { class: "meta-item" }, [
+                                        createVNode("i", { class: "bi bi-geo-alt-fill" }),
+                                        createTextVNode(" " + toDisplayString(establishment.city) + ", " + toDisplayString(establishment.country), 1)
+                                      ]),
+                                      establishment.studentCount ? (openBlock(), createBlock("span", {
+                                        key: 0,
+                                        class: "meta-item"
+                                      }, [
+                                        createVNode("i", { class: "bi bi-people-fill" }),
+                                        createTextVNode(" " + toDisplayString(establishment.studentCount) + " étudiants ", 1)
+                                      ])) : createCommentVNode("", true)
+                                    ]),
+                                    createVNode("div", { class: "establishment-type" }, toDisplayString(establishment.type), 1)
+                                  ])
+                                ]),
+                                _: 2
+                              }, 1032, ["href"])
+                            ];
+                          }
+                        }),
+                        _: 2
+                      }, _parent3, _scopeId2));
+                    });
+                    _push3(`<!--]-->`);
+                  } else {
+                    return [
+                      (openBlock(true), createBlock(Fragment, null, renderList(__props.establishments.slice(0, 6), (establishment) => {
+                        return openBlock(), createBlock(unref(BCol$1), {
+                          key: establishment.id,
+                          md: "6",
+                          lg: "4"
+                        }, {
+                          default: withCtx(() => [
+                            createVNode(unref(Link), {
+                              href: `/establishments/${establishment.slug}`,
+                              class: "establishment-card"
+                            }, {
+                              default: withCtx(() => [
+                                createVNode("div", { class: "establishment-image" }, [
+                                  createVNode("img", {
+                                    src: establishment.thumb || establishment.logo || "https://via.placeholder.com/400x240?text=EtapSup",
+                                    alt: establishment.title
+                                  }, null, 8, ["src", "alt"]),
+                                  establishment.ranking ? (openBlock(), createBlock("div", {
+                                    key: 0,
+                                    class: "establishment-badge"
+                                  }, [
+                                    createVNode("i", { class: "bi bi-star-fill" }),
+                                    createTextVNode(" Top " + toDisplayString(establishment.ranking), 1)
+                                  ])) : createCommentVNode("", true)
+                                ]),
+                                createVNode("div", { class: "establishment-body" }, [
+                                  createVNode("h3", { class: "establishment-title" }, toDisplayString(establishment.title), 1),
+                                  createVNode("div", { class: "establishment-meta" }, [
+                                    createVNode("span", { class: "meta-item" }, [
+                                      createVNode("i", { class: "bi bi-geo-alt-fill" }),
+                                      createTextVNode(" " + toDisplayString(establishment.city) + ", " + toDisplayString(establishment.country), 1)
+                                    ]),
+                                    establishment.studentCount ? (openBlock(), createBlock("span", {
+                                      key: 0,
+                                      class: "meta-item"
+                                    }, [
+                                      createVNode("i", { class: "bi bi-people-fill" }),
+                                      createTextVNode(" " + toDisplayString(establishment.studentCount) + " étudiants ", 1)
+                                    ])) : createCommentVNode("", true)
+                                  ]),
+                                  createVNode("div", { class: "establishment-type" }, toDisplayString(establishment.type), 1)
+                                ])
+                              ]),
+                              _: 2
+                            }, 1032, ["href"])
+                          ]),
+                          _: 2
+                        }, 1024);
+                      }), 128))
+                    ];
+                  }
+                }),
+                _: 1
+              }, _parent2, _scopeId));
+            } else {
+              return [
+                createVNode("div", { class: "section-header" }, [
+                  createVNode("div", null, [
+                    createVNode("h2", { class: "section-title" }, "Établissements à la une"),
+                    createVNode("p", { class: "section-subtitle" }, "Les meilleures universités et écoles partenaires")
+                  ]),
+                  createVNode(unref(Link), {
+                    href: "/establishments",
+                    class: "btn-view-all"
+                  }, {
+                    default: withCtx(() => [
+                      createTextVNode(" Voir tout "),
+                      createVNode("i", { class: "bi bi-arrow-right ms-2" })
+                    ]),
+                    _: 1
+                  })
+                ]),
+                createVNode(unref(BRow$1), { class: "g-4" }, {
+                  default: withCtx(() => [
+                    (openBlock(true), createBlock(Fragment, null, renderList(__props.establishments.slice(0, 6), (establishment) => {
+                      return openBlock(), createBlock(unref(BCol$1), {
+                        key: establishment.id,
+                        md: "6",
+                        lg: "4"
+                      }, {
+                        default: withCtx(() => [
+                          createVNode(unref(Link), {
+                            href: `/establishments/${establishment.slug}`,
+                            class: "establishment-card"
+                          }, {
+                            default: withCtx(() => [
+                              createVNode("div", { class: "establishment-image" }, [
+                                createVNode("img", {
+                                  src: establishment.thumb || establishment.logo || "https://via.placeholder.com/400x240?text=EtapSup",
+                                  alt: establishment.title
+                                }, null, 8, ["src", "alt"]),
+                                establishment.ranking ? (openBlock(), createBlock("div", {
+                                  key: 0,
+                                  class: "establishment-badge"
+                                }, [
+                                  createVNode("i", { class: "bi bi-star-fill" }),
+                                  createTextVNode(" Top " + toDisplayString(establishment.ranking), 1)
+                                ])) : createCommentVNode("", true)
+                              ]),
+                              createVNode("div", { class: "establishment-body" }, [
+                                createVNode("h3", { class: "establishment-title" }, toDisplayString(establishment.title), 1),
+                                createVNode("div", { class: "establishment-meta" }, [
+                                  createVNode("span", { class: "meta-item" }, [
+                                    createVNode("i", { class: "bi bi-geo-alt-fill" }),
+                                    createTextVNode(" " + toDisplayString(establishment.city) + ", " + toDisplayString(establishment.country), 1)
+                                  ]),
+                                  establishment.studentCount ? (openBlock(), createBlock("span", {
+                                    key: 0,
+                                    class: "meta-item"
+                                  }, [
+                                    createVNode("i", { class: "bi bi-people-fill" }),
+                                    createTextVNode(" " + toDisplayString(establishment.studentCount) + " étudiants ", 1)
+                                  ])) : createCommentVNode("", true)
+                                ]),
+                                createVNode("div", { class: "establishment-type" }, toDisplayString(establishment.type), 1)
+                              ])
+                            ]),
+                            _: 2
+                          }, 1032, ["href"])
+                        ]),
+                        _: 2
+                      }, 1024);
+                    }), 128))
+                  ]),
+                  _: 1
+                })
+              ];
+            }
+          }),
+          _: 1
+        }, _parent));
+        _push(`</section>`);
+      } else {
+        _push(`<!---->`);
+      }
+      _push(`<section class="benefits-section" data-v-2867a92e>`);
+      _push(ssrRenderComponent(unref(BContainer$1), null, {
+        default: withCtx((_, _push2, _parent2, _scopeId) => {
+          if (_push2) {
+            _push2(`<div class="section-header text-center" data-v-2867a92e${_scopeId}><h2 class="section-title" data-v-2867a92e${_scopeId}>Pourquoi choisir EtapSup ?</h2><p class="section-subtitle" data-v-2867a92e${_scopeId}>Un accompagnement complet pour réussir vos études à l&#39;étranger</p></div>`);
+            _push2(ssrRenderComponent(unref(BRow$1), { class: "g-4" }, {
+              default: withCtx((_2, _push3, _parent3, _scopeId2) => {
+                if (_push3) {
+                  _push3(`<!--[-->`);
+                  ssrRenderList(benefits, (benefit, index) => {
+                    _push3(ssrRenderComponent(unref(BCol$1), {
+                      key: index,
+                      md: "6",
+                      lg: "3"
+                    }, {
+                      default: withCtx((_3, _push4, _parent4, _scopeId3) => {
+                        if (_push4) {
+                          _push4(`<div class="benefit-card" data-v-2867a92e${_scopeId3}><div class="benefit-icon" data-v-2867a92e${_scopeId3}>${ssrInterpolate(benefit.icon)}</div><h3 class="benefit-title" data-v-2867a92e${_scopeId3}>${ssrInterpolate(benefit.title)}</h3><p class="benefit-description" data-v-2867a92e${_scopeId3}>${ssrInterpolate(benefit.description)}</p></div>`);
+                        } else {
+                          return [
+                            createVNode("div", { class: "benefit-card" }, [
+                              createVNode("div", { class: "benefit-icon" }, toDisplayString(benefit.icon), 1),
+                              createVNode("h3", { class: "benefit-title" }, toDisplayString(benefit.title), 1),
+                              createVNode("p", { class: "benefit-description" }, toDisplayString(benefit.description), 1)
+                            ])
+                          ];
+                        }
+                      }),
+                      _: 2
+                    }, _parent3, _scopeId2));
+                  });
+                  _push3(`<!--]-->`);
+                } else {
+                  return [
+                    (openBlock(), createBlock(Fragment, null, renderList(benefits, (benefit, index) => {
+                      return createVNode(unref(BCol$1), {
+                        key: index,
+                        md: "6",
+                        lg: "3"
+                      }, {
+                        default: withCtx(() => [
+                          createVNode("div", { class: "benefit-card" }, [
+                            createVNode("div", { class: "benefit-icon" }, toDisplayString(benefit.icon), 1),
+                            createVNode("h3", { class: "benefit-title" }, toDisplayString(benefit.title), 1),
+                            createVNode("p", { class: "benefit-description" }, toDisplayString(benefit.description), 1)
+                          ])
+                        ]),
+                        _: 2
+                      }, 1024);
+                    }), 64))
+                  ];
+                }
+              }),
+              _: 1
+            }, _parent2, _scopeId));
+          } else {
+            return [
+              createVNode("div", { class: "section-header text-center" }, [
+                createVNode("h2", { class: "section-title" }, "Pourquoi choisir EtapSup ?"),
+                createVNode("p", { class: "section-subtitle" }, "Un accompagnement complet pour réussir vos études à l'étranger")
+              ]),
+              createVNode(unref(BRow$1), { class: "g-4" }, {
+                default: withCtx(() => [
+                  (openBlock(), createBlock(Fragment, null, renderList(benefits, (benefit, index) => {
+                    return createVNode(unref(BCol$1), {
+                      key: index,
+                      md: "6",
+                      lg: "3"
+                    }, {
+                      default: withCtx(() => [
+                        createVNode("div", { class: "benefit-card" }, [
+                          createVNode("div", { class: "benefit-icon" }, toDisplayString(benefit.icon), 1),
+                          createVNode("h3", { class: "benefit-title" }, toDisplayString(benefit.title), 1),
+                          createVNode("p", { class: "benefit-description" }, toDisplayString(benefit.description), 1)
+                        ])
+                      ]),
+                      _: 2
+                    }, 1024);
+                  }), 64))
+                ]),
+                _: 1
+              })
+            ];
+          }
+        }),
+        _: 1
+      }, _parent));
+      _push(`</section><section class="testimonials-section" data-v-2867a92e>`);
+      _push(ssrRenderComponent(unref(BContainer$1), null, {
+        default: withCtx((_, _push2, _parent2, _scopeId) => {
+          if (_push2) {
+            _push2(`<div class="section-header text-center" data-v-2867a92e${_scopeId}><h2 class="section-title" data-v-2867a92e${_scopeId}>Ils nous font confiance</h2><p class="section-subtitle" data-v-2867a92e${_scopeId}>Découvrez les témoignages de nos étudiants</p></div>`);
+            _push2(ssrRenderComponent(unref(BRow$1), { class: "g-4" }, {
+              default: withCtx((_2, _push3, _parent3, _scopeId2) => {
+                if (_push3) {
+                  _push3(`<!--[-->`);
+                  ssrRenderList(testimonials, (testimonial, index) => {
+                    _push3(ssrRenderComponent(unref(BCol$1), {
+                      key: index,
+                      md: "4"
+                    }, {
+                      default: withCtx((_3, _push4, _parent4, _scopeId3) => {
+                        if (_push4) {
+                          _push4(`<div class="testimonial-card" data-v-2867a92e${_scopeId3}><div class="testimonial-rating" data-v-2867a92e${_scopeId3}><!--[-->`);
+                          ssrRenderList(5, (i2) => {
+                            _push4(`<i class="bi bi-star-fill" data-v-2867a92e${_scopeId3}></i>`);
+                          });
+                          _push4(`<!--]--></div><p class="testimonial-text" data-v-2867a92e${_scopeId3}>&quot;${ssrInterpolate(testimonial.text)}&quot;</p><div class="testimonial-author" data-v-2867a92e${_scopeId3}><img${ssrRenderAttr("src", testimonial.photo)}${ssrRenderAttr("alt", testimonial.name)} class="author-photo" data-v-2867a92e${_scopeId3}><div data-v-2867a92e${_scopeId3}><div class="author-name" data-v-2867a92e${_scopeId3}>${ssrInterpolate(testimonial.name)}</div><div class="author-country" data-v-2867a92e${_scopeId3}>${ssrInterpolate(testimonial.country)}</div></div></div></div>`);
+                        } else {
+                          return [
+                            createVNode("div", { class: "testimonial-card" }, [
+                              createVNode("div", { class: "testimonial-rating" }, [
+                                (openBlock(), createBlock(Fragment, null, renderList(5, (i2) => {
+                                  return createVNode("i", {
+                                    key: i2,
+                                    class: "bi bi-star-fill"
+                                  });
+                                }), 64))
+                              ]),
+                              createVNode("p", { class: "testimonial-text" }, '"' + toDisplayString(testimonial.text) + '"', 1),
+                              createVNode("div", { class: "testimonial-author" }, [
+                                createVNode("img", {
+                                  src: testimonial.photo,
+                                  alt: testimonial.name,
+                                  class: "author-photo"
+                                }, null, 8, ["src", "alt"]),
+                                createVNode("div", null, [
+                                  createVNode("div", { class: "author-name" }, toDisplayString(testimonial.name), 1),
+                                  createVNode("div", { class: "author-country" }, toDisplayString(testimonial.country), 1)
+                                ])
+                              ])
+                            ])
+                          ];
+                        }
+                      }),
+                      _: 2
+                    }, _parent3, _scopeId2));
+                  });
+                  _push3(`<!--]-->`);
+                } else {
+                  return [
+                    (openBlock(), createBlock(Fragment, null, renderList(testimonials, (testimonial, index) => {
+                      return createVNode(unref(BCol$1), {
+                        key: index,
+                        md: "4"
+                      }, {
+                        default: withCtx(() => [
+                          createVNode("div", { class: "testimonial-card" }, [
+                            createVNode("div", { class: "testimonial-rating" }, [
+                              (openBlock(), createBlock(Fragment, null, renderList(5, (i2) => {
+                                return createVNode("i", {
+                                  key: i2,
+                                  class: "bi bi-star-fill"
+                                });
+                              }), 64))
+                            ]),
+                            createVNode("p", { class: "testimonial-text" }, '"' + toDisplayString(testimonial.text) + '"', 1),
+                            createVNode("div", { class: "testimonial-author" }, [
+                              createVNode("img", {
+                                src: testimonial.photo,
+                                alt: testimonial.name,
+                                class: "author-photo"
+                              }, null, 8, ["src", "alt"]),
+                              createVNode("div", null, [
+                                createVNode("div", { class: "author-name" }, toDisplayString(testimonial.name), 1),
+                                createVNode("div", { class: "author-country" }, toDisplayString(testimonial.country), 1)
+                              ])
+                            ])
+                          ])
+                        ]),
+                        _: 2
+                      }, 1024);
+                    }), 64))
+                  ];
+                }
+              }),
+              _: 1
+            }, _parent2, _scopeId));
+          } else {
+            return [
+              createVNode("div", { class: "section-header text-center" }, [
+                createVNode("h2", { class: "section-title" }, "Ils nous font confiance"),
+                createVNode("p", { class: "section-subtitle" }, "Découvrez les témoignages de nos étudiants")
+              ]),
+              createVNode(unref(BRow$1), { class: "g-4" }, {
+                default: withCtx(() => [
+                  (openBlock(), createBlock(Fragment, null, renderList(testimonials, (testimonial, index) => {
+                    return createVNode(unref(BCol$1), {
+                      key: index,
+                      md: "4"
+                    }, {
+                      default: withCtx(() => [
+                        createVNode("div", { class: "testimonial-card" }, [
+                          createVNode("div", { class: "testimonial-rating" }, [
+                            (openBlock(), createBlock(Fragment, null, renderList(5, (i2) => {
+                              return createVNode("i", {
+                                key: i2,
+                                class: "bi bi-star-fill"
+                              });
+                            }), 64))
+                          ]),
+                          createVNode("p", { class: "testimonial-text" }, '"' + toDisplayString(testimonial.text) + '"', 1),
+                          createVNode("div", { class: "testimonial-author" }, [
+                            createVNode("img", {
+                              src: testimonial.photo,
+                              alt: testimonial.name,
+                              class: "author-photo"
+                            }, null, 8, ["src", "alt"]),
+                            createVNode("div", null, [
+                              createVNode("div", { class: "author-name" }, toDisplayString(testimonial.name), 1),
+                              createVNode("div", { class: "author-country" }, toDisplayString(testimonial.country), 1)
+                            ])
+                          ])
+                        ])
+                      ]),
+                      _: 2
+                    }, 1024);
+                  }), 64))
+                ]),
+                _: 1
+              })
+            ];
+          }
+        }),
+        _: 1
+      }, _parent));
+      _push(`</section><section class="cta-section" data-v-2867a92e>`);
+      _push(ssrRenderComponent(unref(BContainer$1), null, {
+        default: withCtx((_, _push2, _parent2, _scopeId) => {
+          if (_push2) {
+            _push2(`<div class="cta-card" data-v-2867a92e${_scopeId}>`);
+            _push2(ssrRenderComponent(unref(BRow$1), { class: "align-items-center" }, {
+              default: withCtx((_2, _push3, _parent3, _scopeId2) => {
+                if (_push3) {
+                  _push3(ssrRenderComponent(unref(BCol$1), { lg: "8" }, {
+                    default: withCtx((_3, _push4, _parent4, _scopeId3) => {
+                      if (_push4) {
+                        _push4(`<h2 class="cta-title" data-v-2867a92e${_scopeId3}>Prêt à commencer votre aventure ?</h2><p class="cta-subtitle" data-v-2867a92e${_scopeId3}> Créez votre compte gratuitement et découvrez toutes les opportunités qui s&#39;offrent à vous </p>`);
+                      } else {
+                        return [
+                          createVNode("h2", { class: "cta-title" }, "Prêt à commencer votre aventure ?"),
+                          createVNode("p", { class: "cta-subtitle" }, " Créez votre compte gratuitement et découvrez toutes les opportunités qui s'offrent à vous ")
+                        ];
+                      }
+                    }),
+                    _: 1
+                  }, _parent3, _scopeId2));
+                  _push3(ssrRenderComponent(unref(BCol$1), {
+                    lg: "4",
+                    class: "text-lg-end"
+                  }, {
+                    default: withCtx((_3, _push4, _parent4, _scopeId3) => {
+                      if (_push4) {
+                        _push4(ssrRenderComponent(unref(Link), {
+                          href: "/register",
+                          class: "btn-cta"
+                        }, {
+                          default: withCtx((_4, _push5, _parent5, _scopeId4) => {
+                            if (_push5) {
+                              _push5(` Créer mon compte <i class="bi bi-arrow-right ms-2" data-v-2867a92e${_scopeId4}></i>`);
+                            } else {
+                              return [
+                                createTextVNode(" Créer mon compte "),
+                                createVNode("i", { class: "bi bi-arrow-right ms-2" })
+                              ];
+                            }
+                          }),
+                          _: 1
+                        }, _parent4, _scopeId3));
+                      } else {
+                        return [
+                          createVNode(unref(Link), {
+                            href: "/register",
+                            class: "btn-cta"
+                          }, {
+                            default: withCtx(() => [
+                              createTextVNode(" Créer mon compte "),
+                              createVNode("i", { class: "bi bi-arrow-right ms-2" })
+                            ]),
+                            _: 1
+                          })
+                        ];
+                      }
+                    }),
+                    _: 1
+                  }, _parent3, _scopeId2));
+                } else {
+                  return [
+                    createVNode(unref(BCol$1), { lg: "8" }, {
+                      default: withCtx(() => [
+                        createVNode("h2", { class: "cta-title" }, "Prêt à commencer votre aventure ?"),
+                        createVNode("p", { class: "cta-subtitle" }, " Créez votre compte gratuitement et découvrez toutes les opportunités qui s'offrent à vous ")
+                      ]),
+                      _: 1
+                    }),
+                    createVNode(unref(BCol$1), {
+                      lg: "4",
+                      class: "text-lg-end"
+                    }, {
+                      default: withCtx(() => [
+                        createVNode(unref(Link), {
+                          href: "/register",
+                          class: "btn-cta"
+                        }, {
+                          default: withCtx(() => [
+                            createTextVNode(" Créer mon compte "),
+                            createVNode("i", { class: "bi bi-arrow-right ms-2" })
+                          ]),
+                          _: 1
+                        })
+                      ]),
+                      _: 1
+                    })
+                  ];
+                }
+              }),
+              _: 1
+            }, _parent2, _scopeId));
+            _push2(`</div>`);
+          } else {
+            return [
+              createVNode("div", { class: "cta-card" }, [
+                createVNode(unref(BRow$1), { class: "align-items-center" }, {
+                  default: withCtx(() => [
+                    createVNode(unref(BCol$1), { lg: "8" }, {
+                      default: withCtx(() => [
+                        createVNode("h2", { class: "cta-title" }, "Prêt à commencer votre aventure ?"),
+                        createVNode("p", { class: "cta-subtitle" }, " Créez votre compte gratuitement et découvrez toutes les opportunités qui s'offrent à vous ")
+                      ]),
+                      _: 1
+                    }),
+                    createVNode(unref(BCol$1), {
+                      lg: "4",
+                      class: "text-lg-end"
+                    }, {
+                      default: withCtx(() => [
+                        createVNode(unref(Link), {
+                          href: "/register",
+                          class: "btn-cta"
+                        }, {
+                          default: withCtx(() => [
+                            createTextVNode(" Créer mon compte "),
+                            createVNode("i", { class: "bi bi-arrow-right ms-2" })
+                          ]),
+                          _: 1
+                        })
+                      ]),
+                      _: 1
+                    })
+                  ]),
+                  _: 1
+                })
+              ])
+            ];
+          }
+        }),
+        _: 1
+      }, _parent));
+      _push(`</section></div><!--]-->`);
+    };
+  }
+});
+const _sfc_setup$I = _sfc_main$I.setup;
+_sfc_main$I.setup = (props, ctx) => {
+  const ssrContext = useSSRContext();
+  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/Pages/Home/Accueil.vue");
+  return _sfc_setup$I ? _sfc_setup$I(props, ctx) : void 0;
+};
+const Accueil = /* @__PURE__ */ _export_sfc(_sfc_main$I, [["__scopeId", "data-v-2867a92e"]]);
+const __vite_glob_0_36 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+  __proto__: null,
+  default: Accueil
+}, Symbol.toStringTag, { value: "Module" }));
 const _sfc_main$H = /* @__PURE__ */ defineComponent({
-  ...{ layout: _sfc_main$1A },
+  ...{ layout: _sfc_main$1B },
   __name: "Index",
   __ssrInlineRender: true,
   props: {
@@ -44522,7 +45940,7 @@ _sfc_main$H.setup = (props, ctx) => {
   return _sfc_setup$H ? _sfc_setup$H(props, ctx) : void 0;
 };
 const Index$2 = /* @__PURE__ */ _export_sfc(_sfc_main$H, [["__scopeId", "data-v-642b5034"]]);
-const __vite_glob_0_36 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_37 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: Index$2
 }, Symbol.toStringTag, { value: "Module" }));
@@ -44536,7 +45954,7 @@ const _sfc_main$G = /* @__PURE__ */ defineComponent({
   setup(__props) {
     return (_ctx, _push, _parent, _attrs) => {
       _push(`<!--[-->`);
-      _push(ssrRenderComponent(_sfc_main$1I, { title: "EtapSup - Test Page" }, null, _parent));
+      _push(ssrRenderComponent(_sfc_main$1J, { title: "EtapSup - Test Page" }, null, _parent));
       _push(`<div class="min-h-screen bg-gray-50" data-v-99ce5ed3><header class="bg-white shadow-sm" data-v-99ce5ed3><div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" data-v-99ce5ed3><div class="flex justify-between items-center py-6" data-v-99ce5ed3><div class="flex items-center" data-v-99ce5ed3><h1 class="text-3xl font-bold text-blue-600" data-v-99ce5ed3>EtapSup</h1><span class="ml-2 text-sm text-gray-500" data-v-99ce5ed3>Test Page</span></div><nav class="hidden md:flex space-x-8" data-v-99ce5ed3><a href="#" class="text-gray-500 hover:text-gray-900" data-v-99ce5ed3>Établissements</a><a href="#" class="text-gray-500 hover:text-gray-900" data-v-99ce5ed3>Comment ça marche</a><a href="#" class="text-gray-500 hover:text-gray-900" data-v-99ce5ed3>Connexion</a></nav></div></div></header><section class="bg-gradient-to-r from-blue-600 to-indigo-700 text-white" data-v-99ce5ed3><div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20" data-v-99ce5ed3><div class="text-center" data-v-99ce5ed3><h2 class="text-4xl md:text-6xl font-bold mb-6" data-v-99ce5ed3>${ssrInterpolate(__props.message)}</h2><p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto" data-v-99ce5ed3>${ssrInterpolate(__props.description)}</p><button class="bg-white text-blue-600 px-8 py-4 rounded-lg text-lg font-semibold hover:bg-gray-100 transition-colors" data-v-99ce5ed3> Découvrir les établissements </button></div></div></section><section class="bg-white py-8 shadow-sm" data-v-99ce5ed3><div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" data-v-99ce5ed3><div class="bg-gray-50 rounded-lg p-6" data-v-99ce5ed3><div class="grid grid-cols-1 md:grid-cols-4 gap-4" data-v-99ce5ed3><div data-v-99ce5ed3><label class="block text-sm font-medium text-gray-700 mb-2" data-v-99ce5ed3>Pays</label><select class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500" data-v-99ce5ed3><option data-v-99ce5ed3>Sélectionner un pays</option><option data-v-99ce5ed3>Sénégal</option><option data-v-99ce5ed3>Côte d&#39;Ivoire</option><option data-v-99ce5ed3>Mali</option></select></div><div data-v-99ce5ed3><label class="block text-sm font-medium text-gray-700 mb-2" data-v-99ce5ed3>Ville</label><input type="text" placeholder="Entrez une ville" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500" data-v-99ce5ed3></div><div data-v-99ce5ed3><label class="block text-sm font-medium text-gray-700 mb-2" data-v-99ce5ed3>Domaine d&#39;études</label><select class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500" data-v-99ce5ed3><option data-v-99ce5ed3>Tous les domaines</option><option data-v-99ce5ed3>Informatique</option><option data-v-99ce5ed3>Business</option><option data-v-99ce5ed3>Médecine</option></select></div><div class="flex items-end" data-v-99ce5ed3><button class="w-full bg-blue-600 text-white p-3 rounded-lg hover:bg-blue-700 transition-colors" data-v-99ce5ed3> Rechercher </button></div></div></div></div></section><section class="py-16" data-v-99ce5ed3><div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" data-v-99ce5ed3><h3 class="text-3xl font-bold text-gray-900 mb-8 text-center" data-v-99ce5ed3> Établissements Populaires </h3><div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" data-v-99ce5ed3><div class="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow overflow-hidden" data-v-99ce5ed3><div class="h-48 bg-gradient-to-r from-blue-400 to-purple-500" data-v-99ce5ed3></div><div class="p-6" data-v-99ce5ed3><div class="flex items-center mb-3" data-v-99ce5ed3><div class="w-12 h-12 bg-gray-200 rounded-full mr-3" data-v-99ce5ed3></div><div data-v-99ce5ed3><h4 class="font-semibold text-lg" data-v-99ce5ed3>Université Lorem Ipsum</h4><p class="text-gray-600 text-sm" data-v-99ce5ed3>Dakar, Sénégal</p></div></div><p class="text-gray-600 mb-4" data-v-99ce5ed3>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt.</p><p class="text-sm text-blue-600 mb-4" data-v-99ce5ed3>12 programmes disponibles</p><button class="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition-colors" data-v-99ce5ed3> Voir les programmes </button></div></div><div class="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow overflow-hidden" data-v-99ce5ed3><div class="h-48 bg-gradient-to-r from-green-400 to-blue-500" data-v-99ce5ed3></div><div class="p-6" data-v-99ce5ed3><div class="flex items-center mb-3" data-v-99ce5ed3><div class="w-12 h-12 bg-gray-200 rounded-full mr-3" data-v-99ce5ed3></div><div data-v-99ce5ed3><h4 class="font-semibold text-lg" data-v-99ce5ed3>École Superieure Dolor</h4><p class="text-gray-600 text-sm" data-v-99ce5ed3>Abidjan, Côte d&#39;Ivoire</p></div></div><p class="text-gray-600 mb-4" data-v-99ce5ed3>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.</p><p class="text-sm text-blue-600 mb-4" data-v-99ce5ed3>8 programmes disponibles</p><button class="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition-colors" data-v-99ce5ed3> Voir les programmes </button></div></div><div class="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow overflow-hidden" data-v-99ce5ed3><div class="h-48 bg-gradient-to-r from-purple-400 to-pink-500" data-v-99ce5ed3></div><div class="p-6" data-v-99ce5ed3><div class="flex items-center mb-3" data-v-99ce5ed3><div class="w-12 h-12 bg-gray-200 rounded-full mr-3" data-v-99ce5ed3></div><div data-v-99ce5ed3><h4 class="font-semibold text-lg" data-v-99ce5ed3>Institut Adipiscing</h4><p class="text-gray-600 text-sm" data-v-99ce5ed3>Bamako, Mali</p></div></div><p class="text-gray-600 mb-4" data-v-99ce5ed3>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore.</p><p class="text-sm text-blue-600 mb-4" data-v-99ce5ed3>15 programmes disponibles</p><button class="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition-colors" data-v-99ce5ed3> Voir les programmes </button></div></div></div></div></section><section class="bg-gray-100 py-16" data-v-99ce5ed3><div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" data-v-99ce5ed3><h3 class="text-3xl font-bold text-gray-900 mb-12 text-center" data-v-99ce5ed3> Comment ça marche </h3><div class="grid grid-cols-1 md:grid-cols-3 gap-8" data-v-99ce5ed3><div class="text-center" data-v-99ce5ed3><div class="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-4" data-v-99ce5ed3><span class="text-white text-2xl font-bold" data-v-99ce5ed3>1</span></div><h4 class="text-xl font-semibold mb-2" data-v-99ce5ed3>Découvrez</h4><p class="text-gray-600" data-v-99ce5ed3>Explorez les établissements et programmes qui correspondent à vos aspirations</p></div><div class="text-center" data-v-99ce5ed3><div class="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-4" data-v-99ce5ed3><span class="text-white text-2xl font-bold" data-v-99ce5ed3>2</span></div><h4 class="text-xl font-semibold mb-2" data-v-99ce5ed3>Postulez</h4><p class="text-gray-600" data-v-99ce5ed3>Soumettez votre candidature en ligne de manière simple et sécurisée</p></div><div class="text-center" data-v-99ce5ed3><div class="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-4" data-v-99ce5ed3><span class="text-white text-2xl font-bold" data-v-99ce5ed3>3</span></div><h4 class="text-xl font-semibold mb-2" data-v-99ce5ed3>Suivez</h4><p class="text-gray-600" data-v-99ce5ed3>Trackez vos demandes et recevez des mises à jour en temps réel</p></div></div></div></section><footer class="bg-gray-800 text-white py-8" data-v-99ce5ed3><div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" data-v-99ce5ed3><div class="text-center" data-v-99ce5ed3><h4 class="text-2xl font-bold mb-4" data-v-99ce5ed3>EtapSup</h4><p class="text-gray-400" data-v-99ce5ed3>Votre passerelle vers l&#39;enseignement supérieur en Afrique</p></div></div></footer></div><!--]-->`);
     };
   }
@@ -44548,7 +45966,7 @@ _sfc_main$G.setup = (props, ctx) => {
   return _sfc_setup$G ? _sfc_setup$G(props, ctx) : void 0;
 };
 const LoremTest = /* @__PURE__ */ _export_sfc(_sfc_main$G, [["__scopeId", "data-v-99ce5ed3"]]);
-const __vite_glob_0_37 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_38 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: LoremTest
 }, Symbol.toStringTag, { value: "Module" }));
@@ -44751,7 +46169,7 @@ _sfc_main$F.setup = (props, ctx) => {
   return _sfc_setup$F ? _sfc_setup$F(props, ctx) : void 0;
 };
 const EstablishmentFilter = /* @__PURE__ */ _export_sfc(_sfc_main$F, [["__scopeId", "data-v-166b874e"]]);
-const __vite_glob_0_38 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_39 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: EstablishmentFilter
 }, Symbol.toStringTag, { value: "Module" }));
@@ -44766,7 +46184,7 @@ _sfc_main$E.setup = (props, ctx) => {
   return _sfc_setup$E ? _sfc_setup$E(props, ctx) : void 0;
 };
 const Index$1 = /* @__PURE__ */ _export_sfc(_sfc_main$E, [["ssrRender", _sfc_ssrRender$3]]);
-const __vite_glob_0_39 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_40 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: Index$1
 }, Symbol.toStringTag, { value: "Module" }));
@@ -44817,7 +46235,7 @@ const _sfc_main$D = /* @__PURE__ */ defineComponent({
     return (_ctx, _push, _parent, _attrs) => {
       _push(`<div${ssrRenderAttrs(_attrs)} data-v-b9b82943>`);
       _push(ssrRenderComponent(unref(Head), { title: "Accompagnement Premium" }, null, _parent));
-      _push(ssrRenderComponent(_sfc_main$1f, null, null, _parent));
+      _push(ssrRenderComponent(_sfc_main$1g, null, null, _parent));
       _push(`<div class="container py-5" data-v-b9b82943><div class="row justify-content-center" data-v-b9b82943><div class="col-lg-8" data-v-b9b82943><div class="text-center mb-5" data-v-b9b82943><div class="mb-3" data-v-b9b82943><i class="bi bi-award text-warning" style="${ssrRenderStyle({ "font-size": "4rem" })}" data-v-b9b82943></i></div><h1 class="display-5 fw-bold mb-3" data-v-b9b82943>Accompagnement Premium</h1><p class="lead text-muted" data-v-b9b82943> Maximisez vos chances de réussite avec un accompagnement personnalisé </p></div><div class="card border-0 shadow-sm mb-4" data-v-b9b82943><div class="card-body" data-v-b9b82943><div class="d-flex align-items-center" data-v-b9b82943><i class="bi bi-building text-primary me-3" style="${ssrRenderStyle({ "font-size": "2rem" })}" data-v-b9b82943></i><div data-v-b9b82943><h6 class="mb-1 text-muted" data-v-b9b82943>Candidature pour</h6><h5 class="mb-0" data-v-b9b82943>${ssrInterpolate(__props.application.establishment.title)}</h5></div></div></div></div>`);
       if (isAlreadyPaid.value) {
         _push(`<div class="alert alert-success d-flex align-items-center mb-4" data-v-b9b82943><i class="bi bi-check-circle-fill me-2" data-v-b9b82943></i><div data-v-b9b82943><strong data-v-b9b82943>Accompagnement déjà activé !</strong> Vous bénéficiez déjà de l&#39;accompagnement premium pour cette candidature. </div></div>`);
@@ -44857,7 +46275,7 @@ _sfc_main$D.setup = (props, ctx) => {
   return _sfc_setup$D ? _sfc_setup$D(props, ctx) : void 0;
 };
 const AccompagnementCheckout = /* @__PURE__ */ _export_sfc(_sfc_main$D, [["__scopeId", "data-v-b9b82943"]]);
-const __vite_glob_0_40 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_41 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: AccompagnementCheckout
 }, Symbol.toStringTag, { value: "Module" }));
@@ -44903,7 +46321,7 @@ _sfc_main$C.setup = (props, ctx) => {
   return _sfc_setup$C ? _sfc_setup$C(props, ctx) : void 0;
 };
 const Cancel = /* @__PURE__ */ _export_sfc(_sfc_main$C, [["__scopeId", "data-v-4dba72c9"]]);
-const __vite_glob_0_41 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_42 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: Cancel
 }, Symbol.toStringTag, { value: "Module" }));
@@ -44964,7 +46382,7 @@ _sfc_main$B.setup = (props, ctx) => {
   return _sfc_setup$B ? _sfc_setup$B(props, ctx) : void 0;
 };
 const Success = /* @__PURE__ */ _export_sfc(_sfc_main$B, [["__scopeId", "data-v-4a6be24e"]]);
-const __vite_glob_0_42 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_43 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: Success
 }, Symbol.toStringTag, { value: "Module" }));
@@ -45680,7 +47098,7 @@ _sfc_main$o.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/Pages/Profile/Partials/DeleteUserForm.vue");
   return _sfc_setup$o ? _sfc_setup$o(props, ctx) : void 0;
 };
-const __vite_glob_0_44 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_45 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: _sfc_main$o
 }, Symbol.toStringTag, { value: "Module" }));
@@ -45794,7 +47212,7 @@ _sfc_main$m.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/Pages/Profile/Partials/UpdatePasswordForm.vue");
   return _sfc_setup$m ? _sfc_setup$m(props, ctx) : void 0;
 };
-const __vite_glob_0_45 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_46 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: _sfc_main$m
 }, Symbol.toStringTag, { value: "Module" }));
@@ -45903,7 +47321,7 @@ _sfc_main$l.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/Pages/Profile/Partials/UpdateProfileInformationForm.vue");
   return _sfc_setup$l ? _sfc_setup$l(props, ctx) : void 0;
 };
-const __vite_glob_0_46 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_47 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: _sfc_main$l
 }, Symbol.toStringTag, { value: "Module" }));
@@ -45975,7 +47393,7 @@ _sfc_main$k.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/Pages/Profile/Edit.vue");
   return _sfc_setup$k ? _sfc_setup$k(props, ctx) : void 0;
 };
-const __vite_glob_0_43 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_44 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: _sfc_main$k
 }, Symbol.toStringTag, { value: "Module" }));
@@ -46053,14 +47471,14 @@ const _sfc_main$j = /* @__PURE__ */ defineComponent({
                         }, {
                           default: withCtx((_4, _push5, _parent5, _scopeId4) => {
                             if (_push5) {
-                              _push5(ssrRenderComponent(_sfc_main$N, {
+                              _push5(ssrRenderComponent(_sfc_main$O, {
                                 text: __props.property.title,
                                 "auto-resize": "",
                                 "max-lines": 1
                               }, null, _parent5, _scopeId4));
                             } else {
                               return [
-                                createVNode(_sfc_main$N, {
+                                createVNode(_sfc_main$O, {
                                   text: __props.property.title,
                                   "auto-resize": "",
                                   "max-lines": 1
@@ -46079,7 +47497,7 @@ const _sfc_main$j = /* @__PURE__ */ defineComponent({
                             class: "stretched-link"
                           }, {
                             default: withCtx(() => [
-                              createVNode(_sfc_main$N, {
+                              createVNode(_sfc_main$O, {
                                 text: __props.property.title,
                                 "auto-resize": "",
                                 "max-lines": 1
@@ -46122,7 +47540,7 @@ const _sfc_main$j = /* @__PURE__ */ defineComponent({
                           class: "stretched-link"
                         }, {
                           default: withCtx(() => [
-                            createVNode(_sfc_main$N, {
+                            createVNode(_sfc_main$O, {
                               text: __props.property.title,
                               "auto-resize": "",
                               "max-lines": 1
@@ -46243,7 +47661,7 @@ const _sfc_main$j = /* @__PURE__ */ defineComponent({
                         class: "stretched-link"
                       }, {
                         default: withCtx(() => [
-                          createVNode(_sfc_main$N, {
+                          createVNode(_sfc_main$O, {
                             text: __props.property.title,
                             "auto-resize": "",
                             "max-lines": 1
@@ -48246,7 +49664,7 @@ _sfc_main$i.setup = (props, ctx) => {
   return _sfc_setup$i ? _sfc_setup$i(props, ctx) : void 0;
 };
 const SearchBar = /* @__PURE__ */ _export_sfc(_sfc_main$i, [["__scopeId", "data-v-ee9725c0"]]);
-const __vite_glob_0_53 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_54 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: SearchBar
 }, Symbol.toStringTag, { value: "Module" }));
@@ -48310,7 +49728,7 @@ const _sfc_main$h = /* @__PURE__ */ defineComponent({
       const _component_b_col = BCol;
       const _component_b_alert = BAlert;
       _push(`<!--[-->`);
-      _push(ssrRenderComponent(_sfc_main$1I, {
+      _push(ssrRenderComponent(_sfc_main$1J, {
         title: seo.title
       }, {
         default: withCtx((_, _push2, _parent2, _scopeId) => {
@@ -48398,12 +49816,12 @@ const _sfc_main$h = /* @__PURE__ */ defineComponent({
                     }, {
                       default: withCtx((_3, _push4, _parent4, _scopeId3) => {
                         if (_push4) {
-                          _push4(ssrRenderComponent(_sfc_main$Z, {
+                          _push4(ssrRenderComponent(_sfc_main$_, {
                             pagination: __props.properties.meta
                           }, null, _parent4, _scopeId3));
                         } else {
                           return [
-                            createVNode(_sfc_main$Z, {
+                            createVNode(_sfc_main$_, {
                               pagination: __props.properties.meta
                             }, null, 8, ["pagination"])
                           ];
@@ -48418,7 +49836,7 @@ const _sfc_main$h = /* @__PURE__ */ defineComponent({
                         class: "mt-4"
                       }, {
                         default: withCtx(() => [
-                          createVNode(_sfc_main$Z, {
+                          createVNode(_sfc_main$_, {
                             pagination: __props.properties.meta
                           }, null, 8, ["pagination"])
                         ]),
@@ -48514,7 +49932,7 @@ const _sfc_main$h = /* @__PURE__ */ defineComponent({
                       class: "mt-4"
                     }, {
                       default: withCtx(() => [
-                        createVNode(_sfc_main$Z, {
+                        createVNode(_sfc_main$_, {
                           pagination: __props.properties.meta
                         }, null, 8, ["pagination"])
                       ]),
@@ -48561,7 +49979,7 @@ _sfc_main$h.setup = (props, ctx) => {
   return _sfc_setup$h ? _sfc_setup$h(props, ctx) : void 0;
 };
 const Index = /* @__PURE__ */ _export_sfc(_sfc_main$h, [["__scopeId", "data-v-2977a9bb"]]);
-const __vite_glob_0_47 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_48 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: Index
 }, Symbol.toStringTag, { value: "Module" }));
@@ -49687,7 +51105,7 @@ _sfc_main$g.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/Pages/RealEstate/Partials/CustormerReview.vue");
   return _sfc_setup$g ? _sfc_setup$g(props, ctx) : void 0;
 };
-const __vite_glob_0_48 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_49 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: _sfc_main$g
 }, Symbol.toStringTag, { value: "Module" }));
@@ -49748,7 +51166,7 @@ const _sfc_main$f = /* @__PURE__ */ defineComponent({
       const _component_IftaLabel = __unplugin_components_4$1;
       const _component_input_text = __unplugin_components_6;
       const _component_InputNumber = __unplugin_components_13;
-      _push(ssrRenderComponent(_sfc_main$1H, mergeProps({
+      _push(ssrRenderComponent(_sfc_main$1I, mergeProps({
         id: "price-overview",
         "data-sticky": "",
         "data-margin-top": "100",
@@ -50255,7 +51673,7 @@ _sfc_main$f.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/Pages/RealEstate/Partials/MonthlyPriceOverview.vue");
   return _sfc_setup$f ? _sfc_setup$f(props, ctx) : void 0;
 };
-const __vite_glob_0_49 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_50 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: _sfc_main$f
 }, Symbol.toStringTag, { value: "Module" }));
@@ -50368,7 +51786,7 @@ const _sfc_main$e = /* @__PURE__ */ defineComponent({
       const _component_Popover = __unplugin_components_2$1;
       const _component_v_calendar = resolveComponent("v-calendar");
       const _component_InputNumber = __unplugin_components_13;
-      _push(ssrRenderComponent(_sfc_main$1H, mergeProps({
+      _push(ssrRenderComponent(_sfc_main$1I, mergeProps({
         id: "price-overview",
         "data-sticky": "",
         "data-margin-top": "100",
@@ -50915,7 +52333,7 @@ _sfc_main$e.setup = (props, ctx) => {
   return _sfc_setup$e ? _sfc_setup$e(props, ctx) : void 0;
 };
 const PriceOverview = /* @__PURE__ */ _export_sfc(_sfc_main$e, [["__scopeId", "data-v-6cbc1f13"]]);
-const __vite_glob_0_50 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_51 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: PriceOverview
 }, Symbol.toStringTag, { value: "Module" }));
@@ -51016,7 +52434,7 @@ _sfc_main$d.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/Pages/RealEstate/Partials/PropertyAddress.vue");
   return _sfc_setup$d ? _sfc_setup$d(props, ctx) : void 0;
 };
-const __vite_glob_0_51 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_52 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: _sfc_main$d
 }, Symbol.toStringTag, { value: "Module" }));
@@ -51053,7 +52471,7 @@ const _sfc_main$c = /* @__PURE__ */ defineComponent({
                   _push3(ssrRenderComponent(_component_b_col, { md: "6" }, {
                     default: withCtx((_3, _push4, _parent4, _scopeId3) => {
                       if (_push4) {
-                        _push4(ssrRenderComponent(_sfc_main$O, {
+                        _push4(ssrRenderComponent(_sfc_main$P, {
                           link: displayImages.value[0]
                         }, {
                           default: withCtx((_4, _push5, _parent5, _scopeId4) => {
@@ -51107,7 +52525,7 @@ const _sfc_main$c = /* @__PURE__ */ defineComponent({
                         }, _parent4, _scopeId3));
                       } else {
                         return [
-                          createVNode(_sfc_main$O, {
+                          createVNode(_sfc_main$P, {
                             link: displayImages.value[0]
                           }, {
                             default: withCtx(() => [
@@ -51145,7 +52563,7 @@ const _sfc_main$c = /* @__PURE__ */ defineComponent({
                                 _push5(ssrRenderComponent(_component_b_col, { cols: "12" }, {
                                   default: withCtx((_5, _push6, _parent6, _scopeId5) => {
                                     if (_push6) {
-                                      _push6(ssrRenderComponent(_sfc_main$O, {
+                                      _push6(ssrRenderComponent(_sfc_main$P, {
                                         link: displayImages.value[1]
                                       }, {
                                         default: withCtx((_6, _push7, _parent7, _scopeId6) => {
@@ -51199,7 +52617,7 @@ const _sfc_main$c = /* @__PURE__ */ defineComponent({
                                       }, _parent6, _scopeId5));
                                     } else {
                                       return [
-                                        createVNode(_sfc_main$O, {
+                                        createVNode(_sfc_main$P, {
                                           link: displayImages.value[1]
                                         }, {
                                           default: withCtx(() => [
@@ -51234,7 +52652,7 @@ const _sfc_main$c = /* @__PURE__ */ defineComponent({
                                 _push5(ssrRenderComponent(_component_b_col, { md: "6" }, {
                                   default: withCtx((_5, _push6, _parent6, _scopeId5) => {
                                     if (_push6) {
-                                      _push6(ssrRenderComponent(_sfc_main$O, {
+                                      _push6(ssrRenderComponent(_sfc_main$P, {
                                         link: displayImages.value[2]
                                       }, {
                                         default: withCtx((_6, _push7, _parent7, _scopeId6) => {
@@ -51288,7 +52706,7 @@ const _sfc_main$c = /* @__PURE__ */ defineComponent({
                                       }, _parent6, _scopeId5));
                                     } else {
                                       return [
-                                        createVNode(_sfc_main$O, {
+                                        createVNode(_sfc_main$P, {
                                           link: displayImages.value[2]
                                         }, {
                                           default: withCtx(() => [
@@ -51336,7 +52754,7 @@ const _sfc_main$c = /* @__PURE__ */ defineComponent({
                                           if (_push7) {
                                             _push7(`<div class="bg-overlay bg-dark opacity-7"${_scopeId6}></div><!--[-->`);
                                             ssrRenderList(sortedImages.value, (image, index) => {
-                                              _push7(ssrRenderComponent(_sfc_main$O, {
+                                              _push7(ssrRenderComponent(_sfc_main$P, {
                                                 key: index,
                                                 link: image,
                                                 className: index === 3 ? "stretched-link z-index-9" : ""
@@ -51368,7 +52786,7 @@ const _sfc_main$c = /* @__PURE__ */ defineComponent({
                                             return [
                                               createVNode("div", { class: "bg-overlay bg-dark opacity-7" }),
                                               (openBlock(true), createBlock(Fragment, null, renderList(sortedImages.value, (image, index) => {
-                                                return openBlock(), createBlock(_sfc_main$O, {
+                                                return openBlock(), createBlock(_sfc_main$P, {
                                                   key: index,
                                                   link: image,
                                                   className: index === 3 ? "stretched-link z-index-9" : ""
@@ -51407,7 +52825,7 @@ const _sfc_main$c = /* @__PURE__ */ defineComponent({
                                           default: withCtx(() => [
                                             createVNode("div", { class: "bg-overlay bg-dark opacity-7" }),
                                             (openBlock(true), createBlock(Fragment, null, renderList(sortedImages.value, (image, index) => {
-                                              return openBlock(), createBlock(_sfc_main$O, {
+                                              return openBlock(), createBlock(_sfc_main$P, {
                                                 key: index,
                                                 link: image,
                                                 className: index === 3 ? "stretched-link z-index-9" : ""
@@ -51445,7 +52863,7 @@ const _sfc_main$c = /* @__PURE__ */ defineComponent({
                                   cols: "12"
                                 }, {
                                   default: withCtx(() => [
-                                    createVNode(_sfc_main$O, {
+                                    createVNode(_sfc_main$P, {
                                       link: displayImages.value[1]
                                     }, {
                                       default: withCtx(() => [
@@ -51476,7 +52894,7 @@ const _sfc_main$c = /* @__PURE__ */ defineComponent({
                                   md: "6"
                                 }, {
                                   default: withCtx(() => [
-                                    createVNode(_sfc_main$O, {
+                                    createVNode(_sfc_main$P, {
                                       link: displayImages.value[2]
                                     }, {
                                       default: withCtx(() => [
@@ -51519,7 +52937,7 @@ const _sfc_main$c = /* @__PURE__ */ defineComponent({
                                       default: withCtx(() => [
                                         createVNode("div", { class: "bg-overlay bg-dark opacity-7" }),
                                         (openBlock(true), createBlock(Fragment, null, renderList(sortedImages.value, (image, index) => {
-                                          return openBlock(), createBlock(_sfc_main$O, {
+                                          return openBlock(), createBlock(_sfc_main$P, {
                                             key: index,
                                             link: image,
                                             className: index === 3 ? "stretched-link z-index-9" : ""
@@ -51559,7 +52977,7 @@ const _sfc_main$c = /* @__PURE__ */ defineComponent({
                                 cols: "12"
                               }, {
                                 default: withCtx(() => [
-                                  createVNode(_sfc_main$O, {
+                                  createVNode(_sfc_main$P, {
                                     link: displayImages.value[1]
                                   }, {
                                     default: withCtx(() => [
@@ -51590,7 +53008,7 @@ const _sfc_main$c = /* @__PURE__ */ defineComponent({
                                 md: "6"
                               }, {
                                 default: withCtx(() => [
-                                  createVNode(_sfc_main$O, {
+                                  createVNode(_sfc_main$P, {
                                     link: displayImages.value[2]
                                   }, {
                                     default: withCtx(() => [
@@ -51633,7 +53051,7 @@ const _sfc_main$c = /* @__PURE__ */ defineComponent({
                                     default: withCtx(() => [
                                       createVNode("div", { class: "bg-overlay bg-dark opacity-7" }),
                                       (openBlock(true), createBlock(Fragment, null, renderList(sortedImages.value, (image, index) => {
-                                        return openBlock(), createBlock(_sfc_main$O, {
+                                        return openBlock(), createBlock(_sfc_main$P, {
                                           key: index,
                                           link: image,
                                           className: index === 3 ? "stretched-link z-index-9" : ""
@@ -51671,7 +53089,7 @@ const _sfc_main$c = /* @__PURE__ */ defineComponent({
                   return [
                     createVNode(_component_b_col, { md: "6" }, {
                       default: withCtx(() => [
-                        createVNode(_sfc_main$O, {
+                        createVNode(_sfc_main$P, {
                           link: displayImages.value[0]
                         }, {
                           default: withCtx(() => [
@@ -51706,7 +53124,7 @@ const _sfc_main$c = /* @__PURE__ */ defineComponent({
                               cols: "12"
                             }, {
                               default: withCtx(() => [
-                                createVNode(_sfc_main$O, {
+                                createVNode(_sfc_main$P, {
                                   link: displayImages.value[1]
                                 }, {
                                   default: withCtx(() => [
@@ -51737,7 +53155,7 @@ const _sfc_main$c = /* @__PURE__ */ defineComponent({
                               md: "6"
                             }, {
                               default: withCtx(() => [
-                                createVNode(_sfc_main$O, {
+                                createVNode(_sfc_main$P, {
                                   link: displayImages.value[2]
                                 }, {
                                   default: withCtx(() => [
@@ -51780,7 +53198,7 @@ const _sfc_main$c = /* @__PURE__ */ defineComponent({
                                   default: withCtx(() => [
                                     createVNode("div", { class: "bg-overlay bg-dark opacity-7" }),
                                     (openBlock(true), createBlock(Fragment, null, renderList(sortedImages.value, (image, index) => {
-                                      return openBlock(), createBlock(_sfc_main$O, {
+                                      return openBlock(), createBlock(_sfc_main$P, {
                                         key: index,
                                         link: image,
                                         className: index === 3 ? "stretched-link z-index-9" : ""
@@ -51823,7 +53241,7 @@ const _sfc_main$c = /* @__PURE__ */ defineComponent({
                 default: withCtx(() => [
                   createVNode(_component_b_col, { md: "6" }, {
                     default: withCtx(() => [
-                      createVNode(_sfc_main$O, {
+                      createVNode(_sfc_main$P, {
                         link: displayImages.value[0]
                       }, {
                         default: withCtx(() => [
@@ -51858,7 +53276,7 @@ const _sfc_main$c = /* @__PURE__ */ defineComponent({
                             cols: "12"
                           }, {
                             default: withCtx(() => [
-                              createVNode(_sfc_main$O, {
+                              createVNode(_sfc_main$P, {
                                 link: displayImages.value[1]
                               }, {
                                 default: withCtx(() => [
@@ -51889,7 +53307,7 @@ const _sfc_main$c = /* @__PURE__ */ defineComponent({
                             md: "6"
                           }, {
                             default: withCtx(() => [
-                              createVNode(_sfc_main$O, {
+                              createVNode(_sfc_main$P, {
                                 link: displayImages.value[2]
                               }, {
                                 default: withCtx(() => [
@@ -51932,7 +53350,7 @@ const _sfc_main$c = /* @__PURE__ */ defineComponent({
                                 default: withCtx(() => [
                                   createVNode("div", { class: "bg-overlay bg-dark opacity-7" }),
                                   (openBlock(true), createBlock(Fragment, null, renderList(sortedImages.value, (image, index) => {
-                                    return openBlock(), createBlock(_sfc_main$O, {
+                                    return openBlock(), createBlock(_sfc_main$P, {
                                       key: index,
                                       link: image,
                                       className: index === 3 ? "stretched-link z-index-9" : ""
@@ -51982,7 +53400,7 @@ _sfc_main$c.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/Pages/RealEstate/Partials/PropertyGallery.vue");
   return _sfc_setup$c ? _sfc_setup$c(props, ctx) : void 0;
 };
-const __vite_glob_0_52 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_53 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: _sfc_main$c
 }, Symbol.toStringTag, { value: "Module" }));
@@ -52348,7 +53766,7 @@ _sfc_main$b.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/Pages/RealEstate/Reservation/Partials/Hero.vue");
   return _sfc_setup$b ? _sfc_setup$b(props, ctx) : void 0;
 };
-const __vite_glob_0_56 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_57 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: _sfc_main$b
 }, Symbol.toStringTag, { value: "Module" }));
@@ -52634,7 +54052,7 @@ _sfc_main$a.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/Pages/RealEstate/Reservation/Partials/PropertyCard.vue");
   return _sfc_setup$a ? _sfc_setup$a(props, ctx) : void 0;
 };
-const __vite_glob_0_58 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_59 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: _sfc_main$a
 }, Symbol.toStringTag, { value: "Module" }));
@@ -54387,7 +55805,7 @@ _sfc_main$9.setup = (props, ctx) => {
   return _sfc_setup$9 ? _sfc_setup$9(props, ctx) : void 0;
 };
 const ReservationForm = /* @__PURE__ */ _export_sfc(_sfc_main$9, [["__scopeId", "data-v-3c2e48d7"]]);
-const __vite_glob_0_59 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_60 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: ReservationForm
 }, Symbol.toStringTag, { value: "Module" }));
@@ -54516,7 +55934,7 @@ const _sfc_main$8 = /* @__PURE__ */ defineComponent({
       const _component_v_calendar = resolveComponent("v-calendar");
       const _component_InputNumber = __unplugin_components_13;
       _push(`<!--[-->`);
-      _push(ssrRenderComponent(_sfc_main$1I, {
+      _push(ssrRenderComponent(_sfc_main$1J, {
         title: __props.property.title
       }, {
         default: withCtx((_, _push2, _parent2, _scopeId) => {
@@ -54577,7 +55995,7 @@ const _sfc_main$8 = /* @__PURE__ */ defineComponent({
                     _: 1
                   }, _parent3, _scopeId2));
                   _push3(`<aside class="col-xl-4"${_scopeId2}><div class="vstack gap-4"${_scopeId2}>`);
-                  _push3(ssrRenderComponent(_sfc_main$1H, {
+                  _push3(ssrRenderComponent(_sfc_main$1I, {
                     id: "price-overview",
                     "data-sticky": "",
                     "data-margin-top": "100",
@@ -55136,7 +56554,7 @@ const _sfc_main$8 = /* @__PURE__ */ defineComponent({
                     }),
                     createVNode("aside", { class: "col-xl-4" }, [
                       createVNode("div", { class: "vstack gap-4" }, [
-                        createVNode(_sfc_main$1H, {
+                        createVNode(_sfc_main$1I, {
                           id: "price-overview",
                           "data-sticky": "",
                           "data-margin-top": "100",
@@ -55362,7 +56780,7 @@ const _sfc_main$8 = /* @__PURE__ */ defineComponent({
                   }),
                   createVNode("aside", { class: "col-xl-4" }, [
                     createVNode("div", { class: "vstack gap-4" }, [
-                      createVNode(_sfc_main$1H, {
+                      createVNode(_sfc_main$1I, {
                         id: "price-overview",
                         "data-sticky": "",
                         "data-margin-top": "100",
@@ -55578,7 +56996,7 @@ _sfc_main$8.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/Pages/RealEstate/Reservation/Index.vue");
   return _sfc_setup$8 ? _sfc_setup$8(props, ctx) : void 0;
 };
-const __vite_glob_0_54 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_55 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: _sfc_main$8
 }, Symbol.toStringTag, { value: "Module" }));
@@ -57667,7 +59085,7 @@ _sfc_main$6.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/Pages/RealEstate/Reservation/Partials/MonthlyReservationForm.vue");
   return _sfc_setup$6 ? _sfc_setup$6(props, ctx) : void 0;
 };
-const __vite_glob_0_57 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_58 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: _sfc_main$6
 }, Symbol.toStringTag, { value: "Module" }));
@@ -57753,7 +59171,7 @@ const _sfc_main$5 = /* @__PURE__ */ defineComponent({
       const _component_input_text = __unplugin_components_6;
       const _component_InputNumber = __unplugin_components_13;
       _push(`<!--[-->`);
-      _push(ssrRenderComponent(_sfc_main$1I, {
+      _push(ssrRenderComponent(_sfc_main$1J, {
         title: __props.property.title
       }, {
         default: withCtx((_, _push2, _parent2, _scopeId) => {
@@ -57792,7 +59210,7 @@ const _sfc_main$5 = /* @__PURE__ */ defineComponent({
                     _: 1
                   }, _parent3, _scopeId2));
                   _push3(`<aside class="col-xl-4"${_scopeId2}><div class="vstack gap-4"${_scopeId2}>`);
-                  _push3(ssrRenderComponent(_sfc_main$1H, {
+                  _push3(ssrRenderComponent(_sfc_main$1I, {
                     id: "price-overview",
                     "data-sticky": "",
                     "data-margin-top": "100",
@@ -58312,7 +59730,7 @@ const _sfc_main$5 = /* @__PURE__ */ defineComponent({
                     }),
                     createVNode("aside", { class: "col-xl-4" }, [
                       createVNode("div", { class: "vstack gap-4" }, [
-                        createVNode(_sfc_main$1H, {
+                        createVNode(_sfc_main$1I, {
                           id: "price-overview",
                           "data-sticky": "",
                           "data-margin-top": "100",
@@ -58506,7 +59924,7 @@ const _sfc_main$5 = /* @__PURE__ */ defineComponent({
                   }),
                   createVNode("aside", { class: "col-xl-4" }, [
                     createVNode("div", { class: "vstack gap-4" }, [
-                      createVNode(_sfc_main$1H, {
+                      createVNode(_sfc_main$1I, {
                         id: "price-overview",
                         "data-sticky": "",
                         "data-margin-top": "100",
@@ -58701,7 +60119,7 @@ _sfc_main$5.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/Pages/RealEstate/Reservation/MonthlyReservation.vue");
   return _sfc_setup$5 ? _sfc_setup$5(props, ctx) : void 0;
 };
-const __vite_glob_0_55 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_56 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: _sfc_main$5
 }, Symbol.toStringTag, { value: "Module" }));
@@ -58725,7 +60143,7 @@ const _sfc_main$4 = /* @__PURE__ */ defineComponent({
       const _component_b_card_title = BCardTitle;
       const _component_font_awesome_icon = resolveComponent("font-awesome-icon");
       _push(`<!--[-->`);
-      _push(ssrRenderComponent(_sfc_main$1I, {
+      _push(ssrRenderComponent(_sfc_main$1J, {
         title: __props.property.title
       }, {
         default: withCtx((_, _push2, _parent2, _scopeId) => {
@@ -60378,7 +61796,7 @@ _sfc_main$4.setup = (props, ctx) => {
   return _sfc_setup$4 ? _sfc_setup$4(props, ctx) : void 0;
 };
 const Show = /* @__PURE__ */ _export_sfc(_sfc_main$4, [["__scopeId", "data-v-b23db357"]]);
-const __vite_glob_0_60 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_61 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: Show
 }, Symbol.toStringTag, { value: "Module" }));
@@ -60466,7 +61884,7 @@ _sfc_main$3.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/Pages/Welcome.vue");
   return _sfc_setup$3 ? _sfc_setup$3(props, ctx) : void 0;
 };
-const __vite_glob_0_61 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_62 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: _sfc_main$3
 }, Symbol.toStringTag, { value: "Module" }));
@@ -62124,7 +63542,7 @@ _sfc_main$1.setup = (props, ctx) => {
   return _sfc_setup$1 ? _sfc_setup$1(props, ctx) : void 0;
 };
 const EventLanding = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["__scopeId", "data-v-e6aa539a"]]);
-const __vite_glob_0_62 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_63 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: EventLanding
 }, Symbol.toStringTag, { value: "Module" }));
@@ -62515,7 +63933,7 @@ _sfc_main.setup = (props, ctx) => {
   return _sfc_setup ? _sfc_setup(props, ctx) : void 0;
 };
 const RemerciementEvent = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-6c829ffb"]]);
-const __vite_glob_0_63 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_64 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: RemerciementEvent
 }, Symbol.toStringTag, { value: "Module" }));
@@ -62869,10 +64287,10 @@ const appName = "EtapSup";
 createInertiaApp({
   title: (title) => `${title} - ${appName}`,
   resolve: (name) => {
-    const pages = /* @__PURE__ */ Object.assign({ "./Pages/Applications/Create.vue": __vite_glob_0_0, "./Pages/Applications/Partials/ApplicationForm.vue": __vite_glob_0_1, "./Pages/Applications/Partials/EstablishmentCard.vue": __vite_glob_0_2, "./Pages/Applications/Partials/Hero.vue": __vite_glob_0_3, "./Pages/Auth/ConfirmPassword.vue": __vite_glob_0_4, "./Pages/Auth/ForgotPassword.vue": __vite_glob_0_5, "./Pages/Auth/Login.vue": __vite_glob_0_6, "./Pages/Auth/Register.vue": __vite_glob_0_7, "./Pages/Auth/ResetPassword.vue": __vite_glob_0_8, "./Pages/Auth/VerifyEmail.vue": __vite_glob_0_9, "./Pages/Certificate/Index.vue": __vite_glob_0_10, "./Pages/Certificate/Later.vue": __vite_glob_0_11, "./Pages/Certificate/Option.vue": __vite_glob_0_12, "./Pages/Certificate/Partials/CityListBox.vue": __vite_glob_0_13, "./Pages/Certificate/Partials/FormLater.vue": __vite_glob_0_14, "./Pages/Certificate/Partials/FormPay.vue": __vite_glob_0_15, "./Pages/Certificate/Pay.vue": __vite_glob_0_16, "./Pages/CustomSearch/Index.vue": __vite_glob_0_17, "./Pages/CustomSearch/components/CustomSearchPersonalInfo.vue": __vite_glob_0_18, "./Pages/CustomSearch/components/CustomSearchSelectBar.vue": __vite_glob_0_19, "./Pages/CustomSearch/components/CustomerSearchInfo.vue": __vite_glob_0_20, "./Pages/Dashboard.vue": __vite_glob_0_21, "./Pages/Dashboard/Applications/Show.vue": __vite_glob_0_22, "./Pages/Dashboard/CertificateRequest/Index.vue": __vite_glob_0_23, "./Pages/Dashboard/CertificateRequest/Partials/PaymentStatus.vue": __vite_glob_0_24, "./Pages/Dashboard/CertificateRequest/Show.vue": __vite_glob_0_25, "./Pages/Dashboard/CustomSearch/Index.vue": __vite_glob_0_26, "./Pages/Dashboard/Profile/Index.vue": __vite_glob_0_27, "./Pages/Dashboard/Profile/Partials/PasswordForm.vue": __vite_glob_0_28, "./Pages/Dashboard/RealEstate/Index.vue": __vite_glob_0_29, "./Pages/Dashboard/RealEstate/Partials/ReservationCard.vue": __vite_glob_0_30, "./Pages/Dashboard/RealEstate/Partials/ReservationReview.vue": __vite_glob_0_31, "./Pages/Dashboard/RealEstate/Partials/ReservationTabs.vue": __vite_glob_0_32, "./Pages/Dashboard/RealEstate/Show.vue": __vite_glob_0_33, "./Pages/Establishments/Index.vue": __vite_glob_0_34, "./Pages/Establishments/Show.vue": __vite_glob_0_35, "./Pages/Home/Index.vue": __vite_glob_0_36, "./Pages/Home/LoremTest.vue": __vite_glob_0_37, "./Pages/Home/Partials/EstablishmentFilter.vue": __vite_glob_0_38, "./Pages/Index.vue": __vite_glob_0_39, "./Pages/Payment/AccompagnementCheckout.vue": __vite_glob_0_40, "./Pages/Payment/Cancel.vue": __vite_glob_0_41, "./Pages/Payment/Success.vue": __vite_glob_0_42, "./Pages/Profile/Edit.vue": __vite_glob_0_43, "./Pages/Profile/Partials/DeleteUserForm.vue": __vite_glob_0_44, "./Pages/Profile/Partials/UpdatePasswordForm.vue": __vite_glob_0_45, "./Pages/Profile/Partials/UpdateProfileInformationForm.vue": __vite_glob_0_46, "./Pages/RealEstate/Index.vue": __vite_glob_0_47, "./Pages/RealEstate/Partials/CustormerReview.vue": __vite_glob_0_48, "./Pages/RealEstate/Partials/MonthlyPriceOverview.vue": __vite_glob_0_49, "./Pages/RealEstate/Partials/PriceOverview.vue": __vite_glob_0_50, "./Pages/RealEstate/Partials/PropertyAddress.vue": __vite_glob_0_51, "./Pages/RealEstate/Partials/PropertyGallery.vue": __vite_glob_0_52, "./Pages/RealEstate/Partials/SearchBar.vue": __vite_glob_0_53, "./Pages/RealEstate/Reservation/Index.vue": __vite_glob_0_54, "./Pages/RealEstate/Reservation/MonthlyReservation.vue": __vite_glob_0_55, "./Pages/RealEstate/Reservation/Partials/Hero.vue": __vite_glob_0_56, "./Pages/RealEstate/Reservation/Partials/MonthlyReservationForm.vue": __vite_glob_0_57, "./Pages/RealEstate/Reservation/Partials/PropertyCard.vue": __vite_glob_0_58, "./Pages/RealEstate/Reservation/Partials/ReservationForm.vue": __vite_glob_0_59, "./Pages/RealEstate/Show.vue": __vite_glob_0_60, "./Pages/Welcome.vue": __vite_glob_0_61, "./Pages/refonte/EventLanding.vue": __vite_glob_0_62, "./Pages/refonte/RemerciementEvent.vue": __vite_glob_0_63 });
+    const pages = /* @__PURE__ */ Object.assign({ "./Pages/Applications/Create.vue": __vite_glob_0_0, "./Pages/Applications/Partials/ApplicationForm.vue": __vite_glob_0_1, "./Pages/Applications/Partials/EstablishmentCard.vue": __vite_glob_0_2, "./Pages/Applications/Partials/Hero.vue": __vite_glob_0_3, "./Pages/Auth/ConfirmPassword.vue": __vite_glob_0_4, "./Pages/Auth/ForgotPassword.vue": __vite_glob_0_5, "./Pages/Auth/Login.vue": __vite_glob_0_6, "./Pages/Auth/Register.vue": __vite_glob_0_7, "./Pages/Auth/ResetPassword.vue": __vite_glob_0_8, "./Pages/Auth/VerifyEmail.vue": __vite_glob_0_9, "./Pages/Certificate/Index.vue": __vite_glob_0_10, "./Pages/Certificate/Later.vue": __vite_glob_0_11, "./Pages/Certificate/Option.vue": __vite_glob_0_12, "./Pages/Certificate/Partials/CityListBox.vue": __vite_glob_0_13, "./Pages/Certificate/Partials/FormLater.vue": __vite_glob_0_14, "./Pages/Certificate/Partials/FormPay.vue": __vite_glob_0_15, "./Pages/Certificate/Pay.vue": __vite_glob_0_16, "./Pages/CustomSearch/Index.vue": __vite_glob_0_17, "./Pages/CustomSearch/components/CustomSearchPersonalInfo.vue": __vite_glob_0_18, "./Pages/CustomSearch/components/CustomSearchSelectBar.vue": __vite_glob_0_19, "./Pages/CustomSearch/components/CustomerSearchInfo.vue": __vite_glob_0_20, "./Pages/Dashboard.vue": __vite_glob_0_21, "./Pages/Dashboard/Applications/Show.vue": __vite_glob_0_22, "./Pages/Dashboard/CertificateRequest/Index.vue": __vite_glob_0_23, "./Pages/Dashboard/CertificateRequest/Partials/PaymentStatus.vue": __vite_glob_0_24, "./Pages/Dashboard/CertificateRequest/Show.vue": __vite_glob_0_25, "./Pages/Dashboard/CustomSearch/Index.vue": __vite_glob_0_26, "./Pages/Dashboard/Profile/Index.vue": __vite_glob_0_27, "./Pages/Dashboard/Profile/Partials/PasswordForm.vue": __vite_glob_0_28, "./Pages/Dashboard/RealEstate/Index.vue": __vite_glob_0_29, "./Pages/Dashboard/RealEstate/Partials/ReservationCard.vue": __vite_glob_0_30, "./Pages/Dashboard/RealEstate/Partials/ReservationReview.vue": __vite_glob_0_31, "./Pages/Dashboard/RealEstate/Partials/ReservationTabs.vue": __vite_glob_0_32, "./Pages/Dashboard/RealEstate/Show.vue": __vite_glob_0_33, "./Pages/Establishments/Index.vue": __vite_glob_0_34, "./Pages/Establishments/Show.vue": __vite_glob_0_35, "./Pages/Home/Accueil.vue": __vite_glob_0_36, "./Pages/Home/Index.vue": __vite_glob_0_37, "./Pages/Home/LoremTest.vue": __vite_glob_0_38, "./Pages/Home/Partials/EstablishmentFilter.vue": __vite_glob_0_39, "./Pages/Index.vue": __vite_glob_0_40, "./Pages/Payment/AccompagnementCheckout.vue": __vite_glob_0_41, "./Pages/Payment/Cancel.vue": __vite_glob_0_42, "./Pages/Payment/Success.vue": __vite_glob_0_43, "./Pages/Profile/Edit.vue": __vite_glob_0_44, "./Pages/Profile/Partials/DeleteUserForm.vue": __vite_glob_0_45, "./Pages/Profile/Partials/UpdatePasswordForm.vue": __vite_glob_0_46, "./Pages/Profile/Partials/UpdateProfileInformationForm.vue": __vite_glob_0_47, "./Pages/RealEstate/Index.vue": __vite_glob_0_48, "./Pages/RealEstate/Partials/CustormerReview.vue": __vite_glob_0_49, "./Pages/RealEstate/Partials/MonthlyPriceOverview.vue": __vite_glob_0_50, "./Pages/RealEstate/Partials/PriceOverview.vue": __vite_glob_0_51, "./Pages/RealEstate/Partials/PropertyAddress.vue": __vite_glob_0_52, "./Pages/RealEstate/Partials/PropertyGallery.vue": __vite_glob_0_53, "./Pages/RealEstate/Partials/SearchBar.vue": __vite_glob_0_54, "./Pages/RealEstate/Reservation/Index.vue": __vite_glob_0_55, "./Pages/RealEstate/Reservation/MonthlyReservation.vue": __vite_glob_0_56, "./Pages/RealEstate/Reservation/Partials/Hero.vue": __vite_glob_0_57, "./Pages/RealEstate/Reservation/Partials/MonthlyReservationForm.vue": __vite_glob_0_58, "./Pages/RealEstate/Reservation/Partials/PropertyCard.vue": __vite_glob_0_59, "./Pages/RealEstate/Reservation/Partials/ReservationForm.vue": __vite_glob_0_60, "./Pages/RealEstate/Show.vue": __vite_glob_0_61, "./Pages/Welcome.vue": __vite_glob_0_62, "./Pages/refonte/EventLanding.vue": __vite_glob_0_63, "./Pages/refonte/RemerciementEvent.vue": __vite_glob_0_64 });
     const page = pages[`./Pages/${name}.vue`];
     if (page?.default) {
-      page.default.layout = page.default.layout || _sfc_main$1A;
+      page.default.layout = page.default.layout || _sfc_main$1B;
     }
     return page;
   },
