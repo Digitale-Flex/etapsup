@@ -36,9 +36,9 @@ class CityResource extends Resource
                         Forms\Components\Section::make()
                             ->columns(2)
                             ->schema([
-                                Forms\Components\Select::make('region_id')
-                                    ->relationship('region', 'name')
-                                    ->label('Region')
+                                Forms\Components\Select::make('country_id')
+                                    ->relationship('country', 'name')
+                                    ->label('Pays')
                                     ->searchable()
                                     ->preload()
                                     ->required()
@@ -71,8 +71,8 @@ class CityResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('region.name')
-                    ->label('Region')
+                Tables\Columns\TextColumn::make('country.name')
+                    ->label('Pays')
                     ->sortable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('name')

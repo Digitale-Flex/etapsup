@@ -139,7 +139,7 @@ class HomeController extends Controller
         $stats = [
             'totalEstablishments' => Property::where('is_published', true)->count(),
             'totalStudents' => 2500, // Hardcodé
-            'totalCountries' => Country::whereHas('regions.cities.properties', function($q) {
+            'totalCountries' => Country::whereHas('cities.properties', function($q) {
                 $q->where('is_published', true);
             })->count(),
             'totalPrograms' => Program::count(),
