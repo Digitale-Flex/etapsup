@@ -90,8 +90,24 @@ class PropertyResource extends Resource
                                     ->preload()
                                     ->columnSpan(6),
 
+                                Forms\Components\Select::make('country_id')
+                                    ->relationship('country', 'name')
+                                    ->label('Pays')
+                                    ->required()
+                                    ->searchable()
+                                    ->preload()
+                                    ->live() // Met à jour city_id quand le pays change
+                                    ->columnSpan(6),
+
                                 Forms\Components\Select::make('city_id')
-                                    ->relationship('city', 'name')
+                                    ->relationship(
+                                        'city',
+                                        'name',
+                                        fn ($query, Forms\Get $get) => $query->when(
+                                            $get('country_id'),
+                                            fn ($q, $countryId) => $q->where('country_id', $countryId)
+                                        )
+                                    )
                                     ->label('Ville')
                                     ->required()
                                     ->searchable()

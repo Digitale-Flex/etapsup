@@ -77,6 +77,7 @@ class Property extends Model implements HasMedia
         'category_id',
         'sub_category_id',
         'city_id',
+        'country_id', // Ajouté pour cohérence formulaire Filament (Pays + Ville)
         'title',
         'price',
         'description',
@@ -182,6 +183,11 @@ class Property extends Model implements HasMedia
     public function city(): BelongsTo
     {
         return $this->belongsTo(City::class);
+    }
+
+    public function country(): BelongsTo
+    {
+        return $this->belongsTo(\App\Models\Country::class);
     }
 
     // EtatSup: Relations vers Settings pour paramétrabilité

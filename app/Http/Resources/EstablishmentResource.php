@@ -32,7 +32,7 @@ class EstablishmentResource extends JsonResource
             'logo' => $this->getFirstMediaUrl('images', 'thumb'),
             'type' => $this->propertyType?->label ?? $this->establishment_type,
             'city' => $this->city?->name,
-            'country' => $this->city?->region?->country?->name,
+            'country' => $this->country?->name, // Relation directe properties.country_id
 
             // Relations contexte éducatif (objets complets pour pages détails)
             'propertyType' => new PropertyTypeResource($this->whenLoaded('propertyType')), // Type d'établissement

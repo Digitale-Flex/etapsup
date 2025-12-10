@@ -166,7 +166,13 @@ class UserResource extends Resource
             ->filters([
                 Tables\Filters\SelectFilter::make('role')
                     ->label('Rôle')
-                    ->relationship('roles', 'display_name')
+                    ->relationship('roles', 'name')
+                    ->getOptionLabelFromRecordUsing(fn ($record) => match ($record->name) {
+                        'admin' => 'Administrateur',
+                        'partner' => 'Partenaire',
+                        'manager' => 'Gestionnaire',
+                        default => ucfirst($record->name),
+                    })
                     ->multiple()
                     ->preload(),
 

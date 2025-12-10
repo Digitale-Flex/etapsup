@@ -39,16 +39,15 @@ class EstablishmentController extends Controller
             ->with([
                 'propertyType',      // Type d'établissement
                 'category',          // Domaine d'études principal
-                'city.country',      // Ville -> Pays (A20: migration region_id → country_id)
+                'city',              // Ville
+                'country',           // Pays (relation directe properties.country_id)
                 'ratings',           // Notes
             ])
             ->where('is_published', true);
 
-        // Filtre par pays (via city -> country) - Sprint 1 + A20
+        // Filtre par pays (relation directe properties.country_id)
         if ($request->filled('country_id')) {
-            $query->whereHas('city', function ($q) use ($request) {
-                $q->where('country_id', $request->country_id);
-            });
+            $query->where('country_id', $request->country_id);
         }
 
         // Filtres Sprint 1 selon PRD (Foreign Keys vers Settings)
