@@ -114,7 +114,7 @@ class ApplicationResource extends Resource
                     ->toggleable(),
 
                 // Sprint1 Feature 1.4.1 — Colonne Pays
-                Tables\Columns\TextColumn::make('property.city.region.country.name')
+                Tables\Columns\TextColumn::make('property.city.country.name') // A20
                     ->label('Pays')
                     ->searchable()
                     ->sortable()
@@ -171,7 +171,7 @@ class ApplicationResource extends Resource
             // Sprint1 Feature 1.4.1 — Eager loading pour éviter N+1 queries
             ->modifyQueryUsing(fn (Builder $query) => $query->with([
                 'user',
-                'property.city.region.country',
+                'property.city.country', // A20
                 'program',
             ]))
             ->defaultSort('created_at', 'desc')
@@ -202,7 +202,7 @@ class ApplicationResource extends Resource
                         return $query->when(
                             $data['country'],
                             fn (Builder $query, $country): Builder => $query->whereHas(
-                                'property.city.region.country',
+                                'property.city.country', // A20
                                 fn ($query) => $query->where('name', $country)
                             )
                         );

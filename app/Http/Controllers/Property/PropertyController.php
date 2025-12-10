@@ -57,7 +57,7 @@ class PropertyController extends Controller
                     return $query->select('id', 'label');
                 },
                 'city' => function ($query) {
-                    return $query->select('id', 'name', 'region_id');
+                    return $query->select('id', 'name', 'country_id'); // A20: region_id → country_id
                 },
                 'category' => function ($query) {
                     return $query->select('id', 'label');
@@ -66,7 +66,7 @@ class PropertyController extends Controller
                     return $query->select('id', 'label');
                 },
                 'equipments', 'regulations', 'layouts',
-                'city.region',
+                'city.country', // A20: region → country
                 'comments' => function ($query) use ($perPage) {
                     $query->with('user')
                         ->whereNull('parent_id')
@@ -92,7 +92,7 @@ class PropertyController extends Controller
                     return $query->select('id', 'label');
                 },
                 'city' => function ($query) {
-                    return $query->select('id', 'name', 'region_id');
+                    return $query->select('id', 'name', 'country_id'); // A20: region_id → country_id
                 },
                 'category' => function ($query) {
                     return $query->select('id', 'label');
@@ -101,7 +101,7 @@ class PropertyController extends Controller
                     return $query->select('id', 'label');
                 },
                 'equipments', 'regulations', 'layouts',
-                'city.region',
+                'city.country', // A20: region → country
                 'comments' => function ($query) use ($perPage) {
                     $query->with('user')
                         ->whereNull('parent_id')

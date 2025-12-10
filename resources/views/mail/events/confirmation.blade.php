@@ -2,7 +2,7 @@
     use Carbon\Carbon;
 @endphp
 
-<x-mail::message>
+@component('mail::message')
 # Confirmation de votre inscription au webinaire
 
 Cher(e) {{ $registration->name }},
@@ -39,4 +39,4 @@ Cordialement,
 L'équipe EtapSup
 
 **EtapSup** - Votre partenaire pour réussir vos études à l'étranger
-</x-mail::message>
+@endcomponent

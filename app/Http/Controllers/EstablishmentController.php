@@ -39,14 +39,14 @@ class EstablishmentController extends Controller
             ->with([
                 'propertyType',      // Type d'établissement
                 'category',          // Domaine d'études principal
-                'city.region.country', // Ville -> Région -> Pays (hiérarchie complète)
+                'city.country',      // Ville -> Pays (A20: migration region_id → country_id)
                 'ratings',           // Notes
             ])
             ->where('is_published', true);
 
-        // Filtre par pays (via city -> region -> country) - Sprint 1
+        // Filtre par pays (via city -> country) - Sprint 1 + A20
         if ($request->filled('country_id')) {
-            $query->whereHas('city.region', function ($q) use ($request) {
+            $query->whereHas('city', function ($q) use ($request) {
                 $q->where('country_id', $request->country_id);
             });
         }
@@ -108,9 +108,9 @@ class EstablishmentController extends Controller
             return new EstablishmentResource($establishment);
         });
 
-        // Données pour les filtres (Sprint 1 PRD)
+        // Données pour les filtres (Sprint 1 PRD + A20)
         $filters = [
-            'countries' => Country::whereHas('regions.cities.properties', function ($q) {
+            'countries' => Country::whereHas('cities.properties', function ($q) {
                 $q->where('is_published', true);
             })->get(['id', 'name']),
 
@@ -157,7 +157,7 @@ class EstablishmentController extends Controller
             'propertyType',        // Type d'établissement
             'category',            // Domaine d'études principal
             'subCategory',         // Spécialisation
-            'city.region.country', // Géolocalisation complète
+            'city.country',        // Géolocalisation (A20: migration region_id → country_id)
             'equipments',          // Infrastructures campus
             'regulations',         // Certifications et normes
             'comments',            // Avis étudiants

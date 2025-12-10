@@ -75,7 +75,7 @@ Route::get('/dashboard', function () {
 
     // Récupérer les candidatures récentes de l'utilisateur (max 3) - toutes les candidatures y compris brouillons
     $rawApplications = \App\Models\Application::where('user_id', $user->id)
-        ->with(['property.city.region.country', 'property.category', 'property.propertyType'])
+        ->with(['property.city.country', 'property.category', 'property.propertyType']) // C02: region supprimé
         ->latest()
         ->take(3)
         ->get();
@@ -98,13 +98,13 @@ Route::get('/dashboard', function () {
             'status' => $app->status,
             'statusLabel' => $statusLabels[$app->status] ?? ucfirst($app->status),
             'date' => $app->created_at?->format('d/m/Y') ?? '-',
-            'country' => $app->property->city?->region?->country?->name ?? 'Non spécifié',
+            'country' => $app->property->city?->country?->name ?? 'Non spécifié', // C02
         ];
     })->toArray();
 
     // Refonte Story 1.1.3 - Récupérer 6 établissements populaires
     $rawRandomEstablishments = \App\Models\RealEstate\Property::where('is_published', true)
-        ->with(['city.region.country', 'propertyType', 'category', 'media'])
+        ->with(['city.country', 'propertyType', 'category', 'media']) // C02: region supprimé
         ->inRandomOrder()
         ->take(6)
         ->get();
@@ -115,7 +115,7 @@ Route::get('/dashboard', function () {
             'slug' => $property->slug,
             'title' => $property->title, // Refonte Story 1.1.3 - Compatible EstablishmentCard
             'city' => $property->city?->name ?? 'Non spécifié',
-            'country' => $property->city?->region?->country?->name ?? 'Non spécifié',
+            'country' => $property->city?->country?->name ?? 'Non spécifié', // C02
             'type' => $property->propertyType?->label ?? 'Établissement',
             'category' => $property->category?->label ?? '',
             'logo' => $property->getFirstMediaUrl('images', 'thumb'),

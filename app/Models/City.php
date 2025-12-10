@@ -23,7 +23,7 @@ class City extends Model
     use ClearsResponseCache, HasHashid, HashidRouting, SoftDeletes;
 
     protected $fillable = [
-        'region_id',
+        'country_id', // Changé de region_id à country_id (A20)
         'name',
         'budget',
         'is_published',
@@ -49,9 +49,16 @@ class City extends Model
         return $this->hasMany(CertificateRequest::class);
     }
 
+    // A20: Changé region() en country() pour support multi-pays africains
+    public function country(): BelongsTo
+    {
+        return $this->belongsTo(Country::class);
+    }
+
+    // Maintenu pour rétrocompatibilité (à supprimer après tests)
     public function region(): BelongsTo
     {
-        return $this->belongsTo(Region::class);
+        return $this->country(); // Alias vers country()
     }
 
     public function addresses(): HasMany

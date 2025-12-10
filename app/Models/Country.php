@@ -44,4 +44,10 @@ class Country extends Model
     {
         return $this->hasMany(Region::class);
     }
+
+    // A20: Relation directe avec cities après migration region_id → country_id
+    public function cities(): HasMany
+    {
+        return $this->hasMany(City::class);
+    }
 }

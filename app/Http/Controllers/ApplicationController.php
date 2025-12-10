@@ -44,7 +44,7 @@ class ApplicationController extends Controller
         // CAS 1: Reprendre une candidature existante
         if ($applicationId) {
             $application = $this->application
-                ->with(['property.propertyType', 'property.city.region.country', 'property.category'])
+                ->with(['property.propertyType', 'property.city.country', 'property.category']) // A20
                 ->findByHashidOrFail($applicationId);
 
             // Sécurité: vérifier que c'est bien la candidature du user connecté
@@ -67,7 +67,7 @@ class ApplicationController extends Controller
             // Charger l'établissement (Property) avec relations
             $establishment = $this->property
                 ->findByHashidOrFail($establishmentId)
-                ->load(['propertyType', 'city.region.country', 'category']);
+                ->load(['propertyType', 'city.country', 'category']); // A20
 
             // Vérifier que c'est publié
             if (!$establishment->is_published) {
@@ -94,7 +94,7 @@ class ApplicationController extends Controller
                 'type' => $establishment->propertyType?->label,
                 'category' => $establishment->category?->label,
                 'city' => $establishment->city?->name,
-                'country' => $establishment->city?->region?->country?->name,
+                'country' => $establishment->city?->country?->name, // A20
                 'logo' => $establishment->getFirstMediaUrl('images', 'thumb'),
                 // Champs éducatifs EtatSup
                 'website' => $establishment->website,
@@ -129,7 +129,7 @@ class ApplicationController extends Controller
     public function show(string $hashid): Response
     {
         $application = $this->application
-            ->with(['property.propertyType', 'property.city.region.country', 'property.category', 'property.media'])
+            ->with(['property.propertyType', 'property.city.country', 'property.category', 'property.media']) // C02
             ->findByHashidOrFail($hashid);
 
         // Sécurité: vérifier que c'est la candidature du user connecté
@@ -253,7 +253,7 @@ class ApplicationController extends Controller
             'city_of_birth' => ['required', 'string'],
             'address' => ['required', 'string', 'min:5'],
             'postal_code' => ['required', 'string'],
-            'city' => ['required', 'string'],
+            'city' => ['nullable', 'string'], // C04: Optionnel selon PRD Sprint1 (frontend)
             'country' => ['required', 'string'],
             'email' => ['required', 'email'],
             'phone' => ['required', 'string'],

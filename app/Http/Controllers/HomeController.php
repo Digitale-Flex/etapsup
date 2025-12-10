@@ -41,7 +41,7 @@ class HomeController extends Controller
         $establishments = \Illuminate\Support\Facades\Cache::remember('home_establishments', 3600, function() {
             return Property::with([
                 'propertyType',
-                'city.region.country',
+                'city.country', // A20: region supprimé
                 'ratings',
                 'programs' => fn($q) => $q->where('is_published', true)
                     ->with(['studyField', 'degreeLevel'])
@@ -96,7 +96,7 @@ class HomeController extends Controller
         $featuredEstablishments = \Illuminate\Support\Facades\Cache::remember('accueil_establishments', 3600, function() {
             return Property::with([
                 'propertyType',
-                'city.region.country',
+                'city.country', // A20: region supprimé
                 'ratings',
                 'media'
             ])
@@ -122,7 +122,7 @@ class HomeController extends Controller
 
         // Pays
         $countries = Country::select('id', 'name')
-            ->whereHas('regions.cities.properties', function($q) {
+            ->whereHas('cities.properties', function($q) { // A20
                 $q->where('is_published', true);
             })
             ->get();

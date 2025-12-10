@@ -27,8 +27,8 @@ class CertificateRequestController extends Controller
                     $this->certificateRequest->query()
                         ->with([
                             'city' => function ($query) {
-                                $query->select('id', 'name', 'region_id');
-                            }, 'city.region' => function ($query) {
+                                $query->select('id', 'name', 'country_id'); // A20
+                            }, 'city.country' => function ($query) { // A20
                                 $query->select('id', 'name');
                             }, 'genre' => function ($query) {
                                 $query->select('id', 'name');
@@ -69,8 +69,8 @@ class CertificateRequestController extends Controller
     {
         $query = $this->certificateRequest->query()
             ->with([
-                'city' => function ($query) {$query->select('id', 'name', 'region_id');},
-                'city.region' => function ($query) {$query->select('id', 'name');},
+                'city' => function ($query) {$query->select('id', 'name', 'country_id');}, // A20
+                'city.country' => function ($query) {$query->select('id', 'name');}, // A20
                 'genre' => function ($query) {$query->select('id', 'name');},
                 'rentalDeposit' => function ($query) {$query->select('id', 'name');},
                 'partner' => function ($query) {$query->select('id', 'label');},
