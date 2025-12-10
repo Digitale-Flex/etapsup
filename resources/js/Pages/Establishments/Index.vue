@@ -86,13 +86,25 @@ const searchFilters = ref({
 
 // Filtrer les villes selon le pays sélectionné
 const filteredCities = computed(() => {
-    if (!searchFilters.value.country_id) return [];
+    // Si aucun pays sélectionné → afficher toutes les villes
+    if (!searchFilters.value.country_id) return props.filters.cities;
+    // Sinon filtrer par pays
     return props.filters.cities.filter(city => city.country_id == searchFilters.value.country_id);
 });
 
 // Réinitialiser city_id quand le pays change
 const onCountryChange = () => {
     searchFilters.value.city_id = '';
+};
+
+// Auto-sélectionner pays quand une ville est choisie
+const onCityChange = () => {
+    if (searchFilters.value.city_id) {
+        const city = props.filters.cities.find(c => c.id == searchFilters.value.city_id);
+        if (city && city.country_id != searchFilters.value.country_id) {
+            searchFilters.value.country_id = city.country_id;
+        }
+    }
 };
 
 // Appliquer les filtres via Inertia
@@ -176,7 +188,7 @@ const applyFilters = () => {
 
                         <div class="filter-group">
                             <label class="filter-label">Ville</label>
-                            <BFormSelect v-model="searchFilters.city_id" class="filter-input" :disabled="!searchFilters.country_id">
+                            <BFormSelect v-model="searchFilters.city_id" class="filter-input" @change="onCityChange">
                                 <option value="">Toutes les villes</option>
                                 <option v-for="city in filteredCities" :key="city.id" :value="city.id">
                                     {{ city.name }}
@@ -262,7 +274,7 @@ const applyFilters = () => {
                                         {{ establishment.description || 'Découvrez cet établissement d\'enseignement supérieur en Afrique.' }}
                                     </p>
 
-                                    <Link :href="`/establishments/${establishment.slug}`" class="btn btn-primary w-100 establishment-cta">
+                                    <Link :href="`/properties/${establishment.slug}`" class="btn btn-primary w-100 establishment-cta">
                                         Voir les détails
                                     </Link>
                                 </div>

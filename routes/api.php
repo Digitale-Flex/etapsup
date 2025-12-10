@@ -15,7 +15,8 @@ Route::get('/countries', [\App\Http\Controllers\LocationController::class, 'getC
 Route::get('/cities/{region}', [\App\Http\Controllers\LocationController::class, 'getCities']);
 
 // Sprint1 Feature 1.8.1 — Gestion des documents de candidature
-Route::prefix('v1')->middleware('auth:sanctum')->group(function () {
+// Accepte auth:sanctum (API token) OU auth:web (session Laravel)
+Route::prefix('v1')->middleware(['auth:sanctum,web'])->group(function () {
     Route::get('/documents', [\App\Http\Controllers\Api\DocumentController::class, 'index']);
     Route::post('/documents', [\App\Http\Controllers\Api\DocumentController::class, 'store']);
     Route::delete('/documents/{document}', [\App\Http\Controllers\Api\DocumentController::class, 'destroy']);

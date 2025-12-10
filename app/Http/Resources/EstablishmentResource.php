@@ -29,7 +29,7 @@ class EstablishmentResource extends JsonResource
             'address' => $this->whenHas('address'),
 
             // Refonte Accueil Dynamique: Champs plats pour EstablishmentCard
-            'logo' => $this->getFirstMediaUrl('images', 'thumb'),
+            'logo' => $this->getFirstMediaUrl('images', 'thumb') ?: null,
             'type' => $this->propertyType?->label ?? $this->establishment_type,
             'city' => $this->city?->name,
             'country' => $this->country?->name, // Relation directe properties.country_id
