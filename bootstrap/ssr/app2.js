@@ -2,7 +2,7 @@ import { BCard, BCardBody, BCardHeader, BCardTitle, BCardFooter, BCardText } fro
 import { BRow, BCol, BContainer } from "bootstrap-vue-next/components/BContainer";
 import { defineComponent, unref, mergeProps, withCtx, renderSlot, useSSRContext, onMounted, createVNode, resolveDynamicComponent, ref, computed, createTextVNode, toDisplayString, createBlock, openBlock, Fragment, renderList, watch, nextTick, createCommentVNode, withModifiers, reactive, resolveComponent, Transition, withDirectives, vShow, onUnmounted, withKeys, useModel, watchEffect, vModelCheckbox, createApp, h as h$1 } from "vue";
 import { ssrRenderComponent, ssrRenderSlot, ssrRenderVNode, ssrRenderAttrs, ssrInterpolate, ssrRenderList, ssrRenderStyle, ssrRenderClass, ssrRenderAttr, ssrGetDirectiveProps, ssrIncludeBooleanAttr, ssrLooseContain, ssrLooseEqual, ssrGetDynamicModelProps } from "vue/server-renderer";
-import { Head, useForm, router, Link, usePage, Deferred, createInertiaApp } from "@inertiajs/vue3";
+import { Head, router, useForm, Link, usePage, Deferred, createInertiaApp } from "@inertiajs/vue3";
 import Sticky from "sticky-js";
 import { BButton } from "bootstrap-vue-next/components/BButton";
 import { BAlert } from "bootstrap-vue-next/components/BAlert";
@@ -202,44 +202,53 @@ const _sfc_main$1H = /* @__PURE__ */ defineComponent({
       uploading.value = true;
       uploadProgress.value = 0;
       errorMessage.value = null;
-      const formData = new FormData();
-      formData.append("file", file);
-      formData.append("document_type", documentType);
-      formData.append("application_id", props.applicationId);
-      try {
-        const response = await axios.post("/api/v1/documents", formData, {
-          headers: { "Content-Type": "multipart/form-data" },
-          onUploadProgress: (progressEvent) => {
-            if (progressEvent.total) {
-              uploadProgress.value = Math.round(progressEvent.loaded * 100 / progressEvent.total);
-            }
+      const formData = {
+        file,
+        document_type: documentType,
+        application_id: props.applicationId
+      };
+      router.post("/api/v1/documents", formData, {
+        forceFormData: true,
+        preserveScroll: true,
+        onProgress: (progress) => {
+          if (progress && progress.percentage) {
+            uploadProgress.value = progress.percentage;
           }
-        });
-        documents.value.push(response.data.document);
-        emit("documents-updated", documents.value);
-      } catch (error) {
-        errorMessage.value = error.response?.data?.message || "Erreur lors de l'upload";
-      } finally {
-        uploading.value = false;
-        uploadProgress.value = 0;
-      }
+        },
+        onSuccess: (page) => {
+          if (page.props?.document) {
+            documents.value.push(page.props.document);
+            emit("documents-updated", documents.value);
+          }
+        },
+        onError: (errors) => {
+          errorMessage.value = errors.message || "Erreur lors de l'upload";
+        },
+        onFinish: () => {
+          uploading.value = false;
+          uploadProgress.value = 0;
+        }
+      });
     };
     const removeDocument = async (documentId) => {
       if (!confirm("Voulez-vous vraiment supprimer ce document ?")) return;
-      try {
-        await axios.delete(`/api/v1/documents/${documentId}`);
-        documents.value = documents.value.filter((d2) => d2.id !== documentId);
-        emit("documents-updated", documents.value);
-      } catch (error) {
-        errorMessage.value = error.response?.data?.message || "Erreur lors de la suppression";
-      }
+      router.delete(`/api/v1/documents/${documentId}`, {
+        preserveScroll: true,
+        onSuccess: () => {
+          documents.value = documents.value.filter((d2) => d2.id !== documentId);
+          emit("documents-updated", documents.value);
+        },
+        onError: (errors) => {
+          errorMessage.value = errors.message || "Erreur lors de la suppression";
+        }
+      });
     };
     __expose({ canProceed, missingRequiredDocs });
     return (_ctx, _push, _parent, _attrs) => {
       const _component_BAlert = BAlert;
       const _component_BButton = BButton;
       const _component_BProgress = BProgress;
-      _push(`<div${ssrRenderAttrs(mergeProps({ class: "document-uploader" }, _attrs))} data-v-4fa93a3c>`);
+      _push(`<div${ssrRenderAttrs(mergeProps({ class: "document-uploader" }, _attrs))} data-v-bcd8673a>`);
       if (errorMessage.value) {
         _push(ssrRenderComponent(_component_BAlert, {
           variant: "danger",
@@ -261,11 +270,11 @@ const _sfc_main$1H = /* @__PURE__ */ defineComponent({
       } else {
         _push(`<!---->`);
       }
-      _push(`<div class="document-section mb-4" data-v-4fa93a3c><h6 class="section-subtitle" data-v-4fa93a3c><i class="bi bi-file-earmark-check me-2" data-v-4fa93a3c></i> Documents obligatoires </h6><div class="documents-list" data-v-4fa93a3c><!--[-->`);
+      _push(`<div class="document-section mb-4" data-v-bcd8673a><h6 class="section-subtitle" data-v-bcd8673a><i class="bi bi-file-earmark-check me-2" data-v-bcd8673a></i> Documents obligatoires </h6><div class="documents-list" data-v-bcd8673a><!--[-->`);
       ssrRenderList(requiredDocuments.value, (docType) => {
-        _push(`<div class="document-item" data-v-4fa93a3c><div class="doc-info" data-v-4fa93a3c><i class="bi bi-file-earmark-pdf text-primary me-2" data-v-4fa93a3c></i><span class="doc-label" data-v-4fa93a3c>${ssrInterpolate(docType.label)}</span><span class="required-badge" data-v-4fa93a3c>*</span></div>`);
+        _push(`<div class="document-item" data-v-bcd8673a><div class="doc-info" data-v-bcd8673a><i class="bi bi-file-earmark-pdf text-primary me-2" data-v-bcd8673a></i><span class="doc-label" data-v-bcd8673a>${ssrInterpolate(docType.label)}</span><span class="required-badge" data-v-bcd8673a>*</span></div>`);
         if (documents.value.find((d2) => d2.document_type === docType.value)) {
-          _push(`<div class="doc-uploaded" data-v-4fa93a3c><i class="bi bi-check-circle text-success me-2" data-v-4fa93a3c></i><span class="text-muted small" data-v-4fa93a3c>${ssrInterpolate(documents.value.find((d2) => d2.document_type === docType.value)?.file_name)}</span>`);
+          _push(`<div class="doc-uploaded" data-v-bcd8673a><i class="bi bi-check-circle text-success me-2" data-v-bcd8673a></i><span class="text-muted small" data-v-bcd8673a>${ssrInterpolate(documents.value.find((d2) => d2.document_type === docType.value)?.file_name)}</span>`);
           _push(ssrRenderComponent(_component_BButton, {
             variant: "outline-danger",
             size: "sm",
@@ -273,7 +282,7 @@ const _sfc_main$1H = /* @__PURE__ */ defineComponent({
           }, {
             default: withCtx((_, _push2, _parent2, _scopeId) => {
               if (_push2) {
-                _push2(`<i class="bi bi-trash" data-v-4fa93a3c${_scopeId}></i>`);
+                _push2(`<i class="bi bi-trash" data-v-bcd8673a${_scopeId}></i>`);
               } else {
                 return [
                   createVNode("i", { class: "bi bi-trash" })
@@ -292,7 +301,7 @@ const _sfc_main$1H = /* @__PURE__ */ defineComponent({
           }, {
             default: withCtx((_, _push2, _parent2, _scopeId) => {
               if (_push2) {
-                _push2(`<i class="bi bi-upload me-1" data-v-4fa93a3c${_scopeId}></i> Téléverser `);
+                _push2(`<i class="bi bi-upload me-1" data-v-bcd8673a${_scopeId}></i> Téléverser `);
               } else {
                 return [
                   createVNode("i", { class: "bi bi-upload me-1" }),
@@ -305,11 +314,11 @@ const _sfc_main$1H = /* @__PURE__ */ defineComponent({
         }
         _push(`</div>`);
       });
-      _push(`<!--]--></div></div><div class="document-section" data-v-4fa93a3c><h6 class="section-subtitle" data-v-4fa93a3c><i class="bi bi-file-earmark me-2" data-v-4fa93a3c></i> Documents optionnels </h6><div class="documents-list" data-v-4fa93a3c><!--[-->`);
+      _push(`<!--]--></div></div><div class="document-section" data-v-bcd8673a><h6 class="section-subtitle" data-v-bcd8673a><i class="bi bi-file-earmark me-2" data-v-bcd8673a></i> Documents optionnels </h6><div class="documents-list" data-v-bcd8673a><!--[-->`);
       ssrRenderList(optionalDocuments.value, (docType) => {
-        _push(`<div class="document-item" data-v-4fa93a3c><div class="doc-info" data-v-4fa93a3c><i class="bi bi-file-earmark text-secondary me-2" data-v-4fa93a3c></i><span class="doc-label" data-v-4fa93a3c>${ssrInterpolate(docType.label)}</span></div>`);
+        _push(`<div class="document-item" data-v-bcd8673a><div class="doc-info" data-v-bcd8673a><i class="bi bi-file-earmark text-secondary me-2" data-v-bcd8673a></i><span class="doc-label" data-v-bcd8673a>${ssrInterpolate(docType.label)}</span></div>`);
         if (documents.value.find((d2) => d2.document_type === docType.value)) {
-          _push(`<div class="doc-uploaded" data-v-4fa93a3c><i class="bi bi-check-circle text-success me-2" data-v-4fa93a3c></i><span class="text-muted small" data-v-4fa93a3c>${ssrInterpolate(documents.value.find((d2) => d2.document_type === docType.value)?.file_name)}</span>`);
+          _push(`<div class="doc-uploaded" data-v-bcd8673a><i class="bi bi-check-circle text-success me-2" data-v-bcd8673a></i><span class="text-muted small" data-v-bcd8673a>${ssrInterpolate(documents.value.find((d2) => d2.document_type === docType.value)?.file_name)}</span>`);
           _push(ssrRenderComponent(_component_BButton, {
             variant: "outline-danger",
             size: "sm",
@@ -317,7 +326,7 @@ const _sfc_main$1H = /* @__PURE__ */ defineComponent({
           }, {
             default: withCtx((_, _push2, _parent2, _scopeId) => {
               if (_push2) {
-                _push2(`<i class="bi bi-trash" data-v-4fa93a3c${_scopeId}></i>`);
+                _push2(`<i class="bi bi-trash" data-v-bcd8673a${_scopeId}></i>`);
               } else {
                 return [
                   createVNode("i", { class: "bi bi-trash" })
@@ -336,7 +345,7 @@ const _sfc_main$1H = /* @__PURE__ */ defineComponent({
           }, {
             default: withCtx((_, _push2, _parent2, _scopeId) => {
               if (_push2) {
-                _push2(`<i class="bi bi-upload me-1" data-v-4fa93a3c${_scopeId}></i> Téléverser `);
+                _push2(`<i class="bi bi-upload me-1" data-v-bcd8673a${_scopeId}></i> Téléverser `);
               } else {
                 return [
                   createVNode("i", { class: "bi bi-upload me-1" }),
@@ -351,7 +360,7 @@ const _sfc_main$1H = /* @__PURE__ */ defineComponent({
       });
       _push(`<!--]--></div></div>`);
       if (uploading.value) {
-        _push(`<div class="mt-3" data-v-4fa93a3c>`);
+        _push(`<div class="mt-3" data-v-bcd8673a>`);
         _push(ssrRenderComponent(_component_BProgress, {
           value: uploadProgress.value,
           max: 100,
@@ -381,9 +390,9 @@ const _sfc_main$1H = /* @__PURE__ */ defineComponent({
         }, {
           default: withCtx((_, _push2, _parent2, _scopeId) => {
             if (_push2) {
-              _push2(`<i class="bi bi-exclamation-triangle me-2" data-v-4fa93a3c${_scopeId}></i><strong data-v-4fa93a3c${_scopeId}>Documents manquants :</strong><ul class="mb-0 mt-2" data-v-4fa93a3c${_scopeId}><!--[-->`);
+              _push2(`<i class="bi bi-exclamation-triangle me-2" data-v-bcd8673a${_scopeId}></i><strong data-v-bcd8673a${_scopeId}>Documents manquants :</strong><ul class="mb-0 mt-2" data-v-bcd8673a${_scopeId}><!--[-->`);
               ssrRenderList(missingRequiredDocs.value, (doc) => {
-                _push2(`<li data-v-4fa93a3c${_scopeId}>${ssrInterpolate(doc.label)}</li>`);
+                _push2(`<li data-v-bcd8673a${_scopeId}>${ssrInterpolate(doc.label)}</li>`);
               });
               _push2(`<!--]--></ul>`);
             } else {
@@ -410,7 +419,7 @@ const _sfc_main$1H = /* @__PURE__ */ defineComponent({
         }, {
           default: withCtx((_, _push2, _parent2, _scopeId) => {
             if (_push2) {
-              _push2(`<i class="bi bi-check-circle me-2" data-v-4fa93a3c${_scopeId}></i> Tous les documents obligatoires sont téléversés. Vous pouvez continuer. `);
+              _push2(`<i class="bi bi-check-circle me-2" data-v-bcd8673a${_scopeId}></i> Tous les documents obligatoires sont téléversés. Vous pouvez continuer. `);
             } else {
               return [
                 createVNode("i", { class: "bi bi-check-circle me-2" }),
@@ -438,7 +447,7 @@ _sfc_main$1H.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/Components/DocumentUploader.vue");
   return _sfc_setup$1H ? _sfc_setup$1H(props, ctx) : void 0;
 };
-const DocumentUploader = /* @__PURE__ */ _export_sfc(_sfc_main$1H, [["__scopeId", "data-v-4fa93a3c"]]);
+const DocumentUploader = /* @__PURE__ */ _export_sfc(_sfc_main$1H, [["__scopeId", "data-v-bcd8673a"]]);
 const totalSteps = 6;
 const _sfc_main$1G = /* @__PURE__ */ defineComponent({
   __name: "ApplicationForm",
@@ -37432,11 +37441,19 @@ const _sfc_main$M = /* @__PURE__ */ defineComponent({
       search: props.currentFilters.search || ""
     });
     const filteredCities = computed(() => {
-      if (!searchFilters.value.country_id) return [];
+      if (!searchFilters.value.country_id) return props.filters.cities;
       return props.filters.cities.filter((city) => city.country_id == searchFilters.value.country_id);
     });
     const onCountryChange = () => {
       searchFilters.value.city_id = "";
+    };
+    const onCityChange = () => {
+      if (searchFilters.value.city_id) {
+        const city = props.filters.cities.find((c2) => c2.id == searchFilters.value.city_id);
+        if (city && city.country_id != searchFilters.value.country_id) {
+          searchFilters.value.country_id = city.country_id;
+        }
+      }
     };
     const applyFilters = () => {
       router.get(route("establishments.index"), searchFilters.value, {
@@ -37449,7 +37466,7 @@ const _sfc_main$M = /* @__PURE__ */ defineComponent({
       _push(ssrRenderComponent(unref(Head), { title: "Établissements - EtapSup" }, {
         default: withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
-            _push2(`<meta name="description" content="Découvrez nos établissements partenaires pour étudier à l&#39;étranger. Plus de 150 universités et écoles dans le monde." data-v-64487964${_scopeId}>`);
+            _push2(`<meta name="description" content="Découvrez nos établissements partenaires pour étudier à l&#39;étranger. Plus de 150 universités et écoles dans le monde." data-v-8eb12c4a${_scopeId}>`);
           } else {
             return [
               createVNode("meta", {
@@ -37461,18 +37478,18 @@ const _sfc_main$M = /* @__PURE__ */ defineComponent({
         }),
         _: 1
       }, _parent));
-      _push(`<div class="establishments-page" data-v-64487964><nav class="main-navigation" data-v-64487964>`);
+      _push(`<div class="establishments-page" data-v-8eb12c4a><nav class="main-navigation" data-v-8eb12c4a>`);
       _push(ssrRenderComponent(unref(BContainer$1), null, {
         default: withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
-            _push2(`<div class="nav-content" data-v-64487964${_scopeId}>`);
+            _push2(`<div class="nav-content" data-v-8eb12c4a${_scopeId}>`);
             _push2(ssrRenderComponent(unref(Link), {
               href: "/",
               class: "nav-logo"
             }, {
               default: withCtx((_2, _push3, _parent3, _scopeId2) => {
                 if (_push3) {
-                  _push3(`<span class="logo-text" data-v-64487964${_scopeId2}>EtapSup</span>`);
+                  _push3(`<span class="logo-text" data-v-8eb12c4a${_scopeId2}>EtapSup</span>`);
                 } else {
                   return [
                     createVNode("span", { class: "logo-text" }, "EtapSup")
@@ -37481,7 +37498,7 @@ const _sfc_main$M = /* @__PURE__ */ defineComponent({
               }),
               _: 1
             }, _parent2, _scopeId));
-            _push2(`<div class="nav-menu" data-v-64487964${_scopeId}>`);
+            _push2(`<div class="nav-menu" data-v-8eb12c4a${_scopeId}>`);
             _push2(ssrRenderComponent(unref(Link), {
               href: "/",
               class: "nav-link"
@@ -37527,9 +37544,9 @@ const _sfc_main$M = /* @__PURE__ */ defineComponent({
               }),
               _: 1
             }, _parent2, _scopeId));
-            _push2(`</div><div class="nav-actions" data-v-64487964${_scopeId}>`);
+            _push2(`</div><div class="nav-actions" data-v-8eb12c4a${_scopeId}>`);
             if (_ctx.$page.props.auth?.user) {
-              _push2(`<div class="user-menu-wrapper" data-v-64487964${_scopeId}>`);
+              _push2(`<div class="user-menu-wrapper" data-v-8eb12c4a${_scopeId}>`);
               _push2(ssrRenderComponent(_sfc_main$1g, null, null, _parent2, _scopeId));
               _push2(`</div>`);
             } else {
@@ -37641,11 +37658,11 @@ const _sfc_main$M = /* @__PURE__ */ defineComponent({
         }),
         _: 1
       }, _parent));
-      _push(`</nav><div class="page-header" data-v-64487964>`);
+      _push(`</nav><div class="page-header" data-v-8eb12c4a>`);
       _push(ssrRenderComponent(unref(BContainer$1), null, {
         default: withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
-            _push2(`<h1 class="page-title" data-v-64487964${_scopeId}>Trouvez votre établissement idéal</h1><p class="page-subtitle" data-v-64487964${_scopeId}>Plus de 150 établissements partenaires pour réaliser votre rêve d&#39;étudier à l&#39;étranger</p>`);
+            _push2(`<h1 class="page-title" data-v-8eb12c4a${_scopeId}>Trouvez votre établissement idéal</h1><p class="page-subtitle" data-v-8eb12c4a${_scopeId}>Plus de 150 établissements partenaires pour réaliser votre rêve d&#39;étudier à l&#39;étranger</p>`);
           } else {
             return [
               createVNode("h1", { class: "page-title" }, "Trouvez votre établissement idéal"),
@@ -37668,7 +37685,7 @@ const _sfc_main$M = /* @__PURE__ */ defineComponent({
                   }, {
                     default: withCtx((_3, _push4, _parent4, _scopeId3) => {
                       if (_push4) {
-                        _push4(`<div class="filters-sidebar" data-v-64487964${_scopeId3}><h3 class="filters-title" data-v-64487964${_scopeId3}>Filtres</h3><div class="filter-group" data-v-64487964${_scopeId3}><label class="filter-label" data-v-64487964${_scopeId3}>Recherche</label>`);
+                        _push4(`<div class="filters-sidebar" data-v-8eb12c4a${_scopeId3}><h3 class="filters-title" data-v-8eb12c4a${_scopeId3}>Filtres</h3><div class="filter-group" data-v-8eb12c4a${_scopeId3}><label class="filter-label" data-v-8eb12c4a${_scopeId3}>Recherche</label>`);
                         _push4(ssrRenderComponent(unref(BFormInput$1), {
                           modelValue: searchFilters.value.search,
                           "onUpdate:modelValue": ($event) => searchFilters.value.search = $event,
@@ -37676,7 +37693,7 @@ const _sfc_main$M = /* @__PURE__ */ defineComponent({
                           class: "filter-input",
                           onKeyup: applyFilters
                         }, null, _parent4, _scopeId3));
-                        _push4(`</div><div class="filter-group" data-v-64487964${_scopeId3}><label class="filter-label" data-v-64487964${_scopeId3}>Pays</label>`);
+                        _push4(`</div><div class="filter-group" data-v-8eb12c4a${_scopeId3}><label class="filter-label" data-v-8eb12c4a${_scopeId3}>Pays</label>`);
                         _push4(ssrRenderComponent(unref(BFormSelect$1), {
                           modelValue: searchFilters.value.country_id,
                           "onUpdate:modelValue": ($event) => searchFilters.value.country_id = $event,
@@ -37685,9 +37702,9 @@ const _sfc_main$M = /* @__PURE__ */ defineComponent({
                         }, {
                           default: withCtx((_4, _push5, _parent5, _scopeId4) => {
                             if (_push5) {
-                              _push5(`<option value="" data-v-64487964${_scopeId4}>Tous les pays</option><!--[-->`);
+                              _push5(`<option value="" data-v-8eb12c4a${_scopeId4}>Tous les pays</option><!--[-->`);
                               ssrRenderList(__props.filters.countries, (country) => {
-                                _push5(`<option${ssrRenderAttr("value", country.id)} data-v-64487964${_scopeId4}>${ssrInterpolate(country.name)}</option>`);
+                                _push5(`<option${ssrRenderAttr("value", country.id)} data-v-8eb12c4a${_scopeId4}>${ssrInterpolate(country.name)}</option>`);
                               });
                               _push5(`<!--]-->`);
                             } else {
@@ -37704,18 +37721,18 @@ const _sfc_main$M = /* @__PURE__ */ defineComponent({
                           }),
                           _: 1
                         }, _parent4, _scopeId3));
-                        _push4(`</div><div class="filter-group" data-v-64487964${_scopeId3}><label class="filter-label" data-v-64487964${_scopeId3}>Ville</label>`);
+                        _push4(`</div><div class="filter-group" data-v-8eb12c4a${_scopeId3}><label class="filter-label" data-v-8eb12c4a${_scopeId3}>Ville</label>`);
                         _push4(ssrRenderComponent(unref(BFormSelect$1), {
                           modelValue: searchFilters.value.city_id,
                           "onUpdate:modelValue": ($event) => searchFilters.value.city_id = $event,
                           class: "filter-input",
-                          disabled: !searchFilters.value.country_id
+                          onChange: onCityChange
                         }, {
                           default: withCtx((_4, _push5, _parent5, _scopeId4) => {
                             if (_push5) {
-                              _push5(`<option value="" data-v-64487964${_scopeId4}>Toutes les villes</option><!--[-->`);
+                              _push5(`<option value="" data-v-8eb12c4a${_scopeId4}>Toutes les villes</option><!--[-->`);
                               ssrRenderList(filteredCities.value, (city) => {
-                                _push5(`<option${ssrRenderAttr("value", city.id)} data-v-64487964${_scopeId4}>${ssrInterpolate(city.name)}</option>`);
+                                _push5(`<option${ssrRenderAttr("value", city.id)} data-v-8eb12c4a${_scopeId4}>${ssrInterpolate(city.name)}</option>`);
                               });
                               _push5(`<!--]-->`);
                             } else {
@@ -37732,7 +37749,7 @@ const _sfc_main$M = /* @__PURE__ */ defineComponent({
                           }),
                           _: 1
                         }, _parent4, _scopeId3));
-                        _push4(`</div><div class="filter-group" data-v-64487964${_scopeId3}><label class="filter-label" data-v-64487964${_scopeId3}>Type d&#39;établissement</label>`);
+                        _push4(`</div><div class="filter-group" data-v-8eb12c4a${_scopeId3}><label class="filter-label" data-v-8eb12c4a${_scopeId3}>Type d&#39;établissement</label>`);
                         _push4(ssrRenderComponent(unref(BFormSelect$1), {
                           modelValue: searchFilters.value.establishment_type_id,
                           "onUpdate:modelValue": ($event) => searchFilters.value.establishment_type_id = $event,
@@ -37740,9 +37757,9 @@ const _sfc_main$M = /* @__PURE__ */ defineComponent({
                         }, {
                           default: withCtx((_4, _push5, _parent5, _scopeId4) => {
                             if (_push5) {
-                              _push5(`<option value="" data-v-64487964${_scopeId4}>Tous les types</option><!--[-->`);
+                              _push5(`<option value="" data-v-8eb12c4a${_scopeId4}>Tous les types</option><!--[-->`);
                               ssrRenderList(__props.filters.establishment_types, (type) => {
-                                _push5(`<option${ssrRenderAttr("value", type.id)} data-v-64487964${_scopeId4}>${ssrInterpolate(type.label)}</option>`);
+                                _push5(`<option${ssrRenderAttr("value", type.id)} data-v-8eb12c4a${_scopeId4}>${ssrInterpolate(type.label)}</option>`);
                               });
                               _push5(`<!--]-->`);
                             } else {
@@ -37759,7 +37776,7 @@ const _sfc_main$M = /* @__PURE__ */ defineComponent({
                           }),
                           _: 1
                         }, _parent4, _scopeId3));
-                        _push4(`</div><div class="filter-group" data-v-64487964${_scopeId3}><label class="filter-label" data-v-64487964${_scopeId3}>Domaine d&#39;études</label>`);
+                        _push4(`</div><div class="filter-group" data-v-8eb12c4a${_scopeId3}><label class="filter-label" data-v-8eb12c4a${_scopeId3}>Domaine d&#39;études</label>`);
                         _push4(ssrRenderComponent(unref(BFormSelect$1), {
                           modelValue: searchFilters.value.career_field_id,
                           "onUpdate:modelValue": ($event) => searchFilters.value.career_field_id = $event,
@@ -37767,9 +37784,9 @@ const _sfc_main$M = /* @__PURE__ */ defineComponent({
                         }, {
                           default: withCtx((_4, _push5, _parent5, _scopeId4) => {
                             if (_push5) {
-                              _push5(`<option value="" data-v-64487964${_scopeId4}>Tous les domaines</option><!--[-->`);
+                              _push5(`<option value="" data-v-8eb12c4a${_scopeId4}>Tous les domaines</option><!--[-->`);
                               ssrRenderList(__props.filters.career_fields, (field) => {
-                                _push5(`<option${ssrRenderAttr("value", field.id)} data-v-64487964${_scopeId4}>${ssrInterpolate(field.label)}</option>`);
+                                _push5(`<option${ssrRenderAttr("value", field.id)} data-v-8eb12c4a${_scopeId4}>${ssrInterpolate(field.label)}</option>`);
                               });
                               _push5(`<!--]-->`);
                             } else {
@@ -37844,7 +37861,7 @@ const _sfc_main$M = /* @__PURE__ */ defineComponent({
                                 modelValue: searchFilters.value.city_id,
                                 "onUpdate:modelValue": ($event) => searchFilters.value.city_id = $event,
                                 class: "filter-input",
-                                disabled: !searchFilters.value.country_id
+                                onChange: onCityChange
                               }, {
                                 default: withCtx(() => [
                                   createVNode("option", { value: "" }, "Toutes les villes"),
@@ -37856,7 +37873,7 @@ const _sfc_main$M = /* @__PURE__ */ defineComponent({
                                   }), 128))
                                 ]),
                                 _: 1
-                              }, 8, ["modelValue", "onUpdate:modelValue", "disabled"])
+                              }, 8, ["modelValue", "onUpdate:modelValue"])
                             ]),
                             createVNode("div", { class: "filter-group" }, [
                               createVNode("label", { class: "filter-label" }, "Type d'établissement"),
@@ -37915,9 +37932,9 @@ const _sfc_main$M = /* @__PURE__ */ defineComponent({
                   _push3(ssrRenderComponent(unref(BCol$1), { lg: "9" }, {
                     default: withCtx((_3, _push4, _parent4, _scopeId3) => {
                       if (_push4) {
-                        _push4(`<div class="results-header" data-v-64487964${_scopeId3}>`);
+                        _push4(`<div class="results-header" data-v-8eb12c4a${_scopeId3}>`);
                         if (__props.establishments?.meta?.total !== void 0) {
-                          _push4(`<h2 class="results-count" data-v-64487964${_scopeId3}>${ssrInterpolate(__props.establishments.meta.total)} établissement${ssrInterpolate(__props.establishments.meta.total > 1 ? "s" : "")} trouvé${ssrInterpolate(__props.establishments.meta.total > 1 ? "s" : "")}</h2>`);
+                          _push4(`<h2 class="results-count" data-v-8eb12c4a${_scopeId3}>${ssrInterpolate(__props.establishments.meta.total)} établissement${ssrInterpolate(__props.establishments.meta.total > 1 ? "s" : "")} trouvé${ssrInterpolate(__props.establishments.meta.total > 1 ? "s" : "")}</h2>`);
                         } else {
                           _push4(`<!---->`);
                         }
@@ -37936,36 +37953,36 @@ const _sfc_main$M = /* @__PURE__ */ defineComponent({
                                   }, {
                                     default: withCtx((_5, _push6, _parent6, _scopeId5) => {
                                       if (_push6) {
-                                        _push6(`<div class="establishment-card" data-v-64487964${_scopeId5}><div class="establishment-image" data-v-64487964${_scopeId5}>`);
+                                        _push6(`<div class="establishment-card" data-v-8eb12c4a${_scopeId5}><div class="establishment-image" data-v-8eb12c4a${_scopeId5}>`);
                                         if (establishment.logo) {
-                                          _push6(`<img${ssrRenderAttr("src", establishment.logo)}${ssrRenderAttr("alt", establishment.title)} class="establishment-img" data-v-64487964${_scopeId5}>`);
+                                          _push6(`<img${ssrRenderAttr("src", establishment.logo)}${ssrRenderAttr("alt", establishment.title)} class="establishment-img" data-v-8eb12c4a${_scopeId5}>`);
                                         } else {
-                                          _push6(`<div class="image-placeholder" data-v-64487964${_scopeId5}><span class="placeholder-icon" data-v-64487964${_scopeId5}>🏛️</span></div>`);
+                                          _push6(`<div class="image-placeholder" data-v-8eb12c4a${_scopeId5}><span class="placeholder-icon" data-v-8eb12c4a${_scopeId5}>🏛️</span></div>`);
                                         }
                                         if (establishment.ratings?.average) {
-                                          _push6(`<div class="establishment-rating" data-v-64487964${_scopeId5}><span class="rating-icon" data-v-64487964${_scopeId5}>⭐</span><span class="rating-value" data-v-64487964${_scopeId5}>${ssrInterpolate(establishment.ratings.average.toFixed(1))}</span></div>`);
+                                          _push6(`<div class="establishment-rating" data-v-8eb12c4a${_scopeId5}><span class="rating-icon" data-v-8eb12c4a${_scopeId5}>⭐</span><span class="rating-value" data-v-8eb12c4a${_scopeId5}>${ssrInterpolate(establishment.ratings.average.toFixed(1))}</span></div>`);
                                         } else {
                                           _push6(`<!---->`);
                                         }
-                                        _push6(`</div><div class="establishment-content" data-v-64487964${_scopeId5}><h3 class="establishment-name" data-v-64487964${_scopeId5}>${ssrInterpolate(establishment.title)}</h3><div class="establishment-meta" data-v-64487964${_scopeId5}>`);
+                                        _push6(`</div><div class="establishment-content" data-v-8eb12c4a${_scopeId5}><h3 class="establishment-name" data-v-8eb12c4a${_scopeId5}>${ssrInterpolate(establishment.title)}</h3><div class="establishment-meta" data-v-8eb12c4a${_scopeId5}>`);
                                         if (establishment.city) {
-                                          _push6(`<div class="meta-item" data-v-64487964${_scopeId5}><span class="meta-icon" data-v-64487964${_scopeId5}>📍</span><span data-v-64487964${_scopeId5}>${ssrInterpolate(establishment.city.name)}${ssrInterpolate(establishment.city.country ? ", " + establishment.city.country.name : "")}</span></div>`);
+                                          _push6(`<div class="meta-item" data-v-8eb12c4a${_scopeId5}><span class="meta-icon" data-v-8eb12c4a${_scopeId5}>📍</span><span data-v-8eb12c4a${_scopeId5}>${ssrInterpolate(establishment.city.name)}${ssrInterpolate(establishment.city.country ? ", " + establishment.city.country.name : "")}</span></div>`);
                                         } else {
                                           _push6(`<!---->`);
                                         }
                                         if (establishment.propertyType) {
-                                          _push6(`<div class="meta-item" data-v-64487964${_scopeId5}><span class="meta-icon" data-v-64487964${_scopeId5}>🎓</span><span data-v-64487964${_scopeId5}>${ssrInterpolate(establishment.propertyType.label)}</span></div>`);
+                                          _push6(`<div class="meta-item" data-v-8eb12c4a${_scopeId5}><span class="meta-icon" data-v-8eb12c4a${_scopeId5}>🎓</span><span data-v-8eb12c4a${_scopeId5}>${ssrInterpolate(establishment.propertyType.label)}</span></div>`);
                                         } else {
                                           _push6(`<!---->`);
                                         }
                                         if (establishment.category) {
-                                          _push6(`<div class="meta-item" data-v-64487964${_scopeId5}><span class="meta-icon" data-v-64487964${_scopeId5}>📚</span><span data-v-64487964${_scopeId5}>${ssrInterpolate(establishment.category.label)}</span></div>`);
+                                          _push6(`<div class="meta-item" data-v-8eb12c4a${_scopeId5}><span class="meta-icon" data-v-8eb12c4a${_scopeId5}>📚</span><span data-v-8eb12c4a${_scopeId5}>${ssrInterpolate(establishment.category.label)}</span></div>`);
                                         } else {
                                           _push6(`<!---->`);
                                         }
-                                        _push6(`</div><p class="establishment-description" data-v-64487964${_scopeId5}>${ssrInterpolate(establishment.description || "Découvrez cet établissement d'enseignement supérieur en Afrique.")}</p>`);
+                                        _push6(`</div><p class="establishment-description" data-v-8eb12c4a${_scopeId5}>${ssrInterpolate(establishment.description || "Découvrez cet établissement d'enseignement supérieur en Afrique.")}</p>`);
                                         _push6(ssrRenderComponent(unref(Link), {
-                                          href: `/establishments/${establishment.slug}`,
+                                          href: `/properties/${establishment.slug}`,
                                           class: "btn btn-primary w-100 establishment-cta"
                                         }, {
                                           default: withCtx((_6, _push7, _parent7, _scopeId6) => {
@@ -38030,7 +38047,7 @@ const _sfc_main$M = /* @__PURE__ */ defineComponent({
                                               ]),
                                               createVNode("p", { class: "establishment-description" }, toDisplayString(establishment.description || "Découvrez cet établissement d'enseignement supérieur en Afrique."), 1),
                                               createVNode(unref(Link), {
-                                                href: `/establishments/${establishment.slug}`,
+                                                href: `/properties/${establishment.slug}`,
                                                 class: "btn btn-primary w-100 establishment-cta"
                                               }, {
                                                 default: withCtx(() => [
@@ -38105,7 +38122,7 @@ const _sfc_main$M = /* @__PURE__ */ defineComponent({
                                             ]),
                                             createVNode("p", { class: "establishment-description" }, toDisplayString(establishment.description || "Découvrez cet établissement d'enseignement supérieur en Afrique."), 1),
                                             createVNode(unref(Link), {
-                                              href: `/establishments/${establishment.slug}`,
+                                              href: `/properties/${establishment.slug}`,
                                               class: "btn btn-primary w-100 establishment-cta"
                                             }, {
                                               default: withCtx(() => [
@@ -38125,7 +38142,7 @@ const _sfc_main$M = /* @__PURE__ */ defineComponent({
                             _: 1
                           }, _parent4, _scopeId3));
                         } else {
-                          _push4(`<div class="no-results text-center py-5" data-v-64487964${_scopeId3}><p class="text-muted" data-v-64487964${_scopeId3}>Aucun établissement ne correspond à vos critères de recherche.</p>`);
+                          _push4(`<div class="no-results text-center py-5" data-v-8eb12c4a${_scopeId3}><p class="text-muted" data-v-8eb12c4a${_scopeId3}>Aucun établissement ne correspond à vos critères de recherche.</p>`);
                           _push4(ssrRenderComponent(unref(BButton$1), {
                             variant: "outline-primary",
                             onClick: ($event) => {
@@ -38212,7 +38229,7 @@ const _sfc_main$M = /* @__PURE__ */ defineComponent({
                                         ]),
                                         createVNode("p", { class: "establishment-description" }, toDisplayString(establishment.description || "Découvrez cet établissement d'enseignement supérieur en Afrique."), 1),
                                         createVNode(unref(Link), {
-                                          href: `/establishments/${establishment.slug}`,
+                                          href: `/properties/${establishment.slug}`,
                                           class: "btn btn-primary w-100 establishment-cta"
                                         }, {
                                           default: withCtx(() => [
@@ -38296,7 +38313,7 @@ const _sfc_main$M = /* @__PURE__ */ defineComponent({
                               modelValue: searchFilters.value.city_id,
                               "onUpdate:modelValue": ($event) => searchFilters.value.city_id = $event,
                               class: "filter-input",
-                              disabled: !searchFilters.value.country_id
+                              onChange: onCityChange
                             }, {
                               default: withCtx(() => [
                                 createVNode("option", { value: "" }, "Toutes les villes"),
@@ -38308,7 +38325,7 @@ const _sfc_main$M = /* @__PURE__ */ defineComponent({
                                 }), 128))
                               ]),
                               _: 1
-                            }, 8, ["modelValue", "onUpdate:modelValue", "disabled"])
+                            }, 8, ["modelValue", "onUpdate:modelValue"])
                           ]),
                           createVNode("div", { class: "filter-group" }, [
                             createVNode("label", { class: "filter-label" }, "Type d'établissement"),
@@ -38428,7 +38445,7 @@ const _sfc_main$M = /* @__PURE__ */ defineComponent({
                                       ]),
                                       createVNode("p", { class: "establishment-description" }, toDisplayString(establishment.description || "Découvrez cet établissement d'enseignement supérieur en Afrique."), 1),
                                       createVNode(unref(Link), {
-                                        href: `/establishments/${establishment.slug}`,
+                                        href: `/properties/${establishment.slug}`,
                                         class: "btn btn-primary w-100 establishment-cta"
                                       }, {
                                         default: withCtx(() => [
@@ -38517,7 +38534,7 @@ const _sfc_main$M = /* @__PURE__ */ defineComponent({
                             modelValue: searchFilters.value.city_id,
                             "onUpdate:modelValue": ($event) => searchFilters.value.city_id = $event,
                             class: "filter-input",
-                            disabled: !searchFilters.value.country_id
+                            onChange: onCityChange
                           }, {
                             default: withCtx(() => [
                               createVNode("option", { value: "" }, "Toutes les villes"),
@@ -38529,7 +38546,7 @@ const _sfc_main$M = /* @__PURE__ */ defineComponent({
                               }), 128))
                             ]),
                             _: 1
-                          }, 8, ["modelValue", "onUpdate:modelValue", "disabled"])
+                          }, 8, ["modelValue", "onUpdate:modelValue"])
                         ]),
                         createVNode("div", { class: "filter-group" }, [
                           createVNode("label", { class: "filter-label" }, "Type d'établissement"),
@@ -38649,7 +38666,7 @@ const _sfc_main$M = /* @__PURE__ */ defineComponent({
                                     ]),
                                     createVNode("p", { class: "establishment-description" }, toDisplayString(establishment.description || "Découvrez cet établissement d'enseignement supérieur en Afrique."), 1),
                                     createVNode(unref(Link), {
-                                      href: `/establishments/${establishment.slug}`,
+                                      href: `/properties/${establishment.slug}`,
                                       class: "btn btn-primary w-100 establishment-cta"
                                     }, {
                                       default: withCtx(() => [
@@ -38694,11 +38711,11 @@ const _sfc_main$M = /* @__PURE__ */ defineComponent({
         }),
         _: 1
       }, _parent));
-      _push(`<footer class="main-footer" data-v-64487964>`);
+      _push(`<footer class="main-footer" data-v-8eb12c4a>`);
       _push(ssrRenderComponent(unref(BContainer$1), null, {
         default: withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
-            _push2(`<div class="footer-content text-center" data-v-64487964${_scopeId}><p class="mb-0" data-v-64487964${_scopeId}>© 2025 EtapSup. Tous droits réservés.</p></div>`);
+            _push2(`<div class="footer-content text-center" data-v-8eb12c4a${_scopeId}><p class="mb-0" data-v-8eb12c4a${_scopeId}>© 2025 EtapSup. Tous droits réservés.</p></div>`);
           } else {
             return [
               createVNode("div", { class: "footer-content text-center" }, [
@@ -38719,7 +38736,7 @@ _sfc_main$M.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/Pages/Establishments/Index.vue");
   return _sfc_setup$M ? _sfc_setup$M(props, ctx) : void 0;
 };
-const Index$3 = /* @__PURE__ */ _export_sfc(_sfc_main$M, [["__scopeId", "data-v-64487964"]]);
+const Index$3 = /* @__PURE__ */ _export_sfc(_sfc_main$M, [["__scopeId", "data-v-8eb12c4a"]]);
 const __vite_glob_0_34 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: Index$3
@@ -63939,6 +63956,10 @@ const __vite_glob_0_64 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.de
 }, Symbol.toStringTag, { value: "Module" }));
 window.axios = axios;
 window.axios.defaults.headers.common["X-Requested-With"] = "XMLHttpRequest";
+const token = document.head.querySelector('meta[name="csrf-token"]');
+if (token) {
+  window.axios.defaults.headers.common["X-CSRF-TOKEN"] = token.getAttribute("content");
+}
 const FilePond = vueFilePond(
   FilePondPluginFileValidateType,
   FilePondPluginImagePreview,
