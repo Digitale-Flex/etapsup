@@ -4,6 +4,7 @@
 import { Head, Link, router } from '@inertiajs/vue3';
 import { ref } from 'vue';
 import GuestLayout from '@/Layouts/GuestLayout.vue';
+import UserMenu from '@/Layouts/Partials/UserMenu.vue';
 import { BContainer, BRow, BCol, BFormInput, BFormSelect, BButton } from 'bootstrap-vue-next';
 
 defineOptions({ layout: GuestLayout });
@@ -103,8 +104,18 @@ const applyFilters = () => {
                     </div>
 
                     <div class="nav-actions">
-                        <Link href="/login" class="btn-nav btn-nav-login">Connexion</Link>
-                        <Link href="/register" class="btn-nav btn-nav-register">Inscription</Link>
+                        <!-- Si utilisateur connecté : afficher icône utilisateur -->
+                        <template v-if="$page.props.auth?.user">
+                            <div class="user-menu-wrapper">
+                                <UserMenu />
+                            </div>
+                        </template>
+
+                        <!-- Si utilisateur NON connecté : afficher boutons -->
+                        <template v-else>
+                            <Link href="/login" class="btn-nav btn-nav-login">Connexion</Link>
+                            <Link href="/register" class="btn-nav btn-nav-register">Inscription</Link>
+                        </template>
                     </div>
                 </div>
             </BContainer>

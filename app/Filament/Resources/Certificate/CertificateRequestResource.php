@@ -44,6 +44,17 @@ class CertificateRequestResource extends Resource
 
     protected static ?int $navigationSort = 1;
 
+    /**
+     * Masquer la ressource du menu de navigation
+     * Quick Win 10/12/2025 : Désactiver temporairement les demandes d'attestations
+     *
+     * @return bool
+     */
+    public static function shouldRegisterNavigation(): bool
+    {
+        return false;
+    }
+
     public static function form(Form $form): Form
     {
         return $form
