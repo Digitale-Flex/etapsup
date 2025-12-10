@@ -47,13 +47,6 @@ class CityResource extends Resource
                                     ->label('Ville')
                                     ->required()
                                     ->maxLength(255),
-                                Forms\Components\TextInput::make('budget')
-                                    ->label('Budget')
-                                    ->placeholder('Budget minimum pour faire une demande')
-                                    ->suffix('€')
-                                    ->numeric()
-                                    ->required()
-                                    ->maxLength(255),
                             ])->columnSpan(2),
 
                         Forms\Components\Grid::make()

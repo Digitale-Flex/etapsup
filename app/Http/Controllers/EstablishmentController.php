@@ -50,6 +50,11 @@ class EstablishmentController extends Controller
             $query->where('country_id', $request->country_id);
         }
 
+        // Filtre par ville
+        if ($request->filled('city_id')) {
+            $query->where('city_id', $request->city_id);
+        }
+
         // Filtres Sprint 1 selon PRD (Foreign Keys vers Settings)
         if ($request->filled('establishment_type_id')) {
             $query->where('establishment_type_id', $request->establishment_type_id);
@@ -109,9 +114,17 @@ class EstablishmentController extends Controller
 
         // Données pour les filtres (Sprint 1 PRD + A20)
         $filters = [
-            'countries' => Country::whereHas('cities.properties', function ($q) {
-                $q->where('is_published', true);
-            })->get(['id', 'name']),
+            'countries' => Country::where('is_published', true)
+                ->whereHas('properties', function ($q) {
+                    $q->where('is_published', true);
+                })
+                ->get(['id', 'name']),
+
+            'cities' => City::where('is_published', true)
+                ->whereHas('properties', function ($q) {
+                    $q->where('is_published', true);
+                })
+                ->get(['id', 'name', 'country_id']),
 
             // Nouveaux filtres Sprint 1 (paramétrables depuis Settings)
             'establishment_types' => EstablishmentType::where('is_published', true)->get(['id', 'label']),
@@ -123,6 +136,7 @@ class EstablishmentController extends Controller
         // Filtres actifs (Sprint 1)
         $currentFilters = [
             'country_id' => $request->country_id,
+            'city_id' => $request->city_id,
             'establishment_type_id' => $request->establishment_type_id,
             'training_type_id' => $request->training_type_id,
             'career_field_id' => $request->career_field_id,

@@ -2,7 +2,7 @@
 // Refonte: Page Établissements style Diplomeo avec charte EtapSup
 // UI-Fix-2.5: Connexion avec l'API backend via Inertia props
 import { Head, Link, router } from '@inertiajs/vue3';
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 import GuestLayout from '@/Layouts/GuestLayout.vue';
 import UserMenu from '@/Layouts/Partials/UserMenu.vue';
 import { BContainer, BRow, BCol, BFormInput, BFormSelect, BButton } from 'bootstrap-vue-next';
@@ -13,6 +13,12 @@ defineOptions({ layout: GuestLayout });
 interface Country {
     id: string;
     name: string;
+}
+
+interface City {
+    id: string;
+    name: string;
+    country_id: string;
 }
 
 interface Filter {
@@ -51,6 +57,7 @@ const props = defineProps<{
     };
     filters: {
         countries: Country[];
+        cities: City[];
         establishment_types: Filter[];
         training_types: Filter[];
         career_fields: Filter[];
@@ -58,6 +65,7 @@ const props = defineProps<{
     };
     currentFilters: {
         country_id?: string;
+        city_id?: string;
         establishment_type_id?: string;
         training_type_id?: string;
         career_field_id?: string;
@@ -69,10 +77,22 @@ const props = defineProps<{
 // Filtres locaux
 const searchFilters = ref({
     country_id: props.currentFilters.country_id || '',
+    city_id: props.currentFilters.city_id || '',
     career_field_id: props.currentFilters.career_field_id || '',
     establishment_type_id: props.currentFilters.establishment_type_id || '',
     search: props.currentFilters.search || ''
 });
+
+// Filtrer les villes selon le pays sélectionné
+const filteredCities = computed(() => {
+    if (!searchFilters.value.country_id) return [];
+    return props.filters.cities.filter(city => city.country_id == searchFilters.value.country_id);
+});
+
+// Réinitialiser city_id quand le pays change
+const onCountryChange = () => {
+    searchFilters.value.city_id = '';
+};
 
 // Appliquer les filtres via Inertia
 const applyFilters = () => {
@@ -145,10 +165,20 @@ const applyFilters = () => {
 
                         <div class="filter-group">
                             <label class="filter-label">Pays</label>
-                            <BFormSelect v-model="searchFilters.country_id" class="filter-input">
+                            <BFormSelect v-model="searchFilters.country_id" class="filter-input" @change="onCountryChange">
                                 <option value="">Tous les pays</option>
                                 <option v-for="country in filters.countries" :key="country.id" :value="country.id">
                                     {{ country.name }}
+                                </option>
+                            </BFormSelect>
+                        </div>
+
+                        <div class="filter-group">
+                            <label class="filter-label">Ville</label>
+                            <BFormSelect v-model="searchFilters.city_id" class="filter-input" :disabled="!searchFilters.country_id">
+                                <option value="">Toutes les villes</option>
+                                <option v-for="city in filteredCities" :key="city.id" :value="city.id">
+                                    {{ city.name }}
                                 </option>
                             </BFormSelect>
                         </div>
@@ -183,11 +213,13 @@ const applyFilters = () => {
                 <!-- Establishments Grid -->
                 <BCol lg="9">
                     <div class="results-header">
-                        <h2 class="results-count">{{ establishments.meta.total }} établissement{{ establishments.meta.total > 1 ? 's' : '' }} trouvé{{ establishments.meta.total > 1 ? 's' : '' }}</h2>
+                        <h2 class="results-count" v-if="establishments?.meta?.total !== undefined">
+                            {{ establishments.meta.total }} établissement{{ establishments.meta.total > 1 ? 's' : '' }} trouvé{{ establishments.meta.total > 1 ? 's' : '' }}
+                        </h2>
                     </div>
 
                     <!-- UI-Fix-2.5: Affichage réel des données via props -->
-                    <BRow v-if="establishments.data.length > 0">
+                    <BRow v-if="establishments?.data?.length > 0">
                         <BCol
                             v-for="establishment in establishments.data"
                             :key="establishment.id"
@@ -197,7 +229,8 @@ const applyFilters = () => {
                         >
                             <div class="establishment-card">
                                 <div class="establishment-image">
-                                    <div class="image-placeholder">
+                                    <img v-if="establishment.logo" :src="establishment.logo" :alt="establishment.title" class="establishment-img" />
+                                    <div v-else class="image-placeholder">
                                         <span class="placeholder-icon">🏛️</span>
                                     </div>
                                     <div v-if="establishment.ratings?.average" class="establishment-rating">
@@ -465,6 +498,13 @@ const applyFilters = () => {
 .establishment-image {
     position: relative;
     height: 180px;
+    overflow: hidden;
+}
+
+.establishment-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 /* UI-Fix-2.4: Image placeholder charte EtapSup */
