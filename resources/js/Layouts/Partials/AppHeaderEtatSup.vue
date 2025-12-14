@@ -92,7 +92,7 @@ const isMobile = computed(() => {
 .logo-text {
     font-size: 1.75rem;
     font-weight: 800;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #1e3a8a 0%, #1e3a8a 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -110,7 +110,7 @@ const isMobile = computed(() => {
 }
 
 .nav-link:hover {
-    color: #667eea;
+    color: #1e3a8a;
 }
 
 .btn-primary-etapsup {
@@ -129,8 +129,8 @@ const isMobile = computed(() => {
 }
 
 .btn-outline-primary-etapsup {
-    border: 2px solid #667eea;
-    color: #667eea;
+    border: 2px solid #1e3a8a;
+    color: #1e3a8a;
     padding: 0.5rem 1.5rem;
     font-weight: 600;
     border-radius: 50px;
@@ -138,7 +138,7 @@ const isMobile = computed(() => {
 }
 
 .btn-outline-primary-etapsup:hover {
-    background: #667eea;
+    background: #1e3a8a;
     color: white;
 }
 

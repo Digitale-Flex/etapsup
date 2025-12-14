@@ -177,7 +177,7 @@ defineProps<{
                                                 >
                                                     <font-awesome-icon
                                                         :icon="faCheckCircle"
-                                                        class="text-success me-1"
+                                                        class="text-primary me-1"
                                                     />
                                                     {{ layout.label }}
                                                 </li>
@@ -214,7 +214,7 @@ defineProps<{
                                                 >
                                                     <font-awesome-icon
                                                         :icon="faCheckCircle"
-                                                        class="text-success me-1"
+                                                        class="text-primary me-1"
                                                     />
                                                     {{ regulation.label }}
                                                 </li>

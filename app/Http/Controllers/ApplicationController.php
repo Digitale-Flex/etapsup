@@ -41,11 +41,12 @@ class ApplicationController extends Controller
         $draftData = null;
         $establishment = null;
         $existingApplicationId = null; // Sprint1 Feature 1.8.1 - Pour DocumentUploader
+        $existingDocuments = []; // Sprint1 Feature 1.8.1 - Documents existants pour persistance
 
         // CAS 1: Reprendre une candidature existante
         if ($applicationId) {
             $application = $this->application
-                ->with(['property.propertyType', 'property.city.country', 'property.category']) // A20
+                ->with(['property.propertyType', 'property.city.country', 'property.category', 'documents']) // A20 + documents
                 ->findByHashidOrFail($applicationId);
 
             // Sécurité: vérifier que c'est bien la candidature du user connecté
@@ -56,6 +57,7 @@ class ApplicationController extends Controller
             $establishment = $application->property;
             $draftData = $application->fees;
             $existingApplicationId = $application->hashid; // Sprint1 Feature 1.8.1
+            $existingDocuments = $application->documents; // Sprint1 Feature 1.8.1 - Documents existants
         }
         // CAS 2: Nouvelle candidature
         else {
@@ -78,6 +80,7 @@ class ApplicationController extends Controller
 
             // Chercher un brouillon existant pour cet établissement
             $draftApplication = $this->application
+                ->with('documents') // Sprint1 Feature 1.8.1 - Charger documents existants
                 ->where('user_id', $user->id)
                 ->where('property_id', $establishment->id)
                 ->where('status', 'draft')
@@ -85,11 +88,20 @@ class ApplicationController extends Controller
 
             $draftData = $draftApplication?->fees ?? null;
             $existingApplicationId = $draftApplication?->hashid; // Sprint1 Feature 1.8.1
+            $existingDocuments = $draftApplication?->documents ?? []; // Sprint1 Feature 1.8.1
         }
 
         return Inertia::render('Applications/Create', [
             'applicationId' => $existingApplicationId, // Sprint1 Feature 1.8.1 - Pour DocumentUploader
             'draftData' => $draftData,
+            // Sprint1 Feature 1.8.1 - Documents existants pour persistance à l'étape 5
+            'existingDocuments' => collect($existingDocuments)->map(fn ($doc) => [
+                'id' => $doc->id,
+                'document_type' => $doc->document_type,
+                'file_name' => basename($doc->file_path),
+                'file_size' => 0, // Taille non stockée, optionnelle
+                'created_at' => $doc->created_at?->format('d/m/Y à H:i'),
+            ])->values()->all(),
             'establishment' => [
                 'id' => $establishment->hashid,
                 'slug' => $establishment->slug,

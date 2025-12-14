@@ -1,6 +1,6 @@
 import { BCard, BCardBody, BCardHeader, BCardTitle, BCardFooter, BCardText } from "bootstrap-vue-next/components/BCard";
 import { BRow, BCol, BContainer } from "bootstrap-vue-next/components/BContainer";
-import { defineComponent, unref, mergeProps, withCtx, renderSlot, useSSRContext, onMounted, createVNode, resolveDynamicComponent, ref, computed, createTextVNode, toDisplayString, createBlock, openBlock, Fragment, renderList, watch, nextTick, createCommentVNode, withModifiers, reactive, resolveComponent, Transition, withDirectives, vShow, onUnmounted, withKeys, useModel, watchEffect, vModelCheckbox, createApp, h as h$1 } from "vue";
+import { defineComponent, unref, mergeProps, withCtx, renderSlot, useSSRContext, onMounted, createVNode, resolveDynamicComponent, ref, watch, computed, createTextVNode, toDisplayString, createBlock, openBlock, Fragment, renderList, nextTick, createCommentVNode, withModifiers, reactive, resolveComponent, Transition, withDirectives, vShow, onUnmounted, withKeys, useModel, watchEffect, vModelCheckbox, createApp, h as h$1 } from "vue";
 import { ssrRenderComponent, ssrRenderSlot, ssrRenderVNode, ssrRenderAttrs, ssrInterpolate, ssrRenderList, ssrRenderStyle, ssrRenderClass, ssrRenderAttr, ssrGetDirectiveProps, ssrIncludeBooleanAttr, ssrLooseContain, ssrLooseEqual, ssrGetDynamicModelProps } from "vue/server-renderer";
 import { Head, useForm, router, Link, usePage, Deferred, createInertiaApp } from "@inertiajs/vue3";
 import Sticky from "sticky-js";
@@ -160,8 +160,20 @@ const _sfc_main$1H = /* @__PURE__ */ defineComponent({
     const emit = __emit;
     const uploading = ref(false);
     const uploadProgress = ref(0);
-    const documents = ref(props.existingDocuments || []);
+    const documents = ref([]);
     const errorMessage = ref(null);
+    onMounted(() => {
+      if (props.existingDocuments && props.existingDocuments.length > 0) {
+        documents.value = [...props.existingDocuments];
+        console.log("📄 Documents existants chargés:", documents.value.length);
+      }
+    });
+    watch(() => props.existingDocuments, (newDocs) => {
+      if (newDocs && newDocs.length > 0 && documents.value.length === 0) {
+        documents.value = [...newDocs];
+        console.log("📄 Documents mis à jour depuis props:", documents.value.length);
+      }
+    }, { immediate: true });
     const documentTypes = [
       { value: "CV", label: "Curriculum Vitae (CV)", required: true },
       { value: "Diplôme", label: "Dernier diplôme obtenu", required: true },
@@ -247,7 +259,7 @@ const _sfc_main$1H = /* @__PURE__ */ defineComponent({
       const _component_BAlert = BAlert;
       const _component_BButton = BButton;
       const _component_BProgress = BProgress;
-      _push(`<div${ssrRenderAttrs(mergeProps({ class: "document-uploader" }, _attrs))} data-v-d243408b>`);
+      _push(`<div${ssrRenderAttrs(mergeProps({ class: "document-uploader" }, _attrs))} data-v-61f23edd>`);
       if (errorMessage.value) {
         _push(ssrRenderComponent(_component_BAlert, {
           variant: "danger",
@@ -269,11 +281,11 @@ const _sfc_main$1H = /* @__PURE__ */ defineComponent({
       } else {
         _push(`<!---->`);
       }
-      _push(`<div class="document-section mb-4" data-v-d243408b><h6 class="section-subtitle" data-v-d243408b><i class="bi bi-file-earmark-check me-2" data-v-d243408b></i> Documents obligatoires </h6><div class="documents-list" data-v-d243408b><!--[-->`);
+      _push(`<div class="document-section mb-4" data-v-61f23edd><h6 class="section-subtitle" data-v-61f23edd><i class="bi bi-file-earmark-check me-2" data-v-61f23edd></i> Documents obligatoires </h6><div class="documents-list" data-v-61f23edd><!--[-->`);
       ssrRenderList(requiredDocuments.value, (docType) => {
-        _push(`<div class="document-item" data-v-d243408b><div class="doc-info" data-v-d243408b><i class="bi bi-file-earmark-pdf text-primary me-2" data-v-d243408b></i><span class="doc-label" data-v-d243408b>${ssrInterpolate(docType.label)}</span><span class="required-badge" data-v-d243408b>*</span></div>`);
+        _push(`<div class="document-item" data-v-61f23edd><div class="doc-info" data-v-61f23edd><i class="bi bi-file-earmark-pdf text-primary me-2" data-v-61f23edd></i><span class="doc-label" data-v-61f23edd>${ssrInterpolate(docType.label)}</span><span class="required-badge" data-v-61f23edd>*</span></div>`);
         if (documents.value.find((d2) => d2.document_type === docType.value)) {
-          _push(`<div class="doc-uploaded" data-v-d243408b><i class="bi bi-check-circle text-success me-2" data-v-d243408b></i><span class="text-muted small" data-v-d243408b>${ssrInterpolate(documents.value.find((d2) => d2.document_type === docType.value)?.file_name)}</span>`);
+          _push(`<div class="doc-uploaded" data-v-61f23edd><i class="bi bi-check-circle text-success me-2" data-v-61f23edd></i><span class="text-muted small" data-v-61f23edd>${ssrInterpolate(documents.value.find((d2) => d2.document_type === docType.value)?.file_name)}</span>`);
           _push(ssrRenderComponent(_component_BButton, {
             type: "button",
             variant: "outline-danger",
@@ -282,7 +294,7 @@ const _sfc_main$1H = /* @__PURE__ */ defineComponent({
           }, {
             default: withCtx((_, _push2, _parent2, _scopeId) => {
               if (_push2) {
-                _push2(`<i class="bi bi-trash" data-v-d243408b${_scopeId}></i>`);
+                _push2(`<i class="bi bi-trash" data-v-61f23edd${_scopeId}></i>`);
               } else {
                 return [
                   createVNode("i", { class: "bi bi-trash" })
@@ -302,7 +314,7 @@ const _sfc_main$1H = /* @__PURE__ */ defineComponent({
           }, {
             default: withCtx((_, _push2, _parent2, _scopeId) => {
               if (_push2) {
-                _push2(`<i class="bi bi-upload me-1" data-v-d243408b${_scopeId}></i> Téléverser `);
+                _push2(`<i class="bi bi-upload me-1" data-v-61f23edd${_scopeId}></i> Téléverser `);
               } else {
                 return [
                   createVNode("i", { class: "bi bi-upload me-1" }),
@@ -315,11 +327,11 @@ const _sfc_main$1H = /* @__PURE__ */ defineComponent({
         }
         _push(`</div>`);
       });
-      _push(`<!--]--></div></div><div class="document-section" data-v-d243408b><h6 class="section-subtitle" data-v-d243408b><i class="bi bi-file-earmark me-2" data-v-d243408b></i> Documents optionnels </h6><div class="documents-list" data-v-d243408b><!--[-->`);
+      _push(`<!--]--></div></div><div class="document-section" data-v-61f23edd><h6 class="section-subtitle" data-v-61f23edd><i class="bi bi-file-earmark me-2" data-v-61f23edd></i> Documents optionnels </h6><div class="documents-list" data-v-61f23edd><!--[-->`);
       ssrRenderList(optionalDocuments.value, (docType) => {
-        _push(`<div class="document-item" data-v-d243408b><div class="doc-info" data-v-d243408b><i class="bi bi-file-earmark text-secondary me-2" data-v-d243408b></i><span class="doc-label" data-v-d243408b>${ssrInterpolate(docType.label)}</span></div>`);
+        _push(`<div class="document-item" data-v-61f23edd><div class="doc-info" data-v-61f23edd><i class="bi bi-file-earmark text-secondary me-2" data-v-61f23edd></i><span class="doc-label" data-v-61f23edd>${ssrInterpolate(docType.label)}</span></div>`);
         if (documents.value.find((d2) => d2.document_type === docType.value)) {
-          _push(`<div class="doc-uploaded" data-v-d243408b><i class="bi bi-check-circle text-success me-2" data-v-d243408b></i><span class="text-muted small" data-v-d243408b>${ssrInterpolate(documents.value.find((d2) => d2.document_type === docType.value)?.file_name)}</span>`);
+          _push(`<div class="doc-uploaded" data-v-61f23edd><i class="bi bi-check-circle text-success me-2" data-v-61f23edd></i><span class="text-muted small" data-v-61f23edd>${ssrInterpolate(documents.value.find((d2) => d2.document_type === docType.value)?.file_name)}</span>`);
           _push(ssrRenderComponent(_component_BButton, {
             type: "button",
             variant: "outline-danger",
@@ -328,7 +340,7 @@ const _sfc_main$1H = /* @__PURE__ */ defineComponent({
           }, {
             default: withCtx((_, _push2, _parent2, _scopeId) => {
               if (_push2) {
-                _push2(`<i class="bi bi-trash" data-v-d243408b${_scopeId}></i>`);
+                _push2(`<i class="bi bi-trash" data-v-61f23edd${_scopeId}></i>`);
               } else {
                 return [
                   createVNode("i", { class: "bi bi-trash" })
@@ -348,7 +360,7 @@ const _sfc_main$1H = /* @__PURE__ */ defineComponent({
           }, {
             default: withCtx((_, _push2, _parent2, _scopeId) => {
               if (_push2) {
-                _push2(`<i class="bi bi-upload me-1" data-v-d243408b${_scopeId}></i> Téléverser `);
+                _push2(`<i class="bi bi-upload me-1" data-v-61f23edd${_scopeId}></i> Téléverser `);
               } else {
                 return [
                   createVNode("i", { class: "bi bi-upload me-1" }),
@@ -363,7 +375,7 @@ const _sfc_main$1H = /* @__PURE__ */ defineComponent({
       });
       _push(`<!--]--></div></div>`);
       if (uploading.value) {
-        _push(`<div class="mt-3" data-v-d243408b>`);
+        _push(`<div class="mt-3" data-v-61f23edd>`);
         _push(ssrRenderComponent(_component_BProgress, {
           value: uploadProgress.value,
           max: 100,
@@ -393,9 +405,9 @@ const _sfc_main$1H = /* @__PURE__ */ defineComponent({
         }, {
           default: withCtx((_, _push2, _parent2, _scopeId) => {
             if (_push2) {
-              _push2(`<i class="bi bi-exclamation-triangle me-2" data-v-d243408b${_scopeId}></i><strong data-v-d243408b${_scopeId}>Documents manquants :</strong><ul class="mb-0 mt-2" data-v-d243408b${_scopeId}><!--[-->`);
+              _push2(`<i class="bi bi-exclamation-triangle me-2" data-v-61f23edd${_scopeId}></i><strong data-v-61f23edd${_scopeId}>Documents manquants :</strong><ul class="mb-0 mt-2" data-v-61f23edd${_scopeId}><!--[-->`);
               ssrRenderList(missingRequiredDocs.value, (doc) => {
-                _push2(`<li data-v-d243408b${_scopeId}>${ssrInterpolate(doc.label)}</li>`);
+                _push2(`<li data-v-61f23edd${_scopeId}>${ssrInterpolate(doc.label)}</li>`);
               });
               _push2(`<!--]--></ul>`);
             } else {
@@ -422,7 +434,7 @@ const _sfc_main$1H = /* @__PURE__ */ defineComponent({
         }, {
           default: withCtx((_, _push2, _parent2, _scopeId) => {
             if (_push2) {
-              _push2(`<i class="bi bi-check-circle me-2" data-v-d243408b${_scopeId}></i> Tous les documents obligatoires sont téléversés. Vous pouvez continuer. `);
+              _push2(`<i class="bi bi-check-circle me-2" data-v-61f23edd${_scopeId}></i> Tous les documents obligatoires sont téléversés. Vous pouvez continuer. `);
             } else {
               return [
                 createVNode("i", { class: "bi bi-check-circle me-2" }),
@@ -450,7 +462,7 @@ _sfc_main$1H.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/Components/DocumentUploader.vue");
   return _sfc_setup$1H ? _sfc_setup$1H(props, ctx) : void 0;
 };
-const DocumentUploader = /* @__PURE__ */ _export_sfc(_sfc_main$1H, [["__scopeId", "data-v-d243408b"]]);
+const DocumentUploader = /* @__PURE__ */ _export_sfc(_sfc_main$1H, [["__scopeId", "data-v-61f23edd"]]);
 const totalSteps = 6;
 const _sfc_main$1G = /* @__PURE__ */ defineComponent({
   __name: "ApplicationForm",
@@ -458,6 +470,7 @@ const _sfc_main$1G = /* @__PURE__ */ defineComponent({
   props: {
     establishment: {},
     applicationId: {},
+    existingDocuments: {},
     user: {},
     draftData: {},
     stripeKey: {},
@@ -628,8 +641,12 @@ const _sfc_main$1G = /* @__PURE__ */ defineComponent({
         if (response.data.application_id) {
           localApplicationId.value = response.data.application_id;
         }
+        console.log("✅ Brouillon sauvegardé avec succès");
+        return true;
       } catch (error) {
-        console.error("Erreur sauvegarde:", error);
+        console.error("❌ Erreur sauvegarde:", error);
+        errorMessage.value = error.response?.data?.message || "Erreur lors de la sauvegarde du brouillon";
+        return false;
       }
     };
     const nextStep = async () => {
@@ -655,8 +672,12 @@ const _sfc_main$1G = /* @__PURE__ */ defineComponent({
       }
     };
     const finalizeLater = async () => {
-      await saveDraft();
-      window.location.href = "/dashboard/reservations";
+      const saved = await saveDraft();
+      if (saved) {
+        window.location.href = "/dashboard";
+      } else {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
     };
     const prevStep = () => {
       if (currentStep.value > 1) {
@@ -761,58 +782,58 @@ const _sfc_main$1G = /* @__PURE__ */ defineComponent({
       }, _attrs), {
         default: withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
-            _push2(`<div class="card-header-etatsup" data-v-78d4021a${_scopeId}><h5 class="mb-0 text-white" data-v-78d4021a${_scopeId}><i class="bi bi-file-earmark-text me-2" data-v-78d4021a${_scopeId}></i> Formulaire de candidature - ${ssrInterpolate(__props.establishment.title)}</h5></div>`);
+            _push2(`<div class="card-header-etatsup" data-v-7d85058f${_scopeId}><h5 class="mb-0 text-white" data-v-7d85058f${_scopeId}><i class="bi bi-file-earmark-text me-2" data-v-7d85058f${_scopeId}></i> Formulaire de candidature - ${ssrInterpolate(__props.establishment.title)}</h5></div>`);
             _push2(ssrRenderComponent(_component_BCardBody, { class: "p-0" }, {
               default: withCtx((_2, _push3, _parent3, _scopeId2) => {
                 if (_push3) {
-                  _push3(`<div class="stepper-container" data-v-78d4021a${_scopeId2}><div class="stepper-progress" data-v-78d4021a${_scopeId2}><div class="stepper-progress-bar" style="${ssrRenderStyle({ width: progressPercentage.value + "%" })}" data-v-78d4021a${_scopeId2}></div></div><div class="stepper-steps" data-v-78d4021a${_scopeId2}><!--[-->`);
+                  _push3(`<div class="stepper-container" data-v-7d85058f${_scopeId2}><div class="stepper-progress" data-v-7d85058f${_scopeId2}><div class="stepper-progress-bar" style="${ssrRenderStyle({ width: progressPercentage.value + "%" })}" data-v-7d85058f${_scopeId2}></div></div><div class="stepper-steps" data-v-7d85058f${_scopeId2}><!--[-->`);
                   ssrRenderList(totalSteps, (step) => {
                     _push3(`<div class="${ssrRenderClass([{
                       "active": currentStep.value === step,
                       "completed": currentStep.value > step
-                    }, "stepper-step"])}" data-v-78d4021a${_scopeId2}><div class="stepper-step-circle" data-v-78d4021a${_scopeId2}><span data-v-78d4021a${_scopeId2}>${ssrInterpolate(step)}</span></div><div class="stepper-step-label" data-v-78d4021a${_scopeId2}>`);
+                    }, "stepper-step"])}" data-v-7d85058f${_scopeId2}><div class="stepper-step-circle" data-v-7d85058f${_scopeId2}><span data-v-7d85058f${_scopeId2}>${ssrInterpolate(step)}</span></div><div class="stepper-step-label" data-v-7d85058f${_scopeId2}>`);
                     if (step === 1) {
-                      _push3(`<span data-v-78d4021a${_scopeId2}>Infos personnelles</span>`);
+                      _push3(`<span data-v-7d85058f${_scopeId2}>Infos personnelles</span>`);
                     } else {
                       _push3(`<!---->`);
                     }
                     if (step === 2) {
-                      _push3(`<span data-v-78d4021a${_scopeId2}>Formation</span>`);
+                      _push3(`<span data-v-7d85058f${_scopeId2}>Formation</span>`);
                     } else {
                       _push3(`<!---->`);
                     }
                     if (step === 3) {
-                      _push3(`<span data-v-78d4021a${_scopeId2}>Langues</span>`);
+                      _push3(`<span data-v-7d85058f${_scopeId2}>Langues</span>`);
                     } else {
                       _push3(`<!---->`);
                     }
                     if (step === 4) {
-                      _push3(`<span data-v-78d4021a${_scopeId2}>Motivation</span>`);
+                      _push3(`<span data-v-7d85058f${_scopeId2}>Motivation</span>`);
                     } else {
                       _push3(`<!---->`);
                     }
                     if (step === 5) {
-                      _push3(`<span data-v-78d4021a${_scopeId2}>Documents</span>`);
+                      _push3(`<span data-v-7d85058f${_scopeId2}>Documents</span>`);
                     } else {
                       _push3(`<!---->`);
                     }
                     if (step === 6) {
-                      _push3(`<span data-v-78d4021a${_scopeId2}>Paiement</span>`);
+                      _push3(`<span data-v-7d85058f${_scopeId2}>Paiement</span>`);
                     } else {
                       _push3(`<!---->`);
                     }
                     _push3(`</div></div>`);
                   });
-                  _push3(`<!--]--></div></div><div class="form-content" data-v-78d4021a${_scopeId2}><form data-v-78d4021a${_scopeId2}>`);
+                  _push3(`<!--]--></div></div><div class="form-content" data-v-7d85058f${_scopeId2}><form data-v-7d85058f${_scopeId2}>`);
                   if (currentStep.value === 1) {
-                    _push3(`<div class="form-section" data-v-78d4021a${_scopeId2}><h6 class="section-title" data-v-78d4021a${_scopeId2}><i class="bi bi-person-circle me-2" data-v-78d4021a${_scopeId2}></i> 1. Informations personnelles </h6>`);
+                    _push3(`<div class="form-section" data-v-7d85058f${_scopeId2}><h6 class="section-title" data-v-7d85058f${_scopeId2}><i class="bi bi-person-circle me-2" data-v-7d85058f${_scopeId2}></i> 1. Informations personnelles </h6>`);
                     _push3(ssrRenderComponent(_component_BRow, { class: "g-3" }, {
                       default: withCtx((_3, _push4, _parent4, _scopeId3) => {
                         if (_push4) {
                           _push4(ssrRenderComponent(_component_BCol, { md: "6" }, {
                             default: withCtx((_4, _push5, _parent5, _scopeId4) => {
                               if (_push5) {
-                                _push5(`<label class="form-label-etatsup required" data-v-78d4021a${_scopeId4}>Nom</label>`);
+                                _push5(`<label class="form-label-etatsup required" data-v-7d85058f${_scopeId4}>Nom</label>`);
                                 _push5(ssrRenderComponent(_component_BFormInput, {
                                   modelValue: unref(form).surname,
                                   "onUpdate:modelValue": ($event) => unref(form).surname = $event,
@@ -821,7 +842,7 @@ const _sfc_main$1G = /* @__PURE__ */ defineComponent({
                                   onBlur: unref(v$).surname?.$touch
                                 }, null, _parent5, _scopeId4));
                                 if (unref(v$).surname?.$error) {
-                                  _push5(`<div class="invalid-feedback d-block" data-v-78d4021a${_scopeId4}> Le nom est requis (min. 2 caractères) </div>`);
+                                  _push5(`<div class="invalid-feedback d-block" data-v-7d85058f${_scopeId4}> Le nom est requis (min. 2 caractères) </div>`);
                                 } else {
                                   _push5(`<!---->`);
                                 }
@@ -847,7 +868,7 @@ const _sfc_main$1G = /* @__PURE__ */ defineComponent({
                           _push4(ssrRenderComponent(_component_BCol, { md: "6" }, {
                             default: withCtx((_4, _push5, _parent5, _scopeId4) => {
                               if (_push5) {
-                                _push5(`<label class="form-label-etatsup required" data-v-78d4021a${_scopeId4}>Prénom</label>`);
+                                _push5(`<label class="form-label-etatsup required" data-v-7d85058f${_scopeId4}>Prénom</label>`);
                                 _push5(ssrRenderComponent(_component_BFormInput, {
                                   modelValue: unref(form).name,
                                   "onUpdate:modelValue": ($event) => unref(form).name = $event,
@@ -856,7 +877,7 @@ const _sfc_main$1G = /* @__PURE__ */ defineComponent({
                                   onBlur: unref(v$).name?.$touch
                                 }, null, _parent5, _scopeId4));
                                 if (unref(v$).name?.$error) {
-                                  _push5(`<div class="invalid-feedback d-block" data-v-78d4021a${_scopeId4}> Le prénom est requis (min. 2 caractères) </div>`);
+                                  _push5(`<div class="invalid-feedback d-block" data-v-7d85058f${_scopeId4}> Le prénom est requis (min. 2 caractères) </div>`);
                                 } else {
                                   _push5(`<!---->`);
                                 }
@@ -882,7 +903,7 @@ const _sfc_main$1G = /* @__PURE__ */ defineComponent({
                           _push4(ssrRenderComponent(_component_BCol, { md: "4" }, {
                             default: withCtx((_4, _push5, _parent5, _scopeId4) => {
                               if (_push5) {
-                                _push5(`<label class="form-label-etatsup required" data-v-78d4021a${_scopeId4}>Sexe</label>`);
+                                _push5(`<label class="form-label-etatsup required" data-v-7d85058f${_scopeId4}>Sexe</label>`);
                                 _push5(ssrRenderComponent(_component_BFormSelect, {
                                   modelValue: unref(form).gender,
                                   "onUpdate:modelValue": ($event) => unref(form).gender = $event,
@@ -910,7 +931,7 @@ const _sfc_main$1G = /* @__PURE__ */ defineComponent({
                           _push4(ssrRenderComponent(_component_BCol, { md: "4" }, {
                             default: withCtx((_4, _push5, _parent5, _scopeId4) => {
                               if (_push5) {
-                                _push5(`<label class="form-label-etatsup required" data-v-78d4021a${_scopeId4}>Date de naissance</label>`);
+                                _push5(`<label class="form-label-etatsup required" data-v-7d85058f${_scopeId4}>Date de naissance</label>`);
                                 _push5(ssrRenderComponent(_component_BFormInput, {
                                   modelValue: unref(form).date_of_birth,
                                   "onUpdate:modelValue": ($event) => unref(form).date_of_birth = $event,
@@ -938,7 +959,7 @@ const _sfc_main$1G = /* @__PURE__ */ defineComponent({
                           _push4(ssrRenderComponent(_component_BCol, { md: "4" }, {
                             default: withCtx((_4, _push5, _parent5, _scopeId4) => {
                               if (_push5) {
-                                _push5(`<label class="form-label-etatsup required" data-v-78d4021a${_scopeId4}>Nationalité</label>`);
+                                _push5(`<label class="form-label-etatsup required" data-v-7d85058f${_scopeId4}>Nationalité</label>`);
                                 _push5(ssrRenderComponent(_component_BFormInput, {
                                   modelValue: unref(form).nationality,
                                   "onUpdate:modelValue": ($event) => unref(form).nationality = $event,
@@ -966,7 +987,7 @@ const _sfc_main$1G = /* @__PURE__ */ defineComponent({
                           _push4(ssrRenderComponent(_component_BCol, { md: "6" }, {
                             default: withCtx((_4, _push5, _parent5, _scopeId4) => {
                               if (_push5) {
-                                _push5(`<label class="form-label-etatsup required" data-v-78d4021a${_scopeId4}>Pays de naissance</label>`);
+                                _push5(`<label class="form-label-etatsup required" data-v-7d85058f${_scopeId4}>Pays de naissance</label>`);
                                 _push5(ssrRenderComponent(_component_BFormInput, {
                                   modelValue: unref(form).country_of_birth,
                                   "onUpdate:modelValue": ($event) => unref(form).country_of_birth = $event,
@@ -992,7 +1013,7 @@ const _sfc_main$1G = /* @__PURE__ */ defineComponent({
                           _push4(ssrRenderComponent(_component_BCol, { md: "6" }, {
                             default: withCtx((_4, _push5, _parent5, _scopeId4) => {
                               if (_push5) {
-                                _push5(`<label class="form-label-etatsup required" data-v-78d4021a${_scopeId4}>Ville de naissance</label>`);
+                                _push5(`<label class="form-label-etatsup required" data-v-7d85058f${_scopeId4}>Ville de naissance</label>`);
                                 _push5(ssrRenderComponent(_component_BFormInput, {
                                   modelValue: unref(form).city_of_birth,
                                   "onUpdate:modelValue": ($event) => unref(form).city_of_birth = $event,
@@ -1018,7 +1039,7 @@ const _sfc_main$1G = /* @__PURE__ */ defineComponent({
                           _push4(ssrRenderComponent(_component_BCol, { cols: "12" }, {
                             default: withCtx((_4, _push5, _parent5, _scopeId4) => {
                               if (_push5) {
-                                _push5(`<label class="form-label-etatsup required" data-v-78d4021a${_scopeId4}>Adresse actuelle</label>`);
+                                _push5(`<label class="form-label-etatsup required" data-v-7d85058f${_scopeId4}>Adresse actuelle</label>`);
                                 _push5(ssrRenderComponent(_component_BFormInput, {
                                   modelValue: unref(form).address,
                                   "onUpdate:modelValue": ($event) => unref(form).address = $event,
@@ -1044,7 +1065,7 @@ const _sfc_main$1G = /* @__PURE__ */ defineComponent({
                           _push4(ssrRenderComponent(_component_BCol, { md: "4" }, {
                             default: withCtx((_4, _push5, _parent5, _scopeId4) => {
                               if (_push5) {
-                                _push5(`<label class="form-label-etatsup required" data-v-78d4021a${_scopeId4}>Code postal</label>`);
+                                _push5(`<label class="form-label-etatsup required" data-v-7d85058f${_scopeId4}>Code postal</label>`);
                                 _push5(ssrRenderComponent(_component_BFormInput, {
                                   modelValue: unref(form).postal_code,
                                   "onUpdate:modelValue": ($event) => unref(form).postal_code = $event,
@@ -1070,7 +1091,7 @@ const _sfc_main$1G = /* @__PURE__ */ defineComponent({
                           _push4(ssrRenderComponent(_component_BCol, { md: "4" }, {
                             default: withCtx((_4, _push5, _parent5, _scopeId4) => {
                               if (_push5) {
-                                _push5(`<label class="form-label-etatsup" data-v-78d4021a${_scopeId4}>Ville</label>`);
+                                _push5(`<label class="form-label-etatsup" data-v-7d85058f${_scopeId4}>Ville</label>`);
                                 _push5(ssrRenderComponent(_component_BFormInput, {
                                   modelValue: unref(form).city,
                                   "onUpdate:modelValue": ($event) => unref(form).city = $event,
@@ -1094,7 +1115,7 @@ const _sfc_main$1G = /* @__PURE__ */ defineComponent({
                           _push4(ssrRenderComponent(_component_BCol, { md: "4" }, {
                             default: withCtx((_4, _push5, _parent5, _scopeId4) => {
                               if (_push5) {
-                                _push5(`<label class="form-label-etatsup required" data-v-78d4021a${_scopeId4}>Pays</label>`);
+                                _push5(`<label class="form-label-etatsup required" data-v-7d85058f${_scopeId4}>Pays</label>`);
                                 _push5(ssrRenderComponent(_component_BFormInput, {
                                   modelValue: unref(form).country,
                                   "onUpdate:modelValue": ($event) => unref(form).country = $event,
@@ -1120,7 +1141,7 @@ const _sfc_main$1G = /* @__PURE__ */ defineComponent({
                           _push4(ssrRenderComponent(_component_BCol, { md: "6" }, {
                             default: withCtx((_4, _push5, _parent5, _scopeId4) => {
                               if (_push5) {
-                                _push5(`<label class="form-label-etatsup required" data-v-78d4021a${_scopeId4}>Email</label>`);
+                                _push5(`<label class="form-label-etatsup required" data-v-7d85058f${_scopeId4}>Email</label>`);
                                 _push5(ssrRenderComponent(_component_BFormInput, {
                                   modelValue: unref(form).email,
                                   "onUpdate:modelValue": ($event) => unref(form).email = $event,
@@ -1148,7 +1169,7 @@ const _sfc_main$1G = /* @__PURE__ */ defineComponent({
                           _push4(ssrRenderComponent(_component_BCol, { md: "6" }, {
                             default: withCtx((_4, _push5, _parent5, _scopeId4) => {
                               if (_push5) {
-                                _push5(`<label class="form-label-etatsup required" data-v-78d4021a${_scopeId4}>Portable</label>`);
+                                _push5(`<label class="form-label-etatsup required" data-v-7d85058f${_scopeId4}>Portable</label>`);
                                 _push5(ssrRenderComponent(_component_BFormInput, {
                                   modelValue: unref(form).phone,
                                   "onUpdate:modelValue": ($event) => unref(form).phone = $event,
@@ -1178,7 +1199,7 @@ const _sfc_main$1G = /* @__PURE__ */ defineComponent({
                           _push4(ssrRenderComponent(_component_BCol, { cols: "12" }, {
                             default: withCtx((_4, _push5, _parent5, _scopeId4) => {
                               if (_push5) {
-                                _push5(`<label class="form-label-etatsup" data-v-78d4021a${_scopeId4}>Courriel des parents (optionnel)</label>`);
+                                _push5(`<label class="form-label-etatsup" data-v-7d85058f${_scopeId4}>Courriel des parents (optionnel)</label>`);
                                 _push5(ssrRenderComponent(_component_BFormInput, {
                                   modelValue: unref(form).parent_email,
                                   "onUpdate:modelValue": ($event) => unref(form).parent_email = $event,
@@ -1405,14 +1426,14 @@ const _sfc_main$1G = /* @__PURE__ */ defineComponent({
                     _push3(`<!---->`);
                   }
                   if (currentStep.value === 2) {
-                    _push3(`<div class="form-section" data-v-78d4021a${_scopeId2}><h6 class="section-title" data-v-78d4021a${_scopeId2}><i class="bi bi-mortarboard me-2" data-v-78d4021a${_scopeId2}></i> 2. Formation </h6>`);
+                    _push3(`<div class="form-section" data-v-7d85058f${_scopeId2}><h6 class="section-title" data-v-7d85058f${_scopeId2}><i class="bi bi-mortarboard me-2" data-v-7d85058f${_scopeId2}></i> 2. Formation </h6>`);
                     _push3(ssrRenderComponent(_component_BRow, { class: "g-3" }, {
                       default: withCtx((_3, _push4, _parent4, _scopeId3) => {
                         if (_push4) {
                           _push4(ssrRenderComponent(_component_BCol, { md: "8" }, {
                             default: withCtx((_4, _push5, _parent5, _scopeId4) => {
                               if (_push5) {
-                                _push5(`<label class="form-label-etatsup required" data-v-78d4021a${_scopeId4}>Diplôme en cours d&#39;obtention (ou dernier diplôme obtenu)</label>`);
+                                _push5(`<label class="form-label-etatsup required" data-v-7d85058f${_scopeId4}>Diplôme en cours d&#39;obtention (ou dernier diplôme obtenu)</label>`);
                                 _push5(ssrRenderComponent(_component_BFormInput, {
                                   modelValue: unref(form).current_diploma,
                                   "onUpdate:modelValue": ($event) => unref(form).current_diploma = $event,
@@ -1440,7 +1461,7 @@ const _sfc_main$1G = /* @__PURE__ */ defineComponent({
                           _push4(ssrRenderComponent(_component_BCol, { md: "4" }, {
                             default: withCtx((_4, _push5, _parent5, _scopeId4) => {
                               if (_push5) {
-                                _push5(`<label class="form-label-etatsup required" data-v-78d4021a${_scopeId4}>Année du diplôme</label>`);
+                                _push5(`<label class="form-label-etatsup required" data-v-7d85058f${_scopeId4}>Année du diplôme</label>`);
                                 _push5(ssrRenderComponent(_component_BFormInput, {
                                   modelValue: unref(form).diploma_year,
                                   "onUpdate:modelValue": ($event) => unref(form).diploma_year = $event,
@@ -1472,7 +1493,7 @@ const _sfc_main$1G = /* @__PURE__ */ defineComponent({
                           _push4(ssrRenderComponent(_component_BCol, { cols: "12" }, {
                             default: withCtx((_4, _push5, _parent5, _scopeId4) => {
                               if (_push5) {
-                                _push5(`<label class="form-label-etatsup required" data-v-78d4021a${_scopeId4}>Nombre d&#39;années de premier cycle validé</label>`);
+                                _push5(`<label class="form-label-etatsup required" data-v-7d85058f${_scopeId4}>Nombre d&#39;années de premier cycle validé</label>`);
                                 _push5(ssrRenderComponent(_component_BFormSelect, {
                                   modelValue: unref(form).years_validated,
                                   "onUpdate:modelValue": ($event) => unref(form).years_validated = $event,
@@ -1500,7 +1521,7 @@ const _sfc_main$1G = /* @__PURE__ */ defineComponent({
                           _push4(ssrRenderComponent(_component_BCol, { md: "6" }, {
                             default: withCtx((_4, _push5, _parent5, _scopeId4) => {
                               if (_push5) {
-                                _push5(`<label class="form-label-etatsup required" data-v-78d4021a${_scopeId4}>Établissement antérieur</label>`);
+                                _push5(`<label class="form-label-etatsup required" data-v-7d85058f${_scopeId4}>Établissement antérieur</label>`);
                                 _push5(ssrRenderComponent(_component_BFormInput, {
                                   modelValue: unref(form).previous_institution,
                                   "onUpdate:modelValue": ($event) => unref(form).previous_institution = $event,
@@ -1528,7 +1549,7 @@ const _sfc_main$1G = /* @__PURE__ */ defineComponent({
                           _push4(ssrRenderComponent(_component_BCol, { md: "3" }, {
                             default: withCtx((_4, _push5, _parent5, _scopeId4) => {
                               if (_push5) {
-                                _push5(`<label class="form-label-etatsup required" data-v-78d4021a${_scopeId4}>Ville</label>`);
+                                _push5(`<label class="form-label-etatsup required" data-v-7d85058f${_scopeId4}>Ville</label>`);
                                 _push5(ssrRenderComponent(_component_BFormInput, {
                                   modelValue: unref(form).institution_city,
                                   "onUpdate:modelValue": ($event) => unref(form).institution_city = $event,
@@ -1554,7 +1575,7 @@ const _sfc_main$1G = /* @__PURE__ */ defineComponent({
                           _push4(ssrRenderComponent(_component_BCol, { md: "3" }, {
                             default: withCtx((_4, _push5, _parent5, _scopeId4) => {
                               if (_push5) {
-                                _push5(`<label class="form-label-etatsup required" data-v-78d4021a${_scopeId4}>Pays</label>`);
+                                _push5(`<label class="form-label-etatsup required" data-v-7d85058f${_scopeId4}>Pays</label>`);
                                 _push5(ssrRenderComponent(_component_BFormInput, {
                                   modelValue: unref(form).institution_country,
                                   "onUpdate:modelValue": ($event) => unref(form).institution_country = $event,
@@ -1673,14 +1694,14 @@ const _sfc_main$1G = /* @__PURE__ */ defineComponent({
                     _push3(`<!---->`);
                   }
                   if (currentStep.value === 3) {
-                    _push3(`<div class="form-section" data-v-78d4021a${_scopeId2}><h6 class="section-title" data-v-78d4021a${_scopeId2}><i class="bi bi-translate me-2" data-v-78d4021a${_scopeId2}></i> 3. Compétences linguistiques </h6>`);
+                    _push3(`<div class="form-section" data-v-7d85058f${_scopeId2}><h6 class="section-title" data-v-7d85058f${_scopeId2}><i class="bi bi-translate me-2" data-v-7d85058f${_scopeId2}></i> 3. Compétences linguistiques </h6>`);
                     _push3(ssrRenderComponent(_component_BRow, { class: "g-3" }, {
                       default: withCtx((_3, _push4, _parent4, _scopeId3) => {
                         if (_push4) {
                           _push4(ssrRenderComponent(_component_BCol, { cols: "12" }, {
                             default: withCtx((_4, _push5, _parent5, _scopeId4) => {
                               if (_push5) {
-                                _push5(`<label class="form-label-etatsup required" data-v-78d4021a${_scopeId4}>Langue maternelle</label>`);
+                                _push5(`<label class="form-label-etatsup required" data-v-7d85058f${_scopeId4}>Langue maternelle</label>`);
                                 _push5(ssrRenderComponent(_component_BFormSelect, {
                                   modelValue: unref(form).mother_tongue,
                                   "onUpdate:modelValue": ($event) => unref(form).mother_tongue = $event,
@@ -1711,7 +1732,7 @@ const _sfc_main$1G = /* @__PURE__ */ defineComponent({
                           }, {
                             default: withCtx((_4, _push5, _parent5, _scopeId4) => {
                               if (_push5) {
-                                _push5(`<div class="info-box" data-v-78d4021a${_scopeId4}><i class="bi bi-info-circle me-2" data-v-78d4021a${_scopeId4}></i><strong data-v-78d4021a${_scopeId4}>Pour les non-anglophones :</strong> Indiquez votre niveau d&#39;anglais </div>`);
+                                _push5(`<div class="info-box" data-v-7d85058f${_scopeId4}><i class="bi bi-info-circle me-2" data-v-7d85058f${_scopeId4}></i><strong data-v-7d85058f${_scopeId4}>Pour les non-anglophones :</strong> Indiquez votre niveau d&#39;anglais </div>`);
                               } else {
                                 return [
                                   createVNode("div", { class: "info-box" }, [
@@ -1727,7 +1748,7 @@ const _sfc_main$1G = /* @__PURE__ */ defineComponent({
                           _push4(ssrRenderComponent(_component_BCol, { md: "6" }, {
                             default: withCtx((_4, _push5, _parent5, _scopeId4) => {
                               if (_push5) {
-                                _push5(`<label class="form-label-etatsup" data-v-78d4021a${_scopeId4}>Test d&#39;anglais</label>`);
+                                _push5(`<label class="form-label-etatsup" data-v-7d85058f${_scopeId4}>Test d&#39;anglais</label>`);
                                 _push5(ssrRenderComponent(_component_BFormSelect, {
                                   modelValue: unref(form).english_test,
                                   "onUpdate:modelValue": ($event) => unref(form).english_test = $event,
@@ -1751,7 +1772,7 @@ const _sfc_main$1G = /* @__PURE__ */ defineComponent({
                           _push4(ssrRenderComponent(_component_BCol, { md: "6" }, {
                             default: withCtx((_4, _push5, _parent5, _scopeId4) => {
                               if (_push5) {
-                                _push5(`<label class="form-label-etatsup" data-v-78d4021a${_scopeId4}>Niveau obtenu</label>`);
+                                _push5(`<label class="form-label-etatsup" data-v-7d85058f${_scopeId4}>Niveau obtenu</label>`);
                                 _push5(ssrRenderComponent(_component_BFormInput, {
                                   modelValue: unref(form).english_level,
                                   "onUpdate:modelValue": ($event) => unref(form).english_level = $event,
@@ -1778,7 +1799,7 @@ const _sfc_main$1G = /* @__PURE__ */ defineComponent({
                           }, {
                             default: withCtx((_4, _push5, _parent5, _scopeId4) => {
                               if (_push5) {
-                                _push5(`<div class="info-box" data-v-78d4021a${_scopeId4}><i class="bi bi-info-circle me-2" data-v-78d4021a${_scopeId4}></i><strong data-v-78d4021a${_scopeId4}>Pour les non-francophones :</strong> Indiquez votre niveau de français </div>`);
+                                _push5(`<div class="info-box" data-v-7d85058f${_scopeId4}><i class="bi bi-info-circle me-2" data-v-7d85058f${_scopeId4}></i><strong data-v-7d85058f${_scopeId4}>Pour les non-francophones :</strong> Indiquez votre niveau de français </div>`);
                               } else {
                                 return [
                                   createVNode("div", { class: "info-box" }, [
@@ -1794,7 +1815,7 @@ const _sfc_main$1G = /* @__PURE__ */ defineComponent({
                           _push4(ssrRenderComponent(_component_BCol, { md: "6" }, {
                             default: withCtx((_4, _push5, _parent5, _scopeId4) => {
                               if (_push5) {
-                                _push5(`<label class="form-label-etatsup" data-v-78d4021a${_scopeId4}>Test de français</label>`);
+                                _push5(`<label class="form-label-etatsup" data-v-7d85058f${_scopeId4}>Test de français</label>`);
                                 _push5(ssrRenderComponent(_component_BFormSelect, {
                                   modelValue: unref(form).french_test,
                                   "onUpdate:modelValue": ($event) => unref(form).french_test = $event,
@@ -1818,7 +1839,7 @@ const _sfc_main$1G = /* @__PURE__ */ defineComponent({
                           _push4(ssrRenderComponent(_component_BCol, { md: "6" }, {
                             default: withCtx((_4, _push5, _parent5, _scopeId4) => {
                               if (_push5) {
-                                _push5(`<label class="form-label-etatsup" data-v-78d4021a${_scopeId4}>Niveau obtenu</label>`);
+                                _push5(`<label class="form-label-etatsup" data-v-7d85058f${_scopeId4}>Niveau obtenu</label>`);
                                 _push5(ssrRenderComponent(_component_BFormInput, {
                                   modelValue: unref(form).french_level,
                                   "onUpdate:modelValue": ($event) => unref(form).french_level = $event,
@@ -1939,14 +1960,14 @@ const _sfc_main$1G = /* @__PURE__ */ defineComponent({
                     _push3(`<!---->`);
                   }
                   if (currentStep.value === 4) {
-                    _push3(`<div class="form-section" data-v-78d4021a${_scopeId2}><h6 class="section-title" data-v-78d4021a${_scopeId2}><i class="bi bi-heart me-2" data-v-78d4021a${_scopeId2}></i> 4. Lettre de motivation </h6>`);
+                    _push3(`<div class="form-section" data-v-7d85058f${_scopeId2}><h6 class="section-title" data-v-7d85058f${_scopeId2}><i class="bi bi-heart me-2" data-v-7d85058f${_scopeId2}></i> 4. Lettre de motivation </h6>`);
                     _push3(ssrRenderComponent(_component_BRow, { class: "g-3" }, {
                       default: withCtx((_3, _push4, _parent4, _scopeId3) => {
                         if (_push4) {
                           _push4(ssrRenderComponent(_component_BCol, { cols: "12" }, {
                             default: withCtx((_4, _push5, _parent5, _scopeId4) => {
                               if (_push5) {
-                                _push5(`<label class="form-label-etatsup required" data-v-78d4021a${_scopeId4}> Pourquoi souhaitez-vous intégrer cet établissement ? </label>`);
+                                _push5(`<label class="form-label-etatsup required" data-v-7d85058f${_scopeId4}> Pourquoi souhaitez-vous intégrer cet établissement ? </label>`);
                                 _push5(ssrRenderComponent(_component_BFormTextarea, {
                                   modelValue: unref(form).motivation,
                                   "onUpdate:modelValue": ($event) => unref(form).motivation = $event,
@@ -1956,9 +1977,9 @@ const _sfc_main$1G = /* @__PURE__ */ defineComponent({
                                   placeholder: "Expliquez vos motivations, vos objectifs professionnels, et pourquoi vous avez choisi cet établissement...",
                                   onBlur: unref(v$).motivation?.$touch
                                 }, null, _parent5, _scopeId4));
-                                _push5(`<small class="text-muted" data-v-78d4021a${_scopeId4}>${ssrInterpolate(unref(form).motivation.length)} / 2000 caractères (minimum 100) </small>`);
+                                _push5(`<small class="text-muted" data-v-7d85058f${_scopeId4}>${ssrInterpolate(unref(form).motivation.length)} / 2000 caractères (minimum 100) </small>`);
                                 if (unref(v$).motivation?.$error) {
-                                  _push5(`<div class="invalid-feedback d-block" data-v-78d4021a${_scopeId4}> La motivation doit contenir entre 100 et 2000 caractères </div>`);
+                                  _push5(`<div class="invalid-feedback d-block" data-v-7d85058f${_scopeId4}> La motivation doit contenir entre 100 et 2000 caractères </div>`);
                                 } else {
                                   _push5(`<!---->`);
                                 }
@@ -1987,7 +2008,7 @@ const _sfc_main$1G = /* @__PURE__ */ defineComponent({
                           _push4(ssrRenderComponent(_component_BCol, { md: "6" }, {
                             default: withCtx((_4, _push5, _parent5, _scopeId4) => {
                               if (_push5) {
-                                _push5(`<label class="form-label-etatsup required" data-v-78d4021a${_scopeId4}>Lieu</label>`);
+                                _push5(`<label class="form-label-etatsup required" data-v-7d85058f${_scopeId4}>Lieu</label>`);
                                 _push5(ssrRenderComponent(_component_BFormInput, {
                                   modelValue: unref(form).application_location,
                                   "onUpdate:modelValue": ($event) => unref(form).application_location = $event,
@@ -2015,7 +2036,7 @@ const _sfc_main$1G = /* @__PURE__ */ defineComponent({
                           _push4(ssrRenderComponent(_component_BCol, { md: "6" }, {
                             default: withCtx((_4, _push5, _parent5, _scopeId4) => {
                               if (_push5) {
-                                _push5(`<label class="form-label-etatsup" data-v-78d4021a${_scopeId4}>Date</label>`);
+                                _push5(`<label class="form-label-etatsup" data-v-7d85058f${_scopeId4}>Date</label>`);
                                 _push5(ssrRenderComponent(_component_BFormInput, {
                                   modelValue: unref(form).application_date,
                                   "onUpdate:modelValue": ($event) => unref(form).application_date = $event,
@@ -2097,7 +2118,7 @@ const _sfc_main$1G = /* @__PURE__ */ defineComponent({
                     _push3(`<!---->`);
                   }
                   if (currentStep.value === 5) {
-                    _push3(`<div class="form-section" data-v-78d4021a${_scopeId2}><h6 class="section-title" data-v-78d4021a${_scopeId2}><i class="bi bi-file-earmark-arrow-up me-2" data-v-78d4021a${_scopeId2}></i> 5. Pièces justificatives </h6>`);
+                    _push3(`<div class="form-section" data-v-7d85058f${_scopeId2}><h6 class="section-title" data-v-7d85058f${_scopeId2}><i class="bi bi-file-earmark-arrow-up me-2" data-v-7d85058f${_scopeId2}></i> 5. Pièces justificatives </h6>`);
                     if (!localApplicationId.value) {
                       _push3(ssrRenderComponent(_component_BAlert, {
                         variant: "warning",
@@ -2105,7 +2126,7 @@ const _sfc_main$1G = /* @__PURE__ */ defineComponent({
                       }, {
                         default: withCtx((_3, _push4, _parent4, _scopeId3) => {
                           if (_push4) {
-                            _push4(`<i class="bi bi-exclamation-triangle me-2" data-v-78d4021a${_scopeId3}></i> Veuillez d&#39;abord sauvegarder votre candidature (étapes 1-4) avant de téléverser des documents. `);
+                            _push4(`<i class="bi bi-exclamation-triangle me-2" data-v-7d85058f${_scopeId3}></i> Veuillez d&#39;abord sauvegarder votre candidature (étapes 1-4) avant de téléverser des documents. `);
                           } else {
                             return [
                               createVNode("i", { class: "bi bi-exclamation-triangle me-2" }),
@@ -2120,7 +2141,7 @@ const _sfc_main$1G = /* @__PURE__ */ defineComponent({
                         ref_key: "documentUploaderRef",
                         ref: documentUploaderRef,
                         "application-id": localApplicationId.value,
-                        "existing-documents": [],
+                        "existing-documents": __props.existingDocuments || [],
                         onDocumentsUpdated: ($event) => documentsComplete.value = true
                       }, null, _parent3, _scopeId2));
                     }
@@ -2129,7 +2150,7 @@ const _sfc_main$1G = /* @__PURE__ */ defineComponent({
                     _push3(`<!---->`);
                   }
                   if (currentStep.value === 6) {
-                    _push3(`<div class="form-section" data-v-78d4021a${_scopeId2}><h6 class="section-title" data-v-78d4021a${_scopeId2}><i class="bi bi-credit-card me-2" data-v-78d4021a${_scopeId2}></i> 6. Paiement des frais de dossier </h6>`);
+                    _push3(`<div class="form-section" data-v-7d85058f${_scopeId2}><h6 class="section-title" data-v-7d85058f${_scopeId2}><i class="bi bi-credit-card me-2" data-v-7d85058f${_scopeId2}></i> 6. Paiement des frais de dossier </h6>`);
                     _push3(ssrRenderComponent(_component_BAlert, {
                       variant: "info",
                       "model-value": true,
@@ -2137,7 +2158,7 @@ const _sfc_main$1G = /* @__PURE__ */ defineComponent({
                     }, {
                       default: withCtx((_3, _push4, _parent4, _scopeId3) => {
                         if (_push4) {
-                          _push4(`<i class="bi bi-info-circle me-2" data-v-78d4021a${_scopeId3}></i><strong data-v-78d4021a${_scopeId3}>Frais de dossier :</strong> ${ssrInterpolate(formattedAmount.value)} € (paiement sécurisé via Stripe) `);
+                          _push4(`<i class="bi bi-info-circle me-2" data-v-7d85058f${_scopeId3}></i><strong data-v-7d85058f${_scopeId3}>Frais de dossier :</strong> ${ssrInterpolate(formattedAmount.value)} € (paiement sécurisé via Stripe) `);
                         } else {
                           return [
                             createVNode("i", { class: "bi bi-info-circle me-2" }),
@@ -2154,7 +2175,7 @@ const _sfc_main$1G = /* @__PURE__ */ defineComponent({
                           _push4(ssrRenderComponent(_component_BCol, { cols: "12" }, {
                             default: withCtx((_4, _push5, _parent5, _scopeId4) => {
                               if (_push5) {
-                                _push5(`<label class="form-label-etatsup required" data-v-78d4021a${_scopeId4}>Carte bancaire</label><div class="stripe-card-element" data-v-78d4021a${_scopeId4}></div><small class="text-muted mt-2 d-block" data-v-78d4021a${_scopeId4}><i class="bi bi-lock-fill me-1" data-v-78d4021a${_scopeId4}></i> Paiement 100% sécurisé avec chiffrement SSL </small>`);
+                                _push5(`<label class="form-label-etatsup required" data-v-7d85058f${_scopeId4}>Carte bancaire</label><div class="stripe-card-element" data-v-7d85058f${_scopeId4}></div><small class="text-muted mt-2 d-block" data-v-7d85058f${_scopeId4}><i class="bi bi-lock-fill me-1" data-v-7d85058f${_scopeId4}></i> Paiement 100% sécurisé avec chiffrement SSL </small>`);
                               } else {
                                 return [
                                   createVNode("label", { class: "form-label-etatsup required" }, "Carte bancaire"),
@@ -2182,7 +2203,7 @@ const _sfc_main$1G = /* @__PURE__ */ defineComponent({
                                   }, {
                                     default: withCtx((_5, _push6, _parent6, _scopeId5) => {
                                       if (_push6) {
-                                        _push6(`<i class="bi bi-exclamation-triangle me-2" data-v-78d4021a${_scopeId5}></i> ${ssrInterpolate(errorMessage.value)}`);
+                                        _push6(`<i class="bi bi-exclamation-triangle me-2" data-v-7d85058f${_scopeId5}></i> ${ssrInterpolate(errorMessage.value)}`);
                                       } else {
                                         return [
                                           createVNode("i", { class: "bi bi-exclamation-triangle me-2" }),
@@ -2215,7 +2236,7 @@ const _sfc_main$1G = /* @__PURE__ */ defineComponent({
                           _push4(ssrRenderComponent(_component_BCol, { cols: "12" }, {
                             default: withCtx((_4, _push5, _parent5, _scopeId4) => {
                               if (_push5) {
-                                _push5(`<div class="payment-summary p-3 bg-light rounded" data-v-78d4021a${_scopeId4}><div class="d-flex justify-content-between align-items-center" data-v-78d4021a${_scopeId4}><span class="fw-bold" data-v-78d4021a${_scopeId4}>Total à payer</span><span class="h4 mb-0 text-primary fw-bold" data-v-78d4021a${_scopeId4}>${ssrInterpolate(formattedAmount.value)} €</span></div></div>`);
+                                _push5(`<div class="payment-summary p-3 bg-light rounded" data-v-7d85058f${_scopeId4}><div class="d-flex justify-content-between align-items-center" data-v-7d85058f${_scopeId4}><span class="fw-bold" data-v-7d85058f${_scopeId4}>Total à payer</span><span class="h4 mb-0 text-primary fw-bold" data-v-7d85058f${_scopeId4}>${ssrInterpolate(formattedAmount.value)} €</span></div></div>`);
                               } else {
                                 return [
                                   createVNode("div", { class: "payment-summary p-3 bg-light rounded" }, [
@@ -2284,7 +2305,7 @@ const _sfc_main$1G = /* @__PURE__ */ defineComponent({
                   } else {
                     _push3(`<!---->`);
                   }
-                  _push3(`<div class="form-navigation" data-v-78d4021a${_scopeId2}><div class="left-buttons" data-v-78d4021a${_scopeId2}>`);
+                  _push3(`<div class="form-navigation" data-v-7d85058f${_scopeId2}><div class="left-buttons" data-v-7d85058f${_scopeId2}>`);
                   if (currentStep.value > 1) {
                     _push3(ssrRenderComponent(_component_BButton, {
                       type: "button",
@@ -2294,7 +2315,7 @@ const _sfc_main$1G = /* @__PURE__ */ defineComponent({
                     }, {
                       default: withCtx((_3, _push4, _parent4, _scopeId3) => {
                         if (_push4) {
-                          _push4(`<i class="bi bi-arrow-left me-2" data-v-78d4021a${_scopeId3}></i> Précédent `);
+                          _push4(`<i class="bi bi-arrow-left me-2" data-v-7d85058f${_scopeId3}></i> Précédent `);
                         } else {
                           return [
                             createVNode("i", { class: "bi bi-arrow-left me-2" }),
@@ -2307,7 +2328,7 @@ const _sfc_main$1G = /* @__PURE__ */ defineComponent({
                   } else {
                     _push3(`<!---->`);
                   }
-                  _push3(`</div><div class="right-buttons" data-v-78d4021a${_scopeId2}>`);
+                  _push3(`</div><div class="right-buttons" data-v-7d85058f${_scopeId2}>`);
                   _push3(ssrRenderComponent(_component_BButton, {
                     type: "button",
                     variant: "outline-secondary",
@@ -2316,7 +2337,7 @@ const _sfc_main$1G = /* @__PURE__ */ defineComponent({
                   }, {
                     default: withCtx((_3, _push4, _parent4, _scopeId3) => {
                       if (_push4) {
-                        _push4(`<i class="bi bi-bookmark me-2" data-v-78d4021a${_scopeId3}></i> Finaliser plus tard `);
+                        _push4(`<i class="bi bi-bookmark me-2" data-v-7d85058f${_scopeId3}></i> Finaliser plus tard `);
                       } else {
                         return [
                           createVNode("i", { class: "bi bi-bookmark me-2" }),
@@ -2334,7 +2355,7 @@ const _sfc_main$1G = /* @__PURE__ */ defineComponent({
                     }, {
                       default: withCtx((_3, _push4, _parent4, _scopeId3) => {
                         if (_push4) {
-                          _push4(` Suivant <i class="bi bi-arrow-right ms-2" data-v-78d4021a${_scopeId3}></i>`);
+                          _push4(` Suivant <i class="bi bi-arrow-right ms-2" data-v-7d85058f${_scopeId3}></i>`);
                         } else {
                           return [
                             createTextVNode(" Suivant "),
@@ -2357,9 +2378,9 @@ const _sfc_main$1G = /* @__PURE__ */ defineComponent({
                       default: withCtx((_3, _push4, _parent4, _scopeId3) => {
                         if (_push4) {
                           if (processing.value) {
-                            _push4(`<span data-v-78d4021a${_scopeId3}><span class="spinner-border spinner-border-sm me-2" data-v-78d4021a${_scopeId3}></span> Envoi en cours... </span>`);
+                            _push4(`<span data-v-7d85058f${_scopeId3}><span class="spinner-border spinner-border-sm me-2" data-v-7d85058f${_scopeId3}></span> Envoi en cours... </span>`);
                           } else {
-                            _push4(`<span data-v-78d4021a${_scopeId3}><i class="bi bi-send me-2" data-v-78d4021a${_scopeId3}></i> Soumettre ma candidature </span>`);
+                            _push4(`<span data-v-7d85058f${_scopeId3}><i class="bi bi-send me-2" data-v-7d85058f${_scopeId3}></i> Soumettre ma candidature </span>`);
                           }
                         } else {
                           return [
@@ -2909,9 +2930,9 @@ const _sfc_main$1G = /* @__PURE__ */ defineComponent({
                             ref_key: "documentUploaderRef",
                             ref: documentUploaderRef,
                             "application-id": localApplicationId.value,
-                            "existing-documents": [],
+                            "existing-documents": __props.existingDocuments || [],
                             onDocumentsUpdated: ($event) => documentsComplete.value = true
-                          }, null, 8, ["application-id", "onDocumentsUpdated"]))
+                          }, null, 8, ["application-id", "existing-documents", "onDocumentsUpdated"]))
                         ])) : createCommentVNode("", true),
                         currentStep.value === 6 ? (openBlock(), createBlock("div", {
                           key: 5,
@@ -3589,9 +3610,9 @@ const _sfc_main$1G = /* @__PURE__ */ defineComponent({
                           ref_key: "documentUploaderRef",
                           ref: documentUploaderRef,
                           "application-id": localApplicationId.value,
-                          "existing-documents": [],
+                          "existing-documents": __props.existingDocuments || [],
                           onDocumentsUpdated: ($event) => documentsComplete.value = true
-                        }, null, 8, ["application-id", "onDocumentsUpdated"]))
+                        }, null, 8, ["application-id", "existing-documents", "onDocumentsUpdated"]))
                       ])) : createCommentVNode("", true),
                       currentStep.value === 6 ? (openBlock(), createBlock("div", {
                         key: 5,
@@ -3743,7 +3764,7 @@ _sfc_main$1G.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/Pages/Applications/Partials/ApplicationForm.vue");
   return _sfc_setup$1G ? _sfc_setup$1G(props, ctx) : void 0;
 };
-const ApplicationForm = /* @__PURE__ */ _export_sfc(_sfc_main$1G, [["__scopeId", "data-v-78d4021a"]]);
+const ApplicationForm = /* @__PURE__ */ _export_sfc(_sfc_main$1G, [["__scopeId", "data-v-7d85058f"]]);
 const __vite_glob_0_1 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: ApplicationForm
@@ -4361,6 +4382,7 @@ const _sfc_main$1D = /* @__PURE__ */ defineComponent({
   props: {
     establishment: {},
     applicationId: {},
+    existingDocuments: {},
     draftData: {},
     user: {},
     stripeKey: {},
@@ -4379,7 +4401,7 @@ const _sfc_main$1D = /* @__PURE__ */ defineComponent({
       }, {
         default: withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
-            _push2(`<meta head-key="description" name="description"${ssrRenderAttr("content", `Soumettez votre candidature à ${__props.establishment.title}`)} data-v-a79db46d${_scopeId}>`);
+            _push2(`<meta head-key="description" name="description"${ssrRenderAttr("content", `Soumettez votre candidature à ${__props.establishment.title}`)} data-v-c5a9c58c${_scopeId}>`);
           } else {
             return [
               createVNode("meta", {
@@ -4392,7 +4414,7 @@ const _sfc_main$1D = /* @__PURE__ */ defineComponent({
         }),
         _: 1
       }, _parent));
-      _push(`<main class="pb-5 application-page" data-v-a79db46d>`);
+      _push(`<main class="pb-5 application-page" data-v-c5a9c58c>`);
       _push(ssrRenderComponent(Hero, { establishment: __props.establishment }, null, _parent));
       _push(ssrRenderComponent(_component_b_container, { class: "pt-4" }, {
         default: withCtx((_, _push2, _parent2, _scopeId) => {
@@ -4406,6 +4428,7 @@ const _sfc_main$1D = /* @__PURE__ */ defineComponent({
                         _push4(ssrRenderComponent(ApplicationForm, {
                           establishment: __props.establishment,
                           applicationId: __props.applicationId,
+                          existingDocuments: __props.existingDocuments,
                           draftData: __props.draftData,
                           user: __props.user,
                           stripeKey: __props.stripeKey,
@@ -4416,17 +4439,18 @@ const _sfc_main$1D = /* @__PURE__ */ defineComponent({
                           createVNode(ApplicationForm, {
                             establishment: __props.establishment,
                             applicationId: __props.applicationId,
+                            existingDocuments: __props.existingDocuments,
                             draftData: __props.draftData,
                             user: __props.user,
                             stripeKey: __props.stripeKey,
                             intent: __props.intent
-                          }, null, 8, ["establishment", "applicationId", "draftData", "user", "stripeKey", "intent"])
+                          }, null, 8, ["establishment", "applicationId", "existingDocuments", "draftData", "user", "stripeKey", "intent"])
                         ];
                       }
                     }),
                     _: 1
                   }, _parent3, _scopeId2));
-                  _push3(`<aside class="col-xl-4" data-v-a79db46d${_scopeId2}><div class="vstack gap-4" data-v-a79db46d${_scopeId2}>`);
+                  _push3(`<aside class="col-xl-4" data-v-c5a9c58c${_scopeId2}><div class="vstack gap-4" data-v-c5a9c58c${_scopeId2}>`);
                   _push3(ssrRenderComponent(_sfc_main$1I, {
                     id: "establishment-info",
                     "data-sticky": "",
@@ -4446,14 +4470,14 @@ const _sfc_main$1D = /* @__PURE__ */ defineComponent({
                                 _push5(ssrRenderComponent(_component_BCardBody, { class: "p-3" }, {
                                   default: withCtx((_5, _push6, _parent6, _scopeId5) => {
                                     if (_push6) {
-                                      _push6(`<h6 class="mb-3 fw-bold" data-v-a79db46d${_scopeId5}><i class="bi bi-info-circle me-2 text-primary" data-v-a79db46d${_scopeId5}></i> Informations de contact </h6><div class="vstack gap-2" data-v-a79db46d${_scopeId5}>`);
+                                      _push6(`<h6 class="mb-3 fw-bold" data-v-c5a9c58c${_scopeId5}><i class="bi bi-info-circle me-2 text-primary" data-v-c5a9c58c${_scopeId5}></i> Informations de contact </h6><div class="vstack gap-2" data-v-c5a9c58c${_scopeId5}>`);
                                       if (__props.establishment.website) {
-                                        _push6(`<a${ssrRenderAttr("href", __props.establishment.website)} target="_blank" class="contact-link" data-v-a79db46d${_scopeId5}><i class="bi bi-globe me-2" data-v-a79db46d${_scopeId5}></i> Site web </a>`);
+                                        _push6(`<a${ssrRenderAttr("href", __props.establishment.website)} target="_blank" class="contact-link" data-v-c5a9c58c${_scopeId5}><i class="bi bi-globe me-2" data-v-c5a9c58c${_scopeId5}></i> Site web </a>`);
                                       } else {
                                         _push6(`<!---->`);
                                       }
                                       if (__props.establishment.phone) {
-                                        _push6(`<a${ssrRenderAttr("href", `tel:${__props.establishment.phone}`)} class="contact-link" data-v-a79db46d${_scopeId5}><i class="bi bi-telephone me-2" data-v-a79db46d${_scopeId5}></i> ${ssrInterpolate(__props.establishment.phone)}</a>`);
+                                        _push6(`<a${ssrRenderAttr("href", `tel:${__props.establishment.phone}`)} class="contact-link" data-v-c5a9c58c${_scopeId5}><i class="bi bi-telephone me-2" data-v-c5a9c58c${_scopeId5}></i> ${ssrInterpolate(__props.establishment.phone)}</a>`);
                                       } else {
                                         _push6(`<!---->`);
                                       }
@@ -4535,7 +4559,7 @@ const _sfc_main$1D = /* @__PURE__ */ defineComponent({
                               _push5(ssrRenderComponent(_component_BCardBody, { class: "p-3 text-center" }, {
                                 default: withCtx((_5, _push6, _parent6, _scopeId5) => {
                                   if (_push6) {
-                                    _push6(`<i class="bi bi-question-circle display-6 text-primary mb-2" data-v-a79db46d${_scopeId5}></i><h6 class="mb-2" data-v-a79db46d${_scopeId5}>Besoin d&#39;aide ?</h6><p class="small text-muted mb-0" data-v-a79db46d${_scopeId5}> Notre équipe est là pour vous accompagner dans votre candidature. </p>`);
+                                    _push6(`<i class="bi bi-question-circle display-6 text-primary mb-2" data-v-c5a9c58c${_scopeId5}></i><h6 class="mb-2" data-v-c5a9c58c${_scopeId5}>Besoin d&#39;aide ?</h6><p class="small text-muted mb-0" data-v-c5a9c58c${_scopeId5}> Notre équipe est là pour vous accompagner dans votre candidature. </p>`);
                                   } else {
                                     return [
                                       createVNode("i", { class: "bi bi-question-circle display-6 text-primary mb-2" }),
@@ -4630,11 +4654,12 @@ const _sfc_main$1D = /* @__PURE__ */ defineComponent({
                         createVNode(ApplicationForm, {
                           establishment: __props.establishment,
                           applicationId: __props.applicationId,
+                          existingDocuments: __props.existingDocuments,
                           draftData: __props.draftData,
                           user: __props.user,
                           stripeKey: __props.stripeKey,
                           intent: __props.intent
-                        }, null, 8, ["establishment", "applicationId", "draftData", "user", "stripeKey", "intent"])
+                        }, null, 8, ["establishment", "applicationId", "existingDocuments", "draftData", "user", "stripeKey", "intent"])
                       ]),
                       _: 1
                     }),
@@ -4720,11 +4745,12 @@ const _sfc_main$1D = /* @__PURE__ */ defineComponent({
                       createVNode(ApplicationForm, {
                         establishment: __props.establishment,
                         applicationId: __props.applicationId,
+                        existingDocuments: __props.existingDocuments,
                         draftData: __props.draftData,
                         user: __props.user,
                         stripeKey: __props.stripeKey,
                         intent: __props.intent
-                      }, null, 8, ["establishment", "applicationId", "draftData", "user", "stripeKey", "intent"])
+                      }, null, 8, ["establishment", "applicationId", "existingDocuments", "draftData", "user", "stripeKey", "intent"])
                     ]),
                     _: 1
                   }),
@@ -4814,7 +4840,7 @@ _sfc_main$1D.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/Pages/Applications/Create.vue");
   return _sfc_setup$1D ? _sfc_setup$1D(props, ctx) : void 0;
 };
-const Create = /* @__PURE__ */ _export_sfc(_sfc_main$1D, [["__scopeId", "data-v-a79db46d"]]);
+const Create = /* @__PURE__ */ _export_sfc(_sfc_main$1D, [["__scopeId", "data-v-c5a9c58c"]]);
 const __vite_glob_0_0 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: Create
@@ -24165,7 +24191,7 @@ const _sfc_main$1f = /* @__PURE__ */ defineComponent({
       const size = props.size === "sm" ? "text-xl" : props.size === "lg" ? "text-4xl" : props.size === "xl" ? "text-5xl" : "text-2xl";
       let color = "";
       if (props.variant === "gradient") {
-        color = "bg-gradient-to-r from-[#667eea] to-[#764ba2] bg-clip-text text-transparent";
+        color = "bg-gradient-to-r from-[#1e3a8a] to-[#1e3a8a] bg-clip-text text-transparent";
       } else if (props.variant === "white") {
         color = "text-white";
       } else {
@@ -24174,9 +24200,9 @@ const _sfc_main$1f = /* @__PURE__ */ defineComponent({
       return `${base} ${size} ${color}`;
     });
     return (_ctx, _push, _parent, _attrs) => {
-      _push(`<div${ssrRenderAttrs(mergeProps({ class: "logo-etapsup flex items-center gap-3" }, _attrs))} data-v-a12b9f98><div class="${ssrRenderClass([sizeClasses.value, "flex items-center"])}" data-v-a12b9f98><svg viewBox="0 0 100 100" class="${ssrRenderClass(sizeClasses.value)}" xmlns="http://www.w3.org/2000/svg" data-v-a12b9f98><defs data-v-a12b9f98><linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%" data-v-a12b9f98><stop offset="0%" style="${ssrRenderStyle({ "stop-color": "#667eea", "stop-opacity": "1" })}" data-v-a12b9f98></stop><stop offset="100%" style="${ssrRenderStyle({ "stop-color": "#764ba2", "stop-opacity": "1" })}" data-v-a12b9f98></stop></linearGradient></defs><g${ssrRenderAttr("fill", __props.variant === "white" ? "white" : __props.variant === "dark" ? "#1a202c" : "url(#logoGradient)")} data-v-a12b9f98><rect x="15" y="20" width="8" height="60" rx="4" data-v-a12b9f98></rect><rect x="15" y="20" width="35" height="8" rx="4" data-v-a12b9f98></rect><rect x="15" y="46" width="30" height="8" rx="4" data-v-a12b9f98></rect><rect x="15" y="72" width="35" height="8" rx="4" data-v-a12b9f98></rect><rect x="60" y="55" width="12" height="25" rx="2" data-v-a12b9f98></rect><rect x="75" y="40" width="12" height="40" rx="2" data-v-a12b9f98></rect><rect x="90" y="25" width="8" height="55" rx="2" data-v-a12b9f98></rect></g></svg></div>`);
+      _push(`<div${ssrRenderAttrs(mergeProps({ class: "logo-etapsup flex items-center gap-3" }, _attrs))} data-v-1c46da4a><div class="${ssrRenderClass([sizeClasses.value, "flex items-center"])}" data-v-1c46da4a><svg viewBox="0 0 100 100" class="${ssrRenderClass(sizeClasses.value)}" xmlns="http://www.w3.org/2000/svg" data-v-1c46da4a><defs data-v-1c46da4a><linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%" data-v-1c46da4a><stop offset="0%" style="${ssrRenderStyle({ "stop-color": "#1e3a8a", "stop-opacity": "1" })}" data-v-1c46da4a></stop><stop offset="100%" style="${ssrRenderStyle({ "stop-color": "#1e3a8a", "stop-opacity": "1" })}" data-v-1c46da4a></stop></linearGradient></defs><g${ssrRenderAttr("fill", __props.variant === "white" ? "white" : __props.variant === "dark" ? "#1a202c" : "url(#logoGradient)")} data-v-1c46da4a><rect x="15" y="20" width="8" height="60" rx="4" data-v-1c46da4a></rect><rect x="15" y="20" width="35" height="8" rx="4" data-v-1c46da4a></rect><rect x="15" y="46" width="30" height="8" rx="4" data-v-1c46da4a></rect><rect x="15" y="72" width="35" height="8" rx="4" data-v-1c46da4a></rect><rect x="60" y="55" width="12" height="25" rx="2" data-v-1c46da4a></rect><rect x="75" y="40" width="12" height="40" rx="2" data-v-1c46da4a></rect><rect x="90" y="25" width="8" height="55" rx="2" data-v-1c46da4a></rect></g></svg></div>`);
       if (__props.showText) {
-        _push(`<span class="${ssrRenderClass(textClasses.value)}" data-v-a12b9f98> EtapSup </span>`);
+        _push(`<span class="${ssrRenderClass(textClasses.value)}" data-v-1c46da4a> EtapSup </span>`);
       } else {
         _push(`<!---->`);
       }
@@ -24190,7 +24216,7 @@ _sfc_main$1f.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/Components/Logo.vue");
   return _sfc_setup$1f ? _sfc_setup$1f(props, ctx) : void 0;
 };
-const Logo = /* @__PURE__ */ _export_sfc(_sfc_main$1f, [["__scopeId", "data-v-a12b9f98"]]);
+const Logo = /* @__PURE__ */ _export_sfc(_sfc_main$1f, [["__scopeId", "data-v-1c46da4a"]]);
 const _sfc_main$1e = /* @__PURE__ */ defineComponent({
   __name: "Dashboard",
   __ssrInlineRender: true,
@@ -38967,7 +38993,7 @@ const _sfc_main$J = /* @__PURE__ */ defineComponent({
       }, {
         default: withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
-            _push2(`<meta head-key="description" name="description"${ssrRenderAttr("content", __props.establishment.description)} data-v-8e96c5f6${_scopeId}>`);
+            _push2(`<meta head-key="description" name="description"${ssrRenderAttr("content", __props.establishment.description)} data-v-383a1715${_scopeId}>`);
           } else {
             return [
               createVNode("meta", {
@@ -38980,7 +39006,7 @@ const _sfc_main$J = /* @__PURE__ */ defineComponent({
         }),
         _: 1
       }, _parent));
-      _push(`<div class="establishment-show-page" data-v-8e96c5f6><section class="pt-4 pb-0 bg-light" data-v-8e96c5f6>`);
+      _push(`<div class="establishment-show-page" data-v-383a1715><section class="pt-4 pb-0 bg-light" data-v-383a1715>`);
       _push(ssrRenderComponent(unref(BContainer$1), null, {
         default: withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
@@ -38990,7 +39016,7 @@ const _sfc_main$J = /* @__PURE__ */ defineComponent({
                   _push3(ssrRenderComponent(unref(BCol$1), { lg: "12" }, {
                     default: withCtx((_3, _push4, _parent4, _scopeId3) => {
                       if (_push4) {
-                        _push4(`<nav aria-label="breadcrumb" data-v-8e96c5f6${_scopeId3}><ol class="breadcrumb mb-3" data-v-8e96c5f6${_scopeId3}><li class="breadcrumb-item" data-v-8e96c5f6${_scopeId3}>`);
+                        _push4(`<nav aria-label="breadcrumb" data-v-383a1715${_scopeId3}><ol class="breadcrumb mb-3" data-v-383a1715${_scopeId3}><li class="breadcrumb-item" data-v-383a1715${_scopeId3}>`);
                         _push4(ssrRenderComponent(unref(Link), { href: "/" }, {
                           default: withCtx((_4, _push5, _parent5, _scopeId4) => {
                             if (_push5) {
@@ -39003,7 +39029,7 @@ const _sfc_main$J = /* @__PURE__ */ defineComponent({
                           }),
                           _: 1
                         }, _parent4, _scopeId3));
-                        _push4(`</li><li class="breadcrumb-item" data-v-8e96c5f6${_scopeId3}>`);
+                        _push4(`</li><li class="breadcrumb-item" data-v-383a1715${_scopeId3}>`);
                         _push4(ssrRenderComponent(unref(Link), { href: "/establishments" }, {
                           default: withCtx((_4, _push5, _parent5, _scopeId4) => {
                             if (_push5) {
@@ -39016,7 +39042,7 @@ const _sfc_main$J = /* @__PURE__ */ defineComponent({
                           }),
                           _: 1
                         }, _parent4, _scopeId3));
-                        _push4(`</li><li class="breadcrumb-item active" aria-current="page" data-v-8e96c5f6${_scopeId3}>${ssrInterpolate(__props.establishment.title)}</li></ol></nav><h1 class="h2 mb-2" data-v-8e96c5f6${_scopeId3}>${ssrInterpolate(__props.establishment.title)}</h1><div class="d-flex align-items-center mb-3 gap-3" data-v-8e96c5f6${_scopeId3}>`);
+                        _push4(`</li><li class="breadcrumb-item active" aria-current="page" data-v-383a1715${_scopeId3}>${ssrInterpolate(__props.establishment.title)}</li></ol></nav><h1 class="h2 mb-2" data-v-383a1715${_scopeId3}>${ssrInterpolate(__props.establishment.title)}</h1><div class="d-flex align-items-center mb-3 gap-3" data-v-383a1715${_scopeId3}>`);
                         _push4(ssrRenderComponent(unref(BBadge), {
                           variant: "primary",
                           pill: ""
@@ -39032,9 +39058,9 @@ const _sfc_main$J = /* @__PURE__ */ defineComponent({
                           }),
                           _: 1
                         }, _parent4, _scopeId3));
-                        _push4(`<span class="text-muted" data-v-8e96c5f6${_scopeId3}><i class="bi bi-geo-alt me-1" data-v-8e96c5f6${_scopeId3}></i> ${ssrInterpolate(__props.establishment.city?.name)}, ${ssrInterpolate(__props.establishment.city?.country?.name)}</span>`);
+                        _push4(`<span class="text-muted" data-v-383a1715${_scopeId3}><i class="bi bi-geo-alt me-1" data-v-383a1715${_scopeId3}></i> ${ssrInterpolate(__props.establishment.city?.name)}, ${ssrInterpolate(__props.establishment.city?.country?.name)}</span>`);
                         if (ratingCount.value > 0) {
-                          _push4(`<div class="d-flex align-items-center" data-v-8e96c5f6${_scopeId3}><span class="text-warning me-1" data-v-8e96c5f6${_scopeId3}>★</span><strong data-v-8e96c5f6${_scopeId3}>${ssrInterpolate(averageRating.value)}</strong><span class="text-muted ms-1" data-v-8e96c5f6${_scopeId3}>(${ssrInterpolate(ratingCount.value)} avis)</span></div>`);
+                          _push4(`<div class="d-flex align-items-center" data-v-383a1715${_scopeId3}><span class="text-warning me-1" data-v-383a1715${_scopeId3}>★</span><strong data-v-383a1715${_scopeId3}>${ssrInterpolate(averageRating.value)}</strong><span class="text-muted ms-1" data-v-383a1715${_scopeId3}>(${ssrInterpolate(ratingCount.value)} avis)</span></div>`);
                         } else {
                           _push4(`<!---->`);
                         }
@@ -39221,7 +39247,7 @@ const _sfc_main$J = /* @__PURE__ */ defineComponent({
       }, _parent));
       _push(`</section>`);
       if (__props.establishment.images && __props.establishment.images.length > 0) {
-        _push(`<section class="py-0" data-v-8e96c5f6>`);
+        _push(`<section class="py-0" data-v-383a1715>`);
         _push(ssrRenderComponent(unref(BContainer$1), { fluid: "" }, {
           default: withCtx((_, _push2, _parent2, _scopeId) => {
             if (_push2) {
@@ -39231,9 +39257,9 @@ const _sfc_main$J = /* @__PURE__ */ defineComponent({
                     _push3(ssrRenderComponent(unref(BCol$1), null, {
                       default: withCtx((_3, _push4, _parent4, _scopeId3) => {
                         if (_push4) {
-                          _push4(`<div class="establishment-gallery" data-v-8e96c5f6${_scopeId3}>`);
+                          _push4(`<div class="establishment-gallery" data-v-383a1715${_scopeId3}>`);
                           if (__props.establishment.images[0]) {
-                            _push4(`<img${ssrRenderAttr("src", __props.establishment.images[0].url)}${ssrRenderAttr("alt", __props.establishment.title)} class="img-fluid w-100" style="${ssrRenderStyle({ "max-height": "500px", "object-fit": "cover" })}" data-v-8e96c5f6${_scopeId3}>`);
+                            _push4(`<img${ssrRenderAttr("src", __props.establishment.images[0].url)}${ssrRenderAttr("alt", __props.establishment.title)} class="img-fluid w-100" style="${ssrRenderStyle({ "max-height": "500px", "object-fit": "cover" })}" data-v-383a1715${_scopeId3}>`);
                           } else {
                             _push4(`<!---->`);
                           }
@@ -39305,7 +39331,7 @@ const _sfc_main$J = /* @__PURE__ */ defineComponent({
       } else {
         _push(`<!---->`);
       }
-      _push(`<section class="py-5" data-v-8e96c5f6>`);
+      _push(`<section class="py-5" data-v-383a1715>`);
       _push(ssrRenderComponent(unref(BContainer$1), null, {
         default: withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
@@ -39315,7 +39341,7 @@ const _sfc_main$J = /* @__PURE__ */ defineComponent({
                   _push3(ssrRenderComponent(unref(BCol$1), { xl: "8" }, {
                     default: withCtx((_3, _push4, _parent4, _scopeId3) => {
                       if (_push4) {
-                        _push4(`<div class="vstack gap-4" data-v-8e96c5f6${_scopeId3}>`);
+                        _push4(`<div class="vstack gap-4" data-v-383a1715${_scopeId3}>`);
                         if (__props.establishment.ranking || __props.establishment.studentCount || __props.establishment.tuitionRange) {
                           _push4(ssrRenderComponent(unref(BCard$1), {
                             "no-body": "",
@@ -39326,7 +39352,7 @@ const _sfc_main$J = /* @__PURE__ */ defineComponent({
                                 _push5(ssrRenderComponent(unref(BCardHeader$1), { class: "bg-gradient-primary text-white" }, {
                                   default: withCtx((_5, _push6, _parent6, _scopeId5) => {
                                     if (_push6) {
-                                      _push6(`<h3 class="mb-0" data-v-8e96c5f6${_scopeId5}><i class="bi bi-info-circle me-2" data-v-8e96c5f6${_scopeId5}></i>Informations clés</h3>`);
+                                      _push6(`<h3 class="mb-0" data-v-383a1715${_scopeId5}><i class="bi bi-info-circle me-2" data-v-383a1715${_scopeId5}></i>Informations clés</h3>`);
                                     } else {
                                       return [
                                         createVNode("h3", { class: "mb-0" }, [
@@ -39351,7 +39377,7 @@ const _sfc_main$J = /* @__PURE__ */ defineComponent({
                                               }, {
                                                 default: withCtx((_7, _push8, _parent8, _scopeId7) => {
                                                   if (_push8) {
-                                                    _push8(`<div class="p-3 bg-light rounded" data-v-8e96c5f6${_scopeId7}><div class="text-primary h3 mb-1" data-v-8e96c5f6${_scopeId7}>#${ssrInterpolate(__props.establishment.ranking)}</div><small class="text-muted" data-v-8e96c5f6${_scopeId7}>Classement national</small></div>`);
+                                                    _push8(`<div class="p-3 bg-light rounded" data-v-383a1715${_scopeId7}><div class="text-primary h3 mb-1" data-v-383a1715${_scopeId7}>#${ssrInterpolate(__props.establishment.ranking)}</div><small class="text-muted" data-v-383a1715${_scopeId7}>Classement national</small></div>`);
                                                   } else {
                                                     return [
                                                       createVNode("div", { class: "p-3 bg-light rounded" }, [
@@ -39373,7 +39399,7 @@ const _sfc_main$J = /* @__PURE__ */ defineComponent({
                                               }, {
                                                 default: withCtx((_7, _push8, _parent8, _scopeId7) => {
                                                   if (_push8) {
-                                                    _push8(`<div class="p-3 bg-light rounded" data-v-8e96c5f6${_scopeId7}><div class="text-primary h3 mb-1" data-v-8e96c5f6${_scopeId7}>${ssrInterpolate(__props.establishment.studentCount.toLocaleString("fr-FR"))}</div><small class="text-muted" data-v-8e96c5f6${_scopeId7}>Étudiants</small></div>`);
+                                                    _push8(`<div class="p-3 bg-light rounded" data-v-383a1715${_scopeId7}><div class="text-primary h3 mb-1" data-v-383a1715${_scopeId7}>${ssrInterpolate(__props.establishment.studentCount.toLocaleString("fr-FR"))}</div><small class="text-muted" data-v-383a1715${_scopeId7}>Étudiants</small></div>`);
                                                   } else {
                                                     return [
                                                       createVNode("div", { class: "p-3 bg-light rounded" }, [
@@ -39395,7 +39421,7 @@ const _sfc_main$J = /* @__PURE__ */ defineComponent({
                                               }, {
                                                 default: withCtx((_7, _push8, _parent8, _scopeId7) => {
                                                   if (_push8) {
-                                                    _push8(`<div class="p-3 bg-light rounded" data-v-8e96c5f6${_scopeId7}><div class="text-primary h6 mb-1" data-v-8e96c5f6${_scopeId7}>${ssrInterpolate(__props.establishment.tuitionRange.min.toLocaleString("fr-FR", { style: "currency", currency: __props.establishment.tuitionRange.currency }))} - ${ssrInterpolate(__props.establishment.tuitionRange.max.toLocaleString("fr-FR", { style: "currency", currency: __props.establishment.tuitionRange.currency }))}</div><small class="text-muted" data-v-8e96c5f6${_scopeId7}>Frais annuels</small></div>`);
+                                                    _push8(`<div class="p-3 bg-light rounded" data-v-383a1715${_scopeId7}><div class="text-primary h6 mb-1" data-v-383a1715${_scopeId7}>${ssrInterpolate(__props.establishment.tuitionRange.min.toLocaleString("fr-FR", { style: "currency", currency: __props.establishment.tuitionRange.currency }))} - ${ssrInterpolate(__props.establishment.tuitionRange.max.toLocaleString("fr-FR", { style: "currency", currency: __props.establishment.tuitionRange.currency }))}</div><small class="text-muted" data-v-383a1715${_scopeId7}>Frais annuels</small></div>`);
                                                   } else {
                                                     return [
                                                       createVNode("div", { class: "p-3 bg-light rounded" }, [
@@ -39584,7 +39610,7 @@ const _sfc_main$J = /* @__PURE__ */ defineComponent({
                               _push5(ssrRenderComponent(unref(BCardHeader$1), { class: "bg-light" }, {
                                 default: withCtx((_5, _push6, _parent6, _scopeId5) => {
                                   if (_push6) {
-                                    _push6(`<h3 class="mb-0" data-v-8e96c5f6${_scopeId5}>📖 Présentation</h3>`);
+                                    _push6(`<h3 class="mb-0" data-v-383a1715${_scopeId5}>📖 Présentation</h3>`);
                                   } else {
                                     return [
                                       createVNode("h3", { class: "mb-0" }, "📖 Présentation")
@@ -39602,7 +39628,7 @@ const _sfc_main$J = /* @__PURE__ */ defineComponent({
                                         "max-chars": 500
                                       }, null, _parent6, _scopeId5));
                                     } else {
-                                      _push6(`<p class="text-muted fst-italic mb-0" data-v-8e96c5f6${_scopeId5}> Information à venir </p>`);
+                                      _push6(`<p class="text-muted fst-italic mb-0" data-v-383a1715${_scopeId5}> Information à venir </p>`);
                                     }
                                   } else {
                                     return [
@@ -39654,7 +39680,7 @@ const _sfc_main$J = /* @__PURE__ */ defineComponent({
                               _push5(ssrRenderComponent(unref(BCardHeader$1), { class: "bg-light" }, {
                                 default: withCtx((_5, _push6, _parent6, _scopeId5) => {
                                   if (_push6) {
-                                    _push6(`<h3 class="mb-0" data-v-8e96c5f6${_scopeId5}>📋 Prérequis et admission</h3>`);
+                                    _push6(`<h3 class="mb-0" data-v-383a1715${_scopeId5}>📋 Prérequis et admission</h3>`);
                                   } else {
                                     return [
                                       createVNode("h3", { class: "mb-0" }, "📋 Prérequis et admission")
@@ -39672,7 +39698,7 @@ const _sfc_main$J = /* @__PURE__ */ defineComponent({
                                         "max-chars": 500
                                       }, null, _parent6, _scopeId5));
                                     } else {
-                                      _push6(`<p class="text-muted fst-italic mb-0" data-v-8e96c5f6${_scopeId5}> Information à venir </p>`);
+                                      _push6(`<p class="text-muted fst-italic mb-0" data-v-383a1715${_scopeId5}> Information à venir </p>`);
                                     }
                                   } else {
                                     return [
@@ -39724,7 +39750,7 @@ const _sfc_main$J = /* @__PURE__ */ defineComponent({
                               _push5(ssrRenderComponent(unref(BCardHeader$1), { class: "bg-light" }, {
                                 default: withCtx((_5, _push6, _parent6, _scopeId5) => {
                                   if (_push6) {
-                                    _push6(`<h3 class="mb-0" data-v-8e96c5f6${_scopeId5}>💰 Frais de dossier</h3>`);
+                                    _push6(`<h3 class="mb-0" data-v-383a1715${_scopeId5}>💰 Frais de dossier</h3>`);
                                   } else {
                                     return [
                                       createVNode("h3", { class: "mb-0" }, "💰 Frais de dossier")
@@ -39742,7 +39768,7 @@ const _sfc_main$J = /* @__PURE__ */ defineComponent({
                                         "max-chars": 500
                                       }, null, _parent6, _scopeId5));
                                     } else {
-                                      _push6(`<p class="text-muted fst-italic mb-0" data-v-8e96c5f6${_scopeId5}> Information à venir </p>`);
+                                      _push6(`<p class="text-muted fst-italic mb-0" data-v-383a1715${_scopeId5}> Information à venir </p>`);
                                     }
                                   } else {
                                     return [
@@ -39794,7 +39820,7 @@ const _sfc_main$J = /* @__PURE__ */ defineComponent({
                               _push5(ssrRenderComponent(unref(BCardHeader$1), { class: "bg-light" }, {
                                 default: withCtx((_5, _push6, _parent6, _scopeId5) => {
                                   if (_push6) {
-                                    _push6(`<h3 class="mb-0" data-v-8e96c5f6${_scopeId5}>📚 Programme</h3>`);
+                                    _push6(`<h3 class="mb-0" data-v-383a1715${_scopeId5}>📚 Programme</h3>`);
                                   } else {
                                     return [
                                       createVNode("h3", { class: "mb-0" }, "📚 Programme")
@@ -39812,10 +39838,10 @@ const _sfc_main$J = /* @__PURE__ */ defineComponent({
                                         "max-chars": 500
                                       }, null, _parent6, _scopeId5));
                                     } else {
-                                      _push6(`<p class="text-muted fst-italic mb-0" data-v-8e96c5f6${_scopeId5}> Information à venir </p>`);
+                                      _push6(`<p class="text-muted fst-italic mb-0" data-v-383a1715${_scopeId5}> Information à venir </p>`);
                                     }
                                     if (__props.establishment.category) {
-                                      _push6(`<div class="mt-4" data-v-8e96c5f6${_scopeId5}><h5 class="fw-light mb-2" data-v-8e96c5f6${_scopeId5}>Domaine d&#39;études principal</h5>`);
+                                      _push6(`<div class="mt-4" data-v-383a1715${_scopeId5}><h5 class="fw-light mb-2" data-v-383a1715${_scopeId5}>Domaine d&#39;études principal</h5>`);
                                       _push6(ssrRenderComponent(unref(BBadge), {
                                         variant: "primary",
                                         class: "px-3 py-2"
@@ -39836,7 +39862,7 @@ const _sfc_main$J = /* @__PURE__ */ defineComponent({
                                       _push6(`<!---->`);
                                     }
                                     if (__props.establishment.subCategory) {
-                                      _push6(`<div class="mt-3" data-v-8e96c5f6${_scopeId5}><h5 class="fw-light mb-2" data-v-8e96c5f6${_scopeId5}>Spécialisation</h5>`);
+                                      _push6(`<div class="mt-3" data-v-383a1715${_scopeId5}><h5 class="fw-light mb-2" data-v-383a1715${_scopeId5}>Spécialisation</h5>`);
                                       _push6(ssrRenderComponent(unref(BBadge), {
                                         variant: "secondary",
                                         class: "px-3 py-2"
@@ -39966,7 +39992,7 @@ const _sfc_main$J = /* @__PURE__ */ defineComponent({
                               _push5(ssrRenderComponent(unref(BCardHeader$1), { class: "bg-light" }, {
                                 default: withCtx((_5, _push6, _parent6, _scopeId5) => {
                                   if (_push6) {
-                                    _push6(`<h3 class="mb-0" data-v-8e96c5f6${_scopeId5}>🏫 Campus &amp; Vie étudiante</h3>`);
+                                    _push6(`<h3 class="mb-0" data-v-383a1715${_scopeId5}>🏫 Campus &amp; Vie étudiante</h3>`);
                                   } else {
                                     return [
                                       createVNode("h3", { class: "mb-0" }, "🏫 Campus & Vie étudiante")
@@ -39984,7 +40010,7 @@ const _sfc_main$J = /* @__PURE__ */ defineComponent({
                                         "max-chars": 500
                                       }, null, _parent6, _scopeId5));
                                     } else {
-                                      _push6(`<p class="text-muted fst-italic mb-0" data-v-8e96c5f6${_scopeId5}> Information à venir </p>`);
+                                      _push6(`<p class="text-muted fst-italic mb-0" data-v-383a1715${_scopeId5}> Information à venir </p>`);
                                     }
                                   } else {
                                     return [
@@ -40037,7 +40063,7 @@ const _sfc_main$J = /* @__PURE__ */ defineComponent({
                                 _push5(ssrRenderComponent(unref(BCardHeader$1), { class: "bg-gradient-primary text-white" }, {
                                   default: withCtx((_5, _push6, _parent6, _scopeId5) => {
                                     if (_push6) {
-                                      _push6(`<h3 class="mb-0" data-v-8e96c5f6${_scopeId5}><i class="bi bi-mortarboard-fill me-2" data-v-8e96c5f6${_scopeId5}></i> Programmes d&#39;études proposés </h3>`);
+                                      _push6(`<h3 class="mb-0" data-v-383a1715${_scopeId5}><i class="bi bi-mortarboard-fill me-2" data-v-383a1715${_scopeId5}></i> Programmes d&#39;études proposés </h3>`);
                                     } else {
                                       return [
                                         createVNode("h3", { class: "mb-0" }, [
@@ -40052,9 +40078,9 @@ const _sfc_main$J = /* @__PURE__ */ defineComponent({
                                 _push5(ssrRenderComponent(unref(BCardBody$1), null, {
                                   default: withCtx((_5, _push6, _parent6, _scopeId5) => {
                                     if (_push6) {
-                                      _push6(`<div class="vstack gap-3" data-v-8e96c5f6${_scopeId5}><!--[-->`);
+                                      _push6(`<div class="vstack gap-3" data-v-383a1715${_scopeId5}><!--[-->`);
                                       ssrRenderList(__props.establishment.programs, (program) => {
-                                        _push6(`<div class="p-3 border rounded bg-light" data-v-8e96c5f6${_scopeId5}><div class="d-flex justify-content-between align-items-start mb-2" data-v-8e96c5f6${_scopeId5}><div class="flex-grow-1" data-v-8e96c5f6${_scopeId5}><h5 class="mb-1" data-v-8e96c5f6${_scopeId5}>${ssrInterpolate(program.name)}</h5><div class="d-flex flex-wrap gap-2 mb-2" data-v-8e96c5f6${_scopeId5}>`);
+                                        _push6(`<div class="p-3 border rounded bg-light" data-v-383a1715${_scopeId5}><div class="d-flex justify-content-between align-items-start mb-2" data-v-383a1715${_scopeId5}><div class="flex-grow-1" data-v-383a1715${_scopeId5}><h5 class="mb-1" data-v-383a1715${_scopeId5}>${ssrInterpolate(program.name)}</h5><div class="d-flex flex-wrap gap-2 mb-2" data-v-383a1715${_scopeId5}>`);
                                         if (program.degreeLevel) {
                                           _push6(ssrRenderComponent(unref(BBadge), {
                                             variant: "primary",
@@ -40062,7 +40088,7 @@ const _sfc_main$J = /* @__PURE__ */ defineComponent({
                                           }, {
                                             default: withCtx((_6, _push7, _parent7, _scopeId6) => {
                                               if (_push7) {
-                                                _push7(`<i class="bi bi-award me-1" data-v-8e96c5f6${_scopeId6}></i> ${ssrInterpolate(program.degreeLevel.label)}`);
+                                                _push7(`<i class="bi bi-award me-1" data-v-383a1715${_scopeId6}></i> ${ssrInterpolate(program.degreeLevel.label)}`);
                                               } else {
                                                 return [
                                                   createVNode("i", { class: "bi bi-award me-1" }),
@@ -40082,7 +40108,7 @@ const _sfc_main$J = /* @__PURE__ */ defineComponent({
                                           }, {
                                             default: withCtx((_6, _push7, _parent7, _scopeId6) => {
                                               if (_push7) {
-                                                _push7(`<i class="bi bi-clock me-1" data-v-8e96c5f6${_scopeId6}></i> ${ssrInterpolate(program.duration)}`);
+                                                _push7(`<i class="bi bi-clock me-1" data-v-383a1715${_scopeId6}></i> ${ssrInterpolate(program.duration)}`);
                                               } else {
                                                 return [
                                                   createVNode("i", { class: "bi bi-clock me-1" }),
@@ -40102,7 +40128,7 @@ const _sfc_main$J = /* @__PURE__ */ defineComponent({
                                           }, {
                                             default: withCtx((_6, _push7, _parent7, _scopeId6) => {
                                               if (_push7) {
-                                                _push7(`<i class="bi bi-translate me-1" data-v-8e96c5f6${_scopeId6}></i> ${ssrInterpolate(program.language)}`);
+                                                _push7(`<i class="bi bi-translate me-1" data-v-383a1715${_scopeId6}></i> ${ssrInterpolate(program.language)}`);
                                               } else {
                                                 return [
                                                   createVNode("i", { class: "bi bi-translate me-1" }),
@@ -40117,12 +40143,12 @@ const _sfc_main$J = /* @__PURE__ */ defineComponent({
                                         }
                                         if (program.tuitionFee) {
                                           _push6(ssrRenderComponent(unref(BBadge), {
-                                            variant: "success",
+                                            variant: "primary",
                                             class: "px-2 py-1"
                                           }, {
                                             default: withCtx((_6, _push7, _parent7, _scopeId6) => {
                                               if (_push7) {
-                                                _push7(`<i class="bi bi-currency-euro me-1" data-v-8e96c5f6${_scopeId6}></i> ${ssrInterpolate(program.tuitionFee.formatted)}`);
+                                                _push7(`<i class="bi bi-currency-euro me-1" data-v-383a1715${_scopeId6}></i> ${ssrInterpolate(program.tuitionFee.formatted)}`);
                                               } else {
                                                 return [
                                                   createVNode("i", { class: "bi bi-currency-euro me-1" }),
@@ -40137,19 +40163,19 @@ const _sfc_main$J = /* @__PURE__ */ defineComponent({
                                         }
                                         _push6(`</div></div></div>`);
                                         if (program.description) {
-                                          _push6(`<p class="mb-2 text-muted small" data-v-8e96c5f6${_scopeId5}>${ssrInterpolate(program.description)}</p>`);
+                                          _push6(`<p class="mb-2 text-muted small" data-v-383a1715${_scopeId5}>${ssrInterpolate(program.description)}</p>`);
                                         } else {
                                           _push6(`<!---->`);
                                         }
                                         if (program.studyField || program.specialization) {
-                                          _push6(`<div class="d-flex flex-wrap gap-2 mt-2" data-v-8e96c5f6${_scopeId5}>`);
+                                          _push6(`<div class="d-flex flex-wrap gap-2 mt-2" data-v-383a1715${_scopeId5}>`);
                                           if (program.studyField) {
-                                            _push6(`<span class="badge bg-white border text-dark px-2 py-1" data-v-8e96c5f6${_scopeId5}><i class="bi bi-book me-1" data-v-8e96c5f6${_scopeId5}></i> ${ssrInterpolate(program.studyField.label)}</span>`);
+                                            _push6(`<span class="badge bg-white border text-dark px-2 py-1" data-v-383a1715${_scopeId5}><i class="bi bi-book me-1" data-v-383a1715${_scopeId5}></i> ${ssrInterpolate(program.studyField.label)}</span>`);
                                           } else {
                                             _push6(`<!---->`);
                                           }
                                           if (program.specialization) {
-                                            _push6(`<span class="badge bg-white border text-dark px-2 py-1" data-v-8e96c5f6${_scopeId5}><i class="bi bi-star me-1" data-v-8e96c5f6${_scopeId5}></i> ${ssrInterpolate(program.specialization.label)}</span>`);
+                                            _push6(`<span class="badge bg-white border text-dark px-2 py-1" data-v-383a1715${_scopeId5}><i class="bi bi-star me-1" data-v-383a1715${_scopeId5}></i> ${ssrInterpolate(program.specialization.label)}</span>`);
                                           } else {
                                             _push6(`<!---->`);
                                           }
@@ -40161,7 +40187,7 @@ const _sfc_main$J = /* @__PURE__ */ defineComponent({
                                       });
                                       _push6(`<!--]-->`);
                                       if (__props.establishment.programs.length === 0) {
-                                        _push6(`<div class="text-center py-4 text-muted" data-v-8e96c5f6${_scopeId5}><i class="bi bi-info-circle me-2" data-v-8e96c5f6${_scopeId5}></i> Aucun programme publié pour le moment </div>`);
+                                        _push6(`<div class="text-center py-4 text-muted" data-v-383a1715${_scopeId5}><i class="bi bi-info-circle me-2" data-v-383a1715${_scopeId5}></i> Aucun programme publié pour le moment </div>`);
                                       } else {
                                         _push6(`<!---->`);
                                       }
@@ -40213,7 +40239,7 @@ const _sfc_main$J = /* @__PURE__ */ defineComponent({
                                                     }, 1024)) : createCommentVNode("", true),
                                                     program.tuitionFee ? (openBlock(), createBlock(unref(BBadge), {
                                                       key: 3,
-                                                      variant: "success",
+                                                      variant: "primary",
                                                       class: "px-2 py-1"
                                                     }, {
                                                       default: withCtx(() => [
@@ -40321,7 +40347,7 @@ const _sfc_main$J = /* @__PURE__ */ defineComponent({
                                                   }, 1024)) : createCommentVNode("", true),
                                                   program.tuitionFee ? (openBlock(), createBlock(unref(BBadge), {
                                                     key: 3,
-                                                    variant: "success",
+                                                    variant: "primary",
                                                     class: "px-2 py-1"
                                                   }, {
                                                     default: withCtx(() => [
@@ -40387,7 +40413,7 @@ const _sfc_main$J = /* @__PURE__ */ defineComponent({
                                 _push5(ssrRenderComponent(unref(BCardHeader$1), { class: "bg-light" }, {
                                   default: withCtx((_5, _push6, _parent6, _scopeId5) => {
                                     if (_push6) {
-                                      _push6(`<h3 class="mb-0" data-v-8e96c5f6${_scopeId5}>Infrastructures &amp; Équipements</h3>`);
+                                      _push6(`<h3 class="mb-0" data-v-383a1715${_scopeId5}>Infrastructures &amp; Équipements</h3>`);
                                     } else {
                                       return [
                                         createVNode("h3", { class: "mb-0" }, "Infrastructures & Équipements")
@@ -40411,7 +40437,7 @@ const _sfc_main$J = /* @__PURE__ */ defineComponent({
                                               }, {
                                                 default: withCtx((_7, _push8, _parent8, _scopeId7) => {
                                                   if (_push8) {
-                                                    _push8(`<div class="d-flex align-items-center" data-v-8e96c5f6${_scopeId7}><i class="bi bi-check-circle-fill text-primary me-2" data-v-8e96c5f6${_scopeId7}></i><span data-v-8e96c5f6${_scopeId7}>${ssrInterpolate(equipment.label)}</span></div>`);
+                                                    _push8(`<div class="d-flex align-items-center" data-v-383a1715${_scopeId7}><i class="bi bi-check-circle-fill text-primary me-2" data-v-383a1715${_scopeId7}></i><span data-v-383a1715${_scopeId7}>${ssrInterpolate(equipment.label)}</span></div>`);
                                                   } else {
                                                     return [
                                                       createVNode("div", { class: "d-flex align-items-center" }, [
@@ -40527,7 +40553,7 @@ const _sfc_main$J = /* @__PURE__ */ defineComponent({
                               _push5(ssrRenderComponent(unref(BCardHeader$1), { class: "bg-light" }, {
                                 default: withCtx((_5, _push6, _parent6, _scopeId5) => {
                                   if (_push6) {
-                                    _push6(`<h3 class="mb-0" data-v-8e96c5f6${_scopeId5}><i class="bi bi-geo-alt me-2" data-v-8e96c5f6${_scopeId5}></i> Localisation </h3>`);
+                                    _push6(`<h3 class="mb-0" data-v-383a1715${_scopeId5}><i class="bi bi-geo-alt me-2" data-v-383a1715${_scopeId5}></i> Localisation </h3>`);
                                   } else {
                                     return [
                                       createVNode("h3", { class: "mb-0" }, [
@@ -40542,7 +40568,7 @@ const _sfc_main$J = /* @__PURE__ */ defineComponent({
                               _push5(ssrRenderComponent(unref(BCardBody$1), null, {
                                 default: withCtx((_5, _push6, _parent6, _scopeId5) => {
                                   if (_push6) {
-                                    _push6(`<p class="mb-0" data-v-8e96c5f6${_scopeId5}><strong data-v-8e96c5f6${_scopeId5}>Adresse:</strong> ${ssrInterpolate(__props.establishment.address)}<br data-v-8e96c5f6${_scopeId5}><strong data-v-8e96c5f6${_scopeId5}>Ville:</strong> ${ssrInterpolate(__props.establishment.city?.name)}<br data-v-8e96c5f6${_scopeId5}><strong data-v-8e96c5f6${_scopeId5}>Région:</strong> ${ssrInterpolate(__props.establishment.city?.region?.name)}<br data-v-8e96c5f6${_scopeId5}><strong data-v-8e96c5f6${_scopeId5}>Pays:</strong> ${ssrInterpolate(__props.establishment.city?.country?.name)}</p>`);
+                                    _push6(`<p class="mb-0" data-v-383a1715${_scopeId5}><strong data-v-383a1715${_scopeId5}>Adresse:</strong> ${ssrInterpolate(__props.establishment.address)}<br data-v-383a1715${_scopeId5}><strong data-v-383a1715${_scopeId5}>Ville:</strong> ${ssrInterpolate(__props.establishment.city?.name)}<br data-v-383a1715${_scopeId5}><strong data-v-383a1715${_scopeId5}>Région:</strong> ${ssrInterpolate(__props.establishment.city?.region?.name)}<br data-v-383a1715${_scopeId5}><strong data-v-383a1715${_scopeId5}>Pays:</strong> ${ssrInterpolate(__props.establishment.city?.country?.name)}</p>`);
                                   } else {
                                     return [
                                       createVNode("p", { class: "mb-0" }, [
@@ -40607,7 +40633,7 @@ const _sfc_main$J = /* @__PURE__ */ defineComponent({
                                 _push5(ssrRenderComponent(unref(BCardHeader$1), { class: "bg-light" }, {
                                   default: withCtx((_5, _push6, _parent6, _scopeId5) => {
                                     if (_push6) {
-                                      _push6(`<h3 class="mb-0" data-v-8e96c5f6${_scopeId5}>Avis des étudiants</h3>`);
+                                      _push6(`<h3 class="mb-0" data-v-383a1715${_scopeId5}>Avis des étudiants</h3>`);
                                     } else {
                                       return [
                                         createVNode("h3", { class: "mb-0" }, "Avis des étudiants")
@@ -40621,11 +40647,11 @@ const _sfc_main$J = /* @__PURE__ */ defineComponent({
                                     if (_push6) {
                                       _push6(`<!--[-->`);
                                       ssrRenderList(__props.establishment.comments, (comment) => {
-                                        _push6(`<div class="mb-4 pb-3 border-bottom" data-v-8e96c5f6${_scopeId5}><div class="d-flex justify-content-between mb-2" data-v-8e96c5f6${_scopeId5}><div data-v-8e96c5f6${_scopeId5}><strong data-v-8e96c5f6${_scopeId5}>${ssrInterpolate(comment.user?.name || "Étudiant anonyme")}</strong><div class="text-warning small" data-v-8e96c5f6${_scopeId5}><!--[-->`);
+                                        _push6(`<div class="mb-4 pb-3 border-bottom" data-v-383a1715${_scopeId5}><div class="d-flex justify-content-between mb-2" data-v-383a1715${_scopeId5}><div data-v-383a1715${_scopeId5}><strong data-v-383a1715${_scopeId5}>${ssrInterpolate(comment.user?.name || "Étudiant anonyme")}</strong><div class="text-warning small" data-v-383a1715${_scopeId5}><!--[-->`);
                                         ssrRenderList(5, (n2) => {
-                                          _push6(`<span data-v-8e96c5f6${_scopeId5}>${ssrInterpolate(n2 <= comment.score ? "★" : "☆")}</span>`);
+                                          _push6(`<span data-v-383a1715${_scopeId5}>${ssrInterpolate(n2 <= comment.score ? "★" : "☆")}</span>`);
                                         });
-                                        _push6(`<!--]--></div></div><small class="text-muted" data-v-8e96c5f6${_scopeId5}>${ssrInterpolate(new Date(comment.created_at).toLocaleDateString("fr-FR"))}</small></div><p class="mb-0" data-v-8e96c5f6${_scopeId5}>${ssrInterpolate(comment.content)}</p></div>`);
+                                        _push6(`<!--]--></div></div><small class="text-muted" data-v-383a1715${_scopeId5}>${ssrInterpolate(new Date(comment.created_at).toLocaleDateString("fr-FR"))}</small></div><p class="mb-0" data-v-383a1715${_scopeId5}>${ssrInterpolate(comment.content)}</p></div>`);
                                       });
                                       _push6(`<!--]-->`);
                                     } else {
@@ -40992,7 +41018,7 @@ const _sfc_main$J = /* @__PURE__ */ defineComponent({
                                                 }, 1024)) : createCommentVNode("", true),
                                                 program.tuitionFee ? (openBlock(), createBlock(unref(BBadge), {
                                                   key: 3,
-                                                  variant: "success",
+                                                  variant: "primary",
                                                   class: "px-2 py-1"
                                                 }, {
                                                   default: withCtx(() => [
@@ -41167,16 +41193,16 @@ const _sfc_main$J = /* @__PURE__ */ defineComponent({
                   _push3(ssrRenderComponent(unref(BCol$1), { xl: "4" }, {
                     default: withCtx((_3, _push4, _parent4, _scopeId3) => {
                       if (_push4) {
-                        _push4(`<div class="sticky-top" style="${ssrRenderStyle({ "top": "100px" })}" data-v-8e96c5f6${_scopeId3}>`);
+                        _push4(`<div class="sticky-top" style="${ssrRenderStyle({ "top": "100px" })}" data-v-383a1715${_scopeId3}>`);
                         _push4(ssrRenderComponent(unref(BCard$1), { class: "border shadow-sm" }, {
                           default: withCtx((_4, _push5, _parent5, _scopeId4) => {
                             if (_push5) {
                               _push5(ssrRenderComponent(unref(BCardBody$1), null, {
                                 default: withCtx((_5, _push6, _parent6, _scopeId5) => {
                                   if (_push6) {
-                                    _push6(`<h4 class="mb-3" data-v-8e96c5f6${_scopeId5}>Intéressé(e) par cet établissement ?</h4>`);
+                                    _push6(`<h4 class="mb-3" data-v-383a1715${_scopeId5}>Intéressé(e) par cet établissement ?</h4>`);
                                     if (ratingCount.value > 0) {
-                                      _push6(`<div class="mb-4 p-3 bg-light rounded text-center" data-v-8e96c5f6${_scopeId5}><div class="h2 mb-1" data-v-8e96c5f6${_scopeId5}>${ssrInterpolate(averageRating.value)}/5</div><div class="text-warning mb-1" data-v-8e96c5f6${_scopeId5}> ★★★★☆ </div><small class="text-muted" data-v-8e96c5f6${_scopeId5}>Basé sur ${ssrInterpolate(ratingCount.value)} avis</small></div>`);
+                                      _push6(`<div class="mb-4 p-3 bg-light rounded text-center" data-v-383a1715${_scopeId5}><div class="h2 mb-1" data-v-383a1715${_scopeId5}>${ssrInterpolate(averageRating.value)}/5</div><div class="text-warning mb-1" data-v-383a1715${_scopeId5}> ★★★★☆ </div><small class="text-muted" data-v-383a1715${_scopeId5}>Basé sur ${ssrInterpolate(ratingCount.value)} avis</small></div>`);
                                     } else {
                                       _push6(`<!---->`);
                                     }
@@ -41188,7 +41214,7 @@ const _sfc_main$J = /* @__PURE__ */ defineComponent({
                                       }, {
                                         default: withCtx((_6, _push7, _parent7, _scopeId6) => {
                                           if (_push7) {
-                                            _push7(`<i class="bi bi-send-fill me-2" data-v-8e96c5f6${_scopeId6}></i> Candidater `);
+                                            _push7(`<i class="bi bi-send-fill me-2" data-v-383a1715${_scopeId6}></i> Candidater `);
                                           } else {
                                             return [
                                               createVNode("i", { class: "bi bi-send-fill me-2" }),
@@ -41206,7 +41232,7 @@ const _sfc_main$J = /* @__PURE__ */ defineComponent({
                                       }, {
                                         default: withCtx((_6, _push7, _parent7, _scopeId6) => {
                                           if (_push7) {
-                                            _push7(`<i class="bi bi-box-arrow-in-right me-2" data-v-8e96c5f6${_scopeId6}></i> Connectez-vous pour candidater `);
+                                            _push7(`<i class="bi bi-box-arrow-in-right me-2" data-v-383a1715${_scopeId6}></i> Connectez-vous pour candidater `);
                                           } else {
                                             return [
                                               createVNode("i", { class: "bi bi-box-arrow-in-right me-2" }),
@@ -41217,21 +41243,21 @@ const _sfc_main$J = /* @__PURE__ */ defineComponent({
                                         _: 1
                                       }, _parent6, _scopeId5));
                                     }
-                                    _push6(`<div class="vstack gap-2" data-v-8e96c5f6${_scopeId5}><div class="d-flex justify-content-between small" data-v-8e96c5f6${_scopeId5}><span class="text-muted" data-v-8e96c5f6${_scopeId5}>Type:</span><strong data-v-8e96c5f6${_scopeId5}>${ssrInterpolate(__props.establishment.propertyType?.label)}</strong></div><div class="d-flex justify-content-between small" data-v-8e96c5f6${_scopeId5}><span class="text-muted" data-v-8e96c5f6${_scopeId5}>Ville:</span><strong data-v-8e96c5f6${_scopeId5}>${ssrInterpolate(__props.establishment.city?.name)}</strong></div><div class="d-flex justify-content-between small" data-v-8e96c5f6${_scopeId5}><span class="text-muted" data-v-8e96c5f6${_scopeId5}>Pays:</span><strong data-v-8e96c5f6${_scopeId5}>${ssrInterpolate(__props.establishment.city?.country?.name)}</strong></div></div>`);
+                                    _push6(`<div class="vstack gap-2" data-v-383a1715${_scopeId5}><div class="d-flex justify-content-between small" data-v-383a1715${_scopeId5}><span class="text-muted" data-v-383a1715${_scopeId5}>Type:</span><strong data-v-383a1715${_scopeId5}>${ssrInterpolate(__props.establishment.propertyType?.label)}</strong></div><div class="d-flex justify-content-between small" data-v-383a1715${_scopeId5}><span class="text-muted" data-v-383a1715${_scopeId5}>Ville:</span><strong data-v-383a1715${_scopeId5}>${ssrInterpolate(__props.establishment.city?.name)}</strong></div><div class="d-flex justify-content-between small" data-v-383a1715${_scopeId5}><span class="text-muted" data-v-383a1715${_scopeId5}>Pays:</span><strong data-v-383a1715${_scopeId5}>${ssrInterpolate(__props.establishment.city?.country?.name)}</strong></div></div>`);
                                     if (__props.establishment.website || __props.establishment.phone || __props.establishment.email) {
-                                      _push6(`<div class="mt-3" data-v-8e96c5f6${_scopeId5}><hr class="my-3" data-v-8e96c5f6${_scopeId5}><h6 class="mb-2" data-v-8e96c5f6${_scopeId5}>Contact</h6><div class="vstack gap-2 small" data-v-8e96c5f6${_scopeId5}>`);
+                                      _push6(`<div class="mt-3" data-v-383a1715${_scopeId5}><hr class="my-3" data-v-383a1715${_scopeId5}><h6 class="mb-2" data-v-383a1715${_scopeId5}>Contact</h6><div class="vstack gap-2 small" data-v-383a1715${_scopeId5}>`);
                                       if (__props.establishment.website) {
-                                        _push6(`<a${ssrRenderAttr("href", __props.establishment.website)} target="_blank" class="text-decoration-none" data-v-8e96c5f6${_scopeId5}><i class="bi bi-globe me-2" data-v-8e96c5f6${_scopeId5}></i> Site web </a>`);
+                                        _push6(`<a${ssrRenderAttr("href", __props.establishment.website)} target="_blank" class="text-decoration-none" data-v-383a1715${_scopeId5}><i class="bi bi-globe me-2" data-v-383a1715${_scopeId5}></i> Site web </a>`);
                                       } else {
                                         _push6(`<!---->`);
                                       }
                                       if (__props.establishment.phone) {
-                                        _push6(`<a${ssrRenderAttr("href", `tel:${__props.establishment.phone}`)} class="text-decoration-none" data-v-8e96c5f6${_scopeId5}><i class="bi bi-telephone me-2" data-v-8e96c5f6${_scopeId5}></i> ${ssrInterpolate(__props.establishment.phone)}</a>`);
+                                        _push6(`<a${ssrRenderAttr("href", `tel:${__props.establishment.phone}`)} class="text-decoration-none" data-v-383a1715${_scopeId5}><i class="bi bi-telephone me-2" data-v-383a1715${_scopeId5}></i> ${ssrInterpolate(__props.establishment.phone)}</a>`);
                                       } else {
                                         _push6(`<!---->`);
                                       }
                                       if (__props.establishment.email) {
-                                        _push6(`<a${ssrRenderAttr("href", `mailto:${__props.establishment.email}`)} class="text-decoration-none" data-v-8e96c5f6${_scopeId5}><i class="bi bi-envelope me-2" data-v-8e96c5f6${_scopeId5}></i> ${ssrInterpolate(__props.establishment.email)}</a>`);
+                                        _push6(`<a${ssrRenderAttr("href", `mailto:${__props.establishment.email}`)} class="text-decoration-none" data-v-383a1715${_scopeId5}><i class="bi bi-envelope me-2" data-v-383a1715${_scopeId5}></i> ${ssrInterpolate(__props.establishment.email)}</a>`);
                                       } else {
                                         _push6(`<!---->`);
                                       }
@@ -41239,7 +41265,7 @@ const _sfc_main$J = /* @__PURE__ */ defineComponent({
                                     } else {
                                       _push6(`<!---->`);
                                     }
-                                    _push6(`<hr class="my-3" data-v-8e96c5f6${_scopeId5}><div class="d-grid gap-2" data-v-8e96c5f6${_scopeId5}>`);
+                                    _push6(`<hr class="my-3" data-v-383a1715${_scopeId5}><div class="d-grid gap-2" data-v-383a1715${_scopeId5}>`);
                                     _push6(ssrRenderComponent(unref(BButton$1), {
                                       variant: isFavorite.value ? "primary" : "outline-secondary",
                                       size: "sm",
@@ -41247,7 +41273,7 @@ const _sfc_main$J = /* @__PURE__ */ defineComponent({
                                     }, {
                                       default: withCtx((_6, _push7, _parent7, _scopeId6) => {
                                         if (_push7) {
-                                          _push7(`<i class="${ssrRenderClass([isFavorite.value ? "bi bi-bookmark-fill" : "bi bi-bookmark", "me-2"])}" data-v-8e96c5f6${_scopeId6}></i> ${ssrInterpolate(isFavorite.value ? "Retirer des favoris" : "Ajouter aux favoris")}`);
+                                          _push7(`<i class="${ssrRenderClass([isFavorite.value ? "bi bi-bookmark-fill" : "bi bi-bookmark", "me-2"])}" data-v-383a1715${_scopeId6}></i> ${ssrInterpolate(isFavorite.value ? "Retirer des favoris" : "Ajouter aux favoris")}`);
                                         } else {
                                           return [
                                             createVNode("i", {
@@ -41266,7 +41292,7 @@ const _sfc_main$J = /* @__PURE__ */ defineComponent({
                                     }, {
                                       default: withCtx((_6, _push7, _parent7, _scopeId6) => {
                                         if (_push7) {
-                                          _push7(`<i class="bi bi-share me-2" data-v-8e96c5f6${_scopeId6}></i> Partager `);
+                                          _push7(`<i class="bi bi-share me-2" data-v-383a1715${_scopeId6}></i> Partager `);
                                         } else {
                                           return [
                                             createVNode("i", { class: "bi bi-share me-2" }),
@@ -41516,7 +41542,7 @@ const _sfc_main$J = /* @__PURE__ */ defineComponent({
                               _push5(ssrRenderComponent(unref(BCardBody$1), null, {
                                 default: withCtx((_5, _push6, _parent6, _scopeId5) => {
                                   if (_push6) {
-                                    _push6(`<h5 class="mb-3" data-v-8e96c5f6${_scopeId5}>Établissements similaires</h5><p class="text-muted small" data-v-8e96c5f6${_scopeId5}> Découvrez d&#39;autres établissements qui pourraient vous intéresser </p>`);
+                                    _push6(`<h5 class="mb-3" data-v-383a1715${_scopeId5}>Établissements similaires</h5><p class="text-muted small" data-v-383a1715${_scopeId5}> Découvrez d&#39;autres établissements qui pourraient vous intéresser </p>`);
                                     _push6(ssrRenderComponent(unref(Link), {
                                       href: "/establishments",
                                       class: "btn btn-outline-primary btn-sm w-100"
@@ -42023,7 +42049,7 @@ const _sfc_main$J = /* @__PURE__ */ defineComponent({
                                               }, 1024)) : createCommentVNode("", true),
                                               program.tuitionFee ? (openBlock(), createBlock(unref(BBadge), {
                                                 key: 3,
-                                                variant: "success",
+                                                variant: "primary",
                                                 class: "px-2 py-1"
                                               }, {
                                                 default: withCtx(() => [
@@ -42647,7 +42673,7 @@ const _sfc_main$J = /* @__PURE__ */ defineComponent({
                                             }, 1024)) : createCommentVNode("", true),
                                             program.tuitionFee ? (openBlock(), createBlock(unref(BBadge), {
                                               key: 3,
-                                              variant: "success",
+                                              variant: "primary",
                                               class: "px-2 py-1"
                                             }, {
                                               default: withCtx(() => [
@@ -42982,14 +43008,14 @@ const _sfc_main$J = /* @__PURE__ */ defineComponent({
       }, {
         default: withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
-            _push2(`<p class="mb-3" data-v-8e96c5f6${_scopeId}>${ssrInterpolate(shareText.value)}</p><div class="d-grid gap-2" data-v-8e96c5f6${_scopeId}><a${ssrRenderAttr("href", `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl.value)}`)} target="_blank" class="btn btn-primary" style="${ssrRenderStyle({ "background-color": "#1877f2", "border-color": "#1877f2" })}" data-v-8e96c5f6${_scopeId}><i class="bi bi-facebook me-2" data-v-8e96c5f6${_scopeId}></i> Partager sur Facebook </a><a${ssrRenderAttr("href", `https://twitter.com/intent/tweet?url=${encodeURIComponent(shareUrl.value)}&text=${encodeURIComponent(shareText.value)}`)} target="_blank" class="btn btn-dark" data-v-8e96c5f6${_scopeId}><i class="bi bi-twitter-x me-2" data-v-8e96c5f6${_scopeId}></i> Partager sur X (Twitter) </a><a${ssrRenderAttr("href", `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(shareUrl.value)}`)} target="_blank" class="btn btn-primary" style="${ssrRenderStyle({ "background-color": "#0a66c2", "border-color": "#0a66c2" })}" data-v-8e96c5f6${_scopeId}><i class="bi bi-linkedin me-2" data-v-8e96c5f6${_scopeId}></i> Partager sur LinkedIn </a><a${ssrRenderAttr("href", `https://wa.me/?text=${encodeURIComponent(shareText.value + " " + shareUrl.value)}`)} target="_blank" class="btn btn-success" style="${ssrRenderStyle({ "background-color": "#25d366", "border-color": "#25d366" })}" data-v-8e96c5f6${_scopeId}><i class="bi bi-whatsapp me-2" data-v-8e96c5f6${_scopeId}></i> Partager sur WhatsApp </a>`);
+            _push2(`<p class="mb-3" data-v-383a1715${_scopeId}>${ssrInterpolate(shareText.value)}</p><div class="d-grid gap-2" data-v-383a1715${_scopeId}><a${ssrRenderAttr("href", `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl.value)}`)} target="_blank" class="btn btn-primary" style="${ssrRenderStyle({ "background-color": "#1877f2", "border-color": "#1877f2" })}" data-v-383a1715${_scopeId}><i class="bi bi-facebook me-2" data-v-383a1715${_scopeId}></i> Partager sur Facebook </a><a${ssrRenderAttr("href", `https://twitter.com/intent/tweet?url=${encodeURIComponent(shareUrl.value)}&text=${encodeURIComponent(shareText.value)}`)} target="_blank" class="btn btn-dark" data-v-383a1715${_scopeId}><i class="bi bi-twitter-x me-2" data-v-383a1715${_scopeId}></i> Partager sur X (Twitter) </a><a${ssrRenderAttr("href", `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(shareUrl.value)}`)} target="_blank" class="btn btn-primary" style="${ssrRenderStyle({ "background-color": "#0a66c2", "border-color": "#0a66c2" })}" data-v-383a1715${_scopeId}><i class="bi bi-linkedin me-2" data-v-383a1715${_scopeId}></i> Partager sur LinkedIn </a><a${ssrRenderAttr("href", `https://wa.me/?text=${encodeURIComponent(shareText.value + " " + shareUrl.value)}`)} target="_blank" class="btn btn-success" style="${ssrRenderStyle({ "background-color": "#25d366", "border-color": "#25d366" })}" data-v-383a1715${_scopeId}><i class="bi bi-whatsapp me-2" data-v-383a1715${_scopeId}></i> Partager sur WhatsApp </a>`);
             _push2(ssrRenderComponent(unref(BButton$1), {
               variant: "outline-secondary",
               onClick: copyShareLink
             }, {
               default: withCtx((_2, _push3, _parent3, _scopeId2) => {
                 if (_push3) {
-                  _push3(`<i class="bi bi-clipboard me-2" data-v-8e96c5f6${_scopeId2}></i> Copier le lien `);
+                  _push3(`<i class="bi bi-clipboard me-2" data-v-383a1715${_scopeId2}></i> Copier le lien `);
                 } else {
                   return [
                     createVNode("i", { class: "bi bi-clipboard me-2" }),
@@ -43055,7 +43081,7 @@ const _sfc_main$J = /* @__PURE__ */ defineComponent({
         }),
         _: 1
       }, _parent));
-      _push(`<div class="mobile-footer-cta d-md-none" data-v-8e96c5f6>`);
+      _push(`<div class="mobile-footer-cta d-md-none" data-v-383a1715>`);
       _push(ssrRenderComponent(unref(BContainer$1), null, {
         default: withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
@@ -43073,7 +43099,7 @@ const _sfc_main$J = /* @__PURE__ */ defineComponent({
                           }, {
                             default: withCtx((_4, _push5, _parent5, _scopeId4) => {
                               if (_push5) {
-                                _push5(`<i class="bi bi-send-fill me-2" data-v-8e96c5f6${_scopeId4}></i> Candidater `);
+                                _push5(`<i class="bi bi-send-fill me-2" data-v-383a1715${_scopeId4}></i> Candidater `);
                               } else {
                                 return [
                                   createVNode("i", { class: "bi bi-send-fill me-2" }),
@@ -43091,7 +43117,7 @@ const _sfc_main$J = /* @__PURE__ */ defineComponent({
                           }, {
                             default: withCtx((_4, _push5, _parent5, _scopeId4) => {
                               if (_push5) {
-                                _push5(`<i class="bi bi-box-arrow-in-right me-2" data-v-8e96c5f6${_scopeId4}></i> Connectez-vous pour candidater `);
+                                _push5(`<i class="bi bi-box-arrow-in-right me-2" data-v-383a1715${_scopeId4}></i> Connectez-vous pour candidater `);
                               } else {
                                 return [
                                   createVNode("i", { class: "bi bi-box-arrow-in-right me-2" }),
@@ -43217,7 +43243,7 @@ _sfc_main$J.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/Pages/Establishments/Show.vue");
   return _sfc_setup$J ? _sfc_setup$J(props, ctx) : void 0;
 };
-const Show$1 = /* @__PURE__ */ _export_sfc(_sfc_main$J, [["__scopeId", "data-v-8e96c5f6"]]);
+const Show$1 = /* @__PURE__ */ _export_sfc(_sfc_main$J, [["__scopeId", "data-v-383a1715"]]);
 const __vite_glob_0_35 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: Show$1
@@ -47512,7 +47538,7 @@ const _sfc_main$j = /* @__PURE__ */ defineComponent({
       }, _attrs), {
         default: withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
-            _push2(`<div class="position-relative" data-v-860f402a${_scopeId}><img${ssrRenderAttr("src", __props.property.thumb)} class="card-img-top" alt="Photo" data-v-860f402a${_scopeId}><div class="card-img-overlay d-flex flex-column z-index-1 p-4" data-v-860f402a${_scopeId}><div data-v-860f402a${_scopeId}><span class="badge text-bg-danger d-none me-1" data-v-860f402a${_scopeId}>${ssrInterpolate(__props.property.city.name)}</span><span class="badge text-bg-dark" data-v-860f402a${_scopeId}>${ssrInterpolate(__props.property.propertyType.label)}</span></div><div class="w-100 mt-auto" data-v-860f402a${_scopeId}><span class="badge text-bg-white fs-6" data-v-860f402a${_scopeId}>${ssrInterpolate(__props.property.city.name)}</span></div></div></div>`);
+            _push2(`<div class="position-relative" data-v-b402f6d7${_scopeId}><img${ssrRenderAttr("src", __props.property.thumb)} class="card-img-top" alt="Photo" data-v-b402f6d7${_scopeId}><div class="card-img-overlay d-flex flex-column z-index-1 p-4" data-v-b402f6d7${_scopeId}><div data-v-b402f6d7${_scopeId}><span class="badge text-bg-danger d-none me-1" data-v-b402f6d7${_scopeId}>${ssrInterpolate(__props.property.city.name)}</span><span class="badge text-bg-dark" data-v-b402f6d7${_scopeId}>${ssrInterpolate(__props.property.propertyType.label)}</span></div><div class="w-100 mt-auto" data-v-b402f6d7${_scopeId}><span class="badge text-bg-white fs-6" data-v-b402f6d7${_scopeId}>${ssrInterpolate(__props.property.city.name)}</span></div></div></div>`);
             _push2(ssrRenderComponent(_component_b_card_body, { class: "px-3" }, {
               default: withCtx((_2, _push3, _parent3, _scopeId2) => {
                 if (_push3) {
@@ -47569,14 +47595,14 @@ const _sfc_main$j = /* @__PURE__ */ defineComponent({
                     }),
                     _: 1
                   }, _parent3, _scopeId2));
-                  _push3(`<span class="small" data-v-860f402a${_scopeId2}>`);
+                  _push3(`<span class="small" data-v-b402f6d7${_scopeId2}>`);
                   _push3(ssrRenderComponent(_component_font_awesome_icon, {
                     icon: unref(faMapPin),
                     class: "me-2"
                   }, null, _parent3, _scopeId2));
-                  _push3(`${ssrInterpolate(__props.property.city.name + ", " + __props.property.city.region.name)}</span><ul class="nav nav-divider mb-0 mt-3" data-v-860f402a${_scopeId2}><!--[-->`);
+                  _push3(`${ssrInterpolate(__props.property.city.name + ", " + __props.property.city.region.name)}</span><ul class="nav nav-divider mb-0 mt-3" data-v-b402f6d7${_scopeId2}><!--[-->`);
                   ssrRenderList(amenities.value, (amenity, index) => {
-                    _push3(`<li class="nav-item h6 fw-normal mb-0" data-v-860f402a${_scopeId2}>`);
+                    _push3(`<li class="nav-item h6 fw-normal mb-0" data-v-b402f6d7${_scopeId2}>`);
                     _push3(ssrRenderComponent(unref(SvgIcon), {
                       type: "mdi",
                       path: amenity.icon,
@@ -47640,7 +47666,7 @@ const _sfc_main$j = /* @__PURE__ */ defineComponent({
             _push2(ssrRenderComponent(_component_b_card_footer, { class: "pt-0" }, {
               default: withCtx((_2, _push3, _parent3, _scopeId2) => {
                 if (_push3) {
-                  _push3(`<div class="d-sm-flex justify-content-sm-between align-items-center flex-wrap" data-v-860f402a${_scopeId2}><div class="hstack gap-2" data-v-860f402a${_scopeId2}><h5 class="fw-normal text-success mb-0" data-v-860f402a${_scopeId2}>${ssrInterpolate(formattedPrice.value)}</h5></div><div class="mt-sm-0 mt-2" data-v-860f402a${_scopeId2}>`);
+                  _push3(`<div class="d-sm-flex justify-content-sm-between align-items-center flex-wrap" data-v-b402f6d7${_scopeId2}><div class="hstack gap-2" data-v-b402f6d7${_scopeId2}><h5 class="fw-normal text-primary mb-0" data-v-b402f6d7${_scopeId2}>${ssrInterpolate(formattedPrice.value)}</h5></div><div class="mt-sm-0 mt-2" data-v-b402f6d7${_scopeId2}>`);
                   _push3(ssrRenderComponent(unref(Link), {
                     href: _ctx.route("properties.show", {
                       property: __props.property.slug
@@ -47665,7 +47691,7 @@ const _sfc_main$j = /* @__PURE__ */ defineComponent({
                   return [
                     createVNode("div", { class: "d-sm-flex justify-content-sm-between align-items-center flex-wrap" }, [
                       createVNode("div", { class: "hstack gap-2" }, [
-                        createVNode("h5", { class: "fw-normal text-success mb-0" }, toDisplayString(formattedPrice.value), 1)
+                        createVNode("h5", { class: "fw-normal text-primary mb-0" }, toDisplayString(formattedPrice.value), 1)
                       ]),
                       createVNode("div", { class: "mt-sm-0 mt-2" }, [
                         createVNode(unref(Link), {
@@ -47760,7 +47786,7 @@ const _sfc_main$j = /* @__PURE__ */ defineComponent({
                 default: withCtx(() => [
                   createVNode("div", { class: "d-sm-flex justify-content-sm-between align-items-center flex-wrap" }, [
                     createVNode("div", { class: "hstack gap-2" }, [
-                      createVNode("h5", { class: "fw-normal text-success mb-0" }, toDisplayString(formattedPrice.value), 1)
+                      createVNode("h5", { class: "fw-normal text-primary mb-0" }, toDisplayString(formattedPrice.value), 1)
                     ]),
                     createVNode("div", { class: "mt-sm-0 mt-2" }, [
                       createVNode(unref(Link), {
@@ -47795,7 +47821,7 @@ _sfc_main$j.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/Components/PropertyCard.vue");
   return _sfc_setup$j ? _sfc_setup$j(props, ctx) : void 0;
 };
-const PropertyCard = /* @__PURE__ */ _export_sfc(_sfc_main$j, [["__scopeId", "data-v-860f402a"]]);
+const PropertyCard = /* @__PURE__ */ _export_sfc(_sfc_main$j, [["__scopeId", "data-v-b402f6d7"]]);
 const _sfc_main$i = /* @__PURE__ */ defineComponent({
   __name: "SearchBar",
   __ssrInlineRender: true,
@@ -60207,7 +60233,7 @@ const _sfc_main$4 = /* @__PURE__ */ defineComponent({
       }, {
         default: withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
-            _push2(`<meta head-key="description" name="description"${ssrRenderAttr("content", __props.property.description)} data-v-b23db357${_scopeId}>`);
+            _push2(`<meta head-key="description" name="description"${ssrRenderAttr("content", __props.property.description)} data-v-3796b8d3${_scopeId}>`);
           } else {
             return [
               createVNode("meta", {
@@ -60220,12 +60246,12 @@ const _sfc_main$4 = /* @__PURE__ */ defineComponent({
         }),
         _: 1
       }, _parent));
-      _push(`<main data-v-b23db357>`);
+      _push(`<main data-v-3796b8d3>`);
       _push(ssrRenderComponent(_sfc_main$d, { property: __props.property }, null, _parent));
       _push(ssrRenderComponent(_sfc_main$c, {
         images: __props.property.images
       }, null, _parent));
-      _push(`<section class="pt-0" data-v-b23db357>`);
+      _push(`<section class="pt-0" data-v-3796b8d3>`);
       _push(ssrRenderComponent(_component_b_container, { "data-sticky-container": "" }, {
         default: withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
@@ -60238,7 +60264,7 @@ const _sfc_main$4 = /* @__PURE__ */ defineComponent({
                   }, {
                     default: withCtx((_3, _push4, _parent4, _scopeId3) => {
                       if (_push4) {
-                        _push4(`<div class="vstack gap-5" data-v-b23db357${_scopeId3}>`);
+                        _push4(`<div class="vstack gap-5" data-v-3796b8d3${_scopeId3}>`);
                         _push4(ssrRenderComponent(_component_b_card, {
                           "no-body": "",
                           class: "bg-transparent border-0 shadow-etatsup"
@@ -60248,7 +60274,7 @@ const _sfc_main$4 = /* @__PURE__ */ defineComponent({
                               _push5(ssrRenderComponent(_component_b_card_header, { class: "header-etatsup px-4 py-3" }, {
                                 default: withCtx((_5, _push6, _parent6, _scopeId5) => {
                                   if (_push6) {
-                                    _push6(`<h3 class="mb-0 text-white" data-v-b23db357${_scopeId5}> À propos de l&#39;établissement : ${ssrInterpolate(__props.property.propertyType.label)}</h3>`);
+                                    _push6(`<h3 class="mb-0 text-white" data-v-3796b8d3${_scopeId5}> À propos de l&#39;établissement : ${ssrInterpolate(__props.property.propertyType.label)}</h3>`);
                                   } else {
                                     return [
                                       createVNode("h3", { class: "mb-0 text-white" }, " À propos de l'établissement : " + toDisplayString(__props.property.propertyType.label), 1)
@@ -60260,16 +60286,16 @@ const _sfc_main$4 = /* @__PURE__ */ defineComponent({
                               _push5(ssrRenderComponent(_component_b_card_body, { class: "p-4" }, {
                                 default: withCtx((_5, _push6, _parent6, _scopeId5) => {
                                   if (_push6) {
-                                    _push6(`<h5 class="fw-bold mb-4 text-etatsup" data-v-b23db357${_scopeId5}> Informations clés </h5>`);
+                                    _push6(`<h5 class="fw-bold mb-4 text-etatsup" data-v-3796b8d3${_scopeId5}> Informations clés </h5>`);
                                     if (__props.property.student_count || __props.property.ranking) {
-                                      _push6(`<div class="hstack mb-4 gap-3" data-v-b23db357${_scopeId5}>`);
+                                      _push6(`<div class="hstack mb-4 gap-3" data-v-3796b8d3${_scopeId5}>`);
                                       if (__props.property.student_count) {
-                                        _push6(`<div class="stat-badge" data-v-b23db357${_scopeId5}><i class="bi bi-people-fill text-primary me-2" data-v-b23db357${_scopeId5}></i><strong data-v-b23db357${_scopeId5}>${ssrInterpolate(__props.property.student_count.toLocaleString())}</strong> étudiants </div>`);
+                                        _push6(`<div class="stat-badge" data-v-3796b8d3${_scopeId5}><i class="bi bi-people-fill text-primary me-2" data-v-3796b8d3${_scopeId5}></i><strong data-v-3796b8d3${_scopeId5}>${ssrInterpolate(__props.property.student_count.toLocaleString())}</strong> étudiants </div>`);
                                       } else {
                                         _push6(`<!---->`);
                                       }
                                       if (__props.property.ranking) {
-                                        _push6(`<div class="stat-badge" data-v-b23db357${_scopeId5}><i class="bi bi-trophy-fill text-warning me-2" data-v-b23db357${_scopeId5}></i> Classement <strong data-v-b23db357${_scopeId5}>#${ssrInterpolate(__props.property.ranking)}</strong></div>`);
+                                        _push6(`<div class="stat-badge" data-v-3796b8d3${_scopeId5}><i class="bi bi-trophy-fill text-warning me-2" data-v-3796b8d3${_scopeId5}></i> Classement <strong data-v-3796b8d3${_scopeId5}>#${ssrInterpolate(__props.property.ranking)}</strong></div>`);
                                       } else {
                                         _push6(`<!---->`);
                                       }
@@ -60282,19 +60308,19 @@ const _sfc_main$4 = /* @__PURE__ */ defineComponent({
                                       "max-chars": 440
                                     }, null, _parent6, _scopeId5));
                                     if (__props.property.website || __props.property.phone || __props.property.email) {
-                                      _push6(`<div class="mt-4" data-v-b23db357${_scopeId5}><h6 class="fw-bold text-etatsup mb-3" data-v-b23db357${_scopeId5}><i class="bi bi-info-circle me-2" data-v-b23db357${_scopeId5}></i> Contact </h6><div class="vstack gap-2" data-v-b23db357${_scopeId5}>`);
+                                      _push6(`<div class="mt-4" data-v-3796b8d3${_scopeId5}><h6 class="fw-bold text-etatsup mb-3" data-v-3796b8d3${_scopeId5}><i class="bi bi-info-circle me-2" data-v-3796b8d3${_scopeId5}></i> Contact </h6><div class="vstack gap-2" data-v-3796b8d3${_scopeId5}>`);
                                       if (__props.property.website) {
-                                        _push6(`<a${ssrRenderAttr("href", __props.property.website)} target="_blank" class="contact-link" data-v-b23db357${_scopeId5}><i class="bi bi-globe me-2" data-v-b23db357${_scopeId5}></i> Site web officiel </a>`);
+                                        _push6(`<a${ssrRenderAttr("href", __props.property.website)} target="_blank" class="contact-link" data-v-3796b8d3${_scopeId5}><i class="bi bi-globe me-2" data-v-3796b8d3${_scopeId5}></i> Site web officiel </a>`);
                                       } else {
                                         _push6(`<!---->`);
                                       }
                                       if (__props.property.phone) {
-                                        _push6(`<a${ssrRenderAttr("href", `tel:${__props.property.phone}`)} class="contact-link" data-v-b23db357${_scopeId5}><i class="bi bi-telephone me-2" data-v-b23db357${_scopeId5}></i> ${ssrInterpolate(__props.property.phone)}</a>`);
+                                        _push6(`<a${ssrRenderAttr("href", `tel:${__props.property.phone}`)} class="contact-link" data-v-3796b8d3${_scopeId5}><i class="bi bi-telephone me-2" data-v-3796b8d3${_scopeId5}></i> ${ssrInterpolate(__props.property.phone)}</a>`);
                                       } else {
                                         _push6(`<!---->`);
                                       }
                                       if (__props.property.email) {
-                                        _push6(`<a${ssrRenderAttr("href", `mailto:${__props.property.email}`)} class="contact-link" data-v-b23db357${_scopeId5}><i class="bi bi-envelope me-2" data-v-b23db357${_scopeId5}></i> ${ssrInterpolate(__props.property.email)}</a>`);
+                                        _push6(`<a${ssrRenderAttr("href", `mailto:${__props.property.email}`)} class="contact-link" data-v-3796b8d3${_scopeId5}><i class="bi bi-envelope me-2" data-v-3796b8d3${_scopeId5}></i> ${ssrInterpolate(__props.property.email)}</a>`);
                                       } else {
                                         _push6(`<!---->`);
                                       }
@@ -60501,15 +60527,15 @@ const _sfc_main$4 = /* @__PURE__ */ defineComponent({
                                             _push7(ssrRenderComponent(_component_b_col, { sm: "6" }, {
                                               default: withCtx((_7, _push8, _parent8, _scopeId7) => {
                                                 if (_push8) {
-                                                  _push8(`<h6 data-v-b23db357${_scopeId7}>`);
+                                                  _push8(`<h6 data-v-3796b8d3${_scopeId7}>`);
                                                   _push8(ssrRenderComponent(unref(SvgIcon), {
                                                     type: "mdi",
                                                     path: unref(mdiHomeAutomation),
                                                     class: "mb-1 me-1"
                                                   }, null, _parent8, _scopeId7));
-                                                  _push8(` Équipements </h6><ul class="list-group list-group-borderless mb-0 mt-2" data-v-b23db357${_scopeId7}><!--[-->`);
+                                                  _push8(` Équipements </h6><ul class="list-group list-group-borderless mb-0 mt-2" data-v-3796b8d3${_scopeId7}><!--[-->`);
                                                   ssrRenderList(__props.property.equipments, (equipment, i2) => {
-                                                    _push8(`<li class="list-group-item pb-0" data-v-b23db357${_scopeId7}>`);
+                                                    _push8(`<li class="list-group-item pb-0" data-v-3796b8d3${_scopeId7}>`);
                                                     _push8(ssrRenderComponent(_component_font_awesome_icon, {
                                                       icon: unref(faCheckCircle),
                                                       class: "text-primary me-1"
@@ -60553,18 +60579,18 @@ const _sfc_main$4 = /* @__PURE__ */ defineComponent({
                                             _push7(ssrRenderComponent(_component_b_col, { sm: "6" }, {
                                               default: withCtx((_7, _push8, _parent8, _scopeId7) => {
                                                 if (_push8) {
-                                                  _push8(`<h6 data-v-b23db357${_scopeId7}>`);
+                                                  _push8(`<h6 data-v-3796b8d3${_scopeId7}>`);
                                                   _push8(ssrRenderComponent(unref(SvgIcon), {
                                                     type: "mdi",
                                                     path: unref(mdiNaturePeople),
                                                     class: "mb-1 me-1"
                                                   }, null, _parent8, _scopeId7));
-                                                  _push8(` Aménagement </h6><ul class="list-group list-group-borderless mb-0 mt-2" data-v-b23db357${_scopeId7}><!--[-->`);
+                                                  _push8(` Aménagement </h6><ul class="list-group list-group-borderless mb-0 mt-2" data-v-3796b8d3${_scopeId7}><!--[-->`);
                                                   ssrRenderList(__props.property.layouts, (layout, i2) => {
-                                                    _push8(`<li class="list-group-item pb-0" data-v-b23db357${_scopeId7}>`);
+                                                    _push8(`<li class="list-group-item pb-0" data-v-3796b8d3${_scopeId7}>`);
                                                     _push8(ssrRenderComponent(_component_font_awesome_icon, {
                                                       icon: unref(faCheckCircle),
-                                                      class: "text-success me-1"
+                                                      class: "text-primary me-1"
                                                     }, null, _parent8, _scopeId7));
                                                     _push8(` ${ssrInterpolate(layout.label)}</li>`);
                                                   });
@@ -60587,7 +60613,7 @@ const _sfc_main$4 = /* @__PURE__ */ defineComponent({
                                                         }, [
                                                           createVNode(_component_font_awesome_icon, {
                                                             icon: unref(faCheckCircle),
-                                                            class: "text-success me-1"
+                                                            class: "text-primary me-1"
                                                           }, null, 8, ["icon"]),
                                                           createTextVNode(" " + toDisplayString(layout.label), 1)
                                                         ]);
@@ -60654,7 +60680,7 @@ const _sfc_main$4 = /* @__PURE__ */ defineComponent({
                                                     }, [
                                                       createVNode(_component_font_awesome_icon, {
                                                         icon: unref(faCheckCircle),
-                                                        class: "text-success me-1"
+                                                        class: "text-primary me-1"
                                                       }, null, 8, ["icon"]),
                                                       createTextVNode(" " + toDisplayString(layout.label), 1)
                                                     ]);
@@ -60723,7 +60749,7 @@ const _sfc_main$4 = /* @__PURE__ */ defineComponent({
                                                   }, [
                                                     createVNode(_component_font_awesome_icon, {
                                                       icon: unref(faCheckCircle),
-                                                      class: "text-success me-1"
+                                                      class: "text-primary me-1"
                                                     }, null, 8, ["icon"]),
                                                     createTextVNode(" " + toDisplayString(layout.label), 1)
                                                   ]);
@@ -60811,7 +60837,7 @@ const _sfc_main$4 = /* @__PURE__ */ defineComponent({
                                                 }, [
                                                   createVNode(_component_font_awesome_icon, {
                                                     icon: unref(faCheckCircle),
-                                                    class: "text-success me-1"
+                                                    class: "text-primary me-1"
                                                   }, null, 8, ["icon"]),
                                                   createTextVNode(" " + toDisplayString(layout.label), 1)
                                                 ]);
@@ -60881,16 +60907,16 @@ const _sfc_main$4 = /* @__PURE__ */ defineComponent({
                                             _push7(ssrRenderComponent(_component_b_col, { sm: "12" }, {
                                               default: withCtx((_7, _push8, _parent8, _scopeId7) => {
                                                 if (_push8) {
-                                                  _push8(`<ul class="list-group list-group-borderless mb-0 mt-2" data-v-b23db357${_scopeId7}><!--[-->`);
+                                                  _push8(`<ul class="list-group list-group-borderless mb-0 mt-2" data-v-3796b8d3${_scopeId7}><!--[-->`);
                                                   ssrRenderList(__props.property.regulations, (regulation, i2) => {
-                                                    _push8(`<li class="list-group-item pb-0" data-v-b23db357${_scopeId7}>`);
+                                                    _push8(`<li class="list-group-item pb-0" data-v-3796b8d3${_scopeId7}>`);
                                                     _push8(ssrRenderComponent(_component_font_awesome_icon, {
                                                       icon: unref(faCheckCircle),
-                                                      class: "text-success me-1"
+                                                      class: "text-primary me-1"
                                                     }, null, _parent8, _scopeId7));
                                                     _push8(` ${ssrInterpolate(regulation.label)}</li>`);
                                                   });
-                                                  _push8(`<!--]--></ul><div class="mt-2" data-v-b23db357${_scopeId7}>${__props.property.regulation ?? ""}</div>`);
+                                                  _push8(`<!--]--></ul><div class="mt-2" data-v-3796b8d3${_scopeId7}>${__props.property.regulation ?? ""}</div>`);
                                                 } else {
                                                   return [
                                                     createVNode("ul", { class: "list-group list-group-borderless mb-0 mt-2" }, [
@@ -60901,7 +60927,7 @@ const _sfc_main$4 = /* @__PURE__ */ defineComponent({
                                                         }, [
                                                           createVNode(_component_font_awesome_icon, {
                                                             icon: unref(faCheckCircle),
-                                                            class: "text-success me-1"
+                                                            class: "text-primary me-1"
                                                           }, null, 8, ["icon"]),
                                                           createTextVNode(" " + toDisplayString(regulation.label), 1)
                                                         ]);
@@ -60934,7 +60960,7 @@ const _sfc_main$4 = /* @__PURE__ */ defineComponent({
                                                     }, [
                                                       createVNode(_component_font_awesome_icon, {
                                                         icon: unref(faCheckCircle),
-                                                        class: "text-success me-1"
+                                                        class: "text-primary me-1"
                                                       }, null, 8, ["icon"]),
                                                       createTextVNode(" " + toDisplayString(regulation.label), 1)
                                                     ]);
@@ -60969,7 +60995,7 @@ const _sfc_main$4 = /* @__PURE__ */ defineComponent({
                                                   }, [
                                                     createVNode(_component_font_awesome_icon, {
                                                       icon: unref(faCheckCircle),
-                                                      class: "text-success me-1"
+                                                      class: "text-primary me-1"
                                                     }, null, 8, ["icon"]),
                                                     createTextVNode(" " + toDisplayString(regulation.label), 1)
                                                   ]);
@@ -61023,7 +61049,7 @@ const _sfc_main$4 = /* @__PURE__ */ defineComponent({
                                                 }, [
                                                   createVNode(_component_font_awesome_icon, {
                                                     icon: unref(faCheckCircle),
-                                                    class: "text-success me-1"
+                                                    class: "text-primary me-1"
                                                   }, null, 8, ["icon"]),
                                                   createTextVNode(" " + toDisplayString(regulation.label), 1)
                                                 ]);
@@ -61211,7 +61237,7 @@ const _sfc_main$4 = /* @__PURE__ */ defineComponent({
                                                 }, [
                                                   createVNode(_component_font_awesome_icon, {
                                                     icon: unref(faCheckCircle),
-                                                    class: "text-success me-1"
+                                                    class: "text-primary me-1"
                                                   }, null, 8, ["icon"]),
                                                   createTextVNode(" " + toDisplayString(layout.label), 1)
                                                 ]);
@@ -61265,7 +61291,7 @@ const _sfc_main$4 = /* @__PURE__ */ defineComponent({
                                                 }, [
                                                   createVNode(_component_font_awesome_icon, {
                                                     icon: unref(faCheckCircle),
-                                                    class: "text-success me-1"
+                                                    class: "text-primary me-1"
                                                   }, null, 8, ["icon"]),
                                                   createTextVNode(" " + toDisplayString(regulation.label), 1)
                                                 ]);
@@ -61298,7 +61324,7 @@ const _sfc_main$4 = /* @__PURE__ */ defineComponent({
                     }),
                     _: 1
                   }, _parent3, _scopeId2));
-                  _push3(`<aside class="col-xl-5 order-xl-2" data-v-b23db357${_scopeId2}>`);
+                  _push3(`<aside class="col-xl-5 order-xl-2" data-v-3796b8d3${_scopeId2}>`);
                   if (__props.rentalMonthlyBilling) {
                     _push3(ssrRenderComponent(_sfc_main$f, {
                       property: __props.property,
@@ -61474,7 +61500,7 @@ const _sfc_main$4 = /* @__PURE__ */ defineComponent({
                                               }, [
                                                 createVNode(_component_font_awesome_icon, {
                                                   icon: unref(faCheckCircle),
-                                                  class: "text-success me-1"
+                                                  class: "text-primary me-1"
                                                 }, null, 8, ["icon"]),
                                                 createTextVNode(" " + toDisplayString(layout.label), 1)
                                               ]);
@@ -61528,7 +61554,7 @@ const _sfc_main$4 = /* @__PURE__ */ defineComponent({
                                               }, [
                                                 createVNode(_component_font_awesome_icon, {
                                                   icon: unref(faCheckCircle),
-                                                  class: "text-success me-1"
+                                                  class: "text-primary me-1"
                                                 }, null, 8, ["icon"]),
                                                 createTextVNode(" " + toDisplayString(regulation.label), 1)
                                               ]);
@@ -61740,7 +61766,7 @@ const _sfc_main$4 = /* @__PURE__ */ defineComponent({
                                             }, [
                                               createVNode(_component_font_awesome_icon, {
                                                 icon: unref(faCheckCircle),
-                                                class: "text-success me-1"
+                                                class: "text-primary me-1"
                                               }, null, 8, ["icon"]),
                                               createTextVNode(" " + toDisplayString(layout.label), 1)
                                             ]);
@@ -61794,7 +61820,7 @@ const _sfc_main$4 = /* @__PURE__ */ defineComponent({
                                             }, [
                                               createVNode(_component_font_awesome_icon, {
                                                 icon: unref(faCheckCircle),
-                                                class: "text-success me-1"
+                                                class: "text-primary me-1"
                                               }, null, 8, ["icon"]),
                                               createTextVNode(" " + toDisplayString(regulation.label), 1)
                                             ]);
@@ -61854,7 +61880,7 @@ _sfc_main$4.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/Pages/RealEstate/Show.vue");
   return _sfc_setup$4 ? _sfc_setup$4(props, ctx) : void 0;
 };
-const Show = /* @__PURE__ */ _export_sfc(_sfc_main$4, [["__scopeId", "data-v-b23db357"]]);
+const Show = /* @__PURE__ */ _export_sfc(_sfc_main$4, [["__scopeId", "data-v-3796b8d3"]]);
 const __vite_glob_0_61 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: Show

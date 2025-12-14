@@ -457,7 +457,7 @@ const copyShareLink = () => {
                                                         </BBadge>
 
                                                         <!-- Frais de scolarité -->
-                                                        <BBadge v-if="program.tuitionFee" variant="success" class="px-2 py-1">
+                                                        <BBadge v-if="program.tuitionFee" variant="primary" class="px-2 py-1">
                                                             <i class="bi bi-currency-euro me-1"></i>
                                                             {{ program.tuitionFee.formatted }}
                                                         </BBadge>
@@ -524,7 +524,7 @@ const copyShareLink = () => {
                                 <BCardBody>
                                     <!-- Accréditation nationale -->
                                     <div v-if="establishment.accreditations?.national" class="mb-3">
-                                        <BBadge variant="success" class="px-3 py-2">
+                                        <BBadge variant="primary" class="px-3 py-2">
                                             <i class="bi bi-patch-check-fill me-1"></i>
                                             Accréditation Nationale
                                         </BBadge>
@@ -569,7 +569,7 @@ const copyShareLink = () => {
                                             <BBadge
                                                 v-for="regulation in establishment.regulations"
                                                 :key="regulation.id"
-                                                variant="success"
+                                                variant="primary"
                                                 class="px-3 py-2"
                                             >
                                                 <i class="bi bi-patch-check me-1"></i>

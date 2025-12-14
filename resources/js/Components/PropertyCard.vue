@@ -123,7 +123,7 @@ const amenities = computed(() =>
                 class="d-sm-flex justify-content-sm-between align-items-center flex-wrap"
             >
                 <div class="hstack gap-2">
-                    <h5 class="fw-normal text-success mb-0">
+                    <h5 class="fw-normal text-primary mb-0">
                         {{ formattedPrice }}
                     </h5>
                 </div>

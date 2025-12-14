@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue';
+import { ref, computed, watch, onMounted } from 'vue';
 import axios from 'axios';
 
 interface Props {
@@ -20,8 +20,24 @@ const emit = defineEmits(['documents-updated']);
 
 const uploading = ref(false);
 const uploadProgress = ref(0);
-const documents = ref<UploadedDocument[]>(props.existingDocuments || []);
+const documents = ref<UploadedDocument[]>([]);
 const errorMessage = ref<string | null>(null);
+
+// Sprint1 Feature 1.8.1 - Initialiser et surveiller les documents existants
+onMounted(() => {
+    if (props.existingDocuments && props.existingDocuments.length > 0) {
+        documents.value = [...props.existingDocuments];
+        console.log('📄 Documents existants chargés:', documents.value.length);
+    }
+});
+
+// Surveiller les changements de props.existingDocuments
+watch(() => props.existingDocuments, (newDocs) => {
+    if (newDocs && newDocs.length > 0 && documents.value.length === 0) {
+        documents.value = [...newDocs];
+        console.log('📄 Documents mis à jour depuis props:', documents.value.length);
+    }
+}, { immediate: true });
 
 const documentTypes = [
     { value: 'CV', label: 'Curriculum Vitae (CV)', required: true },

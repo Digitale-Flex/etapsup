@@ -30,7 +30,7 @@ const textClasses = computed(() => {
 
     let color = '';
     if (props.variant === 'gradient') {
-        color = 'bg-gradient-to-r from-[#667eea] to-[#764ba2] bg-clip-text text-transparent';
+        color = 'bg-gradient-to-r from-[#1e3a8a] to-[#1e3a8a] bg-clip-text text-transparent';
     } else if (props.variant === 'white') {
         color = 'text-white';
     } else {
@@ -49,8 +49,8 @@ const textClasses = computed(() => {
                 <!-- Gradient Definition -->
                 <defs>
                     <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
-                        <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+                        <stop offset="0%" style="stop-color:#1e3a8a;stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:#1e3a8a;stop-opacity:1" />
                     </linearGradient>
                 </defs>
 

@@ -13,6 +13,7 @@ import type { Establishment } from '@/Types/establishment';
 interface Props {
     establishment: Establishment;
     applicationId?: string; // Sprint1 Feature 1.8.1 - Pour DocumentUploader
+    existingDocuments?: any[]; // Sprint1 Feature 1.8.1 - Documents existants pour persistance
     user?: any;
     draftData?: any;
     stripeKey: string;
@@ -204,7 +205,7 @@ watch(currentStep, async (newStep) => {
 }, { immediate: true }); // S'exécute immédiatement au montage
 
 // Auto-save draft
-const saveDraft = async () => {
+const saveDraft = async (): Promise<boolean> => {
     try {
         const response = await axios.post('/applications/draft', {
             ...form.data(),
@@ -214,8 +215,12 @@ const saveDraft = async () => {
         if (response.data.application_id) {
             localApplicationId.value = response.data.application_id;
         }
-    } catch (error) {
-        console.error('Erreur sauvegarde:', error);
+        console.log('✅ Brouillon sauvegardé avec succès');
+        return true;
+    } catch (error: any) {
+        console.error('❌ Erreur sauvegarde:', error);
+        errorMessage.value = error.response?.data?.message || 'Erreur lors de la sauvegarde du brouillon';
+        return false;
     }
 };
 
@@ -250,8 +255,13 @@ const nextStep = async () => {
 
 // Finaliser plus tard
 const finalizeLater = async () => {
-    await saveDraft();
-    window.location.href = '/dashboard/reservations';
+    const saved = await saveDraft();
+    if (saved) {
+        window.location.href = '/dashboard';
+    } else {
+        // Afficher l'erreur (déjà définie dans saveDraft)
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
 };
 
 const prevStep = () => {
@@ -785,7 +795,7 @@ const formattedAmount = computed(() => {
                             v-else
                             ref="documentUploaderRef"
                             :application-id="localApplicationId"
-                            :existing-documents="[]"
+                            :existing-documents="existingDocuments || []"
                             @documents-updated="documentsComplete = true"
                         />
                     </div>

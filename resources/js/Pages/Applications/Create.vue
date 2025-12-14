@@ -11,6 +11,7 @@ import type { Establishment } from '@/Types/establishment';
 interface PageProps {
     establishment: Establishment;
     applicationId?: string; // Sprint1 Feature 1.8.1 - Pour DocumentUploader
+    existingDocuments?: any[]; // Sprint1 Feature 1.8.1 - Documents existants pour persistance
     draftData?: any;
     user?: any;
     stripeKey: string;
@@ -39,6 +40,7 @@ const props = defineProps<PageProps>();
                     <ApplicationForm
                         :establishment="establishment"
                         :applicationId="applicationId"
+                        :existingDocuments="existingDocuments"
                         :draftData="draftData"
                         :user="user"
                         :stripeKey="stripeKey"
