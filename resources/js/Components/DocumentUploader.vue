@@ -55,14 +55,24 @@ const selectFile = async (documentType: string) => {
         const file = e.target.files[0];
         if (!file) return;
 
+        // Debug: afficher infos fichier
+        console.log('📁 Fichier sélectionné:', {
+            name: file.name,
+            type: file.type,
+            size: file.size,
+            sizeKo: Math.round(file.size / 1024) + ' Ko',
+            maxAllowed: MAX_FILE_SIZE,
+            typeAllowed: ALLOWED_TYPES.includes(file.type)
+        });
+
         // Validation client-side
         if (!ALLOWED_TYPES.includes(file.type)) {
-            errorMessage.value = 'Format non autorisé. Utilisez PDF, JPG ou PNG.';
+            errorMessage.value = `Format non autorisé (${file.type}). Utilisez PDF, JPG ou PNG.`;
             return;
         }
 
         if (file.size > MAX_FILE_SIZE) {
-            errorMessage.value = 'Fichier trop volumineux. Maximum 5 Mo.';
+            errorMessage.value = `Fichier trop volumineux (${Math.round(file.size / 1024)} Ko). Maximum 5 Mo.`;
             return;
         }
 
@@ -83,7 +93,8 @@ const uploadFile = async (file: File, documentType: string) => {
     formData.append('application_id', props.applicationId);
 
     try {
-        const response = await axios.post('/api/v1/documents', formData, {
+        // Utiliser route web (session auth) au lieu de route API (Sanctum)
+        const response = await axios.post('/applications/documents', formData, {
             headers: { 'Content-Type': 'multipart/form-data' },
             onUploadProgress: (progressEvent) => {
                 if (progressEvent.total) {
@@ -107,7 +118,8 @@ const removeDocument = async (documentId: number) => {
     if (!confirm('Voulez-vous vraiment supprimer ce document ?')) return;
 
     try {
-        await axios.delete(`/api/v1/documents/${documentId}`);
+        // Utiliser route web (session auth) au lieu de route API (Sanctum)
+        await axios.delete(`/applications/documents/${documentId}`);
         documents.value = documents.value.filter(d => d.id !== documentId);
         emit('documents-updated', documents.value);
     } catch (error: any) {
@@ -156,6 +168,7 @@ defineExpose({ canProceed, missingRequiredDocs });
                                 {{ documents.find(d => d.document_type === docType.value)?.file_name }}
                             </span>
                             <BButton
+                                type="button"
                                 variant="outline-danger"
                                 size="sm"
                                 @click="removeDocument(documents.find(d => d.document_type === docType.value)!.id)"
@@ -167,6 +180,7 @@ defineExpose({ canProceed, missingRequiredDocs });
 
                     <template v-else>
                         <BButton
+                            type="button"
                             variant="outline-primary"
                             size="sm"
                             @click="selectFile(docType.value)"
@@ -205,6 +219,7 @@ defineExpose({ canProceed, missingRequiredDocs });
                                 {{ documents.find(d => d.document_type === docType.value)?.file_name }}
                             </span>
                             <BButton
+                                type="button"
                                 variant="outline-danger"
                                 size="sm"
                                 @click="removeDocument(documents.find(d => d.document_type === docType.value)!.id)"
@@ -216,6 +231,7 @@ defineExpose({ canProceed, missingRequiredDocs });
 
                     <template v-else>
                         <BButton
+                            type="button"
                             variant="outline-secondary"
                             size="sm"
                             @click="selectFile(docType.value)"

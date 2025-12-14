@@ -72,30 +72,14 @@ const uploadPhoto = async (event: Event) => {
     }
 };
 
-// Sprint1 Update: Feature 1.2.1 — Livret explicatif
+// Sprint1 Update: Feature 1.2.1 — Livret explicatif (passé via props, pas via API)
 const showLivretModal = ref(false);
-const livretUrl = ref<string | null>(null);
-const isLoadingLivret = ref(false);
 
-const openLivret = async () => {
-    isLoadingLivret.value = true;
-
-    try {
-        await axios.get('/sanctum/csrf-cookie');
-
-        const response = await axios.get('/api/v1/settings/livret');
-
-        if (response.data.success && response.data.livret_available) {
-            livretUrl.value = response.data.livret_url;
-            showLivretModal.value = true;
-        } else {
-            alert('Le livret d\'arrivée n\'est pas encore disponible. Veuillez réessayer plus tard.');
-        }
-    } catch (error: any) {
-        console.error('Erreur chargement livret:', error);
-        alert('Impossible de charger le livret pour le moment.');
-    } finally {
-        isLoadingLivret.value = false;
+const openLivret = () => {
+    if (props.livretUrl) {
+        showLivretModal.value = true;
+    } else {
+        alert('Le livret d\'arrivée n\'est pas encore disponible. Veuillez réessayer plus tard.');
     }
 };
 
@@ -110,6 +94,7 @@ interface Props {
     profileCompletion?: number;
     documents?: any[]; // Sprint1 Update
     payments?: any[];  // Sprint1 Update
+    livretUrl?: string | null; // Sprint1 Feature 1.2.1
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -117,7 +102,8 @@ const props = withDefaults(defineProps<Props>(), {
     randomEstablishments: () => [],
     profileCompletion: 0,
     documents: () => [], // Sprint1 Update
-    payments: () => []   // Sprint1 Update
+    payments: () => [],   // Sprint1 Update
+    livretUrl: null // Sprint1 Feature 1.2.1
 });
 
 // Refonte Story 1.1.1
@@ -383,7 +369,7 @@ const getStatusLabel = (status: string) => {
                         </BCol>
                         <!-- Sprint1 Update: Feature 1.2.1 — Livret explicatif -->
                         <BCol md="3" sm="6">
-                            <a href="#" @click.prevent="openLivret" class="action-card" :class="{ 'loading': isLoadingLivret }">
+                            <a href="#" @click.prevent="openLivret" class="action-card">
                                 <div class="action-icon">📘</div>
                                 <div class="action-label">Consulter mon<br/>livret d'arrivée</div>
                             </a>
@@ -409,16 +395,16 @@ const getStatusLabel = (status: string) => {
             <div class="livret-modal-body">
                 <p class="livret-description">Consulte ton livret pour connaître chaque étape de ton parcours, de la candidature à ton arrivée.</p>
                 <iframe
-                    v-if="livretUrl"
-                    :src="livretUrl"
+                    v-if="props.livretUrl"
+                    :src="props.livretUrl"
                     class="livret-iframe"
                     frameborder="0"
                 ></iframe>
             </div>
             <div class="livret-modal-footer">
                 <a
-                    v-if="livretUrl"
-                    :href="livretUrl"
+                    v-if="props.livretUrl"
+                    :href="props.livretUrl"
                     download
                     class="btn-download-livret"
                     target="_blank"

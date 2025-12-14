@@ -191,12 +191,25 @@ Route::get('/dashboard', function () {
         }
     }
 
+    // Sprint1 Feature 1.2.1 - Livret explicatif (passé directement, pas via API)
+    $livretUrl = null;
+    try {
+        $settings = app(\App\Settings\GeneralSettings::class);
+        $livretPath = $settings->livret_path;
+        if (!empty($livretPath) && \Illuminate\Support\Facades\Storage::disk('public')->exists($livretPath)) {
+            $livretUrl = \Illuminate\Support\Facades\Storage::disk('public')->url($livretPath);
+        }
+    } catch (\Exception $e) {
+        logger()->warning('Erreur récupération livret pour dashboard', ['error' => $e->getMessage()]);
+    }
+
     return Inertia::render('Dashboard', [
         'applications' => $applications,
         'randomEstablishments' => $randomEstablishments,
         'profileCompletion' => $profileCompletion,
         'documents' => $documents, // Sprint1 Update
         'payments' => $payments,   // Sprint1 Update
+        'livretUrl' => $livretUrl, // Sprint1 Feature 1.2.1
     ]);
 })->middleware(['auth', 'verified'])->name('dashboard');
 
@@ -220,6 +233,10 @@ Route::middleware('auth')->group(function () {
     Route::post('/applications/draft', [\App\Http\Controllers\ApplicationController::class, 'saveDraft'])->name('applications.draft');
     Route::post('/applications', [\App\Http\Controllers\ApplicationController::class, 'store'])->name('applications.store');
     Route::post('/applications/payment/confirm', [\App\Http\Controllers\ApplicationController::class, 'confirmPayment'])->name('applications.payment.confirm');
+
+    // Routes web pour documents de candidature (session auth, pas Sanctum API)
+    Route::post('/applications/documents', [\App\Http\Controllers\ApplicationController::class, 'uploadDocument'])->name('applications.documents.upload');
+    Route::delete('/applications/documents/{document}', [\App\Http\Controllers\ApplicationController::class, 'deleteDocument'])->name('applications.documents.delete');
 
     // Refonte Story 1.1.2 - Affichage détails candidature cliquable depuis Dashboard
     Route::get('/candidatures/{application}', [\App\Http\Controllers\ApplicationController::class, 'show'])->name('applications.show');

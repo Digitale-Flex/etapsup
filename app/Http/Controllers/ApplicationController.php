@@ -40,6 +40,7 @@ class ApplicationController extends Controller
 
         $draftData = null;
         $establishment = null;
+        $existingApplicationId = null; // Sprint1 Feature 1.8.1 - Pour DocumentUploader
 
         // CAS 1: Reprendre une candidature existante
         if ($applicationId) {
@@ -54,6 +55,7 @@ class ApplicationController extends Controller
 
             $establishment = $application->property;
             $draftData = $application->fees;
+            $existingApplicationId = $application->hashid; // Sprint1 Feature 1.8.1
         }
         // CAS 2: Nouvelle candidature
         else {
@@ -82,9 +84,11 @@ class ApplicationController extends Controller
                 ->first();
 
             $draftData = $draftApplication?->fees ?? null;
+            $existingApplicationId = $draftApplication?->hashid; // Sprint1 Feature 1.8.1
         }
 
         return Inertia::render('Applications/Create', [
+            'applicationId' => $existingApplicationId, // Sprint1 Feature 1.8.1 - Pour DocumentUploader
             'draftData' => $draftData,
             'establishment' => [
                 'id' => $establishment->hashid,
@@ -163,7 +167,7 @@ class ApplicationController extends Controller
     {
         $validated = $request->validate([
             'property_id' => ['required', 'string'],
-            'current_step' => ['required', 'integer', 'min:1', 'max:5'],
+            'current_step' => ['required', 'integer', 'min:1', 'max:6'], // Sprint1: 6 étapes (documents ajoutés)
         ]);
 
         $user = $request->user();
@@ -557,6 +561,135 @@ class ApplicationController extends Controller
             return response()->json([
                 'error' => 'Erreur lors de la confirmation du paiement.',
                 'message' => $e->getMessage(),
+            ], 500);
+        }
+    }
+
+    /**
+     * Upload d'un document de candidature (route web avec session)
+     * POST /applications/documents
+     */
+    public function uploadDocument(Request $request): JsonResponse
+    {
+        $validated = $request->validate([
+            'application_id' => ['required', 'string'],
+            'document_type' => ['required', 'string', 'max:255'],
+            'file' => ['required', 'file', 'mimes:pdf,jpg,jpeg,png', 'max:5120'],
+        ], [
+            'file.required' => 'Veuillez sélectionner un fichier',
+            'file.mimes' => 'Formats acceptés : PDF, JPG, JPEG, PNG',
+            'file.max' => 'La taille maximale est de 5 Mo',
+        ]);
+
+        try {
+            $user = $request->user();
+
+            // Décoder le hashid et vérifier ownership
+            $application = $this->application
+                ->findByHashidOrFail($validated['application_id']);
+
+            if ($application->user_id !== $user->id) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Non autorisé',
+                ], 403);
+            }
+
+            // Upload vers disk 'local' (storage/app/private)
+            $file = $request->file('file');
+            $fileName = time() . '_' . $file->getClientOriginalName();
+            $filePath = $file->storeAs('documents/' . $user->id, $fileName, 'local');
+
+            // Créer l'enregistrement
+            $document = \App\Models\ApplicationDocument::create([
+                'application_id' => $application->id,
+                'document_type' => $validated['document_type'],
+                'file_path' => $filePath,
+                'verified' => false,
+            ]);
+
+            logger()->info('Document uploadé via route web', [
+                'user_id' => $user->id,
+                'application_id' => $application->id,
+                'document_id' => $document->id,
+                'document_type' => $document->document_type,
+            ]);
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Document téléversé avec succès',
+                'document' => [
+                    'id' => $document->id,
+                    'document_type' => $document->document_type,
+                    'file_name' => basename($document->file_path),
+                    'file_size' => $file->getSize(),
+                    'verified' => $document->verified,
+                    'created_at' => $document->created_at->format('d/m/Y à H:i'),
+                ],
+            ], 201);
+
+        } catch (\Exception $e) {
+            logger()->error('Erreur upload document', [
+                'user_id' => $request->user()?->id,
+                'error' => $e->getMessage(),
+            ]);
+
+            return response()->json([
+                'success' => false,
+                'message' => 'Erreur lors de l\'upload du document',
+            ], 500);
+        }
+    }
+
+    /**
+     * Supprimer un document de candidature (route web avec session)
+     * DELETE /applications/documents/{document}
+     */
+    public function deleteDocument(Request $request, int $documentId): JsonResponse
+    {
+        try {
+            $user = $request->user();
+            $document = \App\Models\ApplicationDocument::findOrFail($documentId);
+
+            // Vérifier ownership
+            if ($document->application->user_id !== $user->id) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Non autorisé',
+                ], 403);
+            }
+
+            // Empêcher suppression si vérifié
+            if ($document->verified) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Document déjà vérifié, suppression impossible',
+                ], 422);
+            }
+
+            // Supprimer fichier
+            if (\Illuminate\Support\Facades\Storage::disk('local')->exists($document->file_path)) {
+                \Illuminate\Support\Facades\Storage::disk('local')->delete($document->file_path);
+            }
+
+            logger()->info('Document supprimé via route web', [
+                'user_id' => $user->id,
+                'document_id' => $document->id,
+            ]);
+
+            $document->delete();
+
+            return response()->json(['success' => true], 200);
+
+        } catch (\Exception $e) {
+            logger()->error('Erreur suppression document', [
+                'document_id' => $documentId,
+                'error' => $e->getMessage(),
+            ]);
+
+            return response()->json([
+                'success' => false,
+                'message' => 'Erreur lors de la suppression',
             ], 500);
         }
     }

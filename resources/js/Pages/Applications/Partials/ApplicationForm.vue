@@ -12,6 +12,7 @@ import type { Establishment } from '@/Types/establishment';
 
 interface Props {
     establishment: Establishment;
+    applicationId?: string; // Sprint1 Feature 1.8.1 - Pour DocumentUploader
     user?: any;
     draftData?: any;
     stripeKey: string;
@@ -33,6 +34,8 @@ const processing = computed(() => form.processing);
 // Sprint1 Feature 1.8.1 - Référence DocumentUploader pour validation
 const documentUploaderRef = ref<InstanceType<typeof DocumentUploader> | null>(null);
 const documentsComplete = ref(false);
+// Sprint1 Feature 1.8.1 - ApplicationId local (mis à jour après saveDraft)
+const localApplicationId = ref<string | undefined>(props.applicationId);
 
 // Formulaire complet (toutes sections) - avec chargement draft si existant
 const form = useForm({
@@ -203,10 +206,14 @@ watch(currentStep, async (newStep) => {
 // Auto-save draft
 const saveDraft = async () => {
     try {
-        await axios.post('/applications/draft', {
+        const response = await axios.post('/applications/draft', {
             ...form.data(),
             current_step: currentStep.value,
         });
+        // Sprint1 Feature 1.8.1 - Mettre à jour applicationId après création
+        if (response.data.application_id) {
+            localApplicationId.value = response.data.application_id;
+        }
     } catch (error) {
         console.error('Erreur sauvegarde:', error);
     }
@@ -769,9 +776,15 @@ const formattedAmount = computed(() => {
                             5. Pièces justificatives
                         </h6>
 
+                        <!-- Sprint1 Feature 1.8.1 - Vérifier que applicationId existe -->
+                        <BAlert v-if="!localApplicationId" variant="warning" :model-value="true">
+                            <i class="bi bi-exclamation-triangle me-2"></i>
+                            Veuillez d'abord sauvegarder votre candidature (étapes 1-4) avant de téléverser des documents.
+                        </BAlert>
                         <DocumentUploader
+                            v-else
                             ref="documentUploaderRef"
-                            :application-id="establishment.id"
+                            :application-id="localApplicationId"
                             :existing-documents="[]"
                             @documents-updated="documentsComplete = true"
                         />
