@@ -6234,7 +6234,7 @@ const _sfc_main$1q = /* @__PURE__ */ defineComponent({
       const _directive_b_toggle = vBToggle;
       _push(`<header${ssrRenderAttrs(mergeProps({
         class: ["navbar-light header-sticky", { "header-sticky-on": unref(isSticky) }]
-      }, _attrs))}><nav class="navbar navbar-expand-xl">`);
+      }, _attrs))} data-v-d687630e><nav class="navbar navbar-expand-xl" data-v-d687630e>`);
       _push(ssrRenderComponent(_component_b_container, null, {
         default: withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
@@ -6243,7 +6243,7 @@ const _sfc_main$1q = /* @__PURE__ */ defineComponent({
               _push2(`<button${ssrRenderAttrs(mergeProps({
                 class: "navbar-toggler ms-sm-0 p-sm-2 ms-auto p-0",
                 type: "button"
-              }, ssrGetDirectiveProps(_ctx, _directive_b_toggle, "navbar-collapse")))}${_scopeId}><span class="navbar-toggler-animation py-1"${_scopeId}><span${_scopeId}></span><span${_scopeId}></span><span${_scopeId}></span></span><span class="d-none d-sm-inline-block small ms-1"${_scopeId}>Menu</span></button>`);
+              }, ssrGetDirectiveProps(_ctx, _directive_b_toggle, "navbar-collapse")))} data-v-d687630e${_scopeId}><span class="navbar-toggler-animation py-1" data-v-d687630e${_scopeId}><span data-v-d687630e${_scopeId}></span><span data-v-d687630e${_scopeId}></span><span data-v-d687630e${_scopeId}></span></span><span class="d-none d-sm-inline-block small ms-1" data-v-d687630e${_scopeId}>Menu</span></button>`);
             } else {
               _push2(`<!---->`);
             }
@@ -6264,9 +6264,9 @@ const _sfc_main$1q = /* @__PURE__ */ defineComponent({
                   }, {
                     default: withCtx((_3, _push4, _parent4, _scopeId3) => {
                       if (_push4) {
-                        _push4(`<a class="nav-notification btn btn-light mb-0 p-0" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside"${_scopeId3}>`);
+                        _push4(`<a class="nav-notification btn btn-light mb-0 p-0" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside" data-v-d687630e${_scopeId3}>`);
                         _push4(ssrRenderComponent(unref(BIconBell), { class: "fa-fw" }, null, _parent4, _scopeId3));
-                        _push4(`</a><span class="notif-badge animation-blink"${_scopeId3}></span><div class="dropdown-menu dropdown-animation dropdown-menu-end dropdown-menu-size-md p-0 shadow-lg"${_scopeId3}>`);
+                        _push4(`</a><span class="notif-badge animation-blink" data-v-d687630e${_scopeId3}></span><div class="dropdown-menu dropdown-animation dropdown-menu-end dropdown-menu-size-md p-0 shadow-lg" data-v-d687630e${_scopeId3}>`);
                         _push4(ssrRenderComponent(_component_b_card, {
                           class: "bg-transparent",
                           "body-class": "p-0"
@@ -6276,7 +6276,7 @@ const _sfc_main$1q = /* @__PURE__ */ defineComponent({
                               _push5(ssrRenderComponent(_component_b_card_header, { class: "d-flex justify-content-between align-items-center border-bottom bg-transparent" }, {
                                 default: withCtx((_5, _push6, _parent6, _scopeId5) => {
                                   if (_push6) {
-                                    _push6(`<h6 class="m-0"${_scopeId5}> Notifications <span class="badge bg-danger text-danger ms-2 bg-opacity-10"${_scopeId5}>4 new</span></h6><a class="small" href="#"${_scopeId5}>Clear all</a>`);
+                                    _push6(`<h6 class="m-0" data-v-d687630e${_scopeId5}> Notifications <span class="badge bg-danger text-danger ms-2 bg-opacity-10" data-v-d687630e${_scopeId5}>4 new</span></h6><a class="small" href="#" data-v-d687630e${_scopeId5}>Clear all</a>`);
                                   } else {
                                     return [
                                       createVNode("h6", { class: "m-0" }, [
@@ -6295,7 +6295,7 @@ const _sfc_main$1q = /* @__PURE__ */ defineComponent({
                               _push5(ssrRenderComponent(_component_b_card_footer, { class: "border-top bg-transparent text-center" }, {
                                 default: withCtx((_5, _push6, _parent6, _scopeId5) => {
                                   if (_push6) {
-                                    _push6(`<a href="#" class="btn btn-sm btn-link mb-0 p-0"${_scopeId5}>See all incoming activity</a>`);
+                                    _push6(`<a href="#" class="btn btn-sm btn-link mb-0 p-0" data-v-d687630e${_scopeId5}>See all incoming activity</a>`);
                                   } else {
                                     return [
                                       createVNode("a", {
@@ -6387,7 +6387,7 @@ const _sfc_main$1q = /* @__PURE__ */ defineComponent({
                     }),
                     _: 1
                   }, _parent3, _scopeId2));
-                  _push3(`<li class="nav-item d-none d-sm-block ms-3"${_scopeId2}>`);
+                  _push3(`<li class="nav-item d-none d-sm-block ms-3" data-v-d687630e${_scopeId2}>`);
                   _push3(ssrRenderComponent(unref(Link), {
                     href: _ctx.route("establishments.index"),
                     class: [
@@ -6408,13 +6408,10 @@ const _sfc_main$1q = /* @__PURE__ */ defineComponent({
                     }),
                     _: 1
                   }, _parent3, _scopeId2));
-                  _push3(`</li><li class="nav-item d-none d-sm-block ms-2"${_scopeId2}>`);
+                  _push3(`</li><li class="nav-item d-none d-sm-block ms-2" data-v-d687630e${_scopeId2}>`);
                   _push3(ssrRenderComponent(unref(Link), {
                     href: _ctx.route("custom-search.index"),
-                    class: [
-                      "btn mb-0",
-                      _ctx.route().current("custom-search.*") ? "btn-info" : "btn-info-soft"
-                    ]
+                    class: ["btn mb-0 btn-accompagnement", { "active": _ctx.route().current("custom-search.*") }]
                   }, {
                     default: withCtx((_3, _push4, _parent4, _scopeId3) => {
                       if (_push4) {
@@ -6435,7 +6432,7 @@ const _sfc_main$1q = /* @__PURE__ */ defineComponent({
                   } else {
                     _push3(ssrRenderComponent(unref(Link), {
                       href: _ctx.route("login"),
-                      class: "btn btn-outline-primary btn-sm"
+                      class: "btn btn-outline-primary btn-sm ms-3"
                     }, {
                       default: withCtx((_3, _push4, _parent4, _scopeId3) => {
                         if (_push4) {
@@ -6520,10 +6517,7 @@ const _sfc_main$1q = /* @__PURE__ */ defineComponent({
                     createVNode("li", { class: "nav-item d-none d-sm-block ms-2" }, [
                       createVNode(unref(Link), {
                         href: _ctx.route("custom-search.index"),
-                        class: [
-                          "btn mb-0",
-                          _ctx.route().current("custom-search.*") ? "btn-info" : "btn-info-soft"
-                        ]
+                        class: ["btn mb-0 btn-accompagnement", { "active": _ctx.route().current("custom-search.*") }]
                       }, {
                         default: withCtx(() => [
                           createVNode(unref(BIconLightningCharge), { class: "mb-1 me-1" }),
@@ -6535,7 +6529,7 @@ const _sfc_main$1q = /* @__PURE__ */ defineComponent({
                     _ctx.$page.props.auth?.user ? (openBlock(), createBlock(_sfc_main$1r, { key: 0 })) : (openBlock(), createBlock(unref(Link), {
                       key: 1,
                       href: _ctx.route("login"),
-                      class: "btn btn-outline-primary btn-sm"
+                      class: "btn btn-outline-primary btn-sm ms-3"
                     }, {
                       default: withCtx(() => [
                         createTextVNode("Se connecter")
@@ -6639,10 +6633,7 @@ const _sfc_main$1q = /* @__PURE__ */ defineComponent({
                   createVNode("li", { class: "nav-item d-none d-sm-block ms-2" }, [
                     createVNode(unref(Link), {
                       href: _ctx.route("custom-search.index"),
-                      class: [
-                        "btn mb-0",
-                        _ctx.route().current("custom-search.*") ? "btn-info" : "btn-info-soft"
-                      ]
+                      class: ["btn mb-0 btn-accompagnement", { "active": _ctx.route().current("custom-search.*") }]
                     }, {
                       default: withCtx(() => [
                         createVNode(unref(BIconLightningCharge), { class: "mb-1 me-1" }),
@@ -6654,7 +6645,7 @@ const _sfc_main$1q = /* @__PURE__ */ defineComponent({
                   _ctx.$page.props.auth?.user ? (openBlock(), createBlock(_sfc_main$1r, { key: 0 })) : (openBlock(), createBlock(unref(Link), {
                     key: 1,
                     href: _ctx.route("login"),
-                    class: "btn btn-outline-primary btn-sm"
+                    class: "btn btn-outline-primary btn-sm ms-3"
                   }, {
                     default: withCtx(() => [
                       createTextVNode("Se connecter")
@@ -6679,6 +6670,7 @@ _sfc_main$1q.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/Layouts/Partials/AppHeader.vue");
   return _sfc_setup$1q ? _sfc_setup$1q(props, ctx) : void 0;
 };
+const AppHeader = /* @__PURE__ */ _export_sfc(_sfc_main$1q, [["__scopeId", "data-v-d687630e"]]);
 const _sfc_main$1p = /* @__PURE__ */ defineComponent({
   __name: "AppFooter",
   __ssrInlineRender: true,
@@ -7310,7 +7302,7 @@ const _sfc_main$1o = /* @__PURE__ */ defineComponent({
     });
     return (_ctx, _push, _parent, _attrs) => {
       _push(`<div${ssrRenderAttrs(_attrs)}>`);
-      _push(ssrRenderComponent(_sfc_main$1q, null, null, _parent));
+      _push(ssrRenderComponent(AppHeader, null, null, _parent));
       _push(`<main>`);
       ssrRenderSlot(_ctx.$slots, "default", {}, null, _push, _parent);
       _push(`</main>`);
@@ -22111,7 +22103,7 @@ const _sfc_main$18 = /* @__PURE__ */ defineComponent({
                   }, {
                     default: withCtx((_3, _push4, _parent4, _scopeId3) => {
                       if (_push4) {
-                        _push4(`<div class="d-flex flex-column"${_scopeId3}><label for="rental_deposit_ids"${_scopeId3}>Frais de dossier *</label>`);
+                        _push4(`<div class="d-flex flex-column"${_scopeId3}><label for="rental_deposit_ids"${_scopeId3}>Services souhaités *</label>`);
                         _push4(ssrRenderComponent(_component_MultiSelect, {
                           "input-id": "country_id",
                           modelValue: unref(r$).$value.rental_deposit_ids,
@@ -22122,7 +22114,7 @@ const _sfc_main$18 = /* @__PURE__ */ defineComponent({
                           "max-selected-labels": 2,
                           "option-label": "name",
                           "option-value": "id",
-                          placeholder: "Frais de dossier"
+                          placeholder: "Orientation, Visa, Hébergement..."
                         }, null, _parent4, _scopeId3));
                         if (unref(r$).$fields.rental_deposit_ids.$error) {
                           _push4(ssrRenderComponent(_component_Message, {
@@ -22148,7 +22140,7 @@ const _sfc_main$18 = /* @__PURE__ */ defineComponent({
                       } else {
                         return [
                           createVNode("div", { class: "d-flex flex-column" }, [
-                            createVNode("label", { for: "rental_deposit_ids" }, "Frais de dossier *"),
+                            createVNode("label", { for: "rental_deposit_ids" }, "Services souhaités *"),
                             createVNode(_component_MultiSelect, {
                               "input-id": "country_id",
                               modelValue: unref(r$).$value.rental_deposit_ids,
@@ -22159,7 +22151,7 @@ const _sfc_main$18 = /* @__PURE__ */ defineComponent({
                               "max-selected-labels": 2,
                               "option-label": "name",
                               "option-value": "id",
-                              placeholder: "Frais de dossier"
+                              placeholder: "Orientation, Visa, Hébergement..."
                             }, null, 8, ["modelValue", "onUpdate:modelValue", "options", "disabled", "invalid"]),
                             unref(r$).$fields.rental_deposit_ids.$error ? (openBlock(), createBlock(_component_Message, {
                               key: 0,
@@ -22330,7 +22322,7 @@ const _sfc_main$18 = /* @__PURE__ */ defineComponent({
                   }, {
                     default: withCtx((_3, _push4, _parent4, _scopeId3) => {
                       if (_push4) {
-                        _push4(`<div class="d-flex flex-column"${_scopeId3}><label for="on_duration"${_scopeId3}>Durée du programme</label>`);
+                        _push4(`<div class="d-flex flex-column"${_scopeId3}><label for="on_duration"${_scopeId3}>Durée souhaitée</label>`);
                         _push4(ssrRenderComponent(_component_input_number, {
                           "input-id": "on_duration",
                           modelValue: unref(r$).$value.duration,
@@ -22338,7 +22330,7 @@ const _sfc_main$18 = /* @__PURE__ */ defineComponent({
                           disabled: unref(store).processing,
                           invalid: unref(r$).$fields.duration.$error,
                           suffix: " mois",
-                          placeholder: "A partir de 6 mois"
+                          placeholder: "Ex: 12, 24, 36 mois"
                         }, null, _parent4, _scopeId3));
                         if (unref(r$).$fields.duration.$error) {
                           _push4(ssrRenderComponent(_component_Message, {
@@ -22364,7 +22356,7 @@ const _sfc_main$18 = /* @__PURE__ */ defineComponent({
                       } else {
                         return [
                           createVNode("div", { class: "d-flex flex-column" }, [
-                            createVNode("label", { for: "on_duration" }, "Durée du programme"),
+                            createVNode("label", { for: "on_duration" }, "Durée souhaitée"),
                             createVNode(_component_input_number, {
                               "input-id": "on_duration",
                               modelValue: unref(r$).$value.duration,
@@ -22372,7 +22364,7 @@ const _sfc_main$18 = /* @__PURE__ */ defineComponent({
                               disabled: unref(store).processing,
                               invalid: unref(r$).$fields.duration.$error,
                               suffix: " mois",
-                              placeholder: "A partir de 6 mois"
+                              placeholder: "Ex: 12, 24, 36 mois"
                             }, null, 8, ["modelValue", "onUpdate:modelValue", "disabled", "invalid"]),
                             unref(r$).$fields.duration.$error ? (openBlock(), createBlock(_component_Message, {
                               key: 0,
@@ -22501,7 +22493,7 @@ const _sfc_main$18 = /* @__PURE__ */ defineComponent({
                       }, {
                         default: withCtx(() => [
                           createVNode("div", { class: "d-flex flex-column" }, [
-                            createVNode("label", { for: "rental_deposit_ids" }, "Frais de dossier *"),
+                            createVNode("label", { for: "rental_deposit_ids" }, "Services souhaités *"),
                             createVNode(_component_MultiSelect, {
                               "input-id": "country_id",
                               modelValue: unref(r$).$value.rental_deposit_ids,
@@ -22512,7 +22504,7 @@ const _sfc_main$18 = /* @__PURE__ */ defineComponent({
                               "max-selected-labels": 2,
                               "option-label": "name",
                               "option-value": "id",
-                              placeholder: "Frais de dossier"
+                              placeholder: "Orientation, Visa, Hébergement..."
                             }, null, 8, ["modelValue", "onUpdate:modelValue", "options", "disabled", "invalid"]),
                             unref(r$).$fields.rental_deposit_ids.$error ? (openBlock(), createBlock(_component_Message, {
                               key: 0,
@@ -22605,7 +22597,7 @@ const _sfc_main$18 = /* @__PURE__ */ defineComponent({
                       }, {
                         default: withCtx(() => [
                           createVNode("div", { class: "d-flex flex-column" }, [
-                            createVNode("label", { for: "on_duration" }, "Durée du programme"),
+                            createVNode("label", { for: "on_duration" }, "Durée souhaitée"),
                             createVNode(_component_input_number, {
                               "input-id": "on_duration",
                               modelValue: unref(r$).$value.duration,
@@ -22613,7 +22605,7 @@ const _sfc_main$18 = /* @__PURE__ */ defineComponent({
                               disabled: unref(store).processing,
                               invalid: unref(r$).$fields.duration.$error,
                               suffix: " mois",
-                              placeholder: "A partir de 6 mois"
+                              placeholder: "Ex: 12, 24, 36 mois"
                             }, null, 8, ["modelValue", "onUpdate:modelValue", "disabled", "invalid"]),
                             unref(r$).$fields.duration.$error ? (openBlock(), createBlock(_component_Message, {
                               key: 0,
@@ -22745,7 +22737,7 @@ const _sfc_main$18 = /* @__PURE__ */ defineComponent({
                     }, {
                       default: withCtx(() => [
                         createVNode("div", { class: "d-flex flex-column" }, [
-                          createVNode("label", { for: "rental_deposit_ids" }, "Frais de dossier *"),
+                          createVNode("label", { for: "rental_deposit_ids" }, "Services souhaités *"),
                           createVNode(_component_MultiSelect, {
                             "input-id": "country_id",
                             modelValue: unref(r$).$value.rental_deposit_ids,
@@ -22756,7 +22748,7 @@ const _sfc_main$18 = /* @__PURE__ */ defineComponent({
                             "max-selected-labels": 2,
                             "option-label": "name",
                             "option-value": "id",
-                            placeholder: "Frais de dossier"
+                            placeholder: "Orientation, Visa, Hébergement..."
                           }, null, 8, ["modelValue", "onUpdate:modelValue", "options", "disabled", "invalid"]),
                           unref(r$).$fields.rental_deposit_ids.$error ? (openBlock(), createBlock(_component_Message, {
                             key: 0,
@@ -22849,7 +22841,7 @@ const _sfc_main$18 = /* @__PURE__ */ defineComponent({
                     }, {
                       default: withCtx(() => [
                         createVNode("div", { class: "d-flex flex-column" }, [
-                          createVNode("label", { for: "on_duration" }, "Durée du programme"),
+                          createVNode("label", { for: "on_duration" }, "Durée souhaitée"),
                           createVNode(_component_input_number, {
                             "input-id": "on_duration",
                             modelValue: unref(r$).$value.duration,
@@ -22857,7 +22849,7 @@ const _sfc_main$18 = /* @__PURE__ */ defineComponent({
                             disabled: unref(store).processing,
                             invalid: unref(r$).$fields.duration.$error,
                             suffix: " mois",
-                            placeholder: "A partir de 6 mois"
+                            placeholder: "Ex: 12, 24, 36 mois"
                           }, null, 8, ["modelValue", "onUpdate:modelValue", "disabled", "invalid"]),
                           unref(r$).$fields.duration.$error ? (openBlock(), createBlock(_component_Message, {
                             key: 0,
@@ -24181,7 +24173,7 @@ const _sfc_main$16 = /* @__PURE__ */ defineComponent({
             }, {
               default: withCtx((_2, _push3, _parent3, _scopeId2) => {
                 if (_push3) {
-                  _push3(`<div class="bg-mode rounded-3 p-4 shadow" data-v-d5711859${_scopeId2}><div class="form-control-bg-transparent bg-mode rounded-3" data-v-d5711859${_scopeId2}>`);
+                  _push3(`<div class="bg-mode rounded-3 p-4 shadow" data-v-a278f1f8${_scopeId2}><div class="form-control-bg-transparent bg-mode rounded-3" data-v-a278f1f8${_scopeId2}>`);
                   _push3(ssrRenderComponent(_component_b_row, { class: "g-4 align-items-center" }, {
                     default: withCtx((_3, _push4, _parent4, _scopeId3) => {
                       if (_push4) {
@@ -24197,9 +24189,9 @@ const _sfc_main$16 = /* @__PURE__ */ defineComponent({
                                     }, {
                                       default: withCtx((_6, _push7, _parent7, _scopeId6) => {
                                         if (_push7) {
-                                          _push7(`<label class="h6 fw-normal mb-0" data-v-d5711859${_scopeId6}>`);
+                                          _push7(`<label class="h6 fw-normal mb-0" data-v-a278f1f8${_scopeId6}>`);
                                           _push7(ssrRenderComponent(unref(BIconHouseCheck), { class: "text-primary me-1" }, null, _parent7, _scopeId6));
-                                          _push7(` Établissement </label><div class="form-control-transparent form-fs-lg mt-2" data-v-d5711859${_scopeId6}>`);
+                                          _push7(` Établissement </label><div class="form-control-transparent form-fs-lg mt-2" data-v-a278f1f8${_scopeId6}>`);
                                           _push7(ssrRenderComponent(_component_MultiSelect, {
                                             modelValue: unref(r$).$value.property_type_ids,
                                             "onUpdate:modelValue": ($event) => unref(r$).$value.property_type_ids = $event,
@@ -24276,9 +24268,9 @@ const _sfc_main$16 = /* @__PURE__ */ defineComponent({
                                     }, {
                                       default: withCtx((_6, _push7, _parent7, _scopeId6) => {
                                         if (_push7) {
-                                          _push7(`<label class="h6 fw-normal mb-0" data-v-d5711859${_scopeId6}>`);
+                                          _push7(`<label class="h6 fw-normal mb-0" data-v-a278f1f8${_scopeId6}>`);
                                           _push7(ssrRenderComponent(unref(BIconTag), { class: "text-primary me-1" }, null, _parent7, _scopeId6));
-                                          _push7(` Domaine d&#39;études </label><div class="form-control-transparent form-fs-lg mt-2" data-v-d5711859${_scopeId6}>`);
+                                          _push7(` Domaine d&#39;études </label><div class="form-control-transparent form-fs-lg mt-2" data-v-a278f1f8${_scopeId6}>`);
                                           _push7(ssrRenderComponent(_component_Select, {
                                             modelValue: unref(r$).$value.category_id,
                                             "onUpdate:modelValue": ($event) => unref(r$).$value.category_id = $event,
@@ -24353,9 +24345,9 @@ const _sfc_main$16 = /* @__PURE__ */ defineComponent({
                                     }, {
                                       default: withCtx((_6, _push7, _parent7, _scopeId6) => {
                                         if (_push7) {
-                                          _push7(`<label class="h6 fw-normal mb-0" data-v-d5711859${_scopeId6}>`);
+                                          _push7(`<label class="h6 fw-normal mb-0" data-v-a278f1f8${_scopeId6}>`);
                                           _push7(ssrRenderComponent(unref(BIconHouseAdd), { class: "text-primary me-1" }, null, _parent7, _scopeId6));
-                                          _push7(` Hébergement </label><div class="form-control-transparent form-fs-lg mt-2" data-v-d5711859${_scopeId6}>`);
+                                          _push7(` Niveau d&#39;études </label><div class="form-control-transparent form-fs-lg mt-2" data-v-a278f1f8${_scopeId6}>`);
                                           _push7(ssrRenderComponent(_component_MultiSelect, {
                                             modelValue: unref(r$).$value.layout_ids,
                                             "onUpdate:modelValue": ($event) => unref(r$).$value.layout_ids = $event,
@@ -24366,7 +24358,7 @@ const _sfc_main$16 = /* @__PURE__ */ defineComponent({
                                             "option-label": "label",
                                             "option-value": "id",
                                             class: "w-full",
-                                            placeholder: "Type d'hébergement souhaité"
+                                            placeholder: "Licence, Master, Doctorat..."
                                           }, null, _parent7, _scopeId6));
                                           _push7(ssrRenderComponent(_component_Message, {
                                             style: unref(r$).$fields.layout_ids.$invalid ? null : { display: "none" },
@@ -24390,7 +24382,7 @@ const _sfc_main$16 = /* @__PURE__ */ defineComponent({
                                           return [
                                             createVNode("label", { class: "h6 fw-normal mb-0" }, [
                                               createVNode(unref(BIconHouseAdd), { class: "text-primary me-1" }),
-                                              createTextVNode(" Hébergement ")
+                                              createTextVNode(" Niveau d'études ")
                                             ]),
                                             createVNode("div", { class: "form-control-transparent form-fs-lg mt-2" }, [
                                               createVNode(_component_MultiSelect, {
@@ -24403,7 +24395,7 @@ const _sfc_main$16 = /* @__PURE__ */ defineComponent({
                                                 "option-label": "label",
                                                 "option-value": "id",
                                                 class: "w-full",
-                                                placeholder: "Type d'hébergement souhaité"
+                                                placeholder: "Licence, Master, Doctorat..."
                                               }, null, 8, ["modelValue", "onUpdate:modelValue", "options", "invalid"]),
                                               withDirectives(createVNode(_component_Message, {
                                                 severity: "error",
@@ -24432,9 +24424,9 @@ const _sfc_main$16 = /* @__PURE__ */ defineComponent({
                                     }, {
                                       default: withCtx((_6, _push7, _parent7, _scopeId6) => {
                                         if (_push7) {
-                                          _push7(`<label class="h6 fw-normal mb-0" data-v-d5711859${_scopeId6}>`);
+                                          _push7(`<label class="h6 fw-normal mb-0" data-v-a278f1f8${_scopeId6}>`);
                                           _push7(ssrRenderComponent(unref(BIconPinMap), { class: "text-primary me-1" }, null, _parent7, _scopeId6));
-                                          _push7(` Ville</label><div class="form-control-transparent form-fs-lg mt-2" data-v-d5711859${_scopeId6}>`);
+                                          _push7(` Ville</label><div class="form-control-transparent form-fs-lg mt-2" data-v-a278f1f8${_scopeId6}>`);
                                           _push7(ssrRenderComponent(_component_Select, {
                                             modelValue: unref(r$).$value.city_id,
                                             "onUpdate:modelValue": ($event) => unref(r$).$value.city_id = $event,
@@ -24594,7 +24586,7 @@ const _sfc_main$16 = /* @__PURE__ */ defineComponent({
                                         default: withCtx(() => [
                                           createVNode("label", { class: "h6 fw-normal mb-0" }, [
                                             createVNode(unref(BIconHouseAdd), { class: "text-primary me-1" }),
-                                            createTextVNode(" Hébergement ")
+                                            createTextVNode(" Niveau d'études ")
                                           ]),
                                           createVNode("div", { class: "form-control-transparent form-fs-lg mt-2" }, [
                                             createVNode(_component_MultiSelect, {
@@ -24607,7 +24599,7 @@ const _sfc_main$16 = /* @__PURE__ */ defineComponent({
                                               "option-label": "label",
                                               "option-value": "id",
                                               class: "w-full",
-                                              placeholder: "Type d'hébergement souhaité"
+                                              placeholder: "Licence, Master, Doctorat..."
                                             }, null, 8, ["modelValue", "onUpdate:modelValue", "options", "invalid"]),
                                             withDirectives(createVNode(_component_Message, {
                                               severity: "error",
@@ -24764,7 +24756,7 @@ const _sfc_main$16 = /* @__PURE__ */ defineComponent({
                                       default: withCtx(() => [
                                         createVNode("label", { class: "h6 fw-normal mb-0" }, [
                                           createVNode(unref(BIconHouseAdd), { class: "text-primary me-1" }),
-                                          createTextVNode(" Hébergement ")
+                                          createTextVNode(" Niveau d'études ")
                                         ]),
                                         createVNode("div", { class: "form-control-transparent form-fs-lg mt-2" }, [
                                           createVNode(_component_MultiSelect, {
@@ -24777,7 +24769,7 @@ const _sfc_main$16 = /* @__PURE__ */ defineComponent({
                                             "option-label": "label",
                                             "option-value": "id",
                                             class: "w-full",
-                                            placeholder: "Type d'hébergement souhaité"
+                                            placeholder: "Licence, Master, Doctorat..."
                                           }, null, 8, ["modelValue", "onUpdate:modelValue", "options", "invalid"]),
                                           withDirectives(createVNode(_component_Message, {
                                             severity: "error",
@@ -24939,7 +24931,7 @@ const _sfc_main$16 = /* @__PURE__ */ defineComponent({
                                     default: withCtx(() => [
                                       createVNode("label", { class: "h6 fw-normal mb-0" }, [
                                         createVNode(unref(BIconHouseAdd), { class: "text-primary me-1" }),
-                                        createTextVNode(" Hébergement ")
+                                        createTextVNode(" Niveau d'études ")
                                       ]),
                                       createVNode("div", { class: "form-control-transparent form-fs-lg mt-2" }, [
                                         createVNode(_component_MultiSelect, {
@@ -24952,7 +24944,7 @@ const _sfc_main$16 = /* @__PURE__ */ defineComponent({
                                           "option-label": "label",
                                           "option-value": "id",
                                           class: "w-full",
-                                          placeholder: "Type d'hébergement souhaité"
+                                          placeholder: "Licence, Master, Doctorat..."
                                         }, null, 8, ["modelValue", "onUpdate:modelValue", "options", "invalid"]),
                                         withDirectives(createVNode(_component_Message, {
                                           severity: "error",
@@ -25122,7 +25114,7 @@ const _sfc_main$16 = /* @__PURE__ */ defineComponent({
                                       default: withCtx(() => [
                                         createVNode("label", { class: "h6 fw-normal mb-0" }, [
                                           createVNode(unref(BIconHouseAdd), { class: "text-primary me-1" }),
-                                          createTextVNode(" Hébergement ")
+                                          createTextVNode(" Niveau d'études ")
                                         ]),
                                         createVNode("div", { class: "form-control-transparent form-fs-lg mt-2" }, [
                                           createVNode(_component_MultiSelect, {
@@ -25135,7 +25127,7 @@ const _sfc_main$16 = /* @__PURE__ */ defineComponent({
                                             "option-label": "label",
                                             "option-value": "id",
                                             class: "w-full",
-                                            placeholder: "Type d'hébergement souhaité"
+                                            placeholder: "Licence, Master, Doctorat..."
                                           }, null, 8, ["modelValue", "onUpdate:modelValue", "options", "invalid"]),
                                           withDirectives(createVNode(_component_Message, {
                                             severity: "error",
@@ -25314,7 +25306,7 @@ const _sfc_main$16 = /* @__PURE__ */ defineComponent({
                                     default: withCtx(() => [
                                       createVNode("label", { class: "h6 fw-normal mb-0" }, [
                                         createVNode(unref(BIconHouseAdd), { class: "text-primary me-1" }),
-                                        createTextVNode(" Hébergement ")
+                                        createTextVNode(" Niveau d'études ")
                                       ]),
                                       createVNode("div", { class: "form-control-transparent form-fs-lg mt-2" }, [
                                         createVNode(_component_MultiSelect, {
@@ -25327,7 +25319,7 @@ const _sfc_main$16 = /* @__PURE__ */ defineComponent({
                                           "option-label": "label",
                                           "option-value": "id",
                                           class: "w-full",
-                                          placeholder: "Type d'hébergement souhaité"
+                                          placeholder: "Licence, Master, Doctorat..."
                                         }, null, 8, ["modelValue", "onUpdate:modelValue", "options", "invalid"]),
                                         withDirectives(createVNode(_component_Message, {
                                           severity: "error",
@@ -25415,7 +25407,7 @@ _sfc_main$16.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/Pages/CustomSearch/components/CustomSearchSelectBar.vue");
   return _sfc_setup$16 ? _sfc_setup$16(props, ctx) : void 0;
 };
-const CustomSearchSelectBar = /* @__PURE__ */ _export_sfc(_sfc_main$16, [["__scopeId", "data-v-d5711859"]]);
+const CustomSearchSelectBar = /* @__PURE__ */ _export_sfc(_sfc_main$16, [["__scopeId", "data-v-a278f1f8"]]);
 const __vite_glob_0_19 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: CustomSearchSelectBar
@@ -28249,7 +28241,7 @@ const _sfc_main$10 = /* @__PURE__ */ defineComponent({
       const _component_font_awesome_icon = resolveComponent("font-awesome-icon");
       const _component_Toast = __unplugin_components_4;
       _push(`<div${ssrRenderAttrs(_attrs)}>`);
-      _push(ssrRenderComponent(_sfc_main$1q, null, null, _parent));
+      _push(ssrRenderComponent(AppHeader, null, null, _parent));
       _push(`<main><section class="pt-3">`);
       _push(ssrRenderComponent(_component_b_container, null, {
         default: withCtx((_, _push2, _parent2, _scopeId) => {
@@ -43442,7 +43434,7 @@ const _sfc_main$I = /* @__PURE__ */ defineComponent({
     return (_ctx, _push, _parent, _attrs) => {
       _push(`<!--[-->`);
       _push(ssrRenderComponent(unref(Head), { title: "EtapSup - Votre passerelle vers les études supérieures à l'étranger" }, null, _parent));
-      _push(`<div class="landing-page" data-v-a1edfb1e><section class="${ssrRenderClass([{ "is-visible": isVisible.value }, "hero-section"])}" data-v-a1edfb1e>`);
+      _push(`<div class="landing-page" data-v-9337b91a><section class="${ssrRenderClass([{ "is-visible": isVisible.value }, "hero-section"])}" data-v-9337b91a>`);
       _push(ssrRenderComponent(unref(BContainer$1), null, {
         default: withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
@@ -43455,7 +43447,7 @@ const _sfc_main$I = /* @__PURE__ */ defineComponent({
                   }, {
                     default: withCtx((_3, _push4, _parent4, _scopeId3) => {
                       if (_push4) {
-                        _push4(`<div class="badge-new mb-3" data-v-a1edfb1e${_scopeId3}><span class="badge-pulse" data-v-a1edfb1e${_scopeId3}></span> Nouveau : Accompagnement Premium disponible </div><h1 class="hero-title" data-v-a1edfb1e${_scopeId3}> Trouvez votre formation <span class="text-gradient" data-v-a1edfb1e${_scopeId3}>à l&#39;étranger</span></h1><p class="hero-subtitle" data-v-a1edfb1e${_scopeId3}> Plus de 150 établissements partenaires dans 15 pays africains. <br class="d-none d-md-block" data-v-a1edfb1e${_scopeId3}> Postulez en quelques clics avec un accompagnement personnalisé. </p><div class="search-card" data-v-a1edfb1e${_scopeId3}><form class="search-form" data-v-a1edfb1e${_scopeId3}><div class="search-field" data-v-a1edfb1e${_scopeId3}><label class="search-label" data-v-a1edfb1e${_scopeId3}><i class="bi bi-flag" data-v-a1edfb1e${_scopeId3}></i> Pays </label>`);
+                        _push4(`<div class="badge-new mb-3" data-v-9337b91a${_scopeId3}><span class="badge-pulse" data-v-9337b91a${_scopeId3}></span> Nouveau : Accompagnement Premium disponible </div><h1 class="hero-title" data-v-9337b91a${_scopeId3}> Trouvez votre formation <span class="text-gradient" data-v-9337b91a${_scopeId3}>à l&#39;étranger</span></h1><p class="hero-subtitle" data-v-9337b91a${_scopeId3}> Plus de 150 établissements partenaires dans 15 pays africains. <br class="d-none d-md-block" data-v-9337b91a${_scopeId3}> Postulez en quelques clics avec un accompagnement personnalisé. </p><div class="search-card" data-v-9337b91a${_scopeId3}><form class="search-form" data-v-9337b91a${_scopeId3}><div class="search-field" data-v-9337b91a${_scopeId3}><label class="search-label" data-v-9337b91a${_scopeId3}><i class="bi bi-flag" data-v-9337b91a${_scopeId3}></i> Pays </label>`);
                         _push4(ssrRenderComponent(unref(BFormSelect$1), {
                           modelValue: searchForm.value.country,
                           "onUpdate:modelValue": ($event) => searchForm.value.country = $event,
@@ -43465,7 +43457,7 @@ const _sfc_main$I = /* @__PURE__ */ defineComponent({
                           ],
                           class: "search-select"
                         }, null, _parent4, _scopeId3));
-                        _push4(`</div><div class="search-field" data-v-a1edfb1e${_scopeId3}><label class="search-label" data-v-a1edfb1e${_scopeId3}><i class="bi bi-book" data-v-a1edfb1e${_scopeId3}></i> Domaine d&#39;études </label>`);
+                        _push4(`</div><div class="search-field" data-v-9337b91a${_scopeId3}><label class="search-label" data-v-9337b91a${_scopeId3}><i class="bi bi-book" data-v-9337b91a${_scopeId3}></i> Domaine d&#39;études </label>`);
                         _push4(ssrRenderComponent(unref(BFormSelect$1), {
                           modelValue: searchForm.value.study_field,
                           "onUpdate:modelValue": ($event) => searchForm.value.study_field = $event,
@@ -43475,7 +43467,7 @@ const _sfc_main$I = /* @__PURE__ */ defineComponent({
                           ],
                           class: "search-select"
                         }, null, _parent4, _scopeId3));
-                        _push4(`</div><div class="search-field flex-grow-1" data-v-a1edfb1e${_scopeId3}><label class="search-label" data-v-a1edfb1e${_scopeId3}><i class="bi bi-search" data-v-a1edfb1e${_scopeId3}></i> Mots-clés </label>`);
+                        _push4(`</div><div class="search-field flex-grow-1" data-v-9337b91a${_scopeId3}><label class="search-label" data-v-9337b91a${_scopeId3}><i class="bi bi-search" data-v-9337b91a${_scopeId3}></i> Mots-clés </label>`);
                         _push4(ssrRenderComponent(unref(BFormInput$1), {
                           modelValue: searchForm.value.keywords,
                           "onUpdate:modelValue": ($event) => searchForm.value.keywords = $event,
@@ -43489,7 +43481,7 @@ const _sfc_main$I = /* @__PURE__ */ defineComponent({
                         }, {
                           default: withCtx((_4, _push5, _parent5, _scopeId4) => {
                             if (_push5) {
-                              _push5(`<i class="bi bi-search me-2" data-v-a1edfb1e${_scopeId4}></i> Rechercher `);
+                              _push5(`<i class="bi bi-search me-2" data-v-9337b91a${_scopeId4}></i> Rechercher `);
                             } else {
                               return [
                                 createVNode("i", { class: "bi bi-search me-2" }),
@@ -43499,7 +43491,7 @@ const _sfc_main$I = /* @__PURE__ */ defineComponent({
                           }),
                           _: 1
                         }, _parent4, _scopeId3));
-                        _push4(`</form></div><div class="stats-row" data-v-a1edfb1e${_scopeId3}><div class="stat-item" data-v-a1edfb1e${_scopeId3}><div class="stat-value" data-v-a1edfb1e${_scopeId3}>${ssrInterpolate(__props.stats.totalEstablishments)}+</div><div class="stat-label" data-v-a1edfb1e${_scopeId3}>Établissements</div></div><div class="stat-item" data-v-a1edfb1e${_scopeId3}><div class="stat-value" data-v-a1edfb1e${_scopeId3}>${ssrInterpolate(__props.stats.totalStudents)}+</div><div class="stat-label" data-v-a1edfb1e${_scopeId3}>Étudiants accompagnés</div></div><div class="stat-item" data-v-a1edfb1e${_scopeId3}><div class="stat-value" data-v-a1edfb1e${_scopeId3}>${ssrInterpolate(__props.stats.totalCountries)}</div><div class="stat-label" data-v-a1edfb1e${_scopeId3}>Pays</div></div></div>`);
+                        _push4(`</form></div><div class="stats-row" data-v-9337b91a${_scopeId3}><div class="stat-item" data-v-9337b91a${_scopeId3}><div class="stat-value" data-v-9337b91a${_scopeId3}>${ssrInterpolate(__props.stats.totalEstablishments)}+</div><div class="stat-label" data-v-9337b91a${_scopeId3}>Établissements</div></div><div class="stat-item" data-v-9337b91a${_scopeId3}><div class="stat-value" data-v-9337b91a${_scopeId3}>${ssrInterpolate(__props.stats.totalStudents)}+</div><div class="stat-label" data-v-9337b91a${_scopeId3}>Étudiants accompagnés</div></div><div class="stat-item" data-v-9337b91a${_scopeId3}><div class="stat-value" data-v-9337b91a${_scopeId3}>${ssrInterpolate(__props.stats.totalCountries)}</div><div class="stat-label" data-v-9337b91a${_scopeId3}>Pays</div></div></div>`);
                       } else {
                         return [
                           createVNode("div", { class: "badge-new mb-3" }, [
@@ -43599,7 +43591,7 @@ const _sfc_main$I = /* @__PURE__ */ defineComponent({
                   }, {
                     default: withCtx((_3, _push4, _parent4, _scopeId3) => {
                       if (_push4) {
-                        _push4(`<div class="hero-illustration" data-v-a1edfb1e${_scopeId3}><div class="floating-card card-1" data-v-a1edfb1e${_scopeId3}><i class="bi bi-mortarboard-fill" data-v-a1edfb1e${_scopeId3}></i><span data-v-a1edfb1e${_scopeId3}>Licence</span></div><div class="floating-card card-2" data-v-a1edfb1e${_scopeId3}><i class="bi bi-book-fill" data-v-a1edfb1e${_scopeId3}></i><span data-v-a1edfb1e${_scopeId3}>Master</span></div><div class="floating-card card-3" data-v-a1edfb1e${_scopeId3}><i class="bi bi-award-fill" data-v-a1edfb1e${_scopeId3}></i><span data-v-a1edfb1e${_scopeId3}>Doctorat</span></div><div class="hero-blob" data-v-a1edfb1e${_scopeId3}></div></div>`);
+                        _push4(`<div class="hero-illustration" data-v-9337b91a${_scopeId3}><div class="floating-card card-1" data-v-9337b91a${_scopeId3}><i class="bi bi-mortarboard-fill" data-v-9337b91a${_scopeId3}></i><span data-v-9337b91a${_scopeId3}>Licence</span></div><div class="floating-card card-2" data-v-9337b91a${_scopeId3}><i class="bi bi-book-fill" data-v-9337b91a${_scopeId3}></i><span data-v-9337b91a${_scopeId3}>Master</span></div><div class="floating-card card-3" data-v-9337b91a${_scopeId3}><i class="bi bi-award-fill" data-v-9337b91a${_scopeId3}></i><span data-v-9337b91a${_scopeId3}>Doctorat</span></div><div class="floating-card card-4" data-v-9337b91a${_scopeId3}><i class="bi bi-briefcase-fill" data-v-9337b91a${_scopeId3}></i><span data-v-9337b91a${_scopeId3}>MBA</span></div><div class="floating-card card-5" data-v-9337b91a${_scopeId3}><i class="bi bi-hospital-fill" data-v-9337b91a${_scopeId3}></i><span data-v-9337b91a${_scopeId3}>Médecine</span></div><div class="floating-card card-6" data-v-9337b91a${_scopeId3}><i class="bi bi-code-slash" data-v-9337b91a${_scopeId3}></i><span data-v-9337b91a${_scopeId3}>Ingénierie</span></div><div class="hero-blob" data-v-9337b91a${_scopeId3}></div></div>`);
                       } else {
                         return [
                           createVNode("div", { class: "hero-illustration" }, [
@@ -43614,6 +43606,18 @@ const _sfc_main$I = /* @__PURE__ */ defineComponent({
                             createVNode("div", { class: "floating-card card-3" }, [
                               createVNode("i", { class: "bi bi-award-fill" }),
                               createVNode("span", null, "Doctorat")
+                            ]),
+                            createVNode("div", { class: "floating-card card-4" }, [
+                              createVNode("i", { class: "bi bi-briefcase-fill" }),
+                              createVNode("span", null, "MBA")
+                            ]),
+                            createVNode("div", { class: "floating-card card-5" }, [
+                              createVNode("i", { class: "bi bi-hospital-fill" }),
+                              createVNode("span", null, "Médecine")
+                            ]),
+                            createVNode("div", { class: "floating-card card-6" }, [
+                              createVNode("i", { class: "bi bi-code-slash" }),
+                              createVNode("span", null, "Ingénierie")
                             ]),
                             createVNode("div", { class: "hero-blob" })
                           ])
@@ -43735,6 +43739,18 @@ const _sfc_main$I = /* @__PURE__ */ defineComponent({
                           createVNode("div", { class: "floating-card card-3" }, [
                             createVNode("i", { class: "bi bi-award-fill" }),
                             createVNode("span", null, "Doctorat")
+                          ]),
+                          createVNode("div", { class: "floating-card card-4" }, [
+                            createVNode("i", { class: "bi bi-briefcase-fill" }),
+                            createVNode("span", null, "MBA")
+                          ]),
+                          createVNode("div", { class: "floating-card card-5" }, [
+                            createVNode("i", { class: "bi bi-hospital-fill" }),
+                            createVNode("span", null, "Médecine")
+                          ]),
+                          createVNode("div", { class: "floating-card card-6" }, [
+                            createVNode("i", { class: "bi bi-code-slash" }),
+                            createVNode("span", null, "Ingénierie")
                           ]),
                           createVNode("div", { class: "hero-blob" })
                         ])
@@ -43862,6 +43878,18 @@ const _sfc_main$I = /* @__PURE__ */ defineComponent({
                           createVNode("i", { class: "bi bi-award-fill" }),
                           createVNode("span", null, "Doctorat")
                         ]),
+                        createVNode("div", { class: "floating-card card-4" }, [
+                          createVNode("i", { class: "bi bi-briefcase-fill" }),
+                          createVNode("span", null, "MBA")
+                        ]),
+                        createVNode("div", { class: "floating-card card-5" }, [
+                          createVNode("i", { class: "bi bi-hospital-fill" }),
+                          createVNode("span", null, "Médecine")
+                        ]),
+                        createVNode("div", { class: "floating-card card-6" }, [
+                          createVNode("i", { class: "bi bi-code-slash" }),
+                          createVNode("span", null, "Ingénierie")
+                        ]),
                         createVNode("div", { class: "hero-blob" })
                       ])
                     ]),
@@ -43875,11 +43903,11 @@ const _sfc_main$I = /* @__PURE__ */ defineComponent({
         }),
         _: 1
       }, _parent));
-      _push(`</section><section class="study-fields-section" data-v-a1edfb1e>`);
+      _push(`</section><section class="study-fields-section" data-v-9337b91a>`);
       _push(ssrRenderComponent(unref(BContainer$1), null, {
         default: withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
-            _push2(`<div class="section-header text-center" data-v-a1edfb1e${_scopeId}><h2 class="section-title" data-v-a1edfb1e${_scopeId}>Explorez les domaines d&#39;études</h2><p class="section-subtitle" data-v-a1edfb1e${_scopeId}>Découvrez les formations les plus recherchées</p></div><div class="fields-grid" data-v-a1edfb1e${_scopeId}><!--[-->`);
+            _push2(`<div class="section-header text-center" data-v-9337b91a${_scopeId}><h2 class="section-title" data-v-9337b91a${_scopeId}>Explorez les domaines d&#39;études</h2><p class="section-subtitle" data-v-9337b91a${_scopeId}>Découvrez les formations les plus recherchées</p></div><div class="fields-grid" data-v-9337b91a${_scopeId}><!--[-->`);
             ssrRenderList(popularFields, (field) => {
               _push2(ssrRenderComponent(unref(Link), {
                 key: field.slug,
@@ -43888,7 +43916,7 @@ const _sfc_main$I = /* @__PURE__ */ defineComponent({
               }, {
                 default: withCtx((_2, _push3, _parent3, _scopeId2) => {
                   if (_push3) {
-                    _push3(`<div class="field-icon" data-v-a1edfb1e${_scopeId2}>${ssrInterpolate(field.icon)}</div><div class="field-name" data-v-a1edfb1e${_scopeId2}>${ssrInterpolate(field.name)}</div><i class="bi bi-arrow-right field-arrow" data-v-a1edfb1e${_scopeId2}></i>`);
+                    _push3(`<div class="field-icon" data-v-9337b91a${_scopeId2}>${ssrInterpolate(field.icon)}</div><div class="field-name" data-v-9337b91a${_scopeId2}>${ssrInterpolate(field.name)}</div><i class="bi bi-arrow-right field-arrow" data-v-9337b91a${_scopeId2}></i>`);
                   } else {
                     return [
                       createVNode("div", { class: "field-icon" }, toDisplayString(field.icon), 1),
@@ -43930,18 +43958,18 @@ const _sfc_main$I = /* @__PURE__ */ defineComponent({
       }, _parent));
       _push(`</section>`);
       if (__props.establishments.length > 0) {
-        _push(`<section class="establishments-section" data-v-a1edfb1e>`);
+        _push(`<section class="establishments-section" data-v-9337b91a>`);
         _push(ssrRenderComponent(unref(BContainer$1), null, {
           default: withCtx((_, _push2, _parent2, _scopeId) => {
             if (_push2) {
-              _push2(`<div class="section-header" data-v-a1edfb1e${_scopeId}><div data-v-a1edfb1e${_scopeId}><h2 class="section-title" data-v-a1edfb1e${_scopeId}>Établissements à la une</h2><p class="section-subtitle" data-v-a1edfb1e${_scopeId}>Les meilleures universités et écoles partenaires</p></div>`);
+              _push2(`<div class="section-header" data-v-9337b91a${_scopeId}><div data-v-9337b91a${_scopeId}><h2 class="section-title" data-v-9337b91a${_scopeId}>Établissements à la une</h2><p class="section-subtitle" data-v-9337b91a${_scopeId}>Les meilleures universités et écoles partenaires</p></div>`);
               _push2(ssrRenderComponent(unref(Link), {
                 href: "/establishments",
                 class: "btn-view-all"
               }, {
                 default: withCtx((_2, _push3, _parent3, _scopeId2) => {
                   if (_push3) {
-                    _push3(` Voir tout <i class="bi bi-arrow-right ms-2" data-v-a1edfb1e${_scopeId2}></i>`);
+                    _push3(` Voir tout <i class="bi bi-arrow-right ms-2" data-v-9337b91a${_scopeId2}></i>`);
                   } else {
                     return [
                       createTextVNode(" Voir tout "),
@@ -43970,19 +43998,19 @@ const _sfc_main$I = /* @__PURE__ */ defineComponent({
                             }, {
                               default: withCtx((_4, _push5, _parent5, _scopeId4) => {
                                 if (_push5) {
-                                  _push5(`<div class="establishment-image" data-v-a1edfb1e${_scopeId4}><img${ssrRenderAttr("src", establishment.thumb || establishment.logo || "https://via.placeholder.com/400x240?text=EtapSup")}${ssrRenderAttr("alt", establishment.title)} data-v-a1edfb1e${_scopeId4}>`);
+                                  _push5(`<div class="establishment-image" data-v-9337b91a${_scopeId4}><img${ssrRenderAttr("src", establishment.thumb || establishment.logo || "https://via.placeholder.com/400x240?text=EtapSup")}${ssrRenderAttr("alt", establishment.title)} data-v-9337b91a${_scopeId4}>`);
                                   if (establishment.ranking) {
-                                    _push5(`<div class="establishment-badge" data-v-a1edfb1e${_scopeId4}><i class="bi bi-star-fill" data-v-a1edfb1e${_scopeId4}></i> Top ${ssrInterpolate(establishment.ranking)}</div>`);
+                                    _push5(`<div class="establishment-badge" data-v-9337b91a${_scopeId4}><i class="bi bi-star-fill" data-v-9337b91a${_scopeId4}></i> Top ${ssrInterpolate(establishment.ranking)}</div>`);
                                   } else {
                                     _push5(`<!---->`);
                                   }
-                                  _push5(`</div><div class="establishment-body" data-v-a1edfb1e${_scopeId4}><h3 class="establishment-title" data-v-a1edfb1e${_scopeId4}>${ssrInterpolate(establishment.title)}</h3><div class="establishment-meta" data-v-a1edfb1e${_scopeId4}><span class="meta-item" data-v-a1edfb1e${_scopeId4}><i class="bi bi-geo-alt-fill" data-v-a1edfb1e${_scopeId4}></i> ${ssrInterpolate(establishment.city)}, ${ssrInterpolate(establishment.country)}</span>`);
+                                  _push5(`</div><div class="establishment-body" data-v-9337b91a${_scopeId4}><h3 class="establishment-title" data-v-9337b91a${_scopeId4}>${ssrInterpolate(establishment.title)}</h3><div class="establishment-meta" data-v-9337b91a${_scopeId4}><span class="meta-item" data-v-9337b91a${_scopeId4}><i class="bi bi-geo-alt-fill" data-v-9337b91a${_scopeId4}></i> ${ssrInterpolate(establishment.city)}, ${ssrInterpolate(establishment.country)}</span>`);
                                   if (establishment.studentCount) {
-                                    _push5(`<span class="meta-item" data-v-a1edfb1e${_scopeId4}><i class="bi bi-people-fill" data-v-a1edfb1e${_scopeId4}></i> ${ssrInterpolate(establishment.studentCount)} étudiants </span>`);
+                                    _push5(`<span class="meta-item" data-v-9337b91a${_scopeId4}><i class="bi bi-people-fill" data-v-9337b91a${_scopeId4}></i> ${ssrInterpolate(establishment.studentCount)} étudiants </span>`);
                                   } else {
                                     _push5(`<!---->`);
                                   }
-                                  _push5(`</div><div class="establishment-type" data-v-a1edfb1e${_scopeId4}>${ssrInterpolate(establishment.type)}</div></div>`);
+                                  _push5(`</div><div class="establishment-type" data-v-9337b91a${_scopeId4}>${ssrInterpolate(establishment.type)}</div></div>`);
                                 } else {
                                   return [
                                     createVNode("div", { class: "establishment-image" }, [
@@ -44204,11 +44232,11 @@ const _sfc_main$I = /* @__PURE__ */ defineComponent({
       } else {
         _push(`<!---->`);
       }
-      _push(`<section class="benefits-section" data-v-a1edfb1e>`);
+      _push(`<section class="benefits-section" data-v-9337b91a>`);
       _push(ssrRenderComponent(unref(BContainer$1), null, {
         default: withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
-            _push2(`<div class="section-header text-center" data-v-a1edfb1e${_scopeId}><h2 class="section-title" data-v-a1edfb1e${_scopeId}>Pourquoi choisir EtapSup ?</h2><p class="section-subtitle" data-v-a1edfb1e${_scopeId}>Un accompagnement complet pour réussir vos études à l&#39;étranger</p></div>`);
+            _push2(`<div class="section-header text-center" data-v-9337b91a${_scopeId}><h2 class="section-title" data-v-9337b91a${_scopeId}>Pourquoi choisir EtapSup ?</h2><p class="section-subtitle" data-v-9337b91a${_scopeId}>Un accompagnement complet pour réussir vos études à l&#39;étranger</p></div>`);
             _push2(ssrRenderComponent(unref(BRow$1), { class: "g-4" }, {
               default: withCtx((_2, _push3, _parent3, _scopeId2) => {
                 if (_push3) {
@@ -44221,7 +44249,7 @@ const _sfc_main$I = /* @__PURE__ */ defineComponent({
                     }, {
                       default: withCtx((_3, _push4, _parent4, _scopeId3) => {
                         if (_push4) {
-                          _push4(`<div class="benefit-card" data-v-a1edfb1e${_scopeId3}><div class="benefit-icon" data-v-a1edfb1e${_scopeId3}>${ssrInterpolate(benefit.icon)}</div><h3 class="benefit-title" data-v-a1edfb1e${_scopeId3}>${ssrInterpolate(benefit.title)}</h3><p class="benefit-description" data-v-a1edfb1e${_scopeId3}>${ssrInterpolate(benefit.description)}</p></div>`);
+                          _push4(`<div class="benefit-card" data-v-9337b91a${_scopeId3}><div class="benefit-icon" data-v-9337b91a${_scopeId3}>${ssrInterpolate(benefit.icon)}</div><h3 class="benefit-title" data-v-9337b91a${_scopeId3}>${ssrInterpolate(benefit.title)}</h3><p class="benefit-description" data-v-9337b91a${_scopeId3}>${ssrInterpolate(benefit.description)}</p></div>`);
                         } else {
                           return [
                             createVNode("div", { class: "benefit-card" }, [
@@ -44291,11 +44319,11 @@ const _sfc_main$I = /* @__PURE__ */ defineComponent({
         }),
         _: 1
       }, _parent));
-      _push(`</section><section class="testimonials-section" data-v-a1edfb1e>`);
+      _push(`</section><section class="testimonials-section" data-v-9337b91a>`);
       _push(ssrRenderComponent(unref(BContainer$1), null, {
         default: withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
-            _push2(`<div class="section-header text-center" data-v-a1edfb1e${_scopeId}><h2 class="section-title" data-v-a1edfb1e${_scopeId}>Ils nous font confiance</h2><p class="section-subtitle" data-v-a1edfb1e${_scopeId}>Découvrez les témoignages de nos étudiants</p></div>`);
+            _push2(`<div class="section-header text-center" data-v-9337b91a${_scopeId}><h2 class="section-title" data-v-9337b91a${_scopeId}>Ils nous font confiance</h2><p class="section-subtitle" data-v-9337b91a${_scopeId}>Découvrez les témoignages de nos étudiants</p></div>`);
             _push2(ssrRenderComponent(unref(BRow$1), { class: "g-4" }, {
               default: withCtx((_2, _push3, _parent3, _scopeId2) => {
                 if (_push3) {
@@ -44307,11 +44335,11 @@ const _sfc_main$I = /* @__PURE__ */ defineComponent({
                     }, {
                       default: withCtx((_3, _push4, _parent4, _scopeId3) => {
                         if (_push4) {
-                          _push4(`<div class="testimonial-card" data-v-a1edfb1e${_scopeId3}><div class="testimonial-rating" data-v-a1edfb1e${_scopeId3}><!--[-->`);
+                          _push4(`<div class="testimonial-card" data-v-9337b91a${_scopeId3}><div class="testimonial-rating" data-v-9337b91a${_scopeId3}><!--[-->`);
                           ssrRenderList(5, (i2) => {
-                            _push4(`<i class="bi bi-star-fill" data-v-a1edfb1e${_scopeId3}></i>`);
+                            _push4(`<i class="bi bi-star-fill" data-v-9337b91a${_scopeId3}></i>`);
                           });
-                          _push4(`<!--]--></div><p class="testimonial-text" data-v-a1edfb1e${_scopeId3}>&quot;${ssrInterpolate(testimonial.text)}&quot;</p><div class="testimonial-author" data-v-a1edfb1e${_scopeId3}><img${ssrRenderAttr("src", testimonial.photo)}${ssrRenderAttr("alt", testimonial.name)} class="author-photo" data-v-a1edfb1e${_scopeId3}><div data-v-a1edfb1e${_scopeId3}><div class="author-name" data-v-a1edfb1e${_scopeId3}>${ssrInterpolate(testimonial.name)}</div><div class="author-country" data-v-a1edfb1e${_scopeId3}>${ssrInterpolate(testimonial.country)}</div></div></div></div>`);
+                          _push4(`<!--]--></div><p class="testimonial-text" data-v-9337b91a${_scopeId3}>&quot;${ssrInterpolate(testimonial.text)}&quot;</p><div class="testimonial-author" data-v-9337b91a${_scopeId3}><img${ssrRenderAttr("src", testimonial.photo)}${ssrRenderAttr("alt", testimonial.name)} class="author-photo" data-v-9337b91a${_scopeId3}><div data-v-9337b91a${_scopeId3}><div class="author-name" data-v-9337b91a${_scopeId3}>${ssrInterpolate(testimonial.name)}</div><div class="author-country" data-v-9337b91a${_scopeId3}>${ssrInterpolate(testimonial.country)}</div></div></div></div>`);
                         } else {
                           return [
                             createVNode("div", { class: "testimonial-card" }, [
@@ -44430,18 +44458,18 @@ const _sfc_main$I = /* @__PURE__ */ defineComponent({
         }),
         _: 1
       }, _parent));
-      _push(`</section><section class="cta-section" data-v-a1edfb1e>`);
+      _push(`</section><section class="cta-section" data-v-9337b91a>`);
       _push(ssrRenderComponent(unref(BContainer$1), null, {
         default: withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
-            _push2(`<div class="cta-card" data-v-a1edfb1e${_scopeId}>`);
+            _push2(`<div class="cta-card" data-v-9337b91a${_scopeId}>`);
             _push2(ssrRenderComponent(unref(BRow$1), { class: "align-items-center" }, {
               default: withCtx((_2, _push3, _parent3, _scopeId2) => {
                 if (_push3) {
                   _push3(ssrRenderComponent(unref(BCol$1), { lg: "8" }, {
                     default: withCtx((_3, _push4, _parent4, _scopeId3) => {
                       if (_push4) {
-                        _push4(`<h2 class="cta-title" data-v-a1edfb1e${_scopeId3}>Prêt à commencer votre aventure ?</h2><p class="cta-subtitle" data-v-a1edfb1e${_scopeId3}> Créez votre compte gratuitement et découvrez toutes les opportunités qui s&#39;offrent à vous </p>`);
+                        _push4(`<h2 class="cta-title" data-v-9337b91a${_scopeId3}>Prêt à commencer votre aventure ?</h2><p class="cta-subtitle" data-v-9337b91a${_scopeId3}> Créez votre compte gratuitement et découvrez toutes les opportunités qui s&#39;offrent à vous </p>`);
                       } else {
                         return [
                           createVNode("h2", { class: "cta-title" }, "Prêt à commencer votre aventure ?"),
@@ -44458,12 +44486,12 @@ const _sfc_main$I = /* @__PURE__ */ defineComponent({
                     default: withCtx((_3, _push4, _parent4, _scopeId3) => {
                       if (_push4) {
                         _push4(ssrRenderComponent(unref(Link), {
-                          href: "/register",
+                          href: _ctx.route("register"),
                           class: "btn-cta"
                         }, {
                           default: withCtx((_4, _push5, _parent5, _scopeId4) => {
                             if (_push5) {
-                              _push5(` Créer mon compte <i class="bi bi-arrow-right ms-2" data-v-a1edfb1e${_scopeId4}></i>`);
+                              _push5(` Créer mon compte <i class="bi bi-arrow-right ms-2" data-v-9337b91a${_scopeId4}></i>`);
                             } else {
                               return [
                                 createTextVNode(" Créer mon compte "),
@@ -44476,7 +44504,7 @@ const _sfc_main$I = /* @__PURE__ */ defineComponent({
                       } else {
                         return [
                           createVNode(unref(Link), {
-                            href: "/register",
+                            href: _ctx.route("register"),
                             class: "btn-cta"
                           }, {
                             default: withCtx(() => [
@@ -44484,7 +44512,7 @@ const _sfc_main$I = /* @__PURE__ */ defineComponent({
                               createVNode("i", { class: "bi bi-arrow-right ms-2" })
                             ]),
                             _: 1
-                          })
+                          }, 8, ["href"])
                         ];
                       }
                     }),
@@ -44505,7 +44533,7 @@ const _sfc_main$I = /* @__PURE__ */ defineComponent({
                     }, {
                       default: withCtx(() => [
                         createVNode(unref(Link), {
-                          href: "/register",
+                          href: _ctx.route("register"),
                           class: "btn-cta"
                         }, {
                           default: withCtx(() => [
@@ -44513,7 +44541,7 @@ const _sfc_main$I = /* @__PURE__ */ defineComponent({
                             createVNode("i", { class: "bi bi-arrow-right ms-2" })
                           ]),
                           _: 1
-                        })
+                        }, 8, ["href"])
                       ]),
                       _: 1
                     })
@@ -44541,7 +44569,7 @@ const _sfc_main$I = /* @__PURE__ */ defineComponent({
                     }, {
                       default: withCtx(() => [
                         createVNode(unref(Link), {
-                          href: "/register",
+                          href: _ctx.route("register"),
                           class: "btn-cta"
                         }, {
                           default: withCtx(() => [
@@ -44549,7 +44577,7 @@ const _sfc_main$I = /* @__PURE__ */ defineComponent({
                             createVNode("i", { class: "bi bi-arrow-right ms-2" })
                           ]),
                           _: 1
-                        })
+                        }, 8, ["href"])
                       ]),
                       _: 1
                     })
@@ -44572,7 +44600,7 @@ _sfc_main$I.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/Pages/Home/Accueil.vue");
   return _sfc_setup$I ? _sfc_setup$I(props, ctx) : void 0;
 };
-const Accueil = /* @__PURE__ */ _export_sfc(_sfc_main$I, [["__scopeId", "data-v-a1edfb1e"]]);
+const Accueil = /* @__PURE__ */ _export_sfc(_sfc_main$I, [["__scopeId", "data-v-9337b91a"]]);
 const __vite_glob_0_36 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: Accueil

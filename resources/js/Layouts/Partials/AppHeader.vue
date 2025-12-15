@@ -124,12 +124,8 @@ const isMobileMenu = computed(() => {
                     <li class="nav-item d-none d-sm-block ms-2">
                         <Link
                             :href="route('custom-search.index')"
-                            class="btn mb-0"
-                            :class="
-                                route().current('custom-search.*')
-                                    ? 'btn-info'
-                                    : 'btn-info-soft'
-                            "
+                            class="btn mb-0 btn-accompagnement"
+                            :class="{ 'active': route().current('custom-search.*') }"
                         >
                             <BIconLightningCharge class="mb-1 me-1" />
                             Accompagnement
@@ -142,7 +138,7 @@ const isMobileMenu = computed(() => {
                     <Link
                         v-else
                         :href="route('login')"
-                        class="btn btn-outline-primary btn-sm"
+                        class="btn btn-outline-primary btn-sm ms-3"
                         >Se connecter</Link
                     >
 
@@ -152,4 +148,18 @@ const isMobileMenu = computed(() => {
     </header>
 </template>
 
-<style scoped></style>
+<style scoped>
+/* EtapSup: Bouton Accompagnement - Bleu #2 */
+.btn-accompagnement {
+    background-color: rgba(59, 130, 246, 0.1);
+    color: #3b82f6;
+    border: 1px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.btn-accompagnement:hover,
+.btn-accompagnement.active {
+    background-color: #3b82f6;
+    color: white;
+}
+</style>

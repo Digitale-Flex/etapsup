@@ -112,7 +112,7 @@ const { r$ } = storeToRefs(store);
                                         <BIconHouseAdd
                                             class="text-primary me-1"
                                         />
-                                        Hébergement
+                                        Niveau d'études
                                     </label>
                                     <div
                                         class="form-control-transparent form-fs-lg mt-2"
@@ -128,7 +128,7 @@ const { r$ } = storeToRefs(store);
                                             option-label="label"
                                             option-value="id"
                                             class="w-full"
-                                            placeholder="Type d'hébergement souhaité"
+                                            placeholder="Licence, Master, Doctorat..."
                                         />
                                         <Message
                                             v-show="

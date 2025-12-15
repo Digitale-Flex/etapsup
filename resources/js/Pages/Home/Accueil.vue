@@ -130,7 +130,7 @@ const testimonials = [
     <Head title="EtapSup - Votre passerelle vers les études supérieures à l'étranger" />
 
     <div class="landing-page">
-        <!-- Hero Section - Inspiré Diplomeo avec effet gradient moderne -->
+        <!-- Hero Section - Design moderne EtapSup inspiré Diplomeo -->
         <section class="hero-section" :class="{ 'is-visible': isVisible }">
             <BContainer>
                 <BRow class="align-items-center min-vh-75">
@@ -233,6 +233,18 @@ const testimonials = [
                             <div class="floating-card card-3">
                                 <i class="bi bi-award-fill"></i>
                                 <span>Doctorat</span>
+                            </div>
+                            <div class="floating-card card-4">
+                                <i class="bi bi-briefcase-fill"></i>
+                                <span>MBA</span>
+                            </div>
+                            <div class="floating-card card-5">
+                                <i class="bi bi-hospital-fill"></i>
+                                <span>Médecine</span>
+                            </div>
+                            <div class="floating-card card-6">
+                                <i class="bi bi-code-slash"></i>
+                                <span>Ingénierie</span>
                             </div>
                             <div class="hero-blob"></div>
                         </div>
@@ -388,7 +400,7 @@ const testimonials = [
                             </p>
                         </BCol>
                         <BCol lg="4" class="text-lg-end">
-                            <Link href="/register" class="btn-cta">
+                            <Link :href="route('register')" class="btn-cta">
                                 Créer mon compte
                                 <i class="bi bi-arrow-right ms-2"></i>
                             </Link>
@@ -636,6 +648,24 @@ const testimonials = [
     top: 70%;
     right: 5%;
     animation-delay: 2s;
+}
+
+.card-4 {
+    top: 10%;
+    right: 40%;
+    animation-delay: 0.5s;
+}
+
+.card-5 {
+    top: 40%;
+    right: 5%;
+    animation-delay: 1.5s;
+}
+
+.card-6 {
+    top: 85%;
+    right: 35%;
+    animation-delay: 2.5s;
 }
 
 @keyframes float {
