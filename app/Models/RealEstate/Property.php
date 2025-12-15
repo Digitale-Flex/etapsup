@@ -146,6 +146,15 @@ class Property extends Model implements HasMedia
             ->saveSlugsTo('slug');
     }
 
+    /**
+     * Route model binding par slug (override HashidRouting)
+     * Permet les URLs SEO-friendly: /establishments/inseec-1
+     */
+    public function getRouteKeyName(): string
+    {
+        return 'slug';
+    }
+
     public function registerMediaCollections(): void
     {
         $this->addMediaCollection('images')

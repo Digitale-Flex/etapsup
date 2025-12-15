@@ -1,6 +1,6 @@
 import { BCard, BCardBody, BCardHeader, BCardFooter, BCardTitle, BCardText } from "bootstrap-vue-next/components/BCard";
 import { BRow, BCol, BContainer } from "bootstrap-vue-next/components/BContainer";
-import { defineComponent, unref, mergeProps, withCtx, renderSlot, useSSRContext, onMounted, createVNode, resolveDynamicComponent, ref, watch, computed, createTextVNode, toDisplayString, createBlock, openBlock, Fragment, renderList, nextTick, createCommentVNode, withModifiers, resolveComponent, withDirectives, reactive, Transition, vShow, onUnmounted, withKeys, useModel, watchEffect, vModelCheckbox, createApp, h as h$1 } from "vue";
+import { defineComponent, unref, mergeProps, withCtx, renderSlot, useSSRContext, onMounted, createVNode, resolveDynamicComponent, ref, watch, computed, createTextVNode, toDisplayString, createBlock, openBlock, Fragment, renderList, nextTick, createCommentVNode, withModifiers, resolveComponent, withDirectives, onUnmounted, reactive, Transition, vShow, withKeys, useModel, watchEffect, vModelCheckbox, createApp, h as h$1 } from "vue";
 import { ssrRenderComponent, ssrRenderSlot, ssrRenderVNode, ssrRenderAttrs, ssrInterpolate, ssrRenderList, ssrRenderStyle, ssrRenderClass, ssrRenderAttr, ssrGetDirectiveProps, ssrIncludeBooleanAttr, ssrLooseContain, ssrLooseEqual, ssrGetDynamicModelProps } from "vue/server-renderer";
 import { Head, useForm, router, Link, usePage, Deferred, createInertiaApp } from "@inertiajs/vue3";
 import Sticky from "sticky-js";
@@ -20,11 +20,11 @@ import { faEye, faEyeSlash, faChevronDown, faEllipsis, faSuitcaseRolling, faAngl
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import { defineStore, skipHydrate, storeToRefs, createPinia } from "pinia";
 import { useLocalStorage, useResizeObserver } from "@vueuse/core";
-import { vBToggle } from "bootstrap-vue-next/directives/BToggle";
 import { BNavItemDropdown, BNav } from "bootstrap-vue-next/components/BNav";
 import { Dropdown } from "bootstrap";
 import { BNavbarNav } from "bootstrap-vue-next/components/BNavbar";
 import { BCollapse } from "bootstrap-vue-next/components/BCollapse";
+import { vBToggle } from "bootstrap-vue-next/directives/BToggle";
 import { vBTooltip } from "bootstrap-vue-next/directives/BTooltip";
 import { faFacebook, faInstagram, faLinkedinIn } from "@fortawesome/free-brands-svg-icons";
 import { tns } from "tiny-slider/src/tiny-slider.js";
@@ -5671,15 +5671,25 @@ const _sfc_main$1s = /* @__PURE__ */ defineComponent({
   props: {
     showExtraPages: { type: Boolean },
     startBookingMenu: { type: Boolean },
-    menuClass: {}
+    menuClass: {},
+    visible: { type: Boolean, default: false }
   },
-  setup(__props) {
+  emits: ["update:visible"],
+  setup(__props, { emit: __emit }) {
+    const props = __props;
+    const emit = __emit;
+    const isVisible = computed({
+      get: () => props.visible,
+      set: (value) => emit("update:visible", value)
+    });
     const menuItems = getAppMenuItems();
     return (_ctx, _push, _parent, _attrs) => {
       const _component_b_collapse = BCollapse;
       const _component_b_navbar_nav = BNavbarNav;
       const _directive_b_toggle = vBToggle;
       _push(ssrRenderComponent(_component_b_collapse, mergeProps({
+        modelValue: isVisible.value,
+        "onUpdate:modelValue": ($event) => isVisible.value = $event,
         class: "navbar-collapse",
         id: "navbar-collapse",
         style: { "margin": "0 20px", "padding": "0 10px" }
@@ -6217,10 +6227,33 @@ const _sfc_main$1q = /* @__PURE__ */ defineComponent({
   __ssrInlineRender: true,
   setup(__props) {
     let isSticky = ref(false);
+    const isMobileMenuOpen = ref(false);
+    const toggleMobileMenu = () => {
+      isMobileMenuOpen.value = !isMobileMenuOpen.value;
+    };
+    const closeMobileMenu = () => {
+      isMobileMenuOpen.value = false;
+    };
+    const handleClickOutside = (event) => {
+      if (!isMobileMenuOpen.value) return;
+      const target = event.target;
+      document.querySelector("header.navbar-light");
+      const navbar = document.getElementById("navbar-collapse");
+      if (target.closest(".navbar-toggler")) return;
+      if (navbar?.contains(target)) return;
+      closeMobileMenu();
+    };
     onMounted(() => {
       window.addEventListener("scroll", () => {
         isSticky.value = window.scrollY >= 400;
       });
+      document.addEventListener("click", handleClickOutside);
+      router.on("start", () => {
+        closeMobileMenu();
+      });
+    });
+    onUnmounted(() => {
+      document.removeEventListener("click", handleClickOutside);
     });
     const isMobileMenu = computed(() => {
       return window.innerWidth <= 640;
@@ -6231,25 +6264,25 @@ const _sfc_main$1q = /* @__PURE__ */ defineComponent({
       const _component_b_card = BCard;
       const _component_b_card_header = BCardHeader;
       const _component_b_card_footer = BCardFooter;
-      const _directive_b_toggle = vBToggle;
       _push(`<header${ssrRenderAttrs(mergeProps({
         class: ["navbar-light header-sticky", { "header-sticky-on": unref(isSticky) }]
-      }, _attrs))} data-v-d687630e><nav class="navbar navbar-expand-xl" data-v-d687630e>`);
+      }, _attrs))} data-v-a4e862ef><nav class="navbar navbar-expand-xl" data-v-a4e862ef>`);
       _push(ssrRenderComponent(_component_b_container, null, {
         default: withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
             _push2(ssrRenderComponent(_sfc_main$1A, null, null, _parent2, _scopeId));
             if (isMobileMenu.value) {
-              _push2(`<button${ssrRenderAttrs(mergeProps({
-                class: "navbar-toggler ms-sm-0 p-sm-2 ms-auto p-0",
-                type: "button"
-              }, ssrGetDirectiveProps(_ctx, _directive_b_toggle, "navbar-collapse")))} data-v-d687630e${_scopeId}><span class="navbar-toggler-animation py-1" data-v-d687630e${_scopeId}><span data-v-d687630e${_scopeId}></span><span data-v-d687630e${_scopeId}></span><span data-v-d687630e${_scopeId}></span></span><span class="d-none d-sm-inline-block small ms-1" data-v-d687630e${_scopeId}>Menu</span></button>`);
+              _push2(`<button class="navbar-toggler ms-sm-0 p-sm-2 ms-auto p-0" type="button" data-v-a4e862ef${_scopeId}><span class="navbar-toggler-animation py-1" data-v-a4e862ef${_scopeId}><span data-v-a4e862ef${_scopeId}></span><span data-v-a4e862ef${_scopeId}></span><span data-v-a4e862ef${_scopeId}></span></span><span class="d-none d-sm-inline-block small ms-1" data-v-a4e862ef${_scopeId}>Menu</span></button>`);
             } else {
               _push2(`<!---->`);
             }
             if (isMobileMenu.value) {
               _push2(`<!--[-->`);
-              _push2(ssrRenderComponent(_sfc_main$1s, { "show-extra-pages": "" }, null, _parent2, _scopeId));
+              _push2(ssrRenderComponent(_sfc_main$1s, {
+                visible: isMobileMenuOpen.value,
+                "onUpdate:visible": ($event) => isMobileMenuOpen.value = $event,
+                "show-extra-pages": ""
+              }, null, _parent2, _scopeId));
               _push2(ssrRenderComponent(_sfc_main$1w, { "show-extra-pages": "" }, null, _parent2, _scopeId));
               _push2(`<!--]-->`);
             } else {
@@ -6264,9 +6297,9 @@ const _sfc_main$1q = /* @__PURE__ */ defineComponent({
                   }, {
                     default: withCtx((_3, _push4, _parent4, _scopeId3) => {
                       if (_push4) {
-                        _push4(`<a class="nav-notification btn btn-light mb-0 p-0" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside" data-v-d687630e${_scopeId3}>`);
+                        _push4(`<a class="nav-notification btn btn-light mb-0 p-0" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside" data-v-a4e862ef${_scopeId3}>`);
                         _push4(ssrRenderComponent(unref(BIconBell), { class: "fa-fw" }, null, _parent4, _scopeId3));
-                        _push4(`</a><span class="notif-badge animation-blink" data-v-d687630e${_scopeId3}></span><div class="dropdown-menu dropdown-animation dropdown-menu-end dropdown-menu-size-md p-0 shadow-lg" data-v-d687630e${_scopeId3}>`);
+                        _push4(`</a><span class="notif-badge animation-blink" data-v-a4e862ef${_scopeId3}></span><div class="dropdown-menu dropdown-animation dropdown-menu-end dropdown-menu-size-md p-0 shadow-lg" data-v-a4e862ef${_scopeId3}>`);
                         _push4(ssrRenderComponent(_component_b_card, {
                           class: "bg-transparent",
                           "body-class": "p-0"
@@ -6276,7 +6309,7 @@ const _sfc_main$1q = /* @__PURE__ */ defineComponent({
                               _push5(ssrRenderComponent(_component_b_card_header, { class: "d-flex justify-content-between align-items-center border-bottom bg-transparent" }, {
                                 default: withCtx((_5, _push6, _parent6, _scopeId5) => {
                                   if (_push6) {
-                                    _push6(`<h6 class="m-0" data-v-d687630e${_scopeId5}> Notifications <span class="badge bg-danger text-danger ms-2 bg-opacity-10" data-v-d687630e${_scopeId5}>4 new</span></h6><a class="small" href="#" data-v-d687630e${_scopeId5}>Clear all</a>`);
+                                    _push6(`<h6 class="m-0" data-v-a4e862ef${_scopeId5}> Notifications <span class="badge bg-danger text-danger ms-2 bg-opacity-10" data-v-a4e862ef${_scopeId5}>4 new</span></h6><a class="small" href="#" data-v-a4e862ef${_scopeId5}>Clear all</a>`);
                                   } else {
                                     return [
                                       createVNode("h6", { class: "m-0" }, [
@@ -6295,7 +6328,7 @@ const _sfc_main$1q = /* @__PURE__ */ defineComponent({
                               _push5(ssrRenderComponent(_component_b_card_footer, { class: "border-top bg-transparent text-center" }, {
                                 default: withCtx((_5, _push6, _parent6, _scopeId5) => {
                                   if (_push6) {
-                                    _push6(`<a href="#" class="btn btn-sm btn-link mb-0 p-0" data-v-d687630e${_scopeId5}>See all incoming activity</a>`);
+                                    _push6(`<a href="#" class="btn btn-sm btn-link mb-0 p-0" data-v-a4e862ef${_scopeId5}>See all incoming activity</a>`);
                                   } else {
                                     return [
                                       createVNode("a", {
@@ -6387,7 +6420,7 @@ const _sfc_main$1q = /* @__PURE__ */ defineComponent({
                     }),
                     _: 1
                   }, _parent3, _scopeId2));
-                  _push3(`<li class="nav-item d-none d-sm-block ms-3" data-v-d687630e${_scopeId2}>`);
+                  _push3(`<li class="nav-item d-none d-sm-block ms-3" data-v-a4e862ef${_scopeId2}>`);
                   _push3(ssrRenderComponent(unref(Link), {
                     href: _ctx.route("establishments.index"),
                     class: [
@@ -6408,7 +6441,7 @@ const _sfc_main$1q = /* @__PURE__ */ defineComponent({
                     }),
                     _: 1
                   }, _parent3, _scopeId2));
-                  _push3(`</li><li class="nav-item d-none d-sm-block ms-2" data-v-d687630e${_scopeId2}>`);
+                  _push3(`</li><li class="nav-item d-none d-sm-block ms-2" data-v-a4e862ef${_scopeId2}>`);
                   _push3(ssrRenderComponent(unref(Link), {
                     href: _ctx.route("custom-search.index"),
                     class: ["btn mb-0 btn-accompagnement", { "active": _ctx.route().current("custom-search.*") }]
@@ -6544,10 +6577,11 @@ const _sfc_main$1q = /* @__PURE__ */ defineComponent({
           } else {
             return [
               createVNode(_sfc_main$1A),
-              isMobileMenu.value ? withDirectives((openBlock(), createBlock("button", {
+              isMobileMenu.value ? (openBlock(), createBlock("button", {
                 key: 0,
                 class: "navbar-toggler ms-sm-0 p-sm-2 ms-auto p-0",
-                type: "button"
+                type: "button",
+                onClick: toggleMobileMenu
               }, [
                 createVNode("span", { class: "navbar-toggler-animation py-1" }, [
                   createVNode("span"),
@@ -6555,11 +6589,13 @@ const _sfc_main$1q = /* @__PURE__ */ defineComponent({
                   createVNode("span")
                 ]),
                 createVNode("span", { class: "d-none d-sm-inline-block small ms-1" }, "Menu")
-              ])), [
-                [_directive_b_toggle, "navbar-collapse"]
-              ]) : createCommentVNode("", true),
+              ])) : createCommentVNode("", true),
               isMobileMenu.value ? (openBlock(), createBlock(Fragment, { key: 1 }, [
-                createVNode(_sfc_main$1s, { "show-extra-pages": "" }),
+                createVNode(_sfc_main$1s, {
+                  visible: isMobileMenuOpen.value,
+                  "onUpdate:visible": ($event) => isMobileMenuOpen.value = $event,
+                  "show-extra-pages": ""
+                }, null, 8, ["visible", "onUpdate:visible"]),
                 createVNode(_sfc_main$1w, { "show-extra-pages": "" })
               ], 64)) : createCommentVNode("", true),
               createVNode(_component_b_nav, { class: "align-items-center list-unstyled ms-xl-auto flex-row" }, {
@@ -6670,7 +6706,7 @@ _sfc_main$1q.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/Layouts/Partials/AppHeader.vue");
   return _sfc_setup$1q ? _sfc_setup$1q(props, ctx) : void 0;
 };
-const AppHeader = /* @__PURE__ */ _export_sfc(_sfc_main$1q, [["__scopeId", "data-v-d687630e"]]);
+const AppHeader = /* @__PURE__ */ _export_sfc(_sfc_main$1q, [["__scopeId", "data-v-a4e862ef"]]);
 const _sfc_main$1p = /* @__PURE__ */ defineComponent({
   __name: "AppFooter",
   __ssrInlineRender: true,

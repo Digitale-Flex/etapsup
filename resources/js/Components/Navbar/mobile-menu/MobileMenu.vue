@@ -1,5 +1,6 @@
 <template>
     <b-collapse
+        v-model="isVisible"
         class="navbar-collapse"
         id="navbar-collapse"
         style="margin: 0 20px; padding: 0 10px"
@@ -74,14 +75,27 @@ import {
 import { bookingHomeMenuItems } from '@assets/data/menu-items';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { Link } from '@inertiajs/vue3';
+import { computed } from 'vue';
 
 type AppMenuProps = {
     showExtraPages?: boolean;
     startBookingMenu?: boolean;
     menuClass?: string;
+    visible?: boolean;
 };
 
-defineProps<AppMenuProps>();
+const props = withDefaults(defineProps<AppMenuProps>(), {
+    visible: false,
+});
+
+const emit = defineEmits<{
+    (e: 'update:visible', value: boolean): void;
+}>();
+
+const isVisible = computed({
+    get: () => props.visible,
+    set: (value) => emit('update:visible', value),
+});
 
 const menuItems = getAppMenuItems();
 </script>

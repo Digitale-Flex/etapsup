@@ -3,7 +3,7 @@ import CustomDropDown from '@/Components/CustomDropDown.vue';
 import LogoBox from '@/Components/LogoBox.vue';
 import AppMenu from '@/Components/Navbar/AppMenu.vue';
 import MobileMenu from '@/Components/Navbar/mobile-menu/MobileMenu.vue';
-import { Link } from '@inertiajs/vue3';
+import { Link, router } from '@inertiajs/vue3';
 
 import UserMenu from '@/Layouts/Partials/UserMenu.vue';
 import {
@@ -11,14 +11,50 @@ import {
     BIconLightningCharge,
     BIconSearch,
 } from 'bootstrap-icons-vue';
-import { computed, onMounted, ref } from 'vue';
+import { computed, onMounted, onUnmounted, ref } from 'vue';
 
 let isSticky = ref<boolean>(false);
+const isMobileMenuOpen = ref<boolean>(false);
+
+const toggleMobileMenu = () => {
+    isMobileMenuOpen.value = !isMobileMenuOpen.value;
+};
+
+const closeMobileMenu = () => {
+    isMobileMenuOpen.value = false;
+};
+
+// Fermer le menu mobile quand on clique ailleurs
+const handleClickOutside = (event: MouseEvent) => {
+    if (!isMobileMenuOpen.value) return;
+
+    const target = event.target as HTMLElement;
+    const header = document.querySelector('header.navbar-light');
+    const navbar = document.getElementById('navbar-collapse');
+
+    // Ne pas fermer si on clique sur le toggle button ou dans le menu
+    if (target.closest('.navbar-toggler')) return;
+    if (navbar?.contains(target)) return;
+
+    closeMobileMenu();
+};
 
 onMounted(() => {
     window.addEventListener('scroll', () => {
         isSticky.value = window.scrollY >= 400;
     });
+
+    // Écouter les clics pour fermer le menu mobile
+    document.addEventListener('click', handleClickOutside);
+
+    // Fermer le menu lors de la navigation Inertia
+    router.on('start', () => {
+        closeMobileMenu();
+    });
+});
+
+onUnmounted(() => {
+    document.removeEventListener('click', handleClickOutside);
 });
 
 const isMobileMenu = computed(() => {
@@ -40,7 +76,7 @@ const isMobileMenu = computed(() => {
                     v-if="isMobileMenu"
                     class="navbar-toggler ms-sm-0 p-sm-2 ms-auto p-0"
                     type="button"
-                    v-b-toggle="'navbar-collapse'"
+                    @click="toggleMobileMenu"
                 >
                     <span class="navbar-toggler-animation py-1">
                         <span></span>
@@ -53,7 +89,7 @@ const isMobileMenu = computed(() => {
                 </button>
 
                 <template v-if="isMobileMenu">
-                    <MobileMenu show-extra-pages />
+                    <MobileMenu v-model:visible="isMobileMenuOpen" show-extra-pages />
                     <AppMenu show-extra-pages />
                 </template>
 
@@ -161,5 +197,19 @@ const isMobileMenu = computed(() => {
 .btn-accompagnement.active {
     background-color: #3b82f6;
     color: white;
+}
+
+/* EtapSup: Centrer le logo sur mobile */
+@media (max-width: 640px) {
+    :deep(.navbar-brand) {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .navbar-toggler {
+        position: relative;
+        z-index: 10;
+    }
 }
 </style>
