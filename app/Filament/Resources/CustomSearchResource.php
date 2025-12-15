@@ -16,11 +16,23 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
+/**
+ * Ressource pour les demandes d'accompagnement personnalisées
+ * Adapté de Mareza vers EtapSup
+ */
 class CustomSearchResource extends Resource
 {
     protected static ?string $model = CustomSearch::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-magnifying-glass-circle';
+    protected static ?string $modelLabel = 'Demande d\'accompagnement';
+
+    protected static ?string $pluralLabel = 'Demandes d\'accompagnement';
+
+    protected static ?string $navigationIcon = 'heroicon-o-hand-raised';
+
+    protected static ?string $navigationGroup = 'Gestion des Candidatures';
+
+    protected static ?int $navigationSort = 5;
 
     public static function form(Form $form): Form
     {
@@ -28,31 +40,44 @@ class CustomSearchResource extends Resource
             ->schema([
                 Forms\Components\Select::make('user_id')
                     ->relationship('user', 'name')
+                    ->label('Étudiant')
                     ->required(),
                 Forms\Components\Select::make('category_id')
-                    ->relationship('category', 'id')
+                    ->relationship('category', 'label')
+                    ->label('Domaine d\'études')
                     ->required(),
                 Forms\Components\Select::make('city_id')
                     ->relationship('city', 'name')
+                    ->label('Ville souhaitée')
                     ->required(),
                 Forms\Components\Select::make('partner_id')
-                    ->relationship('partner', 'id')
-                    ->required(),
+                    ->relationship('partner', 'label')
+                    ->label('Établissement partenaire'),
                 Forms\Components\Select::make('coupon_id')
-                    ->relationship('coupon', 'id'),
+                    ->relationship('coupon', 'code')
+                    ->label('Code promo'),
                 Forms\Components\TextInput::make('budget')
-                    ->required()
-                    ->maxLength(255),
+                    ->label('Budget scolarité')
+                    ->numeric()
+                    ->prefix('€')
+                    ->required(),
                 Forms\Components\DatePicker::make('rental_start')
+                    ->label('Rentrée souhaitée')
                     ->required(),
                 Forms\Components\TextInput::make('duration')
-                    ->maxLength(255),
+                    ->label('Durée du programme (mois)')
+                    ->numeric(),
                 Forms\Components\Textarea::make('note')
+                    ->label('Notes et besoins spécifiques')
                     ->columnSpanFull(),
                 Forms\Components\TextInput::make('stripe_payment_intent')
-                    ->maxLength(255),
+                    ->label('ID Paiement Stripe')
+                    ->disabled(),
                 Forms\Components\TextInput::make('paid')
-                    ->maxLength(50),
+                    ->label('Montant payé')
+                    ->numeric()
+                    ->prefix('€')
+                    ->disabled(),
             ]);
     }
 
@@ -61,8 +86,8 @@ class CustomSearchResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('user.full_name')
-                    ->description(fn(CustomSearch $record): string => $record->user?->email ?? '') // Fix: null-safe
-                    ->label('Demandeur')
+                    ->description(fn(CustomSearch $record): string => $record->user?->email ?? '')
+                    ->label('Étudiant')
                     ->sortable()
                     ->searchable(),
 
@@ -72,7 +97,7 @@ class CustomSearchResource extends Resource
                     ->searchable(),
 
                 Tables\Columns\TextColumn::make('category.label')
-                    ->label('Catégorie')
+                    ->label('Domaine d\'études')
                     ->badge()
                     ->color('primary')
                     ->sortable(),
@@ -90,7 +115,7 @@ class CustomSearchResource extends Resource
                     ->sortable(),
 
                 Tables\Columns\TextColumn::make('rental_start')
-                    ->label('Début')
+                    ->label('Rentrée')
                     ->date('d/m/Y')
                     ->sortable(),
 
@@ -99,7 +124,7 @@ class CustomSearchResource extends Resource
                     ->sortable(),
 
                 Tables\Columns\TextColumn::make('created_at')
-                    ->label('Créé le')
+                    ->label('Date demande')
                     ->dateTime('d/m/Y H:i')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: false),
@@ -107,21 +132,21 @@ class CustomSearchResource extends Resource
             ->filters([
                 Tables\Filters\SelectFilter::make('category')
                     ->relationship('category', 'label')
-                    ->label('Filtrer par catégorie'),
+                    ->label('Domaine d\'études'),
 
                 Tables\Filters\SelectFilter::make('partner')
                     ->relationship('partner', 'label')
-                    ->label('Partenaire')
+                    ->label('Établissement partenaire')
                     ->searchable()
                     ->preload()
                     ->multiple(),
 
                 Tables\Filters\TernaryFilter::make('has_partner')
-                    ->label('Avec partenaire')
+                    ->label('Avec établissement')
                     ->nullable()
                     ->options([
-                        true => 'Avec partenaire',
-                        false => 'Sans partenaire',
+                        true => 'Avec établissement',
+                        false => 'Sans établissement',
                     ])
                     ->queries(
                         true: fn(Builder $query) => $query->whereNotNull('partner_id'),
@@ -132,7 +157,7 @@ class CustomSearchResource extends Resource
                 Tables\Filters\Filter::make('rental_start')
                     ->form([
                         Forms\Components\DatePicker::make('from')
-                            ->label('Début location à partir du'),
+                            ->label('Rentrée à partir du'),
                         Forms\Components\DatePicker::make('until')
                             ->label('Jusqu\'au'),
                     ])
@@ -175,7 +200,8 @@ class CustomSearchResource extends Resource
     {
         return $infolist
             ->schema([
-                Components\Section::make('Informations du demandeur')
+                Components\Section::make('Informations de l\'étudiant')
+                    ->icon('heroicon-o-user')
                     ->schema([
                         Components\Grid::make(3)
                             ->schema([
@@ -213,18 +239,18 @@ class CustomSearchResource extends Resource
                                     ->color('primary'),
 
                                 Components\TextEntry::make('user.passport_number')
-                                    ->label('N° passport'),
+                                    ->label('N° passeport'),
                             ])
                     ])
                     ->columnSpan(2),
 
                 Components\Section::make('Partenaire & Coupon')
+                    ->icon('heroicon-o-building-library')
                     ->schema([
                         Components\Grid::make(2)
                             ->schema([
                                 Components\TextEntry::make('partner.label')
-                                    ->label('Partenaire')
-                                    // ->url(fn ($record) => $record->partner ? route('filament.admin.resources.partners.view', $record->partner) : null)
+                                    ->label('Établissement partenaire')
                                     ->badge()
                                     ->color('info'),
 
@@ -235,7 +261,7 @@ class CustomSearchResource extends Resource
                             ]),
 
                         Components\TextEntry::make('coupon.discount_amount')
-                            ->label('Montant du coupon')
+                            ->label('Réduction')
                             ->money('EUR')
                             ->color('danger'),
 
@@ -246,19 +272,21 @@ class CustomSearchResource extends Resource
                     ])
                     ->columnSpan(1),
 
-                Components\Section::make('Informations principales')
+                Components\Section::make('Critères de recherche')
+                    ->icon('heroicon-o-academic-cap')
                     ->schema([
                         Components\Grid::make(3)
                             ->schema([
                                 Components\TextEntry::make('category.label')
-                                    ->label('Catégorie')
+                                    ->label('Domaine d\'études')
+                                    ->badge()
                                     ->color('primary'),
 
                                 Components\TextEntry::make('city.name')
-                                    ->label('Ville'),
+                                    ->label('Ville souhaitée'),
 
                                 Components\TextEntry::make('budget')
-                                    ->label('Budget')
+                                    ->label('Budget scolarité')
                                     ->money('EUR')
                                     ->color('success'),
                             ]),
@@ -267,16 +295,17 @@ class CustomSearchResource extends Resource
                             ->columns(3)
                             ->schema([
                                 Components\TextEntry::make('rental_start')
-                                    ->label('Début de location')
+                                    ->label('Rentrée souhaitée')
                                     ->date('d/m/Y')
+                                    ->badge()
                                     ->color('warning'),
                                 Components\TextEntry::make('duration')
-                                    ->label('Durée de location')
+                                    ->label('Durée du programme')
                                     ->suffix(' mois'),
                             ]),
 
                         Components\TextEntry::make('note')
-                            ->label('Notes')
+                            ->label('Notes et besoins spécifiques')
                             ->columnSpanFull()
                             ->markdown(),
 
@@ -284,14 +313,15 @@ class CustomSearchResource extends Resource
                     ->columnSpan(2),
 
                 Components\Section::make('Paiement')
+                    ->icon('heroicon-o-credit-card')
                     ->schema([
                         Components\TextEntry::make('stripe_payment_intent')
-                            ->label('ID de paiement Stripe')
+                            ->label('ID Paiement Stripe')
                             ->copyable()
                             ->badge(),
 
                         Components\TextEntry::make('created_at')
-                            ->label('Date de création')
+                            ->label('Date de la demande')
                             ->dateTime('d/m/Y H:i')
                             ->color('gray'),
                     ])
@@ -299,24 +329,20 @@ class CustomSearchResource extends Resource
 
 
                 Components\Section::make('Préférences')
+                    ->icon('heroicon-o-adjustments-horizontal')
                     ->schema([
                         Components\Grid::make(2)
                             ->schema([
-                                Components\TextEntry::make('layouts.label')
-                                    ->label('Commodités')
+                                Components\TextEntry::make('rentalDeposits.name')
+                                    ->label('Frais de dossier')
                                     ->badge()
                                     ->color('gray'),
 
                                 Components\TextEntry::make('propertyTypes.label')
-                                    ->label('Types de propriétés')
+                                    ->label('Types d\'établissement')
                                     ->badge()
                                     ->color('gray'),
                             ]),
-
-                        Components\TextEntry::make('rentalDeposits.name')
-                            ->label('Dépôts de garantie')
-                            ->badge()
-                            ->color('gray'),
                     ])
                     ->columnSpanFull(),
 
@@ -350,21 +376,21 @@ class CustomSearchResource extends Resource
 
     public static function canCreate(): bool
     {
-        return false;
+        return false; // Demandes créées par les étudiants côté frontend
     }
 
     public static function canEdit(Model $record): bool
     {
-        return false;
+        return true; // Permettre l'édition pour le suivi
     }
 
     public static function getNavigationLabel(): string
     {
-        return "🔒 Recherches personnalisées";
+        return "Demandes d'accompagnement";
     }
 
     public static function shouldRegisterNavigation(): bool
     {
-        return false; // Désactivé - non cliquable
+        return true; // Activé pour EtapSup
     }
 }
