@@ -1035,6 +1035,7 @@ const testimonials = [
     height: 400px;
     background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
     border-radius: 50%;
+    pointer-events: none; /* EtapSup: Ne pas bloquer les clics */
 }
 
 .cta-title {
@@ -1062,6 +1063,9 @@ const testimonials = [
     font-size: 1.125rem;
     text-decoration: none;
     transition: all 0.3s;
+    position: relative;
+    z-index: 2; /* EtapSup: Au-dessus du pseudo-élément */
+    cursor: pointer;
 }
 
 .btn-cta:hover {

@@ -43434,7 +43434,7 @@ const _sfc_main$I = /* @__PURE__ */ defineComponent({
     return (_ctx, _push, _parent, _attrs) => {
       _push(`<!--[-->`);
       _push(ssrRenderComponent(unref(Head), { title: "EtapSup - Votre passerelle vers les études supérieures à l'étranger" }, null, _parent));
-      _push(`<div class="landing-page" data-v-9337b91a><section class="${ssrRenderClass([{ "is-visible": isVisible.value }, "hero-section"])}" data-v-9337b91a>`);
+      _push(`<div class="landing-page" data-v-546891f8><section class="${ssrRenderClass([{ "is-visible": isVisible.value }, "hero-section"])}" data-v-546891f8>`);
       _push(ssrRenderComponent(unref(BContainer$1), null, {
         default: withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
@@ -43447,7 +43447,7 @@ const _sfc_main$I = /* @__PURE__ */ defineComponent({
                   }, {
                     default: withCtx((_3, _push4, _parent4, _scopeId3) => {
                       if (_push4) {
-                        _push4(`<div class="badge-new mb-3" data-v-9337b91a${_scopeId3}><span class="badge-pulse" data-v-9337b91a${_scopeId3}></span> Nouveau : Accompagnement Premium disponible </div><h1 class="hero-title" data-v-9337b91a${_scopeId3}> Trouvez votre formation <span class="text-gradient" data-v-9337b91a${_scopeId3}>à l&#39;étranger</span></h1><p class="hero-subtitle" data-v-9337b91a${_scopeId3}> Plus de 150 établissements partenaires dans 15 pays africains. <br class="d-none d-md-block" data-v-9337b91a${_scopeId3}> Postulez en quelques clics avec un accompagnement personnalisé. </p><div class="search-card" data-v-9337b91a${_scopeId3}><form class="search-form" data-v-9337b91a${_scopeId3}><div class="search-field" data-v-9337b91a${_scopeId3}><label class="search-label" data-v-9337b91a${_scopeId3}><i class="bi bi-flag" data-v-9337b91a${_scopeId3}></i> Pays </label>`);
+                        _push4(`<div class="badge-new mb-3" data-v-546891f8${_scopeId3}><span class="badge-pulse" data-v-546891f8${_scopeId3}></span> Nouveau : Accompagnement Premium disponible </div><h1 class="hero-title" data-v-546891f8${_scopeId3}> Trouvez votre formation <span class="text-gradient" data-v-546891f8${_scopeId3}>à l&#39;étranger</span></h1><p class="hero-subtitle" data-v-546891f8${_scopeId3}> Plus de 150 établissements partenaires dans 15 pays africains. <br class="d-none d-md-block" data-v-546891f8${_scopeId3}> Postulez en quelques clics avec un accompagnement personnalisé. </p><div class="search-card" data-v-546891f8${_scopeId3}><form class="search-form" data-v-546891f8${_scopeId3}><div class="search-field" data-v-546891f8${_scopeId3}><label class="search-label" data-v-546891f8${_scopeId3}><i class="bi bi-flag" data-v-546891f8${_scopeId3}></i> Pays </label>`);
                         _push4(ssrRenderComponent(unref(BFormSelect$1), {
                           modelValue: searchForm.value.country,
                           "onUpdate:modelValue": ($event) => searchForm.value.country = $event,
@@ -43457,7 +43457,7 @@ const _sfc_main$I = /* @__PURE__ */ defineComponent({
                           ],
                           class: "search-select"
                         }, null, _parent4, _scopeId3));
-                        _push4(`</div><div class="search-field" data-v-9337b91a${_scopeId3}><label class="search-label" data-v-9337b91a${_scopeId3}><i class="bi bi-book" data-v-9337b91a${_scopeId3}></i> Domaine d&#39;études </label>`);
+                        _push4(`</div><div class="search-field" data-v-546891f8${_scopeId3}><label class="search-label" data-v-546891f8${_scopeId3}><i class="bi bi-book" data-v-546891f8${_scopeId3}></i> Domaine d&#39;études </label>`);
                         _push4(ssrRenderComponent(unref(BFormSelect$1), {
                           modelValue: searchForm.value.study_field,
                           "onUpdate:modelValue": ($event) => searchForm.value.study_field = $event,
@@ -43467,7 +43467,7 @@ const _sfc_main$I = /* @__PURE__ */ defineComponent({
                           ],
                           class: "search-select"
                         }, null, _parent4, _scopeId3));
-                        _push4(`</div><div class="search-field flex-grow-1" data-v-9337b91a${_scopeId3}><label class="search-label" data-v-9337b91a${_scopeId3}><i class="bi bi-search" data-v-9337b91a${_scopeId3}></i> Mots-clés </label>`);
+                        _push4(`</div><div class="search-field flex-grow-1" data-v-546891f8${_scopeId3}><label class="search-label" data-v-546891f8${_scopeId3}><i class="bi bi-search" data-v-546891f8${_scopeId3}></i> Mots-clés </label>`);
                         _push4(ssrRenderComponent(unref(BFormInput$1), {
                           modelValue: searchForm.value.keywords,
                           "onUpdate:modelValue": ($event) => searchForm.value.keywords = $event,
@@ -43481,7 +43481,7 @@ const _sfc_main$I = /* @__PURE__ */ defineComponent({
                         }, {
                           default: withCtx((_4, _push5, _parent5, _scopeId4) => {
                             if (_push5) {
-                              _push5(`<i class="bi bi-search me-2" data-v-9337b91a${_scopeId4}></i> Rechercher `);
+                              _push5(`<i class="bi bi-search me-2" data-v-546891f8${_scopeId4}></i> Rechercher `);
                             } else {
                               return [
                                 createVNode("i", { class: "bi bi-search me-2" }),
@@ -43491,7 +43491,7 @@ const _sfc_main$I = /* @__PURE__ */ defineComponent({
                           }),
                           _: 1
                         }, _parent4, _scopeId3));
-                        _push4(`</form></div><div class="stats-row" data-v-9337b91a${_scopeId3}><div class="stat-item" data-v-9337b91a${_scopeId3}><div class="stat-value" data-v-9337b91a${_scopeId3}>${ssrInterpolate(__props.stats.totalEstablishments)}+</div><div class="stat-label" data-v-9337b91a${_scopeId3}>Établissements</div></div><div class="stat-item" data-v-9337b91a${_scopeId3}><div class="stat-value" data-v-9337b91a${_scopeId3}>${ssrInterpolate(__props.stats.totalStudents)}+</div><div class="stat-label" data-v-9337b91a${_scopeId3}>Étudiants accompagnés</div></div><div class="stat-item" data-v-9337b91a${_scopeId3}><div class="stat-value" data-v-9337b91a${_scopeId3}>${ssrInterpolate(__props.stats.totalCountries)}</div><div class="stat-label" data-v-9337b91a${_scopeId3}>Pays</div></div></div>`);
+                        _push4(`</form></div><div class="stats-row" data-v-546891f8${_scopeId3}><div class="stat-item" data-v-546891f8${_scopeId3}><div class="stat-value" data-v-546891f8${_scopeId3}>${ssrInterpolate(__props.stats.totalEstablishments)}+</div><div class="stat-label" data-v-546891f8${_scopeId3}>Établissements</div></div><div class="stat-item" data-v-546891f8${_scopeId3}><div class="stat-value" data-v-546891f8${_scopeId3}>${ssrInterpolate(__props.stats.totalStudents)}+</div><div class="stat-label" data-v-546891f8${_scopeId3}>Étudiants accompagnés</div></div><div class="stat-item" data-v-546891f8${_scopeId3}><div class="stat-value" data-v-546891f8${_scopeId3}>${ssrInterpolate(__props.stats.totalCountries)}</div><div class="stat-label" data-v-546891f8${_scopeId3}>Pays</div></div></div>`);
                       } else {
                         return [
                           createVNode("div", { class: "badge-new mb-3" }, [
@@ -43591,7 +43591,7 @@ const _sfc_main$I = /* @__PURE__ */ defineComponent({
                   }, {
                     default: withCtx((_3, _push4, _parent4, _scopeId3) => {
                       if (_push4) {
-                        _push4(`<div class="hero-illustration" data-v-9337b91a${_scopeId3}><div class="floating-card card-1" data-v-9337b91a${_scopeId3}><i class="bi bi-mortarboard-fill" data-v-9337b91a${_scopeId3}></i><span data-v-9337b91a${_scopeId3}>Licence</span></div><div class="floating-card card-2" data-v-9337b91a${_scopeId3}><i class="bi bi-book-fill" data-v-9337b91a${_scopeId3}></i><span data-v-9337b91a${_scopeId3}>Master</span></div><div class="floating-card card-3" data-v-9337b91a${_scopeId3}><i class="bi bi-award-fill" data-v-9337b91a${_scopeId3}></i><span data-v-9337b91a${_scopeId3}>Doctorat</span></div><div class="floating-card card-4" data-v-9337b91a${_scopeId3}><i class="bi bi-briefcase-fill" data-v-9337b91a${_scopeId3}></i><span data-v-9337b91a${_scopeId3}>MBA</span></div><div class="floating-card card-5" data-v-9337b91a${_scopeId3}><i class="bi bi-hospital-fill" data-v-9337b91a${_scopeId3}></i><span data-v-9337b91a${_scopeId3}>Médecine</span></div><div class="floating-card card-6" data-v-9337b91a${_scopeId3}><i class="bi bi-code-slash" data-v-9337b91a${_scopeId3}></i><span data-v-9337b91a${_scopeId3}>Ingénierie</span></div><div class="hero-blob" data-v-9337b91a${_scopeId3}></div></div>`);
+                        _push4(`<div class="hero-illustration" data-v-546891f8${_scopeId3}><div class="floating-card card-1" data-v-546891f8${_scopeId3}><i class="bi bi-mortarboard-fill" data-v-546891f8${_scopeId3}></i><span data-v-546891f8${_scopeId3}>Licence</span></div><div class="floating-card card-2" data-v-546891f8${_scopeId3}><i class="bi bi-book-fill" data-v-546891f8${_scopeId3}></i><span data-v-546891f8${_scopeId3}>Master</span></div><div class="floating-card card-3" data-v-546891f8${_scopeId3}><i class="bi bi-award-fill" data-v-546891f8${_scopeId3}></i><span data-v-546891f8${_scopeId3}>Doctorat</span></div><div class="floating-card card-4" data-v-546891f8${_scopeId3}><i class="bi bi-briefcase-fill" data-v-546891f8${_scopeId3}></i><span data-v-546891f8${_scopeId3}>MBA</span></div><div class="floating-card card-5" data-v-546891f8${_scopeId3}><i class="bi bi-hospital-fill" data-v-546891f8${_scopeId3}></i><span data-v-546891f8${_scopeId3}>Médecine</span></div><div class="floating-card card-6" data-v-546891f8${_scopeId3}><i class="bi bi-code-slash" data-v-546891f8${_scopeId3}></i><span data-v-546891f8${_scopeId3}>Ingénierie</span></div><div class="hero-blob" data-v-546891f8${_scopeId3}></div></div>`);
                       } else {
                         return [
                           createVNode("div", { class: "hero-illustration" }, [
@@ -43903,11 +43903,11 @@ const _sfc_main$I = /* @__PURE__ */ defineComponent({
         }),
         _: 1
       }, _parent));
-      _push(`</section><section class="study-fields-section" data-v-9337b91a>`);
+      _push(`</section><section class="study-fields-section" data-v-546891f8>`);
       _push(ssrRenderComponent(unref(BContainer$1), null, {
         default: withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
-            _push2(`<div class="section-header text-center" data-v-9337b91a${_scopeId}><h2 class="section-title" data-v-9337b91a${_scopeId}>Explorez les domaines d&#39;études</h2><p class="section-subtitle" data-v-9337b91a${_scopeId}>Découvrez les formations les plus recherchées</p></div><div class="fields-grid" data-v-9337b91a${_scopeId}><!--[-->`);
+            _push2(`<div class="section-header text-center" data-v-546891f8${_scopeId}><h2 class="section-title" data-v-546891f8${_scopeId}>Explorez les domaines d&#39;études</h2><p class="section-subtitle" data-v-546891f8${_scopeId}>Découvrez les formations les plus recherchées</p></div><div class="fields-grid" data-v-546891f8${_scopeId}><!--[-->`);
             ssrRenderList(popularFields, (field) => {
               _push2(ssrRenderComponent(unref(Link), {
                 key: field.slug,
@@ -43916,7 +43916,7 @@ const _sfc_main$I = /* @__PURE__ */ defineComponent({
               }, {
                 default: withCtx((_2, _push3, _parent3, _scopeId2) => {
                   if (_push3) {
-                    _push3(`<div class="field-icon" data-v-9337b91a${_scopeId2}>${ssrInterpolate(field.icon)}</div><div class="field-name" data-v-9337b91a${_scopeId2}>${ssrInterpolate(field.name)}</div><i class="bi bi-arrow-right field-arrow" data-v-9337b91a${_scopeId2}></i>`);
+                    _push3(`<div class="field-icon" data-v-546891f8${_scopeId2}>${ssrInterpolate(field.icon)}</div><div class="field-name" data-v-546891f8${_scopeId2}>${ssrInterpolate(field.name)}</div><i class="bi bi-arrow-right field-arrow" data-v-546891f8${_scopeId2}></i>`);
                   } else {
                     return [
                       createVNode("div", { class: "field-icon" }, toDisplayString(field.icon), 1),
@@ -43958,18 +43958,18 @@ const _sfc_main$I = /* @__PURE__ */ defineComponent({
       }, _parent));
       _push(`</section>`);
       if (__props.establishments.length > 0) {
-        _push(`<section class="establishments-section" data-v-9337b91a>`);
+        _push(`<section class="establishments-section" data-v-546891f8>`);
         _push(ssrRenderComponent(unref(BContainer$1), null, {
           default: withCtx((_, _push2, _parent2, _scopeId) => {
             if (_push2) {
-              _push2(`<div class="section-header" data-v-9337b91a${_scopeId}><div data-v-9337b91a${_scopeId}><h2 class="section-title" data-v-9337b91a${_scopeId}>Établissements à la une</h2><p class="section-subtitle" data-v-9337b91a${_scopeId}>Les meilleures universités et écoles partenaires</p></div>`);
+              _push2(`<div class="section-header" data-v-546891f8${_scopeId}><div data-v-546891f8${_scopeId}><h2 class="section-title" data-v-546891f8${_scopeId}>Établissements à la une</h2><p class="section-subtitle" data-v-546891f8${_scopeId}>Les meilleures universités et écoles partenaires</p></div>`);
               _push2(ssrRenderComponent(unref(Link), {
                 href: "/establishments",
                 class: "btn-view-all"
               }, {
                 default: withCtx((_2, _push3, _parent3, _scopeId2) => {
                   if (_push3) {
-                    _push3(` Voir tout <i class="bi bi-arrow-right ms-2" data-v-9337b91a${_scopeId2}></i>`);
+                    _push3(` Voir tout <i class="bi bi-arrow-right ms-2" data-v-546891f8${_scopeId2}></i>`);
                   } else {
                     return [
                       createTextVNode(" Voir tout "),
@@ -43998,19 +43998,19 @@ const _sfc_main$I = /* @__PURE__ */ defineComponent({
                             }, {
                               default: withCtx((_4, _push5, _parent5, _scopeId4) => {
                                 if (_push5) {
-                                  _push5(`<div class="establishment-image" data-v-9337b91a${_scopeId4}><img${ssrRenderAttr("src", establishment.thumb || establishment.logo || "https://via.placeholder.com/400x240?text=EtapSup")}${ssrRenderAttr("alt", establishment.title)} data-v-9337b91a${_scopeId4}>`);
+                                  _push5(`<div class="establishment-image" data-v-546891f8${_scopeId4}><img${ssrRenderAttr("src", establishment.thumb || establishment.logo || "https://via.placeholder.com/400x240?text=EtapSup")}${ssrRenderAttr("alt", establishment.title)} data-v-546891f8${_scopeId4}>`);
                                   if (establishment.ranking) {
-                                    _push5(`<div class="establishment-badge" data-v-9337b91a${_scopeId4}><i class="bi bi-star-fill" data-v-9337b91a${_scopeId4}></i> Top ${ssrInterpolate(establishment.ranking)}</div>`);
+                                    _push5(`<div class="establishment-badge" data-v-546891f8${_scopeId4}><i class="bi bi-star-fill" data-v-546891f8${_scopeId4}></i> Top ${ssrInterpolate(establishment.ranking)}</div>`);
                                   } else {
                                     _push5(`<!---->`);
                                   }
-                                  _push5(`</div><div class="establishment-body" data-v-9337b91a${_scopeId4}><h3 class="establishment-title" data-v-9337b91a${_scopeId4}>${ssrInterpolate(establishment.title)}</h3><div class="establishment-meta" data-v-9337b91a${_scopeId4}><span class="meta-item" data-v-9337b91a${_scopeId4}><i class="bi bi-geo-alt-fill" data-v-9337b91a${_scopeId4}></i> ${ssrInterpolate(establishment.city)}, ${ssrInterpolate(establishment.country)}</span>`);
+                                  _push5(`</div><div class="establishment-body" data-v-546891f8${_scopeId4}><h3 class="establishment-title" data-v-546891f8${_scopeId4}>${ssrInterpolate(establishment.title)}</h3><div class="establishment-meta" data-v-546891f8${_scopeId4}><span class="meta-item" data-v-546891f8${_scopeId4}><i class="bi bi-geo-alt-fill" data-v-546891f8${_scopeId4}></i> ${ssrInterpolate(establishment.city)}, ${ssrInterpolate(establishment.country)}</span>`);
                                   if (establishment.studentCount) {
-                                    _push5(`<span class="meta-item" data-v-9337b91a${_scopeId4}><i class="bi bi-people-fill" data-v-9337b91a${_scopeId4}></i> ${ssrInterpolate(establishment.studentCount)} étudiants </span>`);
+                                    _push5(`<span class="meta-item" data-v-546891f8${_scopeId4}><i class="bi bi-people-fill" data-v-546891f8${_scopeId4}></i> ${ssrInterpolate(establishment.studentCount)} étudiants </span>`);
                                   } else {
                                     _push5(`<!---->`);
                                   }
-                                  _push5(`</div><div class="establishment-type" data-v-9337b91a${_scopeId4}>${ssrInterpolate(establishment.type)}</div></div>`);
+                                  _push5(`</div><div class="establishment-type" data-v-546891f8${_scopeId4}>${ssrInterpolate(establishment.type)}</div></div>`);
                                 } else {
                                   return [
                                     createVNode("div", { class: "establishment-image" }, [
@@ -44232,11 +44232,11 @@ const _sfc_main$I = /* @__PURE__ */ defineComponent({
       } else {
         _push(`<!---->`);
       }
-      _push(`<section class="benefits-section" data-v-9337b91a>`);
+      _push(`<section class="benefits-section" data-v-546891f8>`);
       _push(ssrRenderComponent(unref(BContainer$1), null, {
         default: withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
-            _push2(`<div class="section-header text-center" data-v-9337b91a${_scopeId}><h2 class="section-title" data-v-9337b91a${_scopeId}>Pourquoi choisir EtapSup ?</h2><p class="section-subtitle" data-v-9337b91a${_scopeId}>Un accompagnement complet pour réussir vos études à l&#39;étranger</p></div>`);
+            _push2(`<div class="section-header text-center" data-v-546891f8${_scopeId}><h2 class="section-title" data-v-546891f8${_scopeId}>Pourquoi choisir EtapSup ?</h2><p class="section-subtitle" data-v-546891f8${_scopeId}>Un accompagnement complet pour réussir vos études à l&#39;étranger</p></div>`);
             _push2(ssrRenderComponent(unref(BRow$1), { class: "g-4" }, {
               default: withCtx((_2, _push3, _parent3, _scopeId2) => {
                 if (_push3) {
@@ -44249,7 +44249,7 @@ const _sfc_main$I = /* @__PURE__ */ defineComponent({
                     }, {
                       default: withCtx((_3, _push4, _parent4, _scopeId3) => {
                         if (_push4) {
-                          _push4(`<div class="benefit-card" data-v-9337b91a${_scopeId3}><div class="benefit-icon" data-v-9337b91a${_scopeId3}>${ssrInterpolate(benefit.icon)}</div><h3 class="benefit-title" data-v-9337b91a${_scopeId3}>${ssrInterpolate(benefit.title)}</h3><p class="benefit-description" data-v-9337b91a${_scopeId3}>${ssrInterpolate(benefit.description)}</p></div>`);
+                          _push4(`<div class="benefit-card" data-v-546891f8${_scopeId3}><div class="benefit-icon" data-v-546891f8${_scopeId3}>${ssrInterpolate(benefit.icon)}</div><h3 class="benefit-title" data-v-546891f8${_scopeId3}>${ssrInterpolate(benefit.title)}</h3><p class="benefit-description" data-v-546891f8${_scopeId3}>${ssrInterpolate(benefit.description)}</p></div>`);
                         } else {
                           return [
                             createVNode("div", { class: "benefit-card" }, [
@@ -44319,11 +44319,11 @@ const _sfc_main$I = /* @__PURE__ */ defineComponent({
         }),
         _: 1
       }, _parent));
-      _push(`</section><section class="testimonials-section" data-v-9337b91a>`);
+      _push(`</section><section class="testimonials-section" data-v-546891f8>`);
       _push(ssrRenderComponent(unref(BContainer$1), null, {
         default: withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
-            _push2(`<div class="section-header text-center" data-v-9337b91a${_scopeId}><h2 class="section-title" data-v-9337b91a${_scopeId}>Ils nous font confiance</h2><p class="section-subtitle" data-v-9337b91a${_scopeId}>Découvrez les témoignages de nos étudiants</p></div>`);
+            _push2(`<div class="section-header text-center" data-v-546891f8${_scopeId}><h2 class="section-title" data-v-546891f8${_scopeId}>Ils nous font confiance</h2><p class="section-subtitle" data-v-546891f8${_scopeId}>Découvrez les témoignages de nos étudiants</p></div>`);
             _push2(ssrRenderComponent(unref(BRow$1), { class: "g-4" }, {
               default: withCtx((_2, _push3, _parent3, _scopeId2) => {
                 if (_push3) {
@@ -44335,11 +44335,11 @@ const _sfc_main$I = /* @__PURE__ */ defineComponent({
                     }, {
                       default: withCtx((_3, _push4, _parent4, _scopeId3) => {
                         if (_push4) {
-                          _push4(`<div class="testimonial-card" data-v-9337b91a${_scopeId3}><div class="testimonial-rating" data-v-9337b91a${_scopeId3}><!--[-->`);
+                          _push4(`<div class="testimonial-card" data-v-546891f8${_scopeId3}><div class="testimonial-rating" data-v-546891f8${_scopeId3}><!--[-->`);
                           ssrRenderList(5, (i2) => {
-                            _push4(`<i class="bi bi-star-fill" data-v-9337b91a${_scopeId3}></i>`);
+                            _push4(`<i class="bi bi-star-fill" data-v-546891f8${_scopeId3}></i>`);
                           });
-                          _push4(`<!--]--></div><p class="testimonial-text" data-v-9337b91a${_scopeId3}>&quot;${ssrInterpolate(testimonial.text)}&quot;</p><div class="testimonial-author" data-v-9337b91a${_scopeId3}><img${ssrRenderAttr("src", testimonial.photo)}${ssrRenderAttr("alt", testimonial.name)} class="author-photo" data-v-9337b91a${_scopeId3}><div data-v-9337b91a${_scopeId3}><div class="author-name" data-v-9337b91a${_scopeId3}>${ssrInterpolate(testimonial.name)}</div><div class="author-country" data-v-9337b91a${_scopeId3}>${ssrInterpolate(testimonial.country)}</div></div></div></div>`);
+                          _push4(`<!--]--></div><p class="testimonial-text" data-v-546891f8${_scopeId3}>&quot;${ssrInterpolate(testimonial.text)}&quot;</p><div class="testimonial-author" data-v-546891f8${_scopeId3}><img${ssrRenderAttr("src", testimonial.photo)}${ssrRenderAttr("alt", testimonial.name)} class="author-photo" data-v-546891f8${_scopeId3}><div data-v-546891f8${_scopeId3}><div class="author-name" data-v-546891f8${_scopeId3}>${ssrInterpolate(testimonial.name)}</div><div class="author-country" data-v-546891f8${_scopeId3}>${ssrInterpolate(testimonial.country)}</div></div></div></div>`);
                         } else {
                           return [
                             createVNode("div", { class: "testimonial-card" }, [
@@ -44458,18 +44458,18 @@ const _sfc_main$I = /* @__PURE__ */ defineComponent({
         }),
         _: 1
       }, _parent));
-      _push(`</section><section class="cta-section" data-v-9337b91a>`);
+      _push(`</section><section class="cta-section" data-v-546891f8>`);
       _push(ssrRenderComponent(unref(BContainer$1), null, {
         default: withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
-            _push2(`<div class="cta-card" data-v-9337b91a${_scopeId}>`);
+            _push2(`<div class="cta-card" data-v-546891f8${_scopeId}>`);
             _push2(ssrRenderComponent(unref(BRow$1), { class: "align-items-center" }, {
               default: withCtx((_2, _push3, _parent3, _scopeId2) => {
                 if (_push3) {
                   _push3(ssrRenderComponent(unref(BCol$1), { lg: "8" }, {
                     default: withCtx((_3, _push4, _parent4, _scopeId3) => {
                       if (_push4) {
-                        _push4(`<h2 class="cta-title" data-v-9337b91a${_scopeId3}>Prêt à commencer votre aventure ?</h2><p class="cta-subtitle" data-v-9337b91a${_scopeId3}> Créez votre compte gratuitement et découvrez toutes les opportunités qui s&#39;offrent à vous </p>`);
+                        _push4(`<h2 class="cta-title" data-v-546891f8${_scopeId3}>Prêt à commencer votre aventure ?</h2><p class="cta-subtitle" data-v-546891f8${_scopeId3}> Créez votre compte gratuitement et découvrez toutes les opportunités qui s&#39;offrent à vous </p>`);
                       } else {
                         return [
                           createVNode("h2", { class: "cta-title" }, "Prêt à commencer votre aventure ?"),
@@ -44491,7 +44491,7 @@ const _sfc_main$I = /* @__PURE__ */ defineComponent({
                         }, {
                           default: withCtx((_4, _push5, _parent5, _scopeId4) => {
                             if (_push5) {
-                              _push5(` Créer mon compte <i class="bi bi-arrow-right ms-2" data-v-9337b91a${_scopeId4}></i>`);
+                              _push5(` Créer mon compte <i class="bi bi-arrow-right ms-2" data-v-546891f8${_scopeId4}></i>`);
                             } else {
                               return [
                                 createTextVNode(" Créer mon compte "),
@@ -44600,7 +44600,7 @@ _sfc_main$I.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/Pages/Home/Accueil.vue");
   return _sfc_setup$I ? _sfc_setup$I(props, ctx) : void 0;
 };
-const Accueil = /* @__PURE__ */ _export_sfc(_sfc_main$I, [["__scopeId", "data-v-9337b91a"]]);
+const Accueil = /* @__PURE__ */ _export_sfc(_sfc_main$I, [["__scopeId", "data-v-546891f8"]]);
 const __vite_glob_0_36 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: Accueil
