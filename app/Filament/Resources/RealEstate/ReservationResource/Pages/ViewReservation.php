@@ -20,6 +20,6 @@ class ViewReservation extends ViewRecord
 
     public function getTitle(): string|Htmlable
     {
-        return 'Détails de la réservation';
+        return 'Détails de la candidature';
     }
 }

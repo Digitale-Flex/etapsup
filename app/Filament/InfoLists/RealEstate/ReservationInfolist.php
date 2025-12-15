@@ -2,7 +2,7 @@
 
 namespace App\Filament\InfoLists\RealEstate;
 
-use App\Enums\ReservationType;
+use App\Enums\ApplicationStatus;
 use App\Filament\InfoLists\Components\FileEntry;
 use App\Filament\InfoLists\Components\TimelineEntry;
 use App\Filament\Resources\RealEstate\PropertyResource;
@@ -10,6 +10,10 @@ use App\Models\RealEstate\Reservation;
 use Filament\Infolists\Components;
 use Filament\Infolists\Infolist;
 
+/**
+ * Infolist pour afficher les détails d'une candidature EtapSup
+ * Adapté du vocabulaire Mareza vers EtapSup
+ */
 class ReservationInfolist
 {
     public static function infolist(Infolist $infolist): Infolist
@@ -17,7 +21,9 @@ class ReservationInfolist
         return $infolist
             ->columns(5)
             ->schema([
-                Components\Section::make('Informations sur le client')
+                // Section Étudiant
+                Components\Section::make('Informations sur l\'étudiant')
+                    ->icon('heroicon-o-user')
                     ->schema([
                         Components\Grid::make(4)
                             ->schema([
@@ -51,113 +57,117 @@ class ReservationInfolist
                                     ->color('primary'),
 
                                 Components\TextEntry::make('user.passport_number')
-                                    ->label('N° passport'),
+                                    ->label('N° passeport'),
                             ]),
                     ]),
 
-                Components\Section::make('Détails de la réservation')
-                    ->icon('heroicon-o-document-text')
+                // Section Candidature
+                Components\Section::make('Détails de la candidature')
+                    ->icon('heroicon-o-academic-cap')
                     ->schema([
                         Components\Grid::make(3)
                             ->schema([
-                                Components\TextEntry::make('type')
-                                    ->label('Type de réservation')
-                                    ->badge(),
-                                Components\TextEntry::make('guests')
-                                    ->label(function ($record) {
-                                        return match ($record->type?->value) { // Fix: null-safe
-                                            ReservationType::Stay => 'Voyageurs',
-                                            ReservationType::Monthly => 'Durée (Mois)',
-                                            default => 'Invités'
-                                        };
-                                    })
-                                    ->icon(function ($record) {
-                                        return match ($record->type?->value) { // Fix: null-safe
-                                            ReservationType::Stay => 'heroicon-o-user-group',
-                                            ReservationType::Monthly => 'heroicon-o-calendar',
-                                            default => 'heroicon-o-user'
-                                        };
-                                    }),
+                                Components\TextEntry::make('status')
+                                    ->label('Statut de la candidature')
+                                    ->badge()
+                                    ->color(fn ($state) => ApplicationStatus::getStatusColor($state ?? 'pending'))
+                                    ->formatStateUsing(fn ($state) => ApplicationStatus::translateStatus($state ?? 'pending')),
+
                                 Components\TextEntry::make('created_at')
-                                    ->label('Créée le')
+                                    ->label('Date de candidature')
                                     ->dateTime('d/m/Y H:i')
                                     ->color('gray')
                                     ->icon('heroicon-o-calendar'),
 
-                                Components\TextEntry::make('start_date')
-                                    ->label('Début de location')
-                                    ->date('d M Y')
-                                    ->badge()
-                                    ->color('primary'),
-                                Components\TextEntry::make('end_date')
-                                    ->label('Fin de location')
-                                    ->date('d M Y')
-                                    ->badge()
-                                    ->color('primary'),
-                                Components\TextEntry::make('duration')
-                                    ->label('Durée de location')
-                                    ->state(fn(Reservation $record) => $record->start_date && $record->end_date
-                                        ? $record->start_date->diffInDays($record->end_date) . ' jours'
-                                        : 'N/A'), // Fix: null-safe
+                                Components\TextEntry::make('updated_at')
+                                    ->label('Dernière mise à jour')
+                                    ->dateTime('d/m/Y H:i')
+                                    ->color('gray'),
                             ]),
+
+                        Components\Grid::make(3)
+                            ->schema([
+                                Components\TextEntry::make('start_date')
+                                    ->label('Rentrée souhaitée')
+                                    ->date('d M Y')
+                                    ->badge()
+                                    ->color('primary'),
+
+                                Components\TextEntry::make('end_date')
+                                    ->label('Fin prévue')
+                                    ->date('d M Y')
+                                    ->badge()
+                                    ->color('primary'),
+
+                                Components\TextEntry::make('duration')
+                                    ->label('Durée du programme')
+                                    ->state(fn(Reservation $record) => $record->start_date && $record->end_date
+                                        ? $record->start_date->diffInMonths($record->end_date) . ' mois'
+                                        : 'N/A'),
+                            ]),
+
                         Components\Grid::make(2)
                             ->schema([
-                                Components\TextEntry::make('period')
-                                    ->label('Période')
-                                    ->formatStateUsing(fn($state) => $state
-                                        ? "Du {$state->start()->format('d/m/Y')} au {$state->end()->format('d/m/Y')}"
-                                        : 'N/A') // Fix: null-safe
-                                    ->icon('heroicon-o-calendar-days'),
                                 Components\TextEntry::make('price')
-                                    ->label(function ($record) {
-                                        return match ($record->type?->value) { // Fix: null-safe
-                                            ReservationType::Stay => "Payer",
-                                            ReservationType::Monthly => "A Payer",
-                                            default => 'Prix total',
-                                        };
-                                    })
+                                    ->label('Frais de scolarité estimés')
                                     ->money('EUR')
                                     ->color('success')
                                     ->icon('heroicon-o-currency-euro'),
+
+                                // Feature 9: Accompagnement Premium
+                                Components\TextEntry::make('accompagnement_status')
+                                    ->label('Accompagnement Premium')
+                                    ->state(fn(Reservation $record) => match(true) {
+                                        ($record->accompagnement_premium ?? false) && ($record->accompagnement_paid ?? false) => 'Souscrit et payé',
+                                        ($record->accompagnement_premium ?? false) => 'En attente de paiement',
+                                        default => 'Non demandé'
+                                    })
+                                    ->badge()
+                                    ->color(fn($state) => match($state) {
+                                        'Souscrit et payé' => 'success',
+                                        'En attente de paiement' => 'warning',
+                                        default => 'gray'
+                                    }),
                             ]),
 
                         Components\Group::make()
                             ->schema([
                                 Components\TextEntry::make('reason')
-                                    ->label('Motif')
-                                    ->icon('heroicon-o-document-magnifying-glass'),
+                                    ->label('Motif (si refus)')
+                                    ->icon('heroicon-o-document-magnifying-glass')
+                                    ->visible(fn($record) => !empty($record->reason)),
+
+                                Components\TextEntry::make('notes')
+                                    ->label('Notes administratives')
+                                    ->icon('heroicon-o-clipboard-document-list')
+                                    ->visible(fn($record) => !empty($record->notes)),
+
                                 Components\KeyValueEntry::make('fees')
                                     ->label('Détail des frais')
                                     ->columnSpanFull()
-                                    ->state(fn($record) => match ($record->type?->value) { // Fix: null-safe
-                                        ReservationType::Stay => [
-                                            'Taxe de séjour' => $record->fees['touristTax'] ?? 'N/A',
-                                            'Consommable' => $record->fees['consommable'] ?? 'N/A',
-                                            'Frais de service' => $record->fees['serviceFees'] ?? 'N/A',
-                                            'Frais de ménage' => $record->fees['cleaningFees'] ?? 'N/A',
-                                        ],
-                                        ReservationType::Monthly => [
-                                            'Cumule des loyers' => $record->fees['total'] ?? 'N/A',
-                                            'Caution' => $record->fees['caution'] ?? 'N/A',
-                                            '1er mois de loyer' => $record->fees['firstMonthRent'] ?? 'N/A',
-                                            'Frais de dossier' => $record->fees['applicationFees'] ?? 'N/A',
-                                        ],
-                                        default => [],
-                                    }),
+                                    ->state(fn($record) => [
+                                        'Frais de dossier' => $record->fees['applicationFees'] ?? 'N/A',
+                                        'Frais de scolarité' => $record->fees['tuitionFees'] ?? 'N/A',
+                                        'Accompagnement premium' => $record->fees['accompagnement'] ?? 'N/A',
+                                    ])
+                                    ->visible(fn($record) => !empty($record->fees)),
                             ]),
 
                     ])
                     ->columnSpan(3),
 
-                Components\Section::make('Détails du logement')
-                    ->icon('heroicon-o-home-modern')
+                // Section Établissement
+                Components\Section::make('Établissement visé')
+                    ->icon('heroicon-o-building-library')
                     ->schema([
                         Components\Group::make()
                             ->schema([
                                 Components\TextEntry::make('property.title')
                                     ->label('')
                                     ->weight('bold')
-                                    ->url(fn(Reservation $record) => PropertyResource::getUrl('edit', ['record' => $record->property])),
+                                    ->url(fn(Reservation $record) => $record->property
+                                        ? PropertyResource::getUrl('edit', ['record' => $record->property])
+                                        : null),
                                 Components\SpatieMediaLibraryImageEntry::make('property.images')
                                     ->label('')
                                     ->collection('images')
@@ -170,51 +180,41 @@ class ReservationInfolist
                             ->columns(2)
                             ->schema([
                                 Components\TextEntry::make('property.propertyType.label')
-                                    ->label('Type de logement'),
+                                    ->label('Type d\'établissement'),
                                 Components\TextEntry::make('property.category.label')
-                                    ->label('Catégorie'),
+                                    ->label('Domaine d\'études'),
                                 Components\TextEntry::make('property.price')
                                     ->money('EUR')
-                                    ->label('Prix'),
+                                    ->label('Frais annuels'),
                                 Components\TextEntry::make('property.city.name')
                                     ->label('Ville'),
+                                Components\TextEntry::make('property.city.country.name')
+                                    ->label('Pays')
+                                    ->badge()
+                                    ->color('info'),
                                 Components\TextEntry::make('property.address')
                                     ->label('Adresse')->columnSpanFull(),
                             ]),
                     ])->columnSpan(2),
 
-                Components\Section::make('Documents')
+                // Section Documents
+                Components\Section::make('Documents de candidature')
                     ->icon('heroicon-o-folder')
                     ->schema([
                         Components\Grid::make(3)
                             ->schema([
-                                Components\ImageEntry::make('contract')
-                                    ->hidden()
-                                    ->label('Contrat')
-                                    ->getStateUsing(fn($record) => $record->getFirstMediaUrl('contract'))
-                                    ->height(200)
-                                    ->extraImgAttributes(['class' => 'rounded-lg shadow']),
-
-                                /*  FileEntry::make('files')
-                                      ->label('Pièces jointes')
-                                      ->label('Pièces jointes')
-                                      ->getStateUsing(fn ($record) => $record->getMedia('files')) */
                                 Components\TextEntry::make('files')
-                                    ->label('Pièces jointes')
+                                    ->label('Pièces jointes (CV, diplômes, etc.)')
                                     ->getStateUsing(fn($record) => $record->getMedia('files')->map(fn($file) => "<a href='{$file->getUrl()}' target='_blank' class='text-primary-600 hover:underline'>{$file->file_name}</a>"
-                                    )->implode('<br>'))
+                                    )->implode('<br>') ?: '<span class="text-gray-400">Aucun document</span>')
                                     ->html(),
                             ]),
                     ]),
 
-
-                Components\Section::make('Contrat & Communication')
+                // Section Communication (masquée)
+                Components\Section::make('Suivi & Communication')
                     ->hidden()
                     ->schema([
-                        Components\SpatieMediaLibraryImageEntry::make('contract')
-                            ->collection('contract')
-                            ->label('Contrat PDF'),
-
                         Components\Grid::make(2)
                             ->schema([
                                 Components\IconEntry::make('pdf_generated')
@@ -227,17 +227,17 @@ class ReservationInfolist
                                     ->label('Email Envoyé'),
                             ]),
 
-                        Components\Fieldset::make('Statut')
+                        Components\Fieldset::make('Statut des communications')
                             ->schema([
                                 Components\TextEntry::make('pdf_status')
                                     ->state(fn(Reservation $record): string => match (true) {
                                         $record->hasFlag('pdf_generated') => 'Succès',
-                                        $record->hasFlag('pdf_generation_failed') => 'Échec Génération',
+                                        $record->hasFlag('pdf_generation_failed') => 'Échec',
                                         default => 'Non généré'
                                     })
                                     ->color(fn($state): string => match ($state) {
                                         'Succès' => 'success',
-                                        'Échec Génération' => 'danger',
+                                        'Échec' => 'danger',
                                         default => 'gray'
                                     })
                                     ->badge(),
@@ -245,12 +245,12 @@ class ReservationInfolist
                                 Components\TextEntry::make('email_status')
                                     ->state(fn(Reservation $record): string => match (true) {
                                         $record->hasFlag('email_sent') => 'Succès',
-                                        $record->hasFlag('email_failed') => 'Échec Envoi',
+                                        $record->hasFlag('email_failed') => 'Échec',
                                         default => 'Non envoyé'
                                     })
                                     ->color(fn($state): string => match ($state) {
                                         'Succès' => 'success',
-                                        'Échec Envoi' => 'danger',
+                                        'Échec' => 'danger',
                                         default => 'gray'
                                     })
                                     ->badge(),
