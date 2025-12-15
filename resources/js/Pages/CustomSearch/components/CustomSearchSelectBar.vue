@@ -35,7 +35,7 @@ const { r$ } = storeToRefs(store);
                                         <BIconHouseCheck
                                             class="text-primary me-1"
                                         />
-                                        Logement
+                                        Établissement
                                     </label>
                                     <div
                                         class="form-control-transparent form-fs-lg mt-2"
@@ -54,7 +54,7 @@ const { r$ } = storeToRefs(store);
                                             option-label="label"
                                             option-value="id"
                                             class="w-full"
-                                            placeholder="Type de logement"
+                                            placeholder="Type d'établissement"
                                         />
                                         <Message
                                             v-show="
@@ -75,7 +75,7 @@ const { r$ } = storeToRefs(store);
                                 <b-col sm="6" lg="3">
                                     <label class="h6 fw-normal mb-0">
                                         <BIconTag class="text-primary me-1" />
-                                        Catégorie
+                                        Domaine d'études
                                     </label>
                                     <div
                                         class="form-control-transparent form-fs-lg mt-2"
@@ -90,7 +90,7 @@ const { r$ } = storeToRefs(store);
                                             option-value="id"
                                             showClear
                                             class="w-full"
-                                            placeholder="Catégorie"
+                                            placeholder="Domaine d'études"
                                         />
                                         <Message
                                             v-show="
@@ -112,7 +112,7 @@ const { r$ } = storeToRefs(store);
                                         <BIconHouseAdd
                                             class="text-primary me-1"
                                         />
-                                        Commodités
+                                        Hébergement
                                     </label>
                                     <div
                                         class="form-control-transparent form-fs-lg mt-2"
@@ -128,7 +128,7 @@ const { r$ } = storeToRefs(store);
                                             option-label="label"
                                             option-value="id"
                                             class="w-full"
-                                            placeholder="Type d’hébergement"
+                                            placeholder="Type d'hébergement souhaité"
                                         />
                                         <Message
                                             v-show="

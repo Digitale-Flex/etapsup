@@ -6,7 +6,7 @@ defineOptions({ layout: DashboardLayout });
 </script>
 
 <template>
-    <Head title="Mes demandes d'attestations" />
+    <Head title="Mes demandes d'accompagnement" />
     <div class="alert alert-success d-flex align-items-center" role="alert">
         <i class="fas fa-check-circle fa-2x me-3"></i>
         <div>

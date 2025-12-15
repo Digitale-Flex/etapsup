@@ -118,7 +118,7 @@ class CustomSearchController extends Controller
                 'amount' => $payInCents,
                 'currency' => 'eur',
                 'customer' => $user->stripe_id,
-                'description' => 'Recherche personnalisée #' . $model->id,
+                'description' => 'Demande d\'accompagnement EtapSup #' . $model->id,
                 'confirmation_method' => 'automatic',
                 'confirm' => false, // on ne confirme pas encore : on attend Stripe.js
             ]);

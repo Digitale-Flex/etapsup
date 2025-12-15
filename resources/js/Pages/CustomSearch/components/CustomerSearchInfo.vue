@@ -125,7 +125,7 @@ const onSubmit = async () => {
                 <b-col sm="6" md="4" lg="3">
                     <div class="d-flex flex-column">
                         <label for="rental_deposit_ids"
-                            >Cautionnement locatif *</label
+                            >Frais de dossier *</label
                         >
                         <MultiSelect
                             input-id="country_id"
@@ -136,7 +136,7 @@ const onSubmit = async () => {
                             :max-selected-labels="2"
                             option-label="name"
                             option-value="id"
-                            placeholder="Cautionnement locatif "
+                            placeholder="Frais de dossier"
                         />
                         <Message
                             v-if="r$.$fields.rental_deposit_ids.$error"
@@ -176,7 +176,7 @@ const onSubmit = async () => {
                 </b-col>
                 <b-col sm="6" md="4" lg="3">
                     <div class="d-flex flex-column">
-                        <label for="on_start">Debut de location</label>
+                        <label for="on_start">Rentrée souhaitée</label>
                         <Calendar
                             input-id="on_start"
                             v-model="r$.$value.rental_start"
@@ -197,7 +197,7 @@ const onSubmit = async () => {
                 </b-col>
                 <b-col sm="6" md="4" lg="3">
                     <div class="d-flex flex-column">
-                        <label for="on_duration">Durée de location</label>
+                        <label for="on_duration">Durée du programme</label>
                         <input-number
                             input-id="on_duration"
                             v-model="r$.$value.duration"

@@ -29,8 +29,8 @@ dayjs.extend(utc);
 dayjs.extend(timezone);
 
 const content = {
-    title: 'Recherche personnalisée',
-    description: 'Recherche personnalisée',
+    title: 'Demande d\'accompagnement',
+    description: 'Demande d\'accompagnement personnalisé pour vos études',
 };
 
 interface Props {
@@ -228,12 +228,12 @@ const submit = async () => {
                                         </Link>
                                     </li>
                                     <li class="breadcrumb-item active">
-                                        Recherche personnalisée
+                                        Demande d'accompagnement
                                     </li>
                                 </ol>
                             </nav>
                             <h1 class="h3 card-title m-0">
-                                Recherche personnalisée
+                                Demande d'accompagnement
                             </h1>
                         </b-card-body>
                     </b-col>
