@@ -52,10 +52,16 @@ class RoleResource extends Resource
                         Forms\Components\TextInput::make('name')
                             ->label('Nom du rôle')
                             ->required()
-                            ->unique(table: 'roles', column: 'name', ignoreRecord: true) // A8: validation unicité
+                            ->unique(
+                                table: 'roles',
+                                column: 'name',
+                                ignoreRecord: true,
+                                modifyRuleUsing: fn ($rule) => $rule->where('guard_name', 'web')
+                            ) // A8: validation unicité avec guard_name
                             ->validationMessages([
-                                'unique' => 'Ce rôle existe déjà.',
+                                'unique' => 'Ce nom de rôle existe déjà. Veuillez en choisir un autre.',
                             ])
+                            ->live(onBlur: true) // Validation en temps réel
                             ->helperText('Le nom doit être unique (ex: superviseur, comptable)')
                             ->columnSpanFull(),
                     ]),
