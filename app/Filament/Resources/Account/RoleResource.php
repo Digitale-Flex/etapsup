@@ -50,18 +50,14 @@ class RoleResource extends Resource
                 Forms\Components\Grid::make()
                     ->schema([
                         Forms\Components\TextInput::make('name')
-                            ->label('Nom')
+                            ->label('Nom du rôle')
                             ->required()
-                            ->columnSpanFull()
-                        /*->afterStateUpdated(function ($set, $state) {
-                            $set('name', Str::slug($state));
-                        })*/,
-                        /* Forms\Components\TextInput::make('name')
-                             ->label('Identifiant technique')
-                             ->required()
-                             ->unique(ignoreRecord: true)
-                             ->disabled(fn ($state) => !empty($state))
-                             ->dehydrated() */
+                            ->unique(table: 'roles', column: 'name', ignoreRecord: true) // A8: validation unicité
+                            ->validationMessages([
+                                'unique' => 'Ce rôle existe déjà.',
+                            ])
+                            ->helperText('Le nom doit être unique (ex: superviseur, comptable)')
+                            ->columnSpanFull(),
                     ]),
                 Forms\Components\Section::make('Permissions')
                     ->columns(3)
