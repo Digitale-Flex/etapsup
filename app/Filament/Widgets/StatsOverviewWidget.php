@@ -3,6 +3,7 @@
 namespace App\Filament\Widgets;
 
 use App\Models\Application;
+use App\Models\CustomSearch;
 use App\Models\RealEstate\Property;
 use Filament\Widgets\StatsOverviewWidget as BaseWidget;
 use Filament\Widgets\StatsOverviewWidget\Stat;
@@ -28,10 +29,13 @@ class StatsOverviewWidget extends BaseWidget
             ? round(($acceptedApplications / $totalApplications) * 100, 1)
             : 0;
 
+        // Demandes d'accompagnement
+        $totalAccompagnement = CustomSearch::where('state', 'payment_validated')->count();
+
         return [
             Stat::make('Établissements', $totalEstablishments)
                 ->description('Établissements publiés')
-                ->descriptionIcon('heroicon-o-academic-cap')
+                ->descriptionIcon('heroicon-o-building-library')
                 ->color('primary')
                 ->chart([7, 3, 4, 5, 6, 3, 5, 3]),
 
@@ -47,6 +51,12 @@ class StatsOverviewWidget extends BaseWidget
                 ->color('warning')
                 ->chart([2, 3, 4, 5, 6, 4, 3, 2]),
 
+            Stat::make('Accompagnements', $totalAccompagnement)
+                ->description('Demandes validées')
+                ->descriptionIcon('heroicon-o-hand-raised')
+                ->color('info')
+                ->chart([1, 2, 3, 2, 4, 3, 5, 4]),
+
             Stat::make('Taux d\'acceptation', $acceptanceRate . '%')
                 ->description($acceptedApplications . ' candidatures acceptées')
                 ->descriptionIcon('heroicon-o-check-circle')
@@ -58,13 +68,6 @@ class StatsOverviewWidget extends BaseWidget
                 ->descriptionIcon('heroicon-o-currency-euro')
                 ->color('info')
                 ->chart([10, 12, 14, 13, 15, 16, 14, 15]),
-
-            // Sprint1 Feature 1.4.1 — CA Annuel (hardcodé MVP)
-            Stat::make('CA Annuel', '180 000 €')
-                ->description('Chiffre d\'affaires annuel')
-                ->descriptionIcon('heroicon-o-banknotes')
-                ->color('success')
-                ->chart([120, 130, 140, 150, 160, 165, 170, 180]),
         ];
     }
 }
