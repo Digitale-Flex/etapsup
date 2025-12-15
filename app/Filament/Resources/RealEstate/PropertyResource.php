@@ -88,6 +88,19 @@ class PropertyResource extends Resource
                                     ->label('Spécialisation')
                                     ->searchable()
                                     ->preload()
+                                    ->createOptionForm([ // A3: création à la volée
+                                        Forms\Components\TextInput::make('label')
+                                            ->label('Nom de la spécialisation')
+                                            ->required()
+                                            ->maxLength(255),
+                                        Forms\Components\Textarea::make('description')
+                                            ->label('Description')
+                                            ->rows(2),
+                                        Forms\Components\Toggle::make('is_published')
+                                            ->label('Publier')
+                                            ->default(true),
+                                    ])
+                                    ->createOptionModalHeading('Nouvelle spécialisation')
                                     ->columnSpan(6),
 
                                 Forms\Components\Select::make('country_id')

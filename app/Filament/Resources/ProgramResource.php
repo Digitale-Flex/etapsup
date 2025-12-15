@@ -68,9 +68,22 @@ class ProgramResource extends Resource
                         Forms\Components\Select::make('specialization_id')
                             ->relationship('specialization', 'label')
                             ->label('Spécialisation')
-                            ->helperText('Spécialisation ou filière spécifique')
+                            ->helperText('Spécialisation ou filière spécifique. Cliquez + pour en créer une nouvelle.')
                             ->searchable()
                             ->preload()
+                            ->createOptionForm([ // A5: création à la volée
+                                Forms\Components\TextInput::make('label')
+                                    ->label('Nom de la spécialisation')
+                                    ->required()
+                                    ->maxLength(255),
+                                Forms\Components\Textarea::make('description')
+                                    ->label('Description')
+                                    ->rows(2),
+                                Forms\Components\Toggle::make('is_published')
+                                    ->label('Publier')
+                                    ->default(true),
+                            ])
+                            ->createOptionModalHeading('Nouvelle spécialisation')
                             ->columnSpan(6),
 
                         Forms\Components\RichEditor::make('description')
