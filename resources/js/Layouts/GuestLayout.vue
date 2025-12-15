@@ -2,9 +2,9 @@
 import { changeHTMLAttribute } from '@/Helpers/layout';
 import { useLayoutStore } from '@/Stores/layout';
 import { onMounted } from 'vue';
-// Refonte: Masquer AppHeader et AppFooter (Mareza/YOD INVEST)
-// import AppHeader from "@/Layouts/Partials/AppHeader.vue";
-// import AppFooter from "@/Layouts/Partials/AppFooter.vue";
+// EtapSup: Header et Footer réactivés
+import AppHeader from "@/Layouts/Partials/AppHeader.vue";
+import AppFooter from "@/Layouts/Partials/AppFooter.vue";
 
 const useLayout = useLayoutStore();
 
@@ -15,14 +15,14 @@ onMounted(() => {
 
 <template>
     <div>
-        <!-- Refonte: Header masqué temporairement -->
-        <!-- <AppHeader /> -->
+        <!-- EtapSup: Header global avec navigation -->
+        <AppHeader />
 
         <main>
             <slot />
         </main>
 
-        <!-- Refonte: Footer masqué temporairement -->
-        <!-- <AppFooter /> -->
+        <!-- EtapSup: Footer global -->
+        <AppFooter />
     </div>
 </template>

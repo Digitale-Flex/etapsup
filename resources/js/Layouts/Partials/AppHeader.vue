@@ -106,37 +106,35 @@ const isMobileMenu = computed(() => {
                             </b-card>
                         </div>
                     </CustomDropDown>
-                    <!-- Refonte: Action 01 - Éléments Mareza commentés pour autonomie page événementielle -->
-                    <!--
-                    <li class="nav-item d-none d-sm-block mx-5 ms-3">
+                    <!-- EtapSup: Liens navigation principale -->
+                    <li class="nav-item d-none d-sm-block ms-3">
                         <Link
-                            :href="route('custom-search.index')"
+                            :href="route('establishments.index')"
                             class="btn mb-0"
                             :class="
-                                route().current('custom-search.index')
-                                    ? 'btn-info'
-                                    : 'btn-info-soft'
-                            "
-                        >
-                            <BIconSearch class="mb-1" />
-                            Recherche personnalisée</Link
-                        >
-                    </li>
-                    <li class="nav-item d-none d-sm-block mx-5 ms-3">
-                        <Link
-                            :href="route('certificate.home')"
-                            class="btn mb-0"
-                            :class="
-                                route().current('certificate.home')
+                                route().current('establishments.*')
                                     ? 'btn-primary'
                                     : 'btn-primary-soft'
                             "
                         >
-                            <BIconLightningCharge class="mb-1" />
-                            <span>Attestation de logement</span>
+                            <BIconSearch class="mb-1 me-1" />
+                            Établissements
                         </Link>
                     </li>
-                    -->
+                    <li class="nav-item d-none d-sm-block ms-2">
+                        <Link
+                            :href="route('custom-search.index')"
+                            class="btn mb-0"
+                            :class="
+                                route().current('custom-search.*')
+                                    ? 'btn-info'
+                                    : 'btn-info-soft'
+                            "
+                        >
+                            <BIconLightningCharge class="mb-1 me-1" />
+                            Accompagnement
+                        </Link>
+                    </li>
                     <!-- Profile -->
                     <UserMenu v-if="$page.props.auth?.user" />
 

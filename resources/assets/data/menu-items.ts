@@ -297,16 +297,16 @@ export const HELP_MENU_ITEMS: MenuItemType[] = [
     },
 ];
 
+// EtapSup: Menu principal adapté pour plateforme étudiante
 export const APP_MENU_ITEMS: MenuItemType[] = [
     {
-        key: 'search',
-        label: 'Recherche personnalisée',
-        link: { name: 'custom-search.index' },
+        key: 'establishments',
+        label: 'Établissements',
+        link: { name: 'establishments.index' },
     },
     {
-        key: 'hotel-home',
-        label: 'Attestation de logement',
-        link: { name: 'certificate.home' },
-        parentKey: 'hotels',
+        key: 'accompagnement',
+        label: 'Accompagnement',
+        link: { name: 'custom-search.index' },
     },
 ];
