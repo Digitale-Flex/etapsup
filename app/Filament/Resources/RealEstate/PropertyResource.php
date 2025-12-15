@@ -309,12 +309,16 @@ class PropertyResource extends Resource
                                             ->rows(3)
                                             ->columnSpanFull(),
 
-                                        Forms\Components\Textarea::make('section_conditions_financieres')
+                                        Forms\Components\RichEditor::make('section_conditions_financieres')
                                             ->label('Conditions financières')
-                                            ->helperText('Modalités de paiement, bourses disponibles, aides financières (max 1000 caractères)')
-                                            ->maxLength(1000)
-                                            ->rows(3)
-                                            ->columnSpanFull(),
+                                            ->helperText('Modalités de paiement, bourses disponibles, aides financières. Utilisez les puces pour structurer.')
+                                            ->toolbarButtons([
+                                                'bold',
+                                                'italic',
+                                                'bulletList',
+                                                'orderedList',
+                                            ])
+                                            ->columnSpanFull(), // A4: RichEditor pour formatage puces
 
                                         Forms\Components\Textarea::make('section_specialisation')
                                             ->label('Spécialisations proposées')
