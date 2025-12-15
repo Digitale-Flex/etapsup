@@ -24,6 +24,9 @@ class LayoutResource extends Resource
     protected static ?string $navigationIcon = 'gmdi-add-home-work-o';
     protected static ?string $navigationGroup = 'Caractéristiques établ.';
 
+    // Q3: Masquer du menu (demande client 15/12/2025)
+    protected static bool $shouldRegisterNavigation = false;
+
     public static function form(Form $form): Form
     {
         return $form

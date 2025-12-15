@@ -66,7 +66,7 @@ class ReservationResource extends Resource
 
                 Tables\Columns\TextColumn::make('user.full_name')
                     ->label('Étudiant')
-                    ->description(fn(Reservation $record): string => $record->user->email)
+                    ->description(fn(Reservation $record): string => $record->user?->email ?? '') // Fix: null-safe
                     ->searchable()
                     ->sortable(),
 

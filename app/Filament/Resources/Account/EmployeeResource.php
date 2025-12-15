@@ -82,7 +82,7 @@ class EmployeeResource extends Resource
                                 return Role::whereNotIn('name', [
                                     'dev',
                                     'user',
-                                    'account',
+                                    'gestionnaire', // Fix A7: cohérence 'account' → 'gestionnaire'
                                     'partner'
                                 ])->pluck('name', 'id');
                             }),
@@ -228,26 +228,26 @@ class EmployeeResource extends Resource
     {
         return parent::getEloquentQuery()
             ->whereHas('roles', function($query) {
-                $query->where('name', 'account');
+                $query->where('name', 'gestionnaire'); // Fix A7: 'account' → 'gestionnaire'
             });
     }
 
     public static function afterCreate(User $user, array $data): void
     {
-        // Assigner le rôle employee
-        $user->assignRole('account');
+        // Assigner le rôle gestionnaire (Fix A7: 'account' → 'gestionnaire')
+        $user->assignRole('gestionnaire');
 
         // Synchroniser les autres rôles si nécessaire
         if (isset($data['roles'])) {
-            $user->syncRoles(array_merge(['account'], $data['roles']));
+            $user->syncRoles(array_merge(['gestionnaire'], $data['roles']));
         }
     }
 
     public static function afterSave(User $user, array $data): void
     {
-        // S'assurer que l'utilisateur conserve toujours le rôle employee
-        if (!$user->hasRole('account')) {
-            $user->assignRole('account');
+        // S'assurer que l'utilisateur conserve toujours le rôle gestionnaire
+        if (!$user->hasRole('gestionnaire')) {
+            $user->assignRole('gestionnaire');
         }
     }
 }

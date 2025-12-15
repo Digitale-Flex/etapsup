@@ -21,7 +21,7 @@ class ListEmployees extends ListRecords
                 ->modalWidth('xl')
                 ->using(function (array $data): User {
                     $user = User::create($data);
-                    $user->assignRole('account');
+                    $user->assignRole('gestionnaire'); // Fix A7: 'account' → 'gestionnaire'
                     return $user;
                 })
         ];

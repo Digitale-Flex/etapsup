@@ -84,7 +84,7 @@ class ApplicationsRelationManager extends RelationManager
             ->recordTitleAttribute('id')
             ->columns([
                 Tables\Columns\TextColumn::make('user.name')
-                    ->description(fn (Application $record): string => $record->user->email ?? '')
+                    ->description(fn (Application $record): string => $record->user?->email ?? '') // Fix: null-safe
                     ->label('Étudiant')
                     ->searchable()
                     ->sortable(),

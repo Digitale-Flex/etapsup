@@ -126,7 +126,7 @@ class RoleResource extends Resource
     public static function getEloquentQuery(): Builder
     {
         return parent::getEloquentQuery()
-            ->whereNotIn('name', ['partner', 'user', 'account']);
+            ->whereNotIn('name', ['partner', 'user', 'gestionnaire']); // Fix A7: 'account' → 'gestionnaire'
     }
 
     public static function canEdit(Model $record): bool

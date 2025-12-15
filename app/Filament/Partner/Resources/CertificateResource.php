@@ -60,7 +60,7 @@ class CertificateResource extends Resource
                     ->searchable()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('user.name')
-                    ->description(fn(CertificateRequest $record): string => $record->user->surname)
+                    ->description(fn(CertificateRequest $record): string => $record->user?->surname ?? '') // Fix: null-safe
                     ->label('Demandeur')
                     ->searchable()
                     ->sortable(),
@@ -286,7 +286,7 @@ class CertificateResource extends Resource
                                     if ($record->rentalDeposits->isNotEmpty()) {
                                         return $record->rentalDeposits->pluck('name')->join(', ');
                                     }
-                                    return $record->rentalDeposit->name ?? 'Non spécifié';
+                                    return $record->rentalDeposit?->name ?? 'Non spécifié'; // Fix: null-safe
                                 })
                                 ->visible(fn($record) => $record->rentalDeposits->isNotEmpty() || $record->rental_deposit_id),
                             TextEntry::make('budget')->label('Budget')->money('EUR'),

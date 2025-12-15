@@ -132,16 +132,17 @@ class UserResource extends Resource
                 Tables\Columns\TextColumn::make('roles.name')
                     ->label('Rôle')
                     ->badge()
-                    ->formatStateUsing(fn (string $state): string => match ($state) {
+                    ->formatStateUsing(fn (?string $state): string => match ($state ?? 'unknown') {
                         'admin' => 'Administrateur',
                         'partner' => 'Partenaire',
                         'manager' => 'Gestionnaire',
-                        default => ucfirst($state),
+                        'gestionnaire' => 'Gestionnaire',
+                        default => ucfirst($state ?? 'Sans rôle'), // Fix A10: fallback si null
                     })
-                    ->color(fn (string $state): string => match ($state) {
+                    ->color(fn (?string $state): string => match ($state ?? 'unknown') {
                         'admin' => 'success',
                         'partner' => 'info',
-                        'manager' => 'warning',
+                        'manager', 'gestionnaire' => 'warning',
                         default => 'gray',
                     }),
 
@@ -167,11 +168,12 @@ class UserResource extends Resource
                 Tables\Filters\SelectFilter::make('role')
                     ->label('Rôle')
                     ->relationship('roles', 'name')
-                    ->getOptionLabelFromRecordUsing(fn ($record) => match ($record->name) {
+                    ->getOptionLabelFromRecordUsing(fn ($record) => match ($record->name ?? 'unknown') {
                         'admin' => 'Administrateur',
                         'partner' => 'Partenaire',
                         'manager' => 'Gestionnaire',
-                        default => ucfirst($record->name),
+                        'gestionnaire' => 'Gestionnaire',
+                        default => ucfirst($record->name ?? 'Sans nom'), // Fix A10: fallback si name null
                     })
                     ->multiple()
                     ->preload(),

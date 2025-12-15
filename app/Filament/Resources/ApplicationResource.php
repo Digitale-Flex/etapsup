@@ -96,7 +96,7 @@ class ApplicationResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('user.name')
-                    ->description(fn (Application $record): string => $record->user->email ?? '')
+                    ->description(fn (Application $record): string => $record->user?->email ?? '') // Fix: null-safe
                     ->label('Étudiant')
                     ->searchable()
                     ->sortable(),

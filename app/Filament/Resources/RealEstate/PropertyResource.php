@@ -349,7 +349,7 @@ class PropertyResource extends Resource
                     ->ring(10)
                     ->limit(3),
                 Tables\Columns\TextColumn::make('title')
-                    ->description(fn(Property $record): string => $record->propertyType->label)
+                    ->description(fn(Property $record): string => $record->propertyType?->label ?? '') // Fix: null-safe
                     ->label('Titre')
                     ->searchable()
                     ->limit(50)

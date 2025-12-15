@@ -61,7 +61,7 @@ class CustomSearchResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('user.full_name')
-                    ->description(fn(CustomSearch $record): string => $record->user->email)
+                    ->description(fn(CustomSearch $record): string => $record->user?->email ?? '') // Fix: null-safe
                     ->label('Demandeur')
                     ->sortable()
                     ->searchable(),

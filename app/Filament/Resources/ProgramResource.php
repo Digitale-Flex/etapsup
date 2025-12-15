@@ -140,7 +140,7 @@ class ProgramResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('name')
                     ->label('Nom du programme')
-                    ->description(fn (Program $record): string => $record->establishment->title ?? '')
+                    ->description(fn (Program $record): string => $record->establishment?->title ?? '') // Fix: null-safe
                     ->searchable()
                     ->sortable()
                     ->limit(40),

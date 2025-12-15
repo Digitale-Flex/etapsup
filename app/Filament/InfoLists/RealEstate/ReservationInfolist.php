@@ -65,14 +65,14 @@ class ReservationInfolist
                                     ->badge(),
                                 Components\TextEntry::make('guests')
                                     ->label(function ($record) {
-                                        return match ($record->type->value) {
+                                        return match ($record->type?->value) { // Fix: null-safe
                                             ReservationType::Stay => 'Voyageurs',
                                             ReservationType::Monthly => 'Durée (Mois)',
                                             default => 'Invités'
                                         };
                                     })
                                     ->icon(function ($record) {
-                                        return match ($record->type->value) {
+                                        return match ($record->type?->value) { // Fix: null-safe
                                             ReservationType::Stay => 'heroicon-o-user-group',
                                             ReservationType::Monthly => 'heroicon-o-calendar',
                                             default => 'heroicon-o-user'
@@ -96,18 +96,21 @@ class ReservationInfolist
                                     ->color('primary'),
                                 Components\TextEntry::make('duration')
                                     ->label('Durée de location')
-                                    ->state(fn(Reservation $record) => $record->start_date->diffInDays($record->end_date) . ' jours'),
+                                    ->state(fn(Reservation $record) => $record->start_date && $record->end_date
+                                        ? $record->start_date->diffInDays($record->end_date) . ' jours'
+                                        : 'N/A'), // Fix: null-safe
                             ]),
                         Components\Grid::make(2)
                             ->schema([
                                 Components\TextEntry::make('period')
                                     ->label('Période')
-                                    ->formatStateUsing(fn($state) => "Du {$state->start()->format('d/m/Y')} au {$state->end()->format('d/m/Y')}"
-                                    )
+                                    ->formatStateUsing(fn($state) => $state
+                                        ? "Du {$state->start()->format('d/m/Y')} au {$state->end()->format('d/m/Y')}"
+                                        : 'N/A') // Fix: null-safe
                                     ->icon('heroicon-o-calendar-days'),
                                 Components\TextEntry::make('price')
                                     ->label(function ($record) {
-                                        return match ($record->type->value) {
+                                        return match ($record->type?->value) { // Fix: null-safe
                                             ReservationType::Stay => "Payer",
                                             ReservationType::Monthly => "A Payer",
                                             default => 'Prix total',
@@ -126,7 +129,7 @@ class ReservationInfolist
                                 Components\KeyValueEntry::make('fees')
                                     ->label('Détail des frais')
                                     ->columnSpanFull()
-                                    ->state(fn($record) => match ($record->type->value) {
+                                    ->state(fn($record) => match ($record->type?->value) { // Fix: null-safe
                                         ReservationType::Stay => [
                                             'Taxe de séjour' => $record->fees['touristTax'] ?? 'N/A',
                                             'Consommable' => $record->fees['consommable'] ?? 'N/A',

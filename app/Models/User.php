@@ -91,11 +91,11 @@ class User extends Authenticatable implements FilamentUser, HasMedia
             ->saveSlugsTo('slug');
     }
 
-    // Sprint1 Feature 1.6.1 — Accès panel par rôle (admin, dev, account, manager)
+    // Sprint1 Feature 1.6.1 — Accès panel par rôle (admin, dev, gestionnaire, manager)
     public function canAccessPanel(Panel $panel): bool
     {
         if ($panel->getId() === 'admin') {
-            return $this->hasAnyRole(['admin', 'dev', 'account', 'manager']);
+            return $this->hasAnyRole(['admin', 'dev', 'gestionnaire', 'manager']); // Fix A7: 'account' → 'gestionnaire'
         }
 
         // Accès au panel partner uniquement pour le rôle partner
