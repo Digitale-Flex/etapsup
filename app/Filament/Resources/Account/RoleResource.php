@@ -26,6 +26,7 @@ class RoleResource extends Resource
 
     public static function form(Form $form): Form
     {
+        // A9: Récupérer les groupes de permissions avec leurs permissions associées
         $groups = PermissionGroup::with('permissions')->get();
 
         $groupedFields = [];
