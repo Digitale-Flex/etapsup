@@ -4,7 +4,6 @@
 import { Head, Link, router } from '@inertiajs/vue3';
 import { ref, computed } from 'vue';
 import GuestLayout from '@/Layouts/GuestLayout.vue';
-import UserMenu from '@/Layouts/Partials/UserMenu.vue';
 import { BContainer, BRow, BCol, BFormInput, BFormSelect, BButton } from 'bootstrap-vue-next';
 
 defineOptions({ layout: GuestLayout });
@@ -122,38 +121,6 @@ const applyFilters = () => {
     </Head>
 
     <div class="establishments-page">
-        <!-- Navigation -->
-        <nav class="main-navigation">
-            <BContainer>
-                <div class="nav-content">
-                    <Link href="/" class="nav-logo">
-                        <span class="logo-text">EtapSup</span>
-                    </Link>
-
-                    <div class="nav-menu">
-                        <Link href="/" class="nav-link">Accueil</Link>
-                        <Link href="/establishments" class="nav-link active">Établissements</Link>
-                        <Link href="/events" class="nav-link">Événements</Link>
-                    </div>
-
-                    <div class="nav-actions">
-                        <!-- Si utilisateur connecté : afficher icône utilisateur -->
-                        <template v-if="$page.props.auth?.user">
-                            <div class="user-menu-wrapper">
-                                <UserMenu />
-                            </div>
-                        </template>
-
-                        <!-- Si utilisateur NON connecté : afficher boutons -->
-                        <template v-else>
-                            <Link href="/login" class="btn-nav btn-nav-login">Connexion</Link>
-                            <Link href="/register" class="btn-nav btn-nav-register">Inscription</Link>
-                        </template>
-                    </div>
-                </div>
-            </BContainer>
-        </nav>
-
         <!-- Page Header -->
         <div class="page-header">
             <BContainer>
@@ -293,14 +260,6 @@ const applyFilters = () => {
             </BRow>
         </BContainer>
 
-        <!-- Footer -->
-        <footer class="main-footer">
-            <BContainer>
-                <div class="footer-content text-center">
-                    <p class="mb-0">&copy; 2025 EtapSup. Tous droits réservés.</p>
-                </div>
-            </BContainer>
-        </footer>
     </div>
 </template>
 
@@ -310,94 +269,6 @@ const applyFilters = () => {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-}
-
-/* Navigation (same as home) */
-.main-navigation {
-    background: white;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    padding: 1rem 0;
-}
-
-.nav-content {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.nav-logo {
-    text-decoration: none;
-}
-
-/* UI-Fix-2.4: Logo charte EtapSup */
-.logo-text {
-    font-size: 1.75rem;
-    font-weight: 800;
-    background: #1e3a8a;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    color: #1e3a8a;
-}
-
-.nav-menu {
-    display: flex;
-    gap: 2rem;
-}
-
-.nav-link {
-    color: #374151;
-    text-decoration: none;
-    font-weight: 500;
-    transition: color 0.2s ease;
-}
-
-/* UI-Fix-2.4: Navigation active EtapSup */
-.nav-link:hover,
-.nav-link.active {
-    color: #1e3a8a;
-}
-
-.nav-actions {
-    display: flex;
-    gap: 1rem;
-}
-
-.btn-nav {
-    padding: 0.625rem 1.5rem;
-    border-radius: 50px;
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 0.95rem;
-    transition: all 0.3s ease;
-}
-
-/* UI-Fix-2.4: Boutons navigation charte EtapSup */
-.btn-nav-login {
-    background: #1e3a8a;
-    color: white;
-}
-
-.btn-nav-login:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(30, 58, 138, 0.3);
-    color: white;
-    background: #2b4a9e;
-}
-
-.btn-nav-register {
-    background: #dc2626;
-    color: white;
-}
-
-.btn-nav-register:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(220, 38, 38, 0.3);
-    color: white;
-    background: #b91c1c;
 }
 
 /* UI-Fix-2.4: Header charte EtapSup */
@@ -610,24 +481,7 @@ const applyFilters = () => {
     background: #b91c1c;
 }
 
-/* Footer */
-.main-footer {
-    background: #1a202c;
-    color: white;
-    padding: 2rem 0;
-    margin-top: auto;
-}
-
-.footer-content p {
-    color: #94a3b8;
-    font-size: 0.875rem;
-}
-
 @media (max-width: 991px) {
-    .nav-menu {
-        display: none;
-    }
-
     .filters-sidebar {
         position: static;
     }

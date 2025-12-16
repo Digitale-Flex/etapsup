@@ -55,6 +55,11 @@ class EstablishmentController extends Controller
             $query->where('city_id', $request->city_id);
         }
 
+        // Filtre par catégorie (domaine d'études)
+        if ($request->filled('category_id')) {
+            $query->where('category_id', $request->category_id);
+        }
+
         // Filtres Sprint 1 selon PRD (Foreign Keys vers Settings)
         if ($request->filled('establishment_type_id')) {
             $query->where('establishment_type_id', $request->establishment_type_id);

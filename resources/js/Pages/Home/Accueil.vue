@@ -14,6 +14,7 @@ interface Establishment {
     title: string;
     logo?: string;
     thumb?: string;
+    image?: string;
     country: string;
     city: string;
     type: string;
@@ -45,15 +46,21 @@ const props = withDefaults(defineProps<Props>(), {
     studyFields: () => []
 });
 
-// Search form
+// Search form - paramètres correspondant au EstablishmentController
 const searchForm = ref({
-    country: '',
-    study_field: '',
-    keywords: ''
+    country_id: '',
+    category_id: '',
+    search: ''
 });
 
 const handleSearch = () => {
-    router.get('/establishments', searchForm.value);
+    // Filtrer les paramètres vides avant envoi
+    const params: Record<string, string> = {};
+    if (searchForm.value.country_id) params.country_id = searchForm.value.country_id;
+    if (searchForm.value.category_id) params.category_id = searchForm.value.category_id;
+    if (searchForm.value.search) params.search = searchForm.value.search;
+
+    router.get('/establishments', params);
 };
 
 // Animation on scroll
@@ -160,7 +167,7 @@ const testimonials = [
                                         Pays
                                     </label>
                                     <BFormSelect
-                                        v-model="searchForm.country"
+                                        v-model="searchForm.country_id"
                                         :options="[
                                             { value: '', text: 'Tous les pays' },
                                             ...countries.map(c => ({ value: c.id, text: c.name }))
@@ -175,7 +182,7 @@ const testimonials = [
                                         Domaine d'études
                                     </label>
                                     <BFormSelect
-                                        v-model="searchForm.study_field"
+                                        v-model="searchForm.category_id"
                                         :options="[
                                             { value: '', text: 'Tous les domaines' },
                                             ...studyFields.map(f => ({ value: f.id, text: f.name }))
@@ -190,7 +197,7 @@ const testimonials = [
                                         Mots-clés
                                     </label>
                                     <BFormInput
-                                        v-model="searchForm.keywords"
+                                        v-model="searchForm.search"
                                         placeholder="Ex: Médecine, Commerce, Informatique..."
                                         class="search-input"
                                     />
@@ -303,7 +310,7 @@ const testimonials = [
                         >
                             <div class="establishment-image">
                                 <img
-                                    :src="establishment.thumb || establishment.logo || 'https://via.placeholder.com/400x240?text=EtapSup'"
+                                    :src="establishment.image || establishment.thumb || establishment.logo || 'https://via.placeholder.com/400x240?text=EtapSup'"
                                     :alt="establishment.title"
                                 />
                                 <div class="establishment-badge" v-if="establishment.ranking">

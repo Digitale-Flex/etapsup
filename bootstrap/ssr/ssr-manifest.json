@@ -97,13 +97,6 @@
     "/build/assets/primeicons-MpK4pl85.ttf",
     "/build/assets/primeicons-Dr5RGzOO.svg"
   ],
-  "resources/assets/data/menu-items.ts": [
-    "/build/assets/primeicons-DMOk5skT.eot",
-    "/build/assets/primeicons-C6QP2o4f.woff2",
-    "/build/assets/primeicons-WjwUDZjB.woff",
-    "/build/assets/primeicons-MpK4pl85.ttf",
-    "/build/assets/primeicons-Dr5RGzOO.svg"
-  ],
   "resources/assets/scss/style.scss": [
     "/build/assets/primeicons-DMOk5skT.eot",
     "/build/assets/primeicons-C6QP2o4f.woff2",
@@ -426,118 +419,6 @@
     "/build/assets/primeicons-MpK4pl85.ttf",
     "/build/assets/primeicons-Dr5RGzOO.svg"
   ],
-  "resources/js/Components/Navbar/AppMenu.vue": [
-    "/build/assets/primeicons-DMOk5skT.eot",
-    "/build/assets/primeicons-C6QP2o4f.woff2",
-    "/build/assets/primeicons-WjwUDZjB.woff",
-    "/build/assets/primeicons-MpK4pl85.ttf",
-    "/build/assets/primeicons-Dr5RGzOO.svg"
-  ],
-  "resources/js/Components/Navbar/AppMenu.vue?vue&type=script&setup=true&lang.ts": [
-    "/build/assets/primeicons-DMOk5skT.eot",
-    "/build/assets/primeicons-C6QP2o4f.woff2",
-    "/build/assets/primeicons-WjwUDZjB.woff",
-    "/build/assets/primeicons-MpK4pl85.ttf",
-    "/build/assets/primeicons-Dr5RGzOO.svg"
-  ],
-  "resources/js/Components/Navbar/MenuItem.vue": [
-    "/build/assets/primeicons-DMOk5skT.eot",
-    "/build/assets/primeicons-C6QP2o4f.woff2",
-    "/build/assets/primeicons-WjwUDZjB.woff",
-    "/build/assets/primeicons-MpK4pl85.ttf",
-    "/build/assets/primeicons-Dr5RGzOO.svg"
-  ],
-  "resources/js/Components/Navbar/MenuItem.vue?vue&type=script&setup=true&lang.ts": [
-    "/build/assets/primeicons-DMOk5skT.eot",
-    "/build/assets/primeicons-C6QP2o4f.woff2",
-    "/build/assets/primeicons-WjwUDZjB.woff",
-    "/build/assets/primeicons-MpK4pl85.ttf",
-    "/build/assets/primeicons-Dr5RGzOO.svg"
-  ],
-  "resources/js/Components/Navbar/MenuItemLink.vue": [
-    "/build/assets/primeicons-DMOk5skT.eot",
-    "/build/assets/primeicons-C6QP2o4f.woff2",
-    "/build/assets/primeicons-WjwUDZjB.woff",
-    "/build/assets/primeicons-MpK4pl85.ttf",
-    "/build/assets/primeicons-Dr5RGzOO.svg"
-  ],
-  "resources/js/Components/Navbar/MenuItemLink.vue?vue&type=script&setup=true&lang.ts": [
-    "/build/assets/primeicons-DMOk5skT.eot",
-    "/build/assets/primeicons-C6QP2o4f.woff2",
-    "/build/assets/primeicons-WjwUDZjB.woff",
-    "/build/assets/primeicons-MpK4pl85.ttf",
-    "/build/assets/primeicons-Dr5RGzOO.svg"
-  ],
-  "resources/js/Components/Navbar/MenuItemWithChildren.vue": [
-    "/build/assets/primeicons-DMOk5skT.eot",
-    "/build/assets/primeicons-C6QP2o4f.woff2",
-    "/build/assets/primeicons-WjwUDZjB.woff",
-    "/build/assets/primeicons-MpK4pl85.ttf",
-    "/build/assets/primeicons-Dr5RGzOO.svg"
-  ],
-  "resources/js/Components/Navbar/MenuItemWithChildren.vue?vue&type=script&setup=true&lang.ts": [
-    "/build/assets/primeicons-DMOk5skT.eot",
-    "/build/assets/primeicons-C6QP2o4f.woff2",
-    "/build/assets/primeicons-WjwUDZjB.woff",
-    "/build/assets/primeicons-MpK4pl85.ttf",
-    "/build/assets/primeicons-Dr5RGzOO.svg"
-  ],
-  "resources/js/Components/Navbar/mobile-menu/MobileMenu.vue": [
-    "/build/assets/primeicons-DMOk5skT.eot",
-    "/build/assets/primeicons-C6QP2o4f.woff2",
-    "/build/assets/primeicons-WjwUDZjB.woff",
-    "/build/assets/primeicons-MpK4pl85.ttf",
-    "/build/assets/primeicons-Dr5RGzOO.svg"
-  ],
-  "resources/js/Components/Navbar/mobile-menu/MobileMenu.vue?vue&type=script&setup=true&lang.ts": [
-    "/build/assets/primeicons-DMOk5skT.eot",
-    "/build/assets/primeicons-C6QP2o4f.woff2",
-    "/build/assets/primeicons-WjwUDZjB.woff",
-    "/build/assets/primeicons-MpK4pl85.ttf",
-    "/build/assets/primeicons-Dr5RGzOO.svg"
-  ],
-  "resources/js/Components/Navbar/mobile-menu/MobileMenuItem.vue": [
-    "/build/assets/primeicons-DMOk5skT.eot",
-    "/build/assets/primeicons-C6QP2o4f.woff2",
-    "/build/assets/primeicons-WjwUDZjB.woff",
-    "/build/assets/primeicons-MpK4pl85.ttf",
-    "/build/assets/primeicons-Dr5RGzOO.svg"
-  ],
-  "resources/js/Components/Navbar/mobile-menu/MobileMenuItem.vue?vue&type=script&setup=true&lang.ts": [
-    "/build/assets/primeicons-DMOk5skT.eot",
-    "/build/assets/primeicons-C6QP2o4f.woff2",
-    "/build/assets/primeicons-WjwUDZjB.woff",
-    "/build/assets/primeicons-MpK4pl85.ttf",
-    "/build/assets/primeicons-Dr5RGzOO.svg"
-  ],
-  "resources/js/Components/Navbar/mobile-menu/MobileMenuItemLink.vue": [
-    "/build/assets/primeicons-DMOk5skT.eot",
-    "/build/assets/primeicons-C6QP2o4f.woff2",
-    "/build/assets/primeicons-WjwUDZjB.woff",
-    "/build/assets/primeicons-MpK4pl85.ttf",
-    "/build/assets/primeicons-Dr5RGzOO.svg"
-  ],
-  "resources/js/Components/Navbar/mobile-menu/MobileMenuItemLink.vue?vue&type=script&setup=true&lang.ts": [
-    "/build/assets/primeicons-DMOk5skT.eot",
-    "/build/assets/primeicons-C6QP2o4f.woff2",
-    "/build/assets/primeicons-WjwUDZjB.woff",
-    "/build/assets/primeicons-MpK4pl85.ttf",
-    "/build/assets/primeicons-Dr5RGzOO.svg"
-  ],
-  "resources/js/Components/Navbar/mobile-menu/MobileMenuItemWithChildren.vue": [
-    "/build/assets/primeicons-DMOk5skT.eot",
-    "/build/assets/primeicons-C6QP2o4f.woff2",
-    "/build/assets/primeicons-WjwUDZjB.woff",
-    "/build/assets/primeicons-MpK4pl85.ttf",
-    "/build/assets/primeicons-Dr5RGzOO.svg"
-  ],
-  "resources/js/Components/Navbar/mobile-menu/MobileMenuItemWithChildren.vue?vue&type=script&setup=true&lang.ts": [
-    "/build/assets/primeicons-DMOk5skT.eot",
-    "/build/assets/primeicons-C6QP2o4f.woff2",
-    "/build/assets/primeicons-WjwUDZjB.woff",
-    "/build/assets/primeicons-MpK4pl85.ttf",
-    "/build/assets/primeicons-Dr5RGzOO.svg"
-  ],
   "resources/js/Components/Pagination.vue": [
     "/build/assets/primeicons-DMOk5skT.eot",
     "/build/assets/primeicons-C6QP2o4f.woff2",
@@ -623,13 +504,6 @@
     "/build/assets/primeicons-Dr5RGzOO.svg"
   ],
   "resources/js/Helpers/layout.ts": [
-    "/build/assets/primeicons-DMOk5skT.eot",
-    "/build/assets/primeicons-C6QP2o4f.woff2",
-    "/build/assets/primeicons-WjwUDZjB.woff",
-    "/build/assets/primeicons-MpK4pl85.ttf",
-    "/build/assets/primeicons-Dr5RGzOO.svg"
-  ],
-  "resources/js/Helpers/menu.ts": [
     "/build/assets/primeicons-DMOk5skT.eot",
     "/build/assets/primeicons-C6QP2o4f.woff2",
     "/build/assets/primeicons-WjwUDZjB.woff",
@@ -727,7 +601,7 @@
     "/build/assets/primeicons-MpK4pl85.ttf",
     "/build/assets/primeicons-Dr5RGzOO.svg"
   ],
-  "resources/js/Layouts/Partials/AppHeader.vue?vue&type=style&index=0&scoped=a4e862ef&lang.css": [
+  "resources/js/Layouts/Partials/AppHeader.vue?vue&type=style&index=0&scoped=d998e665&lang.css": [
     "/build/assets/primeicons-DMOk5skT.eot",
     "/build/assets/primeicons-C6QP2o4f.woff2",
     "/build/assets/primeicons-WjwUDZjB.woff",
@@ -1378,7 +1252,7 @@
     "/build/assets/primeicons-MpK4pl85.ttf",
     "/build/assets/primeicons-Dr5RGzOO.svg"
   ],
-  "resources/js/Pages/Establishments/Index.vue?vue&type=style&index=0&scoped=8eb12c4a&lang.css": [
+  "resources/js/Pages/Establishments/Index.vue?vue&type=style&index=0&scoped=3ea16183&lang.css": [
     "/build/assets/primeicons-DMOk5skT.eot",
     "/build/assets/primeicons-C6QP2o4f.woff2",
     "/build/assets/primeicons-WjwUDZjB.woff",
@@ -1420,7 +1294,7 @@
     "/build/assets/primeicons-MpK4pl85.ttf",
     "/build/assets/primeicons-Dr5RGzOO.svg"
   ],
-  "resources/js/Pages/Home/Accueil.vue?vue&type=style&index=0&scoped=546891f8&lang.css": [
+  "resources/js/Pages/Home/Accueil.vue?vue&type=style&index=0&scoped=28dc5fda&lang.css": [
     "/build/assets/primeicons-DMOk5skT.eot",
     "/build/assets/primeicons-C6QP2o4f.woff2",
     "/build/assets/primeicons-WjwUDZjB.woff",
