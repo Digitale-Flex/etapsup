@@ -8,27 +8,11 @@ use Stripe\StripeClient;
 
 class PaymentService
 {
-    protected ?StripeClient $stripe = null;
+    protected StripeClient $stripe;
 
-    /**
-     * Lazy initialization du client Stripe
-     * Évite l'erreur si STRIPE_SECRET n'est pas configuré
-     */
-    protected function getStripeClient(): StripeClient
+    public function __construct()
     {
-        if ($this->stripe === null) {
-            $secret = config('cashier.secret');
-
-            if (empty($secret)) {
-                throw new \RuntimeException(
-                    'Stripe non configuré: STRIPE_SECRET manquant dans .env'
-                );
-            }
-
-            $this->stripe = new StripeClient($secret);
-        }
-
-        return $this->stripe;
+        $this->stripe = new StripeClient(config('cashier.secret'));
     }
 
     public function createPaymentIntent(
@@ -46,7 +30,7 @@ class PaymentService
             $user->refresh();
 
             // Create PaymentIntent
-            $paymentIntent = $this->getStripeClient()->paymentIntents->create([
+            $paymentIntent = $this->stripe->paymentIntents->create([
                 'amount' => $this->convertToCents($amount),
                 'currency' => $currency,
                 'customer' => $user->stripe_id,
@@ -72,7 +56,7 @@ class PaymentService
 
     public function confirmPayment(string $paymentIntentId): array
     {
-        $paymentIntent = $this->getStripeClient()->paymentIntents->retrieve($paymentIntentId);
+        $paymentIntent = $this->stripe->paymentIntents->retrieve($paymentIntentId);
 
         if ($paymentIntent->status === 'succeeded') {
             return [
@@ -86,27 +70,14 @@ class PaymentService
 
     /**
      * Create a setup intent for frontend
-     * Retourne null si Stripe n'est pas configuré
      */
-    public function createSetupIntent(User $user): ?string
+    public function createSetupIntent(User $user): string
     {
-        if (empty(config('cashier.secret'))) {
-            return null;
-        }
-
         $intent = $user->createSetupIntent([
             'payment_method_types' => ['card'],
         ]);
 
         return $intent->client_secret;
-    }
-
-    /**
-     * Vérifie si Stripe est configuré
-     */
-    public function isConfigured(): bool
-    {
-        return !empty(config('cashier.secret')) && !empty(config('cashier.key'));
     }
 
     /**
@@ -119,7 +90,7 @@ class PaymentService
             $params['amount'] = $this->convertToCents($amount);
         }
 
-        $refund = $this->getStripeClient()->refunds->create($params);
+        $refund = $this->stripe->refunds->create($params);
 
         return [
             'refund_id' => $refund->id,

@@ -42,6 +42,9 @@ class CustomSearchController extends Controller
     public function index()
     {
         $user = auth()->user()->load('country');
+        $intent = $user->createSetupIntent([
+            'payment_method_types' => ['card'],
+        ]);
 
         return Inertia::render('CustomSearch/Index', [
             'user' => new UserResource($user),
@@ -54,7 +57,7 @@ class CustomSearchController extends Controller
             'cities' => Inertia::defer(fn() => CityResource::collection(City::minimal()->get())),
             'partners' => fn() => PartnerResource::collection(Partner::minimal()->get()),
             'rentalDeposits' => fn() => RentalDepositesource::collection(RentalDeposit::minimal()->get()),
-            'intent' => $this->paymentService->createSetupIntent($user),
+            'intent' => $intent->client_secret,
             'stripeKey' => config('cashier.key'),
         ]);
     }
@@ -117,10 +120,9 @@ class CustomSearchController extends Controller
                 'customer' => $user->stripe_id,
                 'description' => 'Demande d\'accompagnement EtapSup #' . $model->id,
                 'confirmation_method' => 'automatic',
-                'confirm' => false, // on ne confirme pas encore : on attend Stripe.js
+                'confirm' => false,
             ]);
 
-            // 6) Sauvegarde de l’ID du PaymentIntent dans la base
             $model->stripe_payment_intent = $paymentIntent->id;
             $model->save();
 
@@ -147,7 +149,6 @@ class CustomSearchController extends Controller
             $hashId = $request->input('search_id');
             $model = CustomSearch::findByHashidOrFail($hashId);
 
-            // Récupérer le PaymentIntent (pour s'assurer que son statut est bien “succeeded”)
             $stripe = new StripeClient(config('cashier.secret'));
             $paymentIntent = $stripe->paymentIntents->retrieve($model->stripe_payment_intent);
 
@@ -160,9 +161,8 @@ class CustomSearchController extends Controller
             }
 
             $model->delete();
-            // Si le statut n’est pas encore “succeeded”, on peut renvoyer une erreur ou une instruction
             return response()->json([
-                'error' => 'Le paiement n’est pas dans l’état “succeeded”.',
+                'error' => 'Le paiement n\'est pas dans l\'état "succeeded".',
                 'message' => 'Status actuel : ' . $paymentIntent->status,
             ], 422);
         } catch (\Exception $e) {
@@ -177,11 +177,12 @@ class CustomSearchController extends Controller
 
     public function refreshIntent(): JsonResponse
     {
-        $user = auth()->user();
-        $intent = $this->paymentService->createSetupIntent($user);
+        $intent = auth()->user()->createSetupIntent([
+            'payment_method_types' => ['card'],
+        ]);
 
         return response()->json([
-            'intent' => $intent,
+            'intent' => $intent->client_secret,
         ]);
     }
 }
