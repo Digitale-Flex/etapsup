@@ -42,9 +42,6 @@ class CustomSearchController extends Controller
     public function index()
     {
         $user = auth()->user()->load('country');
-        $intent = $user->createSetupIntent([
-            'payment_method_types' => ['card'],
-        ]);
 
         return Inertia::render('CustomSearch/Index', [
             'user' => new UserResource($user),
@@ -57,7 +54,7 @@ class CustomSearchController extends Controller
             'cities' => Inertia::defer(fn() => CityResource::collection(City::minimal()->get())),
             'partners' => fn() => PartnerResource::collection(Partner::minimal()->get()),
             'rentalDeposits' => fn() => RentalDepositesource::collection(RentalDeposit::minimal()->get()),
-            'intent' => $intent->client_secret,
+            'intent' => $this->paymentService->createSetupIntent($user),
             'stripeKey' => config('cashier.key'),
         ]);
     }

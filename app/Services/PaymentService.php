@@ -80,9 +80,14 @@ class PaymentService
 
     /**
      * Create a setup intent for frontend
+     * Returns null if Stripe is not configured
      */
-    public function createSetupIntent(User $user): string
+    public function createSetupIntent(User $user): ?string
     {
+        if (empty(config('cashier.secret'))) {
+            return null;
+        }
+
         $intent = $user->createSetupIntent([
             'payment_method_types' => ['card'],
         ]);
