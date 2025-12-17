@@ -8,11 +8,21 @@ use Stripe\StripeClient;
 
 class PaymentService
 {
-    protected StripeClient $stripe;
+    protected ?StripeClient $stripe = null;
 
-    public function __construct()
+    /**
+     * Get or create the Stripe client (lazy initialization)
+     */
+    protected function getStripeClient(): StripeClient
     {
-        $this->stripe = new StripeClient(config('cashier.secret'));
+        if ($this->stripe === null) {
+            $secret = config('cashier.secret');
+            if (empty($secret)) {
+                throw new \RuntimeException('Stripe secret key is not configured. Please set STRIPE_SECRET in your .env file.');
+            }
+            $this->stripe = new StripeClient($secret);
+        }
+        return $this->stripe;
     }
 
     public function createPaymentIntent(
@@ -30,7 +40,7 @@ class PaymentService
             $user->refresh();
 
             // Create PaymentIntent
-            $paymentIntent = $this->stripe->paymentIntents->create([
+            $paymentIntent = $this->getStripeClient()->paymentIntents->create([
                 'amount' => $this->convertToCents($amount),
                 'currency' => $currency,
                 'customer' => $user->stripe_id,
@@ -56,7 +66,7 @@ class PaymentService
 
     public function confirmPayment(string $paymentIntentId): array
     {
-        $paymentIntent = $this->stripe->paymentIntents->retrieve($paymentIntentId);
+        $paymentIntent = $this->getStripeClient()->paymentIntents->retrieve($paymentIntentId);
 
         if ($paymentIntent->status === 'succeeded') {
             return [
@@ -90,7 +100,7 @@ class PaymentService
             $params['amount'] = $this->convertToCents($amount);
         }
 
-        $refund = $this->stripe->refunds->create($params);
+        $refund = $this->getStripeClient()->refunds->create($params);
 
         return [
             'refund_id' => $refund->id,
