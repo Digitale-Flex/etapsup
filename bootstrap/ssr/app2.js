@@ -15,7 +15,7 @@ import { loadStripe } from "@stripe/stripe-js";
 import axios from "axios";
 import { BProgress } from "bootstrap-vue-next/components/BProgress";
 import { BCard as BCard$1, BCardBody as BCardBody$1, BContainer as BContainer$1, BRow as BRow$1, BCol as BCol$1, BButton as BButton$1, BFormGroup, BFormInput as BFormInput$1, BFormInvalidFeedback, BFormCheckbox, BAlert as BAlert$1, BBadge, BProgress as BProgress$1, BFormSelect as BFormSelect$1, BCardHeader as BCardHeader$1, BModal as BModal$1, createBootstrap } from "bootstrap-vue-next";
-import { BIconBuilding, BIconGeoAlt, BIconHouse, BIconMortarboard, BIconHouseCheck, BIconBookmarkCheck, BIconGear, BIconPower, BIconSun, BIconMoonStars, BIconCircleHalf, BIconX, BIconList, BIconSearch, BIconLightningCharge, BIconEnvelope, BIconTelephone, BIconPerson, BIconPencil, BIconTag, BIconHouseAdd, BIconPinMap, BIconPencilSquare, BIconListCheck, BIconBriefcaseFill, BIconArrowRight, BIconFullscreen, BIconChevronDown, BIconBook, BIconFilter, BIconAward, BIconRecord2, BIconSliders, BIconBracesAsterisk, BIconPeopleFill, BIconWalletFill, BIconFilePdf } from "bootstrap-icons-vue";
+import { BIconBuilding, BIconGeoAlt, BIconHouse, BIconMortarboard, BIconHouseCheck, BIconBookmarkCheck, BIconGear, BIconPower, BIconSun, BIconMoonStars, BIconCircleHalf, BIconX, BIconList, BIconSearch, BIconLightningCharge, BIconEnvelope, BIconTelephone, BIconPerson, BIconPencil, BIconTag, BIconHouseAdd, BIconPinMap, BIconListCheck, BIconBriefcaseFill, BIconArrowRight, BIconFullscreen, BIconChevronDown, BIconBook, BIconFilter, BIconAward, BIconRecord2, BIconSliders, BIconBracesAsterisk, BIconPeopleFill, BIconWalletFill, BIconFilePdf } from "bootstrap-icons-vue";
 import { faEye, faEyeSlash, faStar, faStarHalfAlt, faHandHoldingDollar, faHandHoldingHeart, faArrowUpLong, faSignOutAlt, faSlidersH, faAngleLeft, faAngleRight, faFilePdf, faUsers, faMapPin, faCheckCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import { defineStore, skipHydrate, storeToRefs, createPinia } from "pinia";
@@ -24204,10 +24204,11 @@ const _sfc_main$16 = /* @__PURE__ */ defineComponent({
     const { r$ } = storeToRefs(store);
     const formData = computed(() => r$.value.$value);
     const stripeKey = props.stripeKey;
-    ref(props.intent);
     const cardElement = ref(null);
     const stripe = ref(null);
     const card = ref(null);
+    const stripeError = ref(null);
+    const stripeReady = ref(false);
     const form = useForm({
       ...formData.value
     });
@@ -24226,23 +24227,51 @@ const _sfc_main$16 = /* @__PURE__ */ defineComponent({
       if (props.user) {
         store.prefillUserData(props.user);
       }
-      stripe.value = await loadStripe(stripeKey);
-      const elements = stripe.value.elements();
-      card.value = elements.create("card", {
-        hidePostalCode: true,
-        style: {
-          base: {
-            fontSize: "16px",
-            color: "#32325d",
-            "::placeholder": { color: "#aab7c4" }
-          },
-          invalid: {
-            color: "#fa755a",
-            iconColor: "#fa755a"
-          }
+      if (!stripeKey) {
+        stripeError.value = "Configuration Stripe manquante. Contactez l'administrateur.";
+        console.error("STRIPE_KEY non configurée");
+        return;
+      }
+      try {
+        stripe.value = await loadStripe(stripeKey);
+        if (!stripe.value) {
+          stripeError.value = "Impossible d'initialiser Stripe. Vérifiez votre connexion.";
+          return;
         }
-      });
-      card.value.mount(cardElement.value);
+        const elements = stripe.value.elements();
+        card.value = elements.create("card", {
+          hidePostalCode: true,
+          style: {
+            base: {
+              fontSize: "16px",
+              color: "#32325d",
+              fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
+              "::placeholder": { color: "#aab7c4" }
+            },
+            invalid: {
+              color: "#fa755a",
+              iconColor: "#fa755a"
+            }
+          }
+        });
+        await nextTick();
+        if (cardElement.value) {
+          card.value.mount(cardElement.value);
+          stripeReady.value = true;
+          card.value.on("change", (event) => {
+            if (event.error) {
+              stripeError.value = event.error.message;
+            } else {
+              stripeError.value = null;
+            }
+          });
+        } else {
+          stripeError.value = "Erreur d'initialisation du formulaire de paiement.";
+        }
+      } catch (err) {
+        console.error("Erreur Stripe:", err);
+        stripeError.value = "Erreur lors du chargement du module de paiement.";
+      }
     });
     const processing = ref(false);
     const errorMessage = ref(null);
@@ -24252,11 +24281,14 @@ const _sfc_main$16 = /* @__PURE__ */ defineComponent({
     ref(null);
     const submit = async () => {
       errorMessage.value = null;
+      if (!stripeReady.value || !stripe.value || !card.value) {
+        errorMessage.value = "Le formulaire de paiement n'est pas prêt. Veuillez patienter ou rafraîchir la page.";
+        return;
+      }
       try {
         processing.value = true;
         const payload = {
           ...form.data()
-          // (on n’envoie plus payment_method_id ici)
         };
         const createIntentResponse = await axios.post(
           route("custom-search.store"),
@@ -24309,7 +24341,7 @@ const _sfc_main$16 = /* @__PURE__ */ defineComponent({
       }, {
         default: withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
-            _push2(`<meta head-key="description" name="description"${ssrRenderAttr("content", content.description)} data-v-0bf446e1${_scopeId}>`);
+            _push2(`<meta head-key="description" name="description"${ssrRenderAttr("content", content.description)} data-v-a81568b8${_scopeId}>`);
           } else {
             return [
               createVNode("meta", {
@@ -24322,7 +24354,7 @@ const _sfc_main$16 = /* @__PURE__ */ defineComponent({
         }),
         _: 1
       }, _parent));
-      _push(`<section data-v-0bf446e1>`);
+      _push(`<section data-v-a81568b8>`);
       _push(ssrRenderComponent(_component_b_container, null, {
         default: withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
@@ -24341,7 +24373,7 @@ const _sfc_main$16 = /* @__PURE__ */ defineComponent({
                               _push5(ssrRenderComponent(_component_b_card_body, null, {
                                 default: withCtx((_5, _push6, _parent6, _scopeId5) => {
                                   if (_push6) {
-                                    _push6(`<nav aria-label="breadcrumb" data-v-0bf446e1${_scopeId5}><ol class="breadcrumb breadcrumb-dots mb-0" data-v-0bf446e1${_scopeId5}><li class="breadcrumb-item" data-v-0bf446e1${_scopeId5}>`);
+                                    _push6(`<nav aria-label="breadcrumb" data-v-a81568b8${_scopeId5}><ol class="breadcrumb breadcrumb-dots mb-0" data-v-a81568b8${_scopeId5}><li class="breadcrumb-item" data-v-a81568b8${_scopeId5}>`);
                                     _push6(ssrRenderComponent(unref(Link), { href: "/" }, {
                                       default: withCtx((_6, _push7, _parent7, _scopeId6) => {
                                         if (_push7) {
@@ -24356,7 +24388,7 @@ const _sfc_main$16 = /* @__PURE__ */ defineComponent({
                                       }),
                                       _: 1
                                     }, _parent6, _scopeId5));
-                                    _push6(`</li><li class="breadcrumb-item active" data-v-0bf446e1${_scopeId5}> Demande d&#39;accompagnement </li></ol></nav><h1 class="h3 card-title m-0" data-v-0bf446e1${_scopeId5}> Demande d&#39;accompagnement </h1>`);
+                                    _push6(`</li><li class="breadcrumb-item active" data-v-a81568b8${_scopeId5}> Demande d&#39;accompagnement </li></ol></nav><h1 class="h3 card-title m-0" data-v-a81568b8${_scopeId5}> Demande d&#39;accompagnement </h1>`);
                                   } else {
                                     return [
                                       createVNode("nav", { "aria-label": "breadcrumb" }, [
@@ -24412,7 +24444,7 @@ const _sfc_main$16 = /* @__PURE__ */ defineComponent({
                         }, {
                           default: withCtx((_4, _push5, _parent5, _scopeId4) => {
                             if (_push5) {
-                              _push5(`<img src="/images/front/element/17.svg" class="mb-n4" alt="" data-v-0bf446e1${_scopeId4}>`);
+                              _push5(`<img src="/images/front/element/17.svg" class="mb-n4" alt="" data-v-a81568b8${_scopeId4}>`);
                             } else {
                               return [
                                 createVNode("img", {
@@ -24547,7 +24579,7 @@ const _sfc_main$16 = /* @__PURE__ */ defineComponent({
                   _push3(ssrRenderComponent(_component_b_card_header, { class: "payment-header p-4" }, {
                     default: withCtx((_3, _push4, _parent4, _scopeId3) => {
                       if (_push4) {
-                        _push4(`<h4 class="mb-0" data-v-0bf446e1${_scopeId3}>Paiement sécurisé</h4>`);
+                        _push4(`<h4 class="mb-0" data-v-a81568b8${_scopeId3}>Paiement sécurisé</h4>`);
                       } else {
                         return [
                           createVNode("h4", { class: "mb-0" }, "Paiement sécurisé")
@@ -24559,7 +24591,7 @@ const _sfc_main$16 = /* @__PURE__ */ defineComponent({
                   _push3(ssrRenderComponent(_component_b_card_body, { class: "p-4" }, {
                     default: withCtx((_3, _push4, _parent4, _scopeId3) => {
                       if (_push4) {
-                        _push4(`<div class="payment-elements mb-4" data-v-0bf446e1${_scopeId3}><div class="row g-4 align-items-end" data-v-0bf446e1${_scopeId3}>`);
+                        _push4(`<div class="payment-elements mb-4" data-v-a81568b8${_scopeId3}><div class="row g-4 align-items-end" data-v-a81568b8${_scopeId3}>`);
                         _push4(ssrRenderComponent(_component_b_col, {
                           sm: "12",
                           md: "6",
@@ -24568,15 +24600,36 @@ const _sfc_main$16 = /* @__PURE__ */ defineComponent({
                         }, {
                           default: withCtx((_4, _push5, _parent5, _scopeId4) => {
                             if (_push5) {
-                              _push5(`<label class="form-label" data-v-0bf446e1${_scopeId4}>Informations de carte</label><div class="stripe-card-element" data-v-0bf446e1${_scopeId4}></div>`);
+                              _push5(`<label class="form-label" data-v-a81568b8${_scopeId4}>Informations de carte</label><div class="${ssrRenderClass([{ "stripe-error": stripeError.value, "stripe-loading": !stripeReady.value }, "stripe-card-element"])}" data-v-a81568b8${_scopeId4}></div>`);
+                              if (stripeError.value) {
+                                _push5(`<div class="text-danger small mt-2" data-v-a81568b8${_scopeId4}>${ssrInterpolate(stripeError.value)}</div>`);
+                              } else {
+                                _push5(`<!---->`);
+                              }
+                              if (!stripeReady.value && !stripeError.value) {
+                                _push5(`<div class="text-muted small mt-2" data-v-a81568b8${_scopeId4}><i class="fas fa-spinner fa-spin me-1" data-v-a81568b8${_scopeId4}></i> Chargement du formulaire de paiement... </div>`);
+                              } else {
+                                _push5(`<!---->`);
+                              }
                             } else {
                               return [
                                 createVNode("label", { class: "form-label" }, "Informations de carte"),
                                 createVNode("div", {
                                   ref_key: "cardElement",
                                   ref: cardElement,
-                                  class: "stripe-card-element"
-                                }, null, 512)
+                                  class: ["stripe-card-element", { "stripe-error": stripeError.value, "stripe-loading": !stripeReady.value }]
+                                }, null, 2),
+                                stripeError.value ? (openBlock(), createBlock("div", {
+                                  key: 0,
+                                  class: "text-danger small mt-2"
+                                }, toDisplayString(stripeError.value), 1)) : createCommentVNode("", true),
+                                !stripeReady.value && !stripeError.value ? (openBlock(), createBlock("div", {
+                                  key: 1,
+                                  class: "text-muted small mt-2"
+                                }, [
+                                  createVNode("i", { class: "fas fa-spinner fa-spin me-1" }),
+                                  createTextVNode(" Chargement du formulaire de paiement... ")
+                                ])) : createCommentVNode("", true)
                               ];
                             }
                           }),
@@ -24618,30 +24671,30 @@ const _sfc_main$16 = /* @__PURE__ */ defineComponent({
                         } else {
                           _push4(`<!---->`);
                         }
-                        _push4(`<div class="payment-footer d-flex flex-column flex-md-row align-items-center justify-content-between border-top pt-4" data-v-0bf446e1${_scopeId3}><div class="price-section mb-md-0 mb-3" data-v-0bf446e1${_scopeId3}><h4 class="mb-1" data-v-0bf446e1${_scopeId3}><span class="${ssrRenderClass({
+                        _push4(`<div class="payment-footer d-flex flex-column flex-md-row align-items-center justify-content-between border-top pt-4" data-v-a81568b8${_scopeId3}><div class="price-section mb-md-0 mb-3" data-v-a81568b8${_scopeId3}><h4 class="mb-1" data-v-a81568b8${_scopeId3}><span class="${ssrRenderClass({
                           "text-decoration-line-through text-muted me-2": unref(form).coupon_id,
                           "fw-normal": true
-                        })}" data-v-0bf446e1${_scopeId3}> 100 € </span>`);
+                        })}" data-v-a81568b8${_scopeId3}> 100 € </span>`);
                         if (unref(form).coupon_id) {
-                          _push4(`<span class="text-success fw-bold" data-v-0bf446e1${_scopeId3}>${ssrInterpolate(unref(form).paid)} € </span>`);
+                          _push4(`<span class="text-success fw-bold" data-v-a81568b8${_scopeId3}>${ssrInterpolate(unref(form).paid)} € </span>`);
                         } else {
                           _push4(`<!---->`);
                         }
-                        _push4(`</h4><span class="text-muted small" data-v-0bf446e1${_scopeId3}>Total à payer</span></div>`);
+                        _push4(`</h4><span class="text-muted small" data-v-a81568b8${_scopeId3}>Total à payer</span></div>`);
                         _push4(ssrRenderComponent(_component_b_button, {
                           variant: "primary",
                           size: "lg",
                           onClick: submit,
                           loading: processing.value || unref(form).processing,
-                          disabled: processing.value || unref(form).processing,
+                          disabled: processing.value || unref(form).processing || !stripeReady.value,
                           class: "payment-button"
                         }, {
                           default: withCtx((_4, _push5, _parent5, _scopeId4) => {
                             if (_push5) {
                               if (!(processing.value || unref(form).processing)) {
-                                _push5(`<span data-v-0bf446e1${_scopeId4}><i class="fas fa-lock me-2" data-v-0bf446e1${_scopeId4}></i>Payer et envoyer ma demande </span>`);
+                                _push5(`<span data-v-a81568b8${_scopeId4}><i class="fas fa-lock me-2" data-v-a81568b8${_scopeId4}></i>Payer et envoyer ma demande </span>`);
                               } else {
-                                _push5(`<span data-v-0bf446e1${_scopeId4}> Traitement en cours... </span>`);
+                                _push5(`<span data-v-a81568b8${_scopeId4}> Traitement en cours... </span>`);
                               }
                             } else {
                               return [
@@ -24670,8 +24723,19 @@ const _sfc_main$16 = /* @__PURE__ */ defineComponent({
                                   createVNode("div", {
                                     ref_key: "cardElement",
                                     ref: cardElement,
-                                    class: "stripe-card-element"
-                                  }, null, 512)
+                                    class: ["stripe-card-element", { "stripe-error": stripeError.value, "stripe-loading": !stripeReady.value }]
+                                  }, null, 2),
+                                  stripeError.value ? (openBlock(), createBlock("div", {
+                                    key: 0,
+                                    class: "text-danger small mt-2"
+                                  }, toDisplayString(stripeError.value), 1)) : createCommentVNode("", true),
+                                  !stripeReady.value && !stripeError.value ? (openBlock(), createBlock("div", {
+                                    key: 1,
+                                    class: "text-muted small mt-2"
+                                  }, [
+                                    createVNode("i", { class: "fas fa-spinner fa-spin me-1" }),
+                                    createTextVNode(" Chargement du formulaire de paiement... ")
+                                  ])) : createCommentVNode("", true)
                                 ]),
                                 _: 1
                               }),
@@ -24718,7 +24782,7 @@ const _sfc_main$16 = /* @__PURE__ */ defineComponent({
                               size: "lg",
                               onClick: submit,
                               loading: processing.value || unref(form).processing,
-                              disabled: processing.value || unref(form).processing,
+                              disabled: processing.value || unref(form).processing || !stripeReady.value,
                               class: "payment-button"
                             }, {
                               default: withCtx(() => [
@@ -24758,8 +24822,19 @@ const _sfc_main$16 = /* @__PURE__ */ defineComponent({
                                 createVNode("div", {
                                   ref_key: "cardElement",
                                   ref: cardElement,
-                                  class: "stripe-card-element"
-                                }, null, 512)
+                                  class: ["stripe-card-element", { "stripe-error": stripeError.value, "stripe-loading": !stripeReady.value }]
+                                }, null, 2),
+                                stripeError.value ? (openBlock(), createBlock("div", {
+                                  key: 0,
+                                  class: "text-danger small mt-2"
+                                }, toDisplayString(stripeError.value), 1)) : createCommentVNode("", true),
+                                !stripeReady.value && !stripeError.value ? (openBlock(), createBlock("div", {
+                                  key: 1,
+                                  class: "text-muted small mt-2"
+                                }, [
+                                  createVNode("i", { class: "fas fa-spinner fa-spin me-1" }),
+                                  createTextVNode(" Chargement du formulaire de paiement... ")
+                                ])) : createCommentVNode("", true)
                               ]),
                               _: 1
                             }),
@@ -24806,7 +24881,7 @@ const _sfc_main$16 = /* @__PURE__ */ defineComponent({
                             size: "lg",
                             onClick: submit,
                             loading: processing.value || unref(form).processing,
-                            disabled: processing.value || unref(form).processing,
+                            disabled: processing.value || unref(form).processing || !stripeReady.value,
                             class: "payment-button"
                           }, {
                             default: withCtx(() => [
@@ -24923,8 +24998,19 @@ const _sfc_main$16 = /* @__PURE__ */ defineComponent({
                               createVNode("div", {
                                 ref_key: "cardElement",
                                 ref: cardElement,
-                                class: "stripe-card-element"
-                              }, null, 512)
+                                class: ["stripe-card-element", { "stripe-error": stripeError.value, "stripe-loading": !stripeReady.value }]
+                              }, null, 2),
+                              stripeError.value ? (openBlock(), createBlock("div", {
+                                key: 0,
+                                class: "text-danger small mt-2"
+                              }, toDisplayString(stripeError.value), 1)) : createCommentVNode("", true),
+                              !stripeReady.value && !stripeError.value ? (openBlock(), createBlock("div", {
+                                key: 1,
+                                class: "text-muted small mt-2"
+                              }, [
+                                createVNode("i", { class: "fas fa-spinner fa-spin me-1" }),
+                                createTextVNode(" Chargement du formulaire de paiement... ")
+                              ])) : createCommentVNode("", true)
                             ]),
                             _: 1
                           }),
@@ -24971,7 +25057,7 @@ const _sfc_main$16 = /* @__PURE__ */ defineComponent({
                           size: "lg",
                           onClick: submit,
                           loading: processing.value || unref(form).processing,
-                          disabled: processing.value || unref(form).processing,
+                          disabled: processing.value || unref(form).processing || !stripeReady.value,
                           class: "payment-button"
                         }, {
                           default: withCtx(() => [
@@ -25004,7 +25090,7 @@ _sfc_main$16.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/Pages/CustomSearch/Index.vue");
   return _sfc_setup$16 ? _sfc_setup$16(props, ctx) : void 0;
 };
-const Index$5 = /* @__PURE__ */ _export_sfc(_sfc_main$16, [["__scopeId", "data-v-0bf446e1"]]);
+const Index$5 = /* @__PURE__ */ _export_sfc(_sfc_main$16, [["__scopeId", "data-v-a81568b8"]]);
 const __vite_glob_0_17 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: Index$5
@@ -26646,8 +26732,6 @@ const _sfc_main$12 = /* @__PURE__ */ defineComponent({
   __name: "SideBar",
   __ssrInlineRender: true,
   setup(__props) {
-    const page = usePage();
-    const user = computed(() => page.props.auth?.user);
     const menu = [
       {
         label: "Mon tableau de bord",
@@ -26682,7 +26766,6 @@ const _sfc_main$12 = /* @__PURE__ */ defineComponent({
       const _component_b_card = BCard;
       const _component_b_card_body = BCardBody;
       const _component_font_awesome_icon = resolveComponent("font-awesome-icon");
-      const _directive_b_tooltip = vBTooltip;
       _push(ssrRenderComponent(_component_b_col, mergeProps({
         lg: "4",
         xl: "3"
@@ -26695,16 +26778,10 @@ const _sfc_main$12 = /* @__PURE__ */ defineComponent({
             }, {
               default: withCtx((_2, _push3, _parent3, _scopeId2) => {
                 if (_push3) {
-                  _push3(`<div class="position-absolute end-0 top-0 p-3"${_scopeId2}><a${ssrRenderAttrs(mergeProps({
-                    href: "#",
-                    class: "text-primary-hover"
-                  }, ssrGetDirectiveProps(_ctx, _directive_b_tooltip, "Edit profile")))}${_scopeId2}>`);
-                  _push3(ssrRenderComponent(unref(BIconPencilSquare), null, null, _parent3, _scopeId2));
-                  _push3(`</a></div>`);
                   _push3(ssrRenderComponent(_component_b_card_body, { class: "p-3" }, {
                     default: withCtx((_3, _push4, _parent4, _scopeId3) => {
                       if (_push4) {
-                        _push4(`<div class="mb-3 text-center"${_scopeId3}><div class="avatar avatar-xl mb-2"${_scopeId3}><img class="avatar-img rounded-circle border border-2 border-white" src="https://avatar.iran.liara.run/public/36" alt=""${_scopeId3}></div><h6 class="mb-0"${_scopeId3}>${ssrInterpolate(user.value?.full_name)}</h6><a href="#" class="text-reset text-primary-hover small"${_scopeId3}>${ssrInterpolate(user.value?.email)}</a><hr${_scopeId3}></div><ul class="nav nav-pills-primary-soft flex-column" id="nav-sidebar"${_scopeId3}><!--[-->`);
+                        _push4(`<ul class="nav nav-pills-primary-soft flex-column" id="nav-sidebar"${_scopeId3}><!--[-->`);
                         ssrRenderList(menu.filter((m2) => m2.visible), (item, i2) => {
                           _push4(`<li class="nav-item"${_scopeId3}>`);
                           _push4(ssrRenderComponent(unref(Link), {
@@ -26756,21 +26833,6 @@ const _sfc_main$12 = /* @__PURE__ */ defineComponent({
                         _push4(`</li></ul>`);
                       } else {
                         return [
-                          createVNode("div", { class: "mb-3 text-center" }, [
-                            createVNode("div", { class: "avatar avatar-xl mb-2" }, [
-                              createVNode("img", {
-                                class: "avatar-img rounded-circle border border-2 border-white",
-                                src: "https://avatar.iran.liara.run/public/36",
-                                alt: ""
-                              })
-                            ]),
-                            createVNode("h6", { class: "mb-0" }, toDisplayString(user.value?.full_name), 1),
-                            createVNode("a", {
-                              href: "#",
-                              class: "text-reset text-primary-hover small"
-                            }, toDisplayString(user.value?.email), 1),
-                            createVNode("hr")
-                          ]),
                           createVNode("ul", {
                             class: "nav nav-pills-primary-soft flex-column",
                             id: "nav-sidebar"
@@ -26818,33 +26880,8 @@ const _sfc_main$12 = /* @__PURE__ */ defineComponent({
                   }, _parent3, _scopeId2));
                 } else {
                   return [
-                    createVNode("div", { class: "position-absolute end-0 top-0 p-3" }, [
-                      withDirectives((openBlock(), createBlock("a", {
-                        href: "#",
-                        class: "text-primary-hover"
-                      }, [
-                        createVNode(unref(BIconPencilSquare))
-                      ])), [
-                        [_directive_b_tooltip, "Edit profile"]
-                      ])
-                    ]),
                     createVNode(_component_b_card_body, { class: "p-3" }, {
                       default: withCtx(() => [
-                        createVNode("div", { class: "mb-3 text-center" }, [
-                          createVNode("div", { class: "avatar avatar-xl mb-2" }, [
-                            createVNode("img", {
-                              class: "avatar-img rounded-circle border border-2 border-white",
-                              src: "https://avatar.iran.liara.run/public/36",
-                              alt: ""
-                            })
-                          ]),
-                          createVNode("h6", { class: "mb-0" }, toDisplayString(user.value?.full_name), 1),
-                          createVNode("a", {
-                            href: "#",
-                            class: "text-reset text-primary-hover small"
-                          }, toDisplayString(user.value?.email), 1),
-                          createVNode("hr")
-                        ]),
                         createVNode("ul", {
                           class: "nav nav-pills-primary-soft flex-column",
                           id: "nav-sidebar"
@@ -26900,33 +26937,8 @@ const _sfc_main$12 = /* @__PURE__ */ defineComponent({
                 class: "bg-light w-100"
               }, {
                 default: withCtx(() => [
-                  createVNode("div", { class: "position-absolute end-0 top-0 p-3" }, [
-                    withDirectives((openBlock(), createBlock("a", {
-                      href: "#",
-                      class: "text-primary-hover"
-                    }, [
-                      createVNode(unref(BIconPencilSquare))
-                    ])), [
-                      [_directive_b_tooltip, "Edit profile"]
-                    ])
-                  ]),
                   createVNode(_component_b_card_body, { class: "p-3" }, {
                     default: withCtx(() => [
-                      createVNode("div", { class: "mb-3 text-center" }, [
-                        createVNode("div", { class: "avatar avatar-xl mb-2" }, [
-                          createVNode("img", {
-                            class: "avatar-img rounded-circle border border-2 border-white",
-                            src: "https://avatar.iran.liara.run/public/36",
-                            alt: ""
-                          })
-                        ]),
-                        createVNode("h6", { class: "mb-0" }, toDisplayString(user.value?.full_name), 1),
-                        createVNode("a", {
-                          href: "#",
-                          class: "text-reset text-primary-hover small"
-                        }, toDisplayString(user.value?.email), 1),
-                        createVNode("hr")
-                      ]),
                       createVNode("ul", {
                         class: "nav nav-pills-primary-soft flex-column",
                         id: "nav-sidebar"

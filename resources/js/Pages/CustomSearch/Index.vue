@@ -23,7 +23,7 @@ import dayjs from 'dayjs';
 import timezone from 'dayjs/plugin/timezone';
 import utc from 'dayjs/plugin/utc';
 import { storeToRefs } from 'pinia';
-import { computed, onMounted, ref, watch } from 'vue';
+import { computed, nextTick, onMounted, ref, watch } from 'vue';
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
@@ -53,10 +53,11 @@ const { r$ } = storeToRefs(store);
 const formData = computed(() => r$.value.$value);
 
 const stripeKey = props.stripeKey;
-const intent = ref(props.intent);
-const cardElement = ref(null);
+const cardElement = ref<HTMLElement | null>(null);
 const stripe = ref<any>(null);
 const card = ref<any>(null);
+const stripeError = ref<string | null>(null);
+const stripeReady = ref(false);
 
 // Création du formulaire Inertia avec les données initiales du store
 const form = useForm({
@@ -82,23 +83,60 @@ onMounted(async () => {
         store.prefillUserData(props.user);
     }
 
-    stripe.value = await loadStripe(stripeKey);
-    const elements = stripe.value!.elements();
-    card.value = elements.create('card', {
-        hidePostalCode: true,
-        style: {
-            base: {
-                fontSize: '16px',
-                color: '#32325d',
-                '::placeholder': { color: '#aab7c4' },
+    // Vérification de la clé Stripe
+    if (!stripeKey) {
+        stripeError.value = 'Configuration Stripe manquante. Contactez l\'administrateur.';
+        console.error('STRIPE_KEY non configurée');
+        return;
+    }
+
+    try {
+        stripe.value = await loadStripe(stripeKey);
+
+        if (!stripe.value) {
+            stripeError.value = 'Impossible d\'initialiser Stripe. Vérifiez votre connexion.';
+            return;
+        }
+
+        const elements = stripe.value.elements();
+        card.value = elements.create('card', {
+            hidePostalCode: true,
+            style: {
+                base: {
+                    fontSize: '16px',
+                    color: '#32325d',
+                    fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
+                    '::placeholder': { color: '#aab7c4' },
+                },
+                invalid: {
+                    color: '#fa755a',
+                    iconColor: '#fa755a',
+                },
             },
-            invalid: {
-                color: '#fa755a',
-                iconColor: '#fa755a',
-            },
-        },
-    });
-    card.value!.mount(cardElement.value!);
+        });
+
+        // Attendre que le DOM soit prêt
+        await nextTick();
+
+        if (cardElement.value) {
+            card.value.mount(cardElement.value);
+            stripeReady.value = true;
+
+            // Écouter les erreurs de la carte
+            card.value.on('change', (event: any) => {
+                if (event.error) {
+                    stripeError.value = event.error.message;
+                } else {
+                    stripeError.value = null;
+                }
+            });
+        } else {
+            stripeError.value = 'Erreur d\'initialisation du formulaire de paiement.';
+        }
+    } catch (err) {
+        console.error('Erreur Stripe:', err);
+        stripeError.value = 'Erreur lors du chargement du module de paiement.';
+    }
 });
 const onSubmit = async () => {
     store.clearExternalErrors();
@@ -129,7 +167,7 @@ const onSubmit = async () => {
 };
 
 const processing = ref(false);
-const errorMessage = ref(null);
+const errorMessage = ref<string | null>(null);
 const couponError = ref('');
 const couponSuccess = ref('');
 const discountedAmount = ref('');
@@ -137,16 +175,19 @@ const couponId = ref<number | null>(null);
 
 const submit = async () => {
     errorMessage.value = null;
+
+    // Vérification que Stripe est prêt
+    if (!stripeReady.value || !stripe.value || !card.value) {
+        errorMessage.value = 'Le formulaire de paiement n\'est pas prêt. Veuillez patienter ou rafraîchir la page.';
+        return;
+    }
+
     try {
         processing.value = true;
-        // 1. Valider votre formulaire avec Vuelidate (ou autre). S’il n’est pas valide, on arrête.
-        // if (!await v$.value.$validate()) return;
 
-        // 2. Construire les données “payload” que vous envoyez au serveur pour créer le PaymentIntent
-        //    On envoie TOUT le formulaire, exactement comme avant.
+        // Construire les données payload
         const payload = {
             ...form.data(),
-            // (on n’envoie plus payment_method_id ici)
         };
 
         // 3. Appel au backend pour créer le PaymentIntent (et le modèle CertificateRequest)
@@ -272,13 +313,19 @@ const submit = async () => {
                         <div class="row g-4 align-items-end">
                             <!-- Carte bancaire -->
                             <b-col sm="12" md="6" lg="6" class="pt-3">
-                                <label class="form-label"
-                                    >Informations de carte</label
-                                >
+                                <label class="form-label">Informations de carte</label>
                                 <div
                                     ref="cardElement"
                                     class="stripe-card-element"
+                                    :class="{ 'stripe-error': stripeError, 'stripe-loading': !stripeReady }"
                                 ></div>
+                                <div v-if="stripeError" class="text-danger small mt-2">
+                                    {{ stripeError }}
+                                </div>
+                                <div v-if="!stripeReady && !stripeError" class="text-muted small mt-2">
+                                    <i class="fas fa-spinner fa-spin me-1"></i>
+                                    Chargement du formulaire de paiement...
+                                </div>
                             </b-col>
 
                             <!-- Coupon -->
@@ -324,12 +371,11 @@ const submit = async () => {
                             size="lg"
                             @click="submit"
                             :loading="processing || form.processing"
-                            :disabled="processing || form.processing"
+                            :disabled="processing || form.processing || !stripeReady"
                             class="payment-button"
                         >
                             <span v-if="!(processing || form.processing)">
-                                <i class="fas fa-lock me-2"></i>Payer et envoyer
-                                ma demande
+                                <i class="fas fa-lock me-2"></i>Payer et envoyer ma demande
                             </span>
                             <span v-else> Traitement en cours... </span>
                         </b-button>
@@ -359,6 +405,21 @@ const submit = async () => {
     border: 1px solid #ced4da;
     border-radius: 6px;
     background: white;
+    min-height: 44px;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.stripe-card-element:focus-within {
+    border-color: #1e3a8a;
+    box-shadow: 0 0 0 3px rgba(30, 58, 138, 0.1);
+}
+
+.stripe-card-element.stripe-error {
+    border-color: #fa755a;
+}
+
+.stripe-card-element.stripe-loading {
+    background: #f8f9fa;
 }
 
 .payment-footer {
