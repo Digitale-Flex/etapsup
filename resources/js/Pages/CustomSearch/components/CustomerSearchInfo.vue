@@ -100,7 +100,7 @@ const onSubmit = async () => {
                 </b-col>
                 <b-col sm="6" md="4" lg="3">
                     <div class="d-flex flex-column">
-                        <label for="country_id">Pays de residence *</label>
+                        <label for="country_id">Pays de résidence</label>
                         <Select
                             input-id="country_id"
                             v-model="r$.$value.country_id"
@@ -176,7 +176,7 @@ const onSubmit = async () => {
                 </b-col>
                 <b-col sm="6" md="4" lg="3">
                     <div class="d-flex flex-column">
-                        <label for="on_start">Rentrée souhaitée</label>
+                        <label for="on_start">Rentrée souhaitée *</label>
                         <Calendar
                             input-id="on_start"
                             v-model="r$.$value.rental_start"
@@ -197,7 +197,7 @@ const onSubmit = async () => {
                 </b-col>
                 <b-col sm="6" md="4" lg="3">
                     <div class="d-flex flex-column">
-                        <label for="on_duration">Durée souhaitée</label>
+                        <label for="on_duration">Durée souhaitée *</label>
                         <input-number
                             input-id="on_duration"
                             v-model="r$.$value.duration"

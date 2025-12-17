@@ -130,23 +130,67 @@ const onSubmit = async () => {
 
 const processing = ref(false);
 const errorMessage = ref<string | null>(null);
+const validationErrors = ref<string[]>([]);
 const couponError = ref('');
 const couponSuccess = ref('');
 const discountedAmount = ref('');
 const couponId = ref<number | null>(null);
 
+// Labels des champs pour messages d'erreur
+const fieldLabels: Record<string, string> = {
+    property_type_ids: "Type d'établissement",
+    layout_ids: "Niveau d'études",
+    category_id: "Domaine d'études",
+    city_id: "Ville",
+    name: "Prénom",
+    surname: "Nom",
+    phone: "Téléphone",
+    place_birth: "Lieu de naissance",
+    date_birth: "Date de naissance",
+    nationality: "Nationalité",
+    passport_number: "N° de passeport",
+    partner_id: "Partenaire",
+    rental_deposit_ids: "Services souhaités",
+    budget: "Budget",
+    rental_start: "Rentrée souhaitée",
+    duration: "Durée souhaitée",
+};
+
+// Vérifie si le formulaire est valide
+const isFormValid = computed(() => !r$.value.$invalid);
+
+// Liste des champs invalides pour affichage
+const invalidFields = computed(() => {
+    const fields: string[] = [];
+    if (r$.value.$invalid) {
+        Object.keys(r$.value.$fields).forEach((key) => {
+            const field = (r$.value.$fields as any)[key];
+            if (field.$invalid) {
+                fields.push(fieldLabels[key] || key);
+            }
+        });
+    }
+    return fields;
+});
+
 const submit = async () => {
     errorMessage.value = null;
+    validationErrors.value = [];
+
+    // Valider le formulaire avant soumission
+    await r$.value.$validate();
+
+    if (r$.value.$invalid) {
+        validationErrors.value = invalidFields.value;
+        errorMessage.value = `Veuillez remplir tous les champs obligatoires (${invalidFields.value.length} champ(s) manquant(s))`;
+        return;
+    }
+
     try {
         processing.value = true;
-        // 1. Valider votre formulaire avec Vuelidate (ou autre). S'il n'est pas valide, on arrête.
-        // if (!await v$.value.$validate()) return;
 
-        // 2. Construire les données "payload" que vous envoyez au serveur pour créer le PaymentIntent
-        //    On envoie TOUT le formulaire, exactement comme avant.
         const payload = {
             ...form.data(),
-            // (on n'envoie plus payment_method_id ici)
         };
 
         // 3. Appel au backend pour créer le PaymentIntent (et le modèle CertificateRequest)
@@ -288,9 +332,24 @@ const submit = async () => {
                         </div>
                     </div>
 
+                    <!-- Message d'erreur -->
                     <Message v-if="errorMessage" severity="error" class="mb-4">
                         {{ errorMessage }}
                     </Message>
+
+                    <!-- Liste des champs manquants -->
+                    <div v-if="validationErrors.length > 0" class="alert alert-warning mb-4">
+                        <strong><i class="fas fa-exclamation-triangle me-2"></i>Champs obligatoires manquants :</strong>
+                        <ul class="mb-0 mt-2">
+                            <li v-for="field in validationErrors" :key="field">{{ field }}</li>
+                        </ul>
+                    </div>
+
+                    <!-- Indicateur de formulaire incomplet -->
+                    <div v-if="!isFormValid && validationErrors.length === 0" class="alert alert-info mb-4">
+                        <i class="fas fa-info-circle me-2"></i>
+                        Veuillez remplir tous les champs obligatoires marqués d'un <strong>*</strong> pour procéder au paiement.
+                    </div>
 
                     <!-- Section total et paiement -->
                     <div
@@ -319,20 +378,25 @@ const submit = async () => {
                         </div>
 
                         <!-- Bouton de paiement -->
-                        <b-button
-                            variant="primary"
-                            size="lg"
-                            @click="submit"
-                            :loading="processing || form.processing"
-                            :disabled="processing || form.processing"
-                            class="payment-button"
-                        >
-                            <span v-if="!(processing || form.processing)">
-                                <i class="fas fa-lock me-2"></i>Payer et envoyer
-                                ma demande
-                            </span>
-                            <span v-else> Traitement en cours... </span>
-                        </b-button>
+                        <div class="d-flex flex-column align-items-center align-items-md-end">
+                            <b-button
+                                :variant="isFormValid ? 'primary' : 'secondary'"
+                                size="lg"
+                                @click="submit"
+                                :loading="processing || form.processing"
+                                :disabled="processing || form.processing"
+                                class="payment-button"
+                            >
+                                <span v-if="!(processing || form.processing)">
+                                    <i class="fas fa-lock me-2"></i>Payer et envoyer ma demande
+                                </span>
+                                <span v-else> Traitement en cours... </span>
+                            </b-button>
+                            <small v-if="!isFormValid" class="text-muted mt-2">
+                                <i class="fas fa-info-circle me-1"></i>
+                                Complétez le formulaire pour activer le paiement
+                            </small>
+                        </div>
                     </div>
                 </b-card-body>
             </b-card>

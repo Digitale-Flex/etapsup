@@ -6,8 +6,8 @@ import { ref } from 'vue';
 
 // Interface pour typer notre état de formulaire
 interface FormState {
-    property_type_ids: string;
-    layout_ids: string;
+    property_type_ids: string[];
+    layout_ids: string[];
     category_id: string;
     city_id: string;
     name: string;
@@ -23,7 +23,7 @@ interface FormState {
     partner_id: string;
     coupon_id: string;
     paid: number;
-    rental_deposit_ids: string;
+    rental_deposit_ids: string[];
     budget: number | null;
     rental_start: Date | null;
     duration: number | null;
@@ -35,8 +35,8 @@ export const useCustomSearchStore = defineStore('customSearchStore', () => {
 
     // État initial du formulaire
     const initialFormState: FormState = {
-        property_type_ids: '',
-        layout_ids: '',
+        property_type_ids: [],
+        layout_ids: [],
         category_id: '',
         city_id: '',
         name: '',
@@ -52,7 +52,7 @@ export const useCustomSearchStore = defineStore('customSearchStore', () => {
         partner_id: '',
         coupon_id: '',
         paid: 100,
-        rental_deposit_ids: '',
+        rental_deposit_ids: [],
         budget: null,
         rental_start: null,
         duration: null,
@@ -65,28 +65,33 @@ export const useCustomSearchStore = defineStore('customSearchStore', () => {
     const { r$ } = useCustomRegle(
         initialFormState,
         {
+            // Sélection critères (requis)
             property_type_ids: { required },
             layout_ids: { required },
             category_id: { required },
             city_id: { required },
 
+            // Informations personnelles (requis)
             name: { required, minLength: minLength(2) },
             surname: { required, minLength: minLength(2) },
-            email: { required, email },
-            phone: { required, minLength: minLength(10) },
-            place_birth: { required, minLength: minLength(4) },
+            phone: { required, minLength: minLength(8) },
+            place_birth: { required, minLength: minLength(3) },
             date_birth: { required },
             nationality: { required, minLength: minLength(4) },
             passport_number: { required, minLength: minLength(5) },
-            country_birth_id: { required },
-            country_id: { required },
-            paid: { required },
-
-            partner_id: { required },
-            rental_deposit_ids: { required },
             budget: { required },
             rental_start: { required },
             duration: { required },
+
+            // Informations demande (requis)
+            partner_id: { required },
+            rental_deposit_ids: { required },
+
+            // Champs optionnels (pas de validation required)
+            email: { email }, // optionnel mais doit être valide si rempli
+            country_birth_id: {}, // optionnel
+            country_id: {}, // optionnel
+            paid: {}, // optionnel
         },
         {
             externalErrors, // Passage des erreurs externes

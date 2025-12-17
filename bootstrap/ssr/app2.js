@@ -20393,8 +20393,8 @@ const { useRegle: useCustomRegle } = defineRegleConfig({
 const useCustomSearchStore = defineStore("customSearchStore", () => {
   const processing = ref(false);
   const initialFormState = {
-    property_type_ids: "",
-    layout_ids: "",
+    property_type_ids: [],
+    layout_ids: [],
     category_id: "",
     city_id: "",
     name: "",
@@ -20410,7 +20410,7 @@ const useCustomSearchStore = defineStore("customSearchStore", () => {
     partner_id: "",
     coupon_id: "",
     paid: 100,
-    rental_deposit_ids: "",
+    rental_deposit_ids: [],
     budget: null,
     rental_start: null,
     duration: null,
@@ -20420,26 +20420,34 @@ const useCustomSearchStore = defineStore("customSearchStore", () => {
   const { r$ } = useCustomRegle(
     initialFormState,
     {
+      // Sélection critères (requis)
       property_type_ids: { required: required$1 },
       layout_ids: { required: required$1 },
       category_id: { required: required$1 },
       city_id: { required: required$1 },
+      // Informations personnelles (requis)
       name: { required: required$1, minLength: minLength$1(2) },
       surname: { required: required$1, minLength: minLength$1(2) },
-      email: { required: required$1, email: email$1 },
-      phone: { required: required$1, minLength: minLength$1(10) },
-      place_birth: { required: required$1, minLength: minLength$1(4) },
+      phone: { required: required$1, minLength: minLength$1(8) },
+      place_birth: { required: required$1, minLength: minLength$1(3) },
       date_birth: { required: required$1 },
       nationality: { required: required$1, minLength: minLength$1(4) },
       passport_number: { required: required$1, minLength: minLength$1(5) },
-      country_birth_id: { required: required$1 },
-      country_id: { required: required$1 },
-      paid: { required: required$1 },
-      partner_id: { required: required$1 },
-      rental_deposit_ids: { required: required$1 },
       budget: { required: required$1 },
       rental_start: { required: required$1 },
-      duration: { required: required$1 }
+      duration: { required: required$1 },
+      // Informations demande (requis)
+      partner_id: { required: required$1 },
+      rental_deposit_ids: { required: required$1 },
+      // Champs optionnels (pas de validation required)
+      email: { email: email$1 },
+      // optionnel mais doit être valide si rempli
+      country_birth_id: {},
+      // optionnel
+      country_id: {},
+      // optionnel
+      paid: {}
+      // optionnel
     },
     {
       externalErrors
@@ -20794,7 +20802,7 @@ const _sfc_main$19 = /* @__PURE__ */ defineComponent({
                   }, {
                     default: withCtx((_3, _push4, _parent4, _scopeId3) => {
                       if (_push4) {
-                        _push4(`<div class="d-flex flex-column"${_scopeId3}><label for="country_id"${_scopeId3}>Pays de residence *</label>`);
+                        _push4(`<div class="d-flex flex-column"${_scopeId3}><label for="country_id"${_scopeId3}>Pays de résidence</label>`);
                         _push4(ssrRenderComponent(_component_Select, {
                           "input-id": "country_id",
                           modelValue: unref(r$).$value.country_id,
@@ -20831,7 +20839,7 @@ const _sfc_main$19 = /* @__PURE__ */ defineComponent({
                       } else {
                         return [
                           createVNode("div", { class: "d-flex flex-column" }, [
-                            createVNode("label", { for: "country_id" }, "Pays de residence *"),
+                            createVNode("label", { for: "country_id" }, "Pays de résidence"),
                             createVNode(_component_Select, {
                               "input-id": "country_id",
                               modelValue: unref(r$).$value.country_id,
@@ -21019,7 +21027,7 @@ const _sfc_main$19 = /* @__PURE__ */ defineComponent({
                   }, {
                     default: withCtx((_3, _push4, _parent4, _scopeId3) => {
                       if (_push4) {
-                        _push4(`<div class="d-flex flex-column"${_scopeId3}><label for="on_start"${_scopeId3}>Rentrée souhaitée</label>`);
+                        _push4(`<div class="d-flex flex-column"${_scopeId3}><label for="on_start"${_scopeId3}>Rentrée souhaitée *</label>`);
                         _push4(ssrRenderComponent(_component_Calendar, {
                           "input-id": "on_start",
                           modelValue: unref(r$).$value.rental_start,
@@ -21053,7 +21061,7 @@ const _sfc_main$19 = /* @__PURE__ */ defineComponent({
                       } else {
                         return [
                           createVNode("div", { class: "d-flex flex-column" }, [
-                            createVNode("label", { for: "on_start" }, "Rentrée souhaitée"),
+                            createVNode("label", { for: "on_start" }, "Rentrée souhaitée *"),
                             createVNode(_component_Calendar, {
                               "input-id": "on_start",
                               modelValue: unref(r$).$value.rental_start,
@@ -21087,7 +21095,7 @@ const _sfc_main$19 = /* @__PURE__ */ defineComponent({
                   }, {
                     default: withCtx((_3, _push4, _parent4, _scopeId3) => {
                       if (_push4) {
-                        _push4(`<div class="d-flex flex-column"${_scopeId3}><label for="on_duration"${_scopeId3}>Durée souhaitée</label>`);
+                        _push4(`<div class="d-flex flex-column"${_scopeId3}><label for="on_duration"${_scopeId3}>Durée souhaitée *</label>`);
                         _push4(ssrRenderComponent(_component_input_number, {
                           "input-id": "on_duration",
                           modelValue: unref(r$).$value.duration,
@@ -21121,7 +21129,7 @@ const _sfc_main$19 = /* @__PURE__ */ defineComponent({
                       } else {
                         return [
                           createVNode("div", { class: "d-flex flex-column" }, [
-                            createVNode("label", { for: "on_duration" }, "Durée souhaitée"),
+                            createVNode("label", { for: "on_duration" }, "Durée souhaitée *"),
                             createVNode(_component_input_number, {
                               "input-id": "on_duration",
                               modelValue: unref(r$).$value.duration,
@@ -21223,7 +21231,7 @@ const _sfc_main$19 = /* @__PURE__ */ defineComponent({
                       }, {
                         default: withCtx(() => [
                           createVNode("div", { class: "d-flex flex-column" }, [
-                            createVNode("label", { for: "country_id" }, "Pays de residence *"),
+                            createVNode("label", { for: "country_id" }, "Pays de résidence"),
                             createVNode(_component_Select, {
                               "input-id": "country_id",
                               modelValue: unref(r$).$value.country_id,
@@ -21330,7 +21338,7 @@ const _sfc_main$19 = /* @__PURE__ */ defineComponent({
                       }, {
                         default: withCtx(() => [
                           createVNode("div", { class: "d-flex flex-column" }, [
-                            createVNode("label", { for: "on_start" }, "Rentrée souhaitée"),
+                            createVNode("label", { for: "on_start" }, "Rentrée souhaitée *"),
                             createVNode(_component_Calendar, {
                               "input-id": "on_start",
                               modelValue: unref(r$).$value.rental_start,
@@ -21362,7 +21370,7 @@ const _sfc_main$19 = /* @__PURE__ */ defineComponent({
                       }, {
                         default: withCtx(() => [
                           createVNode("div", { class: "d-flex flex-column" }, [
-                            createVNode("label", { for: "on_duration" }, "Durée souhaitée"),
+                            createVNode("label", { for: "on_duration" }, "Durée souhaitée *"),
                             createVNode(_component_input_number, {
                               "input-id": "on_duration",
                               modelValue: unref(r$).$value.duration,
@@ -21467,7 +21475,7 @@ const _sfc_main$19 = /* @__PURE__ */ defineComponent({
                     }, {
                       default: withCtx(() => [
                         createVNode("div", { class: "d-flex flex-column" }, [
-                          createVNode("label", { for: "country_id" }, "Pays de residence *"),
+                          createVNode("label", { for: "country_id" }, "Pays de résidence"),
                           createVNode(_component_Select, {
                             "input-id": "country_id",
                             modelValue: unref(r$).$value.country_id,
@@ -21574,7 +21582,7 @@ const _sfc_main$19 = /* @__PURE__ */ defineComponent({
                     }, {
                       default: withCtx(() => [
                         createVNode("div", { class: "d-flex flex-column" }, [
-                          createVNode("label", { for: "on_start" }, "Rentrée souhaitée"),
+                          createVNode("label", { for: "on_start" }, "Rentrée souhaitée *"),
                           createVNode(_component_Calendar, {
                             "input-id": "on_start",
                             modelValue: unref(r$).$value.rental_start,
@@ -21606,7 +21614,7 @@ const _sfc_main$19 = /* @__PURE__ */ defineComponent({
                     }, {
                       default: withCtx(() => [
                         createVNode("div", { class: "d-flex flex-column" }, [
-                          createVNode("label", { for: "on_duration" }, "Durée souhaitée"),
+                          createVNode("label", { for: "on_duration" }, "Durée souhaitée *"),
                           createVNode(_component_input_number, {
                             "input-id": "on_duration",
                             modelValue: unref(r$).$value.duration,
@@ -21874,7 +21882,7 @@ const _sfc_main$18 = /* @__PURE__ */ defineComponent({
                   }, {
                     default: withCtx((_3, _push4, _parent4, _scopeId3) => {
                       if (_push4) {
-                        _push4(`<div class="d-flex flex-column"${_scopeId3}><label for="email"${_scopeId3}>Adresse email *</label>`);
+                        _push4(`<div class="d-flex flex-column"${_scopeId3}><label for="email"${_scopeId3}>Adresse email</label>`);
                         _push4(ssrRenderComponent(_component_input_text, {
                           modelValue: unref(r$).$value.email,
                           "onUpdate:modelValue": ($event) => unref(r$).$value.email = $event,
@@ -21887,7 +21895,7 @@ const _sfc_main$18 = /* @__PURE__ */ defineComponent({
                       } else {
                         return [
                           createVNode("div", { class: "d-flex flex-column" }, [
-                            createVNode("label", { for: "email" }, "Adresse email *"),
+                            createVNode("label", { for: "email" }, "Adresse email"),
                             createVNode(_component_input_text, {
                               modelValue: unref(r$).$value.email,
                               "onUpdate:modelValue": ($event) => unref(r$).$value.email = $event,
@@ -22111,7 +22119,7 @@ const _sfc_main$18 = /* @__PURE__ */ defineComponent({
                   }, {
                     default: withCtx((_3, _push4, _parent4, _scopeId3) => {
                       if (_push4) {
-                        _push4(`<div class="d-flex flex-column"${_scopeId3}><label for="country_birth_id"${_scopeId3}>Pays de naissance *</label>`);
+                        _push4(`<div class="d-flex flex-column"${_scopeId3}><label for="country_birth_id"${_scopeId3}>Pays de naissance</label>`);
                         _push4(ssrRenderComponent(_component_Select, {
                           "input-id": "country_birth_id",
                           modelValue: unref(r$).$value.country_birth_id,
@@ -22148,7 +22156,7 @@ const _sfc_main$18 = /* @__PURE__ */ defineComponent({
                       } else {
                         return [
                           createVNode("div", { class: "d-flex flex-column" }, [
-                            createVNode("label", { for: "country_birth_id" }, "Pays de naissance *"),
+                            createVNode("label", { for: "country_birth_id" }, "Pays de naissance"),
                             createVNode(_component_Select, {
                               "input-id": "country_birth_id",
                               modelValue: unref(r$).$value.country_birth_id,
@@ -22385,7 +22393,7 @@ const _sfc_main$18 = /* @__PURE__ */ defineComponent({
                       }, {
                         default: withCtx(() => [
                           createVNode("div", { class: "d-flex flex-column" }, [
-                            createVNode("label", { for: "email" }, "Adresse email *"),
+                            createVNode("label", { for: "email" }, "Adresse email"),
                             createVNode(_component_input_text, {
                               modelValue: unref(r$).$value.email,
                               "onUpdate:modelValue": ($event) => unref(r$).$value.email = $event,
@@ -22500,7 +22508,7 @@ const _sfc_main$18 = /* @__PURE__ */ defineComponent({
                       }, {
                         default: withCtx(() => [
                           createVNode("div", { class: "d-flex flex-column" }, [
-                            createVNode("label", { for: "country_birth_id" }, "Pays de naissance *"),
+                            createVNode("label", { for: "country_birth_id" }, "Pays de naissance"),
                             createVNode(_component_Select, {
                               "input-id": "country_birth_id",
                               modelValue: unref(r$).$value.country_birth_id,
@@ -22684,7 +22692,7 @@ const _sfc_main$18 = /* @__PURE__ */ defineComponent({
                     }, {
                       default: withCtx(() => [
                         createVNode("div", { class: "d-flex flex-column" }, [
-                          createVNode("label", { for: "email" }, "Adresse email *"),
+                          createVNode("label", { for: "email" }, "Adresse email"),
                           createVNode(_component_input_text, {
                             modelValue: unref(r$).$value.email,
                             "onUpdate:modelValue": ($event) => unref(r$).$value.email = $event,
@@ -22799,7 +22807,7 @@ const _sfc_main$18 = /* @__PURE__ */ defineComponent({
                     }, {
                       default: withCtx(() => [
                         createVNode("div", { class: "d-flex flex-column" }, [
-                          createVNode("label", { for: "country_birth_id" }, "Pays de naissance *"),
+                          createVNode("label", { for: "country_birth_id" }, "Pays de naissance"),
                           createVNode(_component_Select, {
                             "input-id": "country_birth_id",
                             modelValue: unref(r$).$value.country_birth_id,
@@ -24246,17 +24254,55 @@ const _sfc_main$16 = /* @__PURE__ */ defineComponent({
     });
     const processing = ref(false);
     const errorMessage = ref(null);
+    const validationErrors = ref([]);
     ref("");
     ref("");
     ref("");
     ref(null);
+    const fieldLabels = {
+      property_type_ids: "Type d'établissement",
+      layout_ids: "Niveau d'études",
+      category_id: "Domaine d'études",
+      city_id: "Ville",
+      name: "Prénom",
+      surname: "Nom",
+      phone: "Téléphone",
+      place_birth: "Lieu de naissance",
+      date_birth: "Date de naissance",
+      nationality: "Nationalité",
+      passport_number: "N° de passeport",
+      partner_id: "Partenaire",
+      rental_deposit_ids: "Services souhaités",
+      budget: "Budget",
+      rental_start: "Rentrée souhaitée",
+      duration: "Durée souhaitée"
+    };
+    const isFormValid = computed(() => !r$.value.$invalid);
+    const invalidFields = computed(() => {
+      const fields = [];
+      if (r$.value.$invalid) {
+        Object.keys(r$.value.$fields).forEach((key) => {
+          const field = r$.value.$fields[key];
+          if (field.$invalid) {
+            fields.push(fieldLabels[key] || key);
+          }
+        });
+      }
+      return fields;
+    });
     const submit = async () => {
       errorMessage.value = null;
+      validationErrors.value = [];
+      await r$.value.$validate();
+      if (r$.value.$invalid) {
+        validationErrors.value = invalidFields.value;
+        errorMessage.value = `Veuillez remplir tous les champs obligatoires (${invalidFields.value.length} champ(s) manquant(s))`;
+        return;
+      }
       try {
         processing.value = true;
         const payload = {
           ...form.data()
-          // (on n'envoie plus payment_method_id ici)
         };
         const createIntentResponse = await axios.post(
           route("custom-search.store"),
@@ -24309,7 +24355,7 @@ const _sfc_main$16 = /* @__PURE__ */ defineComponent({
       }, {
         default: withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
-            _push2(`<meta head-key="description" name="description"${ssrRenderAttr("content", content.description)} data-v-e93edfd0${_scopeId}>`);
+            _push2(`<meta head-key="description" name="description"${ssrRenderAttr("content", content.description)} data-v-48da90ff${_scopeId}>`);
           } else {
             return [
               createVNode("meta", {
@@ -24322,7 +24368,7 @@ const _sfc_main$16 = /* @__PURE__ */ defineComponent({
         }),
         _: 1
       }, _parent));
-      _push(`<section data-v-e93edfd0>`);
+      _push(`<section data-v-48da90ff>`);
       _push(ssrRenderComponent(_component_b_container, null, {
         default: withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
@@ -24341,7 +24387,7 @@ const _sfc_main$16 = /* @__PURE__ */ defineComponent({
                               _push5(ssrRenderComponent(_component_b_card_body, null, {
                                 default: withCtx((_5, _push6, _parent6, _scopeId5) => {
                                   if (_push6) {
-                                    _push6(`<nav aria-label="breadcrumb" data-v-e93edfd0${_scopeId5}><ol class="breadcrumb breadcrumb-dots mb-0" data-v-e93edfd0${_scopeId5}><li class="breadcrumb-item" data-v-e93edfd0${_scopeId5}>`);
+                                    _push6(`<nav aria-label="breadcrumb" data-v-48da90ff${_scopeId5}><ol class="breadcrumb breadcrumb-dots mb-0" data-v-48da90ff${_scopeId5}><li class="breadcrumb-item" data-v-48da90ff${_scopeId5}>`);
                                     _push6(ssrRenderComponent(unref(Link), { href: "/" }, {
                                       default: withCtx((_6, _push7, _parent7, _scopeId6) => {
                                         if (_push7) {
@@ -24356,7 +24402,7 @@ const _sfc_main$16 = /* @__PURE__ */ defineComponent({
                                       }),
                                       _: 1
                                     }, _parent6, _scopeId5));
-                                    _push6(`</li><li class="breadcrumb-item active" data-v-e93edfd0${_scopeId5}> Demande d&#39;accompagnement </li></ol></nav><h1 class="h3 card-title m-0" data-v-e93edfd0${_scopeId5}> Demande d&#39;accompagnement </h1>`);
+                                    _push6(`</li><li class="breadcrumb-item active" data-v-48da90ff${_scopeId5}> Demande d&#39;accompagnement </li></ol></nav><h1 class="h3 card-title m-0" data-v-48da90ff${_scopeId5}> Demande d&#39;accompagnement </h1>`);
                                   } else {
                                     return [
                                       createVNode("nav", { "aria-label": "breadcrumb" }, [
@@ -24412,7 +24458,7 @@ const _sfc_main$16 = /* @__PURE__ */ defineComponent({
                         }, {
                           default: withCtx((_4, _push5, _parent5, _scopeId4) => {
                             if (_push5) {
-                              _push5(`<img src="/images/front/element/17.svg" class="mb-n4" alt="" data-v-e93edfd0${_scopeId4}>`);
+                              _push5(`<img src="/images/front/element/17.svg" class="mb-n4" alt="" data-v-48da90ff${_scopeId4}>`);
                             } else {
                               return [
                                 createVNode("img", {
@@ -24547,7 +24593,7 @@ const _sfc_main$16 = /* @__PURE__ */ defineComponent({
                   _push3(ssrRenderComponent(_component_b_card_header, { class: "payment-header p-4" }, {
                     default: withCtx((_3, _push4, _parent4, _scopeId3) => {
                       if (_push4) {
-                        _push4(`<h4 class="mb-0" data-v-e93edfd0${_scopeId3}>Paiement sécurisé</h4>`);
+                        _push4(`<h4 class="mb-0" data-v-48da90ff${_scopeId3}>Paiement sécurisé</h4>`);
                       } else {
                         return [
                           createVNode("h4", { class: "mb-0" }, "Paiement sécurisé")
@@ -24559,7 +24605,7 @@ const _sfc_main$16 = /* @__PURE__ */ defineComponent({
                   _push3(ssrRenderComponent(_component_b_card_body, { class: "p-4" }, {
                     default: withCtx((_3, _push4, _parent4, _scopeId3) => {
                       if (_push4) {
-                        _push4(`<div class="payment-elements mb-4" data-v-e93edfd0${_scopeId3}><div class="row g-4 align-items-end" data-v-e93edfd0${_scopeId3}>`);
+                        _push4(`<div class="payment-elements mb-4" data-v-48da90ff${_scopeId3}><div class="row g-4 align-items-end" data-v-48da90ff${_scopeId3}>`);
                         _push4(ssrRenderComponent(_component_b_col, {
                           sm: "12",
                           md: "6",
@@ -24568,7 +24614,7 @@ const _sfc_main$16 = /* @__PURE__ */ defineComponent({
                         }, {
                           default: withCtx((_4, _push5, _parent5, _scopeId4) => {
                             if (_push5) {
-                              _push5(`<label class="form-label" data-v-e93edfd0${_scopeId4}>Informations de carte</label><div class="stripe-card-element" data-v-e93edfd0${_scopeId4}></div>`);
+                              _push5(`<label class="form-label" data-v-48da90ff${_scopeId4}>Informations de carte</label><div class="stripe-card-element" data-v-48da90ff${_scopeId4}></div>`);
                             } else {
                               return [
                                 createVNode("label", { class: "form-label" }, "Informations de carte"),
@@ -24618,18 +24664,32 @@ const _sfc_main$16 = /* @__PURE__ */ defineComponent({
                         } else {
                           _push4(`<!---->`);
                         }
-                        _push4(`<div class="payment-footer d-flex flex-column flex-md-row align-items-center justify-content-between border-top pt-4" data-v-e93edfd0${_scopeId3}><div class="price-section mb-md-0 mb-3" data-v-e93edfd0${_scopeId3}><h4 class="mb-1" data-v-e93edfd0${_scopeId3}><span class="${ssrRenderClass({
-                          "text-decoration-line-through text-muted me-2": unref(form).coupon_id,
-                          "fw-normal": true
-                        })}" data-v-e93edfd0${_scopeId3}> 100 € </span>`);
-                        if (unref(form).coupon_id) {
-                          _push4(`<span class="text-success fw-bold" data-v-e93edfd0${_scopeId3}>${ssrInterpolate(unref(form).paid)} € </span>`);
+                        if (validationErrors.value.length > 0) {
+                          _push4(`<div class="alert alert-warning mb-4" data-v-48da90ff${_scopeId3}><strong data-v-48da90ff${_scopeId3}><i class="fas fa-exclamation-triangle me-2" data-v-48da90ff${_scopeId3}></i>Champs obligatoires manquants :</strong><ul class="mb-0 mt-2" data-v-48da90ff${_scopeId3}><!--[-->`);
+                          ssrRenderList(validationErrors.value, (field) => {
+                            _push4(`<li data-v-48da90ff${_scopeId3}>${ssrInterpolate(field)}</li>`);
+                          });
+                          _push4(`<!--]--></ul></div>`);
                         } else {
                           _push4(`<!---->`);
                         }
-                        _push4(`</h4><span class="text-muted small" data-v-e93edfd0${_scopeId3}>Total à payer</span></div>`);
+                        if (!isFormValid.value && validationErrors.value.length === 0) {
+                          _push4(`<div class="alert alert-info mb-4" data-v-48da90ff${_scopeId3}><i class="fas fa-info-circle me-2" data-v-48da90ff${_scopeId3}></i> Veuillez remplir tous les champs obligatoires marqués d&#39;un <strong data-v-48da90ff${_scopeId3}>*</strong> pour procéder au paiement. </div>`);
+                        } else {
+                          _push4(`<!---->`);
+                        }
+                        _push4(`<div class="payment-footer d-flex flex-column flex-md-row align-items-center justify-content-between border-top pt-4" data-v-48da90ff${_scopeId3}><div class="price-section mb-md-0 mb-3" data-v-48da90ff${_scopeId3}><h4 class="mb-1" data-v-48da90ff${_scopeId3}><span class="${ssrRenderClass({
+                          "text-decoration-line-through text-muted me-2": unref(form).coupon_id,
+                          "fw-normal": true
+                        })}" data-v-48da90ff${_scopeId3}> 100 € </span>`);
+                        if (unref(form).coupon_id) {
+                          _push4(`<span class="text-success fw-bold" data-v-48da90ff${_scopeId3}>${ssrInterpolate(unref(form).paid)} € </span>`);
+                        } else {
+                          _push4(`<!---->`);
+                        }
+                        _push4(`</h4><span class="text-muted small" data-v-48da90ff${_scopeId3}>Total à payer</span></div><div class="d-flex flex-column align-items-center align-items-md-end" data-v-48da90ff${_scopeId3}>`);
                         _push4(ssrRenderComponent(_component_b_button, {
-                          variant: "primary",
+                          variant: isFormValid.value ? "primary" : "secondary",
                           size: "lg",
                           onClick: submit,
                           loading: processing.value || unref(form).processing,
@@ -24639,9 +24699,9 @@ const _sfc_main$16 = /* @__PURE__ */ defineComponent({
                           default: withCtx((_4, _push5, _parent5, _scopeId4) => {
                             if (_push5) {
                               if (!(processing.value || unref(form).processing)) {
-                                _push5(`<span data-v-e93edfd0${_scopeId4}><i class="fas fa-lock me-2" data-v-e93edfd0${_scopeId4}></i>Payer et envoyer ma demande </span>`);
+                                _push5(`<span data-v-48da90ff${_scopeId4}><i class="fas fa-lock me-2" data-v-48da90ff${_scopeId4}></i>Payer et envoyer ma demande </span>`);
                               } else {
-                                _push5(`<span data-v-e93edfd0${_scopeId4}> Traitement en cours... </span>`);
+                                _push5(`<span data-v-48da90ff${_scopeId4}> Traitement en cours... </span>`);
                               }
                             } else {
                               return [
@@ -24654,7 +24714,12 @@ const _sfc_main$16 = /* @__PURE__ */ defineComponent({
                           }),
                           _: 1
                         }, _parent4, _scopeId3));
-                        _push4(`</div>`);
+                        if (!isFormValid.value) {
+                          _push4(`<small class="text-muted mt-2" data-v-48da90ff${_scopeId3}><i class="fas fa-info-circle me-1" data-v-48da90ff${_scopeId3}></i> Complétez le formulaire pour activer le paiement </small>`);
+                        } else {
+                          _push4(`<!---->`);
+                        }
+                        _push4(`</div></div>`);
                       } else {
                         return [
                           createVNode("div", { class: "payment-elements mb-4" }, [
@@ -24697,6 +24762,29 @@ const _sfc_main$16 = /* @__PURE__ */ defineComponent({
                             ]),
                             _: 1
                           })) : createCommentVNode("", true),
+                          validationErrors.value.length > 0 ? (openBlock(), createBlock("div", {
+                            key: 1,
+                            class: "alert alert-warning mb-4"
+                          }, [
+                            createVNode("strong", null, [
+                              createVNode("i", { class: "fas fa-exclamation-triangle me-2" }),
+                              createTextVNode("Champs obligatoires manquants :")
+                            ]),
+                            createVNode("ul", { class: "mb-0 mt-2" }, [
+                              (openBlock(true), createBlock(Fragment, null, renderList(validationErrors.value, (field) => {
+                                return openBlock(), createBlock("li", { key: field }, toDisplayString(field), 1);
+                              }), 128))
+                            ])
+                          ])) : createCommentVNode("", true),
+                          !isFormValid.value && validationErrors.value.length === 0 ? (openBlock(), createBlock("div", {
+                            key: 2,
+                            class: "alert alert-info mb-4"
+                          }, [
+                            createVNode("i", { class: "fas fa-info-circle me-2" }),
+                            createTextVNode(" Veuillez remplir tous les champs obligatoires marqués d'un "),
+                            createVNode("strong", null, "*"),
+                            createTextVNode(" pour procéder au paiement. ")
+                          ])) : createCommentVNode("", true),
                           createVNode("div", { class: "payment-footer d-flex flex-column flex-md-row align-items-center justify-content-between border-top pt-4" }, [
                             createVNode("div", { class: "price-section mb-md-0 mb-3" }, [
                               createVNode("h4", { class: "mb-1" }, [
@@ -24713,22 +24801,31 @@ const _sfc_main$16 = /* @__PURE__ */ defineComponent({
                               ]),
                               createVNode("span", { class: "text-muted small" }, "Total à payer")
                             ]),
-                            createVNode(_component_b_button, {
-                              variant: "primary",
-                              size: "lg",
-                              onClick: submit,
-                              loading: processing.value || unref(form).processing,
-                              disabled: processing.value || unref(form).processing,
-                              class: "payment-button"
-                            }, {
-                              default: withCtx(() => [
-                                !(processing.value || unref(form).processing) ? (openBlock(), createBlock("span", { key: 0 }, [
-                                  createVNode("i", { class: "fas fa-lock me-2" }),
-                                  createTextVNode("Payer et envoyer ma demande ")
-                                ])) : (openBlock(), createBlock("span", { key: 1 }, " Traitement en cours... "))
-                              ]),
-                              _: 1
-                            }, 8, ["loading", "disabled"])
+                            createVNode("div", { class: "d-flex flex-column align-items-center align-items-md-end" }, [
+                              createVNode(_component_b_button, {
+                                variant: isFormValid.value ? "primary" : "secondary",
+                                size: "lg",
+                                onClick: submit,
+                                loading: processing.value || unref(form).processing,
+                                disabled: processing.value || unref(form).processing,
+                                class: "payment-button"
+                              }, {
+                                default: withCtx(() => [
+                                  !(processing.value || unref(form).processing) ? (openBlock(), createBlock("span", { key: 0 }, [
+                                    createVNode("i", { class: "fas fa-lock me-2" }),
+                                    createTextVNode("Payer et envoyer ma demande ")
+                                  ])) : (openBlock(), createBlock("span", { key: 1 }, " Traitement en cours... "))
+                                ]),
+                                _: 1
+                              }, 8, ["variant", "loading", "disabled"]),
+                              !isFormValid.value ? (openBlock(), createBlock("small", {
+                                key: 0,
+                                class: "text-muted mt-2"
+                              }, [
+                                createVNode("i", { class: "fas fa-info-circle me-1" }),
+                                createTextVNode(" Complétez le formulaire pour activer le paiement ")
+                              ])) : createCommentVNode("", true)
+                            ])
                           ])
                         ];
                       }
@@ -24785,6 +24882,29 @@ const _sfc_main$16 = /* @__PURE__ */ defineComponent({
                           ]),
                           _: 1
                         })) : createCommentVNode("", true),
+                        validationErrors.value.length > 0 ? (openBlock(), createBlock("div", {
+                          key: 1,
+                          class: "alert alert-warning mb-4"
+                        }, [
+                          createVNode("strong", null, [
+                            createVNode("i", { class: "fas fa-exclamation-triangle me-2" }),
+                            createTextVNode("Champs obligatoires manquants :")
+                          ]),
+                          createVNode("ul", { class: "mb-0 mt-2" }, [
+                            (openBlock(true), createBlock(Fragment, null, renderList(validationErrors.value, (field) => {
+                              return openBlock(), createBlock("li", { key: field }, toDisplayString(field), 1);
+                            }), 128))
+                          ])
+                        ])) : createCommentVNode("", true),
+                        !isFormValid.value && validationErrors.value.length === 0 ? (openBlock(), createBlock("div", {
+                          key: 2,
+                          class: "alert alert-info mb-4"
+                        }, [
+                          createVNode("i", { class: "fas fa-info-circle me-2" }),
+                          createTextVNode(" Veuillez remplir tous les champs obligatoires marqués d'un "),
+                          createVNode("strong", null, "*"),
+                          createTextVNode(" pour procéder au paiement. ")
+                        ])) : createCommentVNode("", true),
                         createVNode("div", { class: "payment-footer d-flex flex-column flex-md-row align-items-center justify-content-between border-top pt-4" }, [
                           createVNode("div", { class: "price-section mb-md-0 mb-3" }, [
                             createVNode("h4", { class: "mb-1" }, [
@@ -24801,22 +24921,31 @@ const _sfc_main$16 = /* @__PURE__ */ defineComponent({
                             ]),
                             createVNode("span", { class: "text-muted small" }, "Total à payer")
                           ]),
-                          createVNode(_component_b_button, {
-                            variant: "primary",
-                            size: "lg",
-                            onClick: submit,
-                            loading: processing.value || unref(form).processing,
-                            disabled: processing.value || unref(form).processing,
-                            class: "payment-button"
-                          }, {
-                            default: withCtx(() => [
-                              !(processing.value || unref(form).processing) ? (openBlock(), createBlock("span", { key: 0 }, [
-                                createVNode("i", { class: "fas fa-lock me-2" }),
-                                createTextVNode("Payer et envoyer ma demande ")
-                              ])) : (openBlock(), createBlock("span", { key: 1 }, " Traitement en cours... "))
-                            ]),
-                            _: 1
-                          }, 8, ["loading", "disabled"])
+                          createVNode("div", { class: "d-flex flex-column align-items-center align-items-md-end" }, [
+                            createVNode(_component_b_button, {
+                              variant: isFormValid.value ? "primary" : "secondary",
+                              size: "lg",
+                              onClick: submit,
+                              loading: processing.value || unref(form).processing,
+                              disabled: processing.value || unref(form).processing,
+                              class: "payment-button"
+                            }, {
+                              default: withCtx(() => [
+                                !(processing.value || unref(form).processing) ? (openBlock(), createBlock("span", { key: 0 }, [
+                                  createVNode("i", { class: "fas fa-lock me-2" }),
+                                  createTextVNode("Payer et envoyer ma demande ")
+                                ])) : (openBlock(), createBlock("span", { key: 1 }, " Traitement en cours... "))
+                              ]),
+                              _: 1
+                            }, 8, ["variant", "loading", "disabled"]),
+                            !isFormValid.value ? (openBlock(), createBlock("small", {
+                              key: 0,
+                              class: "text-muted mt-2"
+                            }, [
+                              createVNode("i", { class: "fas fa-info-circle me-1" }),
+                              createTextVNode(" Complétez le formulaire pour activer le paiement ")
+                            ])) : createCommentVNode("", true)
+                          ])
                         ])
                       ]),
                       _: 1
@@ -24950,6 +25079,29 @@ const _sfc_main$16 = /* @__PURE__ */ defineComponent({
                         ]),
                         _: 1
                       })) : createCommentVNode("", true),
+                      validationErrors.value.length > 0 ? (openBlock(), createBlock("div", {
+                        key: 1,
+                        class: "alert alert-warning mb-4"
+                      }, [
+                        createVNode("strong", null, [
+                          createVNode("i", { class: "fas fa-exclamation-triangle me-2" }),
+                          createTextVNode("Champs obligatoires manquants :")
+                        ]),
+                        createVNode("ul", { class: "mb-0 mt-2" }, [
+                          (openBlock(true), createBlock(Fragment, null, renderList(validationErrors.value, (field) => {
+                            return openBlock(), createBlock("li", { key: field }, toDisplayString(field), 1);
+                          }), 128))
+                        ])
+                      ])) : createCommentVNode("", true),
+                      !isFormValid.value && validationErrors.value.length === 0 ? (openBlock(), createBlock("div", {
+                        key: 2,
+                        class: "alert alert-info mb-4"
+                      }, [
+                        createVNode("i", { class: "fas fa-info-circle me-2" }),
+                        createTextVNode(" Veuillez remplir tous les champs obligatoires marqués d'un "),
+                        createVNode("strong", null, "*"),
+                        createTextVNode(" pour procéder au paiement. ")
+                      ])) : createCommentVNode("", true),
                       createVNode("div", { class: "payment-footer d-flex flex-column flex-md-row align-items-center justify-content-between border-top pt-4" }, [
                         createVNode("div", { class: "price-section mb-md-0 mb-3" }, [
                           createVNode("h4", { class: "mb-1" }, [
@@ -24966,22 +25118,31 @@ const _sfc_main$16 = /* @__PURE__ */ defineComponent({
                           ]),
                           createVNode("span", { class: "text-muted small" }, "Total à payer")
                         ]),
-                        createVNode(_component_b_button, {
-                          variant: "primary",
-                          size: "lg",
-                          onClick: submit,
-                          loading: processing.value || unref(form).processing,
-                          disabled: processing.value || unref(form).processing,
-                          class: "payment-button"
-                        }, {
-                          default: withCtx(() => [
-                            !(processing.value || unref(form).processing) ? (openBlock(), createBlock("span", { key: 0 }, [
-                              createVNode("i", { class: "fas fa-lock me-2" }),
-                              createTextVNode("Payer et envoyer ma demande ")
-                            ])) : (openBlock(), createBlock("span", { key: 1 }, " Traitement en cours... "))
-                          ]),
-                          _: 1
-                        }, 8, ["loading", "disabled"])
+                        createVNode("div", { class: "d-flex flex-column align-items-center align-items-md-end" }, [
+                          createVNode(_component_b_button, {
+                            variant: isFormValid.value ? "primary" : "secondary",
+                            size: "lg",
+                            onClick: submit,
+                            loading: processing.value || unref(form).processing,
+                            disabled: processing.value || unref(form).processing,
+                            class: "payment-button"
+                          }, {
+                            default: withCtx(() => [
+                              !(processing.value || unref(form).processing) ? (openBlock(), createBlock("span", { key: 0 }, [
+                                createVNode("i", { class: "fas fa-lock me-2" }),
+                                createTextVNode("Payer et envoyer ma demande ")
+                              ])) : (openBlock(), createBlock("span", { key: 1 }, " Traitement en cours... "))
+                            ]),
+                            _: 1
+                          }, 8, ["variant", "loading", "disabled"]),
+                          !isFormValid.value ? (openBlock(), createBlock("small", {
+                            key: 0,
+                            class: "text-muted mt-2"
+                          }, [
+                            createVNode("i", { class: "fas fa-info-circle me-1" }),
+                            createTextVNode(" Complétez le formulaire pour activer le paiement ")
+                          ])) : createCommentVNode("", true)
+                        ])
                       ])
                     ]),
                     _: 1
@@ -25004,7 +25165,7 @@ _sfc_main$16.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/Pages/CustomSearch/Index.vue");
   return _sfc_setup$16 ? _sfc_setup$16(props, ctx) : void 0;
 };
-const Index$5 = /* @__PURE__ */ _export_sfc(_sfc_main$16, [["__scopeId", "data-v-e93edfd0"]]);
+const Index$5 = /* @__PURE__ */ _export_sfc(_sfc_main$16, [["__scopeId", "data-v-48da90ff"]]);
 const __vite_glob_0_17 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: Index$5

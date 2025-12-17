@@ -86,7 +86,7 @@ const { r$ } = storeToRefs(store);
                 </b-col>
                 <b-col sm="6" md="4" lg="3">
                     <div class="d-flex flex-column">
-                        <label for="email">Adresse email *</label>
+                        <label for="email">Adresse email</label>
                         <input-text
                             v-model="r$.$value.email"
                             :invalid="r$.$fields.email.$error"
@@ -161,7 +161,7 @@ const { r$ } = storeToRefs(store);
                 <b-col sm="6" md="4" lg="3">
                     <div class="d-flex flex-column">
                         <label for="country_birth_id"
-                            >Pays de naissance *</label
+                            >Pays de naissance</label
                         >
                         <Select
                             input-id="country_birth_id"
