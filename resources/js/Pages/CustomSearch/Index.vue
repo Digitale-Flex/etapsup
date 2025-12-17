@@ -82,23 +82,46 @@ onMounted(async () => {
         store.prefillUserData(props.user);
     }
 
-    stripe.value = await loadStripe(stripeKey);
-    const elements = stripe.value!.elements();
-    card.value = elements.create('card', {
-        hidePostalCode: true,
-        style: {
-            base: {
-                fontSize: '16px',
-                color: '#32325d',
-                '::placeholder': { color: '#aab7c4' },
+    // Vérifier que Stripe est configuré
+    if (!stripeKey) {
+        console.error('Stripe key is not configured');
+        errorMessage.value = 'Le système de paiement n\'est pas configuré. Veuillez contacter l\'administration.';
+        return;
+    }
+
+    try {
+        stripe.value = await loadStripe(stripeKey);
+        if (!stripe.value) {
+            console.error('Failed to load Stripe');
+            errorMessage.value = 'Impossible de charger le système de paiement. Vérifiez votre connexion.';
+            return;
+        }
+
+        const elements = stripe.value.elements();
+        card.value = elements.create('card', {
+            hidePostalCode: true,
+            style: {
+                base: {
+                    fontSize: '16px',
+                    color: '#32325d',
+                    '::placeholder': { color: '#aab7c4' },
+                },
+                invalid: {
+                    color: '#fa755a',
+                    iconColor: '#fa755a',
+                },
             },
-            invalid: {
-                color: '#fa755a',
-                iconColor: '#fa755a',
-            },
-        },
-    });
-    card.value!.mount(cardElement.value!);
+        });
+
+        if (cardElement.value) {
+            card.value.mount(cardElement.value);
+        } else {
+            console.error('Card element container not found');
+        }
+    } catch (e) {
+        console.error('Stripe initialization error:', e);
+        errorMessage.value = 'Erreur lors de l\'initialisation du paiement.';
+    }
 });
 const onSubmit = async () => {
     store.clearExternalErrors();
@@ -177,6 +200,12 @@ const submit = async () => {
     errorMessage.value = null;
     validationErrors.value = [];
 
+    // Vérifier que Stripe est initialisé
+    if (!stripe.value || !card.value) {
+        errorMessage.value = 'Le système de paiement n\'est pas prêt. Veuillez rafraîchir la page.';
+        return;
+    }
+
     // Valider le formulaire avant soumission
     await r$.value.$validate();
 
@@ -204,11 +233,11 @@ const submit = async () => {
         const hashId = createIntentResponse.data.id as string;
 
         // 4. On appelle Stripe.js pour confirmer le PaymentIntent (et déclencher le 3D Secure)
-        const { error, paymentIntent } = await stripe.value!.confirmCardPayment(
+        const { error, paymentIntent } = await stripe.value.confirmCardPayment(
             clientSecret,
             {
                 payment_method: {
-                    card: card.value!,
+                    card: card.value,
                     billing_details: {
                         name: `${form.surname} ${form.name}`,
                         email: form.email,

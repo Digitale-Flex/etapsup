@@ -24234,23 +24234,42 @@ const _sfc_main$16 = /* @__PURE__ */ defineComponent({
       if (props.user) {
         store.prefillUserData(props.user);
       }
-      stripe.value = await loadStripe(stripeKey);
-      const elements = stripe.value.elements();
-      card.value = elements.create("card", {
-        hidePostalCode: true,
-        style: {
-          base: {
-            fontSize: "16px",
-            color: "#32325d",
-            "::placeholder": { color: "#aab7c4" }
-          },
-          invalid: {
-            color: "#fa755a",
-            iconColor: "#fa755a"
-          }
+      if (!stripeKey) {
+        console.error("Stripe key is not configured");
+        errorMessage.value = "Le système de paiement n'est pas configuré. Veuillez contacter l'administration.";
+        return;
+      }
+      try {
+        stripe.value = await loadStripe(stripeKey);
+        if (!stripe.value) {
+          console.error("Failed to load Stripe");
+          errorMessage.value = "Impossible de charger le système de paiement. Vérifiez votre connexion.";
+          return;
         }
-      });
-      card.value.mount(cardElement.value);
+        const elements = stripe.value.elements();
+        card.value = elements.create("card", {
+          hidePostalCode: true,
+          style: {
+            base: {
+              fontSize: "16px",
+              color: "#32325d",
+              "::placeholder": { color: "#aab7c4" }
+            },
+            invalid: {
+              color: "#fa755a",
+              iconColor: "#fa755a"
+            }
+          }
+        });
+        if (cardElement.value) {
+          card.value.mount(cardElement.value);
+        } else {
+          console.error("Card element container not found");
+        }
+      } catch (e2) {
+        console.error("Stripe initialization error:", e2);
+        errorMessage.value = "Erreur lors de l'initialisation du paiement.";
+      }
     });
     const processing = ref(false);
     const errorMessage = ref(null);
@@ -24293,6 +24312,10 @@ const _sfc_main$16 = /* @__PURE__ */ defineComponent({
     const submit = async () => {
       errorMessage.value = null;
       validationErrors.value = [];
+      if (!stripe.value || !card.value) {
+        errorMessage.value = "Le système de paiement n'est pas prêt. Veuillez rafraîchir la page.";
+        return;
+      }
       await r$.value.$validate();
       if (r$.value.$invalid) {
         validationErrors.value = invalidFields.value;
@@ -24355,7 +24378,7 @@ const _sfc_main$16 = /* @__PURE__ */ defineComponent({
       }, {
         default: withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
-            _push2(`<meta head-key="description" name="description"${ssrRenderAttr("content", content.description)} data-v-48da90ff${_scopeId}>`);
+            _push2(`<meta head-key="description" name="description"${ssrRenderAttr("content", content.description)} data-v-df085087${_scopeId}>`);
           } else {
             return [
               createVNode("meta", {
@@ -24368,7 +24391,7 @@ const _sfc_main$16 = /* @__PURE__ */ defineComponent({
         }),
         _: 1
       }, _parent));
-      _push(`<section data-v-48da90ff>`);
+      _push(`<section data-v-df085087>`);
       _push(ssrRenderComponent(_component_b_container, null, {
         default: withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
@@ -24387,7 +24410,7 @@ const _sfc_main$16 = /* @__PURE__ */ defineComponent({
                               _push5(ssrRenderComponent(_component_b_card_body, null, {
                                 default: withCtx((_5, _push6, _parent6, _scopeId5) => {
                                   if (_push6) {
-                                    _push6(`<nav aria-label="breadcrumb" data-v-48da90ff${_scopeId5}><ol class="breadcrumb breadcrumb-dots mb-0" data-v-48da90ff${_scopeId5}><li class="breadcrumb-item" data-v-48da90ff${_scopeId5}>`);
+                                    _push6(`<nav aria-label="breadcrumb" data-v-df085087${_scopeId5}><ol class="breadcrumb breadcrumb-dots mb-0" data-v-df085087${_scopeId5}><li class="breadcrumb-item" data-v-df085087${_scopeId5}>`);
                                     _push6(ssrRenderComponent(unref(Link), { href: "/" }, {
                                       default: withCtx((_6, _push7, _parent7, _scopeId6) => {
                                         if (_push7) {
@@ -24402,7 +24425,7 @@ const _sfc_main$16 = /* @__PURE__ */ defineComponent({
                                       }),
                                       _: 1
                                     }, _parent6, _scopeId5));
-                                    _push6(`</li><li class="breadcrumb-item active" data-v-48da90ff${_scopeId5}> Demande d&#39;accompagnement </li></ol></nav><h1 class="h3 card-title m-0" data-v-48da90ff${_scopeId5}> Demande d&#39;accompagnement </h1>`);
+                                    _push6(`</li><li class="breadcrumb-item active" data-v-df085087${_scopeId5}> Demande d&#39;accompagnement </li></ol></nav><h1 class="h3 card-title m-0" data-v-df085087${_scopeId5}> Demande d&#39;accompagnement </h1>`);
                                   } else {
                                     return [
                                       createVNode("nav", { "aria-label": "breadcrumb" }, [
@@ -24458,7 +24481,7 @@ const _sfc_main$16 = /* @__PURE__ */ defineComponent({
                         }, {
                           default: withCtx((_4, _push5, _parent5, _scopeId4) => {
                             if (_push5) {
-                              _push5(`<img src="/images/front/element/17.svg" class="mb-n4" alt="" data-v-48da90ff${_scopeId4}>`);
+                              _push5(`<img src="/images/front/element/17.svg" class="mb-n4" alt="" data-v-df085087${_scopeId4}>`);
                             } else {
                               return [
                                 createVNode("img", {
@@ -24593,7 +24616,7 @@ const _sfc_main$16 = /* @__PURE__ */ defineComponent({
                   _push3(ssrRenderComponent(_component_b_card_header, { class: "payment-header p-4" }, {
                     default: withCtx((_3, _push4, _parent4, _scopeId3) => {
                       if (_push4) {
-                        _push4(`<h4 class="mb-0" data-v-48da90ff${_scopeId3}>Paiement sécurisé</h4>`);
+                        _push4(`<h4 class="mb-0" data-v-df085087${_scopeId3}>Paiement sécurisé</h4>`);
                       } else {
                         return [
                           createVNode("h4", { class: "mb-0" }, "Paiement sécurisé")
@@ -24605,7 +24628,7 @@ const _sfc_main$16 = /* @__PURE__ */ defineComponent({
                   _push3(ssrRenderComponent(_component_b_card_body, { class: "p-4" }, {
                     default: withCtx((_3, _push4, _parent4, _scopeId3) => {
                       if (_push4) {
-                        _push4(`<div class="payment-elements mb-4" data-v-48da90ff${_scopeId3}><div class="row g-4 align-items-end" data-v-48da90ff${_scopeId3}>`);
+                        _push4(`<div class="payment-elements mb-4" data-v-df085087${_scopeId3}><div class="row g-4 align-items-end" data-v-df085087${_scopeId3}>`);
                         _push4(ssrRenderComponent(_component_b_col, {
                           sm: "12",
                           md: "6",
@@ -24614,7 +24637,7 @@ const _sfc_main$16 = /* @__PURE__ */ defineComponent({
                         }, {
                           default: withCtx((_4, _push5, _parent5, _scopeId4) => {
                             if (_push5) {
-                              _push5(`<label class="form-label" data-v-48da90ff${_scopeId4}>Informations de carte</label><div class="stripe-card-element" data-v-48da90ff${_scopeId4}></div>`);
+                              _push5(`<label class="form-label" data-v-df085087${_scopeId4}>Informations de carte</label><div class="stripe-card-element" data-v-df085087${_scopeId4}></div>`);
                             } else {
                               return [
                                 createVNode("label", { class: "form-label" }, "Informations de carte"),
@@ -24665,29 +24688,29 @@ const _sfc_main$16 = /* @__PURE__ */ defineComponent({
                           _push4(`<!---->`);
                         }
                         if (validationErrors.value.length > 0) {
-                          _push4(`<div class="alert alert-warning mb-4" data-v-48da90ff${_scopeId3}><strong data-v-48da90ff${_scopeId3}><i class="fas fa-exclamation-triangle me-2" data-v-48da90ff${_scopeId3}></i>Champs obligatoires manquants :</strong><ul class="mb-0 mt-2" data-v-48da90ff${_scopeId3}><!--[-->`);
+                          _push4(`<div class="alert alert-warning mb-4" data-v-df085087${_scopeId3}><strong data-v-df085087${_scopeId3}><i class="fas fa-exclamation-triangle me-2" data-v-df085087${_scopeId3}></i>Champs obligatoires manquants :</strong><ul class="mb-0 mt-2" data-v-df085087${_scopeId3}><!--[-->`);
                           ssrRenderList(validationErrors.value, (field) => {
-                            _push4(`<li data-v-48da90ff${_scopeId3}>${ssrInterpolate(field)}</li>`);
+                            _push4(`<li data-v-df085087${_scopeId3}>${ssrInterpolate(field)}</li>`);
                           });
                           _push4(`<!--]--></ul></div>`);
                         } else {
                           _push4(`<!---->`);
                         }
                         if (!isFormValid.value && validationErrors.value.length === 0) {
-                          _push4(`<div class="alert alert-info mb-4" data-v-48da90ff${_scopeId3}><i class="fas fa-info-circle me-2" data-v-48da90ff${_scopeId3}></i> Veuillez remplir tous les champs obligatoires marqués d&#39;un <strong data-v-48da90ff${_scopeId3}>*</strong> pour procéder au paiement. </div>`);
+                          _push4(`<div class="alert alert-info mb-4" data-v-df085087${_scopeId3}><i class="fas fa-info-circle me-2" data-v-df085087${_scopeId3}></i> Veuillez remplir tous les champs obligatoires marqués d&#39;un <strong data-v-df085087${_scopeId3}>*</strong> pour procéder au paiement. </div>`);
                         } else {
                           _push4(`<!---->`);
                         }
-                        _push4(`<div class="payment-footer d-flex flex-column flex-md-row align-items-center justify-content-between border-top pt-4" data-v-48da90ff${_scopeId3}><div class="price-section mb-md-0 mb-3" data-v-48da90ff${_scopeId3}><h4 class="mb-1" data-v-48da90ff${_scopeId3}><span class="${ssrRenderClass({
+                        _push4(`<div class="payment-footer d-flex flex-column flex-md-row align-items-center justify-content-between border-top pt-4" data-v-df085087${_scopeId3}><div class="price-section mb-md-0 mb-3" data-v-df085087${_scopeId3}><h4 class="mb-1" data-v-df085087${_scopeId3}><span class="${ssrRenderClass({
                           "text-decoration-line-through text-muted me-2": unref(form).coupon_id,
                           "fw-normal": true
-                        })}" data-v-48da90ff${_scopeId3}> 100 € </span>`);
+                        })}" data-v-df085087${_scopeId3}> 100 € </span>`);
                         if (unref(form).coupon_id) {
-                          _push4(`<span class="text-success fw-bold" data-v-48da90ff${_scopeId3}>${ssrInterpolate(unref(form).paid)} € </span>`);
+                          _push4(`<span class="text-success fw-bold" data-v-df085087${_scopeId3}>${ssrInterpolate(unref(form).paid)} € </span>`);
                         } else {
                           _push4(`<!---->`);
                         }
-                        _push4(`</h4><span class="text-muted small" data-v-48da90ff${_scopeId3}>Total à payer</span></div><div class="d-flex flex-column align-items-center align-items-md-end" data-v-48da90ff${_scopeId3}>`);
+                        _push4(`</h4><span class="text-muted small" data-v-df085087${_scopeId3}>Total à payer</span></div><div class="d-flex flex-column align-items-center align-items-md-end" data-v-df085087${_scopeId3}>`);
                         _push4(ssrRenderComponent(_component_b_button, {
                           variant: isFormValid.value ? "primary" : "secondary",
                           size: "lg",
@@ -24699,9 +24722,9 @@ const _sfc_main$16 = /* @__PURE__ */ defineComponent({
                           default: withCtx((_4, _push5, _parent5, _scopeId4) => {
                             if (_push5) {
                               if (!(processing.value || unref(form).processing)) {
-                                _push5(`<span data-v-48da90ff${_scopeId4}><i class="fas fa-lock me-2" data-v-48da90ff${_scopeId4}></i>Payer et envoyer ma demande </span>`);
+                                _push5(`<span data-v-df085087${_scopeId4}><i class="fas fa-lock me-2" data-v-df085087${_scopeId4}></i>Payer et envoyer ma demande </span>`);
                               } else {
-                                _push5(`<span data-v-48da90ff${_scopeId4}> Traitement en cours... </span>`);
+                                _push5(`<span data-v-df085087${_scopeId4}> Traitement en cours... </span>`);
                               }
                             } else {
                               return [
@@ -24715,7 +24738,7 @@ const _sfc_main$16 = /* @__PURE__ */ defineComponent({
                           _: 1
                         }, _parent4, _scopeId3));
                         if (!isFormValid.value) {
-                          _push4(`<small class="text-muted mt-2" data-v-48da90ff${_scopeId3}><i class="fas fa-info-circle me-1" data-v-48da90ff${_scopeId3}></i> Complétez le formulaire pour activer le paiement </small>`);
+                          _push4(`<small class="text-muted mt-2" data-v-df085087${_scopeId3}><i class="fas fa-info-circle me-1" data-v-df085087${_scopeId3}></i> Complétez le formulaire pour activer le paiement </small>`);
                         } else {
                           _push4(`<!---->`);
                         }
@@ -25165,7 +25188,7 @@ _sfc_main$16.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/Pages/CustomSearch/Index.vue");
   return _sfc_setup$16 ? _sfc_setup$16(props, ctx) : void 0;
 };
-const Index$5 = /* @__PURE__ */ _export_sfc(_sfc_main$16, [["__scopeId", "data-v-48da90ff"]]);
+const Index$5 = /* @__PURE__ */ _export_sfc(_sfc_main$16, [["__scopeId", "data-v-df085087"]]);
 const __vite_glob_0_17 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: Index$5
