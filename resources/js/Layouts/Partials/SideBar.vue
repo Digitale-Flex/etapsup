@@ -1,17 +1,11 @@
 <script setup lang="ts">
 import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
-import { Link, usePage } from '@inertiajs/vue3';
+import { Link } from '@inertiajs/vue3';
 import {
     BIconHouseCheck,
     BIconListCheck,
-    BIconPencilSquare,
     BIconPerson,
 } from 'bootstrap-icons-vue';
-import { computed } from 'vue';
-
-const page = usePage();
-const user = computed(() => page.props.auth?.user);
-
 // UI-Fix-3.1: Menu harmonisé selon spécifications EtapSup
 const menu = [
     {
@@ -45,32 +39,7 @@ const menu = [
 <template>
     <b-col lg="4" xl="3">
         <b-card no-body class="bg-light w-100">
-            <div class="position-absolute end-0 top-0 p-3">
-                <a
-                    href="#"
-                    class="text-primary-hover"
-                    v-b-tooltip="'Edit profile'"
-                >
-                    <BIconPencilSquare />
-                </a>
-            </div>
-
             <b-card-body class="p-3">
-                <div class="mb-3 text-center">
-                    <div class="avatar avatar-xl mb-2">
-                        <img
-                            class="avatar-img rounded-circle border border-2 border-white"
-                            src="https://avatar.iran.liara.run/public/36"
-                            alt=""
-                        />
-                    </div>
-                    <h6 class="mb-0">{{ user?.full_name }}</h6>
-                    <a href="#" class="text-reset text-primary-hover small">{{
-                        user?.email
-                    }}</a>
-                    <hr />
-                </div>
-
                 <!-- UI-Fix-3.1: Filtrer éléments visibles -->
                 <ul
                     class="nav nav-pills-primary-soft flex-column"

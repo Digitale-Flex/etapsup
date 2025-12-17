@@ -42,9 +42,6 @@ class CustomSearchController extends Controller
     public function index()
     {
         $user = auth()->user()->load('country');
-        $intent = $user->createSetupIntent([
-            'payment_method_types' => ['card'],
-        ]);
 
         return Inertia::render('CustomSearch/Index', [
             'user' => new UserResource($user),
@@ -180,12 +177,11 @@ class CustomSearchController extends Controller
 
     public function refreshIntent(): JsonResponse
     {
-        $intent = auth()->user()->createSetupIntent([
-            'payment_method_types' => ['card'],
-        ]);
+        $user = auth()->user();
+        $intent = $this->paymentService->createSetupIntent($user);
 
         return response()->json([
-            'intent' => $intent->client_secret,
+            'intent' => $intent,
         ]);
     }
 }
