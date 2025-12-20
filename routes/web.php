@@ -73,18 +73,24 @@ Route::get('/certificate', function () {
 Route::get('/dashboard', function () {
     $user = auth()->user();
 
-    // Récupérer les candidatures récentes de l'utilisateur (max 3) - toutes les candidatures y compris brouillons
+    // Récupérer les candidatures récentes de l'utilisateur (max 3)
+    // Bug 3 Fix: Dédupliquer par property_id, garder seulement la version la plus avancée
     $rawApplications = \App\Models\Application::where('user_id', $user->id)
-        ->with(['property.city.country', 'property.category', 'property.propertyType']) // C02: region supprimé
-        ->latest()
+        ->with(['property.city.country', 'property.category', 'property.propertyType'])
+        ->orderByRaw("FIELD(status, 'paid', 'pending_payment', 'accepted', 'in_review', 'submitted', 'pending', 'rejected', 'draft') ASC")
+        ->orderBy('updated_at', 'desc')
+        ->get()
+        ->unique('property_id') // Dédupliquer par établissement
         ->take(3)
-        ->get();
+        ->values();
 
     // Formater les données pour le dashboard
     $applications = $rawApplications->map(function ($app) {
         $statusLabels = [
             'draft' => 'Brouillon',
             'pending' => 'En attente',
+            'pending_payment' => 'Paiement en cours',
+            'paid' => 'Payé',
             'submitted' => 'Soumise',
             'accepted' => 'Acceptée',
             'rejected' => 'Rejetée',
@@ -139,10 +145,12 @@ Route::get('/dashboard', function () {
     $profileCompletion = round(($filledFields / count($profileFields)) * 100);
 
     // Sprint1 Update: Feature 1.1.1 — Récupérer documents et paiements
-    // Documents récents (max 3)
+    // Documents récents (max 3) - Bug 1 Fix: seulement ceux avec fichier uploadé
     $rawDocuments = \App\Models\ApplicationDocument::whereHas('application', function ($query) use ($user) {
         $query->where('user_id', $user->id);
     })
+    ->whereNotNull('file_path')
+    ->where('file_path', '!=', '')
     ->with(['application.property:id,title'])
     ->latest()
     ->take(3)

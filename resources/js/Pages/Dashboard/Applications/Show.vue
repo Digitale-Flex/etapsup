@@ -440,8 +440,8 @@ const progressPercentage = computed(() => {
                         </BRow>
                     </div>
 
-                    <!-- UI-Fix-5.1: Section Documents - Upload après soumission -->
-                    <div v-if="application.status === 'submitted' || application.status === 'in_review'" class="mt-4 pt-4 border-top">
+                    <!-- UI-Fix-5.1: Section Documents - Upload après soumission ou paiement -->
+                    <div v-if="['submitted', 'in_review', 'paid', 'pending_payment'].includes(application.status)" class="mt-4 pt-4 border-top">
                         <h6 class="text-muted mb-3">
                             <i class="bi bi-files me-2"></i>
                             Documents justificatifs
