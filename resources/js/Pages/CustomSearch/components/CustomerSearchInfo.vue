@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useCustomSearchStore } from '@/Stores/customSearch';
-import { Country, Partner, RentalDeposit } from '@/Types/index';
+import { Country, DegreeLevel, Partner, RentalDeposit } from '@/Types/index';
 import axios from 'axios';
 import { BIconPencil } from 'bootstrap-icons-vue';
 import { storeToRefs } from 'pinia';
@@ -10,6 +10,7 @@ interface Props {
     partners: Partner[];
     rentalDeposits: RentalDeposit[];
     countries: Country[];
+    degreeLevels: DegreeLevel[];
 }
 
 defineProps<Props>();
@@ -122,6 +123,31 @@ const onSubmit = async () => {
                         </Message>
                     </div>
                 </b-col>
+                <!-- Bug 6 Fix: Ajout pays de destination -->
+                <b-col sm="6" md="4" lg="3">
+                    <div class="d-flex flex-column">
+                        <label for="destination_country_id">Pays de destination *</label>
+                        <Select
+                            input-id="destination_country_id"
+                            v-model="r$.$value.destination_country_id"
+                            :options="countries"
+                            :disabled="store.processing"
+                            :invalid="r$.$fields.destination_country_id?.$error"
+                            filter
+                            option-label="name"
+                            option-value="id"
+                            placeholder="Où souhaitez-vous étudier ?"
+                        />
+                        <Message
+                            v-if="r$.$fields.destination_country_id?.$error"
+                            severity="error"
+                            size="small"
+                            variant="simple"
+                        >
+                            {{ r$.$fields.destination_country_id?.$errors[0] }}
+                        </Message>
+                    </div>
+                </b-col>
                 <b-col sm="6" md="4" lg="3">
                     <div class="d-flex flex-column">
                         <label for="rental_deposit_ids"
@@ -225,6 +251,69 @@ const onSubmit = async () => {
                             :disabled="store.processing"
                             fluid
                         />
+                    </div>
+                </b-col>
+                <b-col sm="6" md="4" lg="3">
+                    <div class="d-flex flex-column">
+                        <label for="current_level_id">Niveau d'études actuel</label>
+                        <Select
+                            input-id="current_level_id"
+                            v-model="r$.$value.current_level_id"
+                            :options="degreeLevels"
+                            :disabled="store.processing"
+                            :invalid="r$.$fields.current_level_id?.$error"
+                            filter
+                            option-label="label"
+                            option-value="id"
+                            placeholder="Sélectionner votre niveau"
+                        />
+                        <Message
+                            v-if="r$.$fields.current_level_id?.$error"
+                            severity="error"
+                            size="small"
+                            variant="simple"
+                        >
+                            {{ r$.$fields.current_level_id?.$errors[0] }}
+                        </Message>
+                    </div>
+                </b-col>
+                <b-col sm="6" md="4" lg="3">
+                    <div class="d-flex flex-column">
+                        <label for="preferred_language">Langue d'enseignement préférée</label>
+                        <Select
+                            input-id="preferred_language"
+                            v-model="r$.$value.preferred_language"
+                            :options="[{ label: 'Français', value: 'FR' }, { label: 'Anglais', value: 'EN' }]"
+                            :disabled="store.processing"
+                            :invalid="r$.$fields.preferred_language?.$error"
+                            option-label="label"
+                            option-value="value"
+                            placeholder="Sélectionner"
+                        />
+                        <Message
+                            v-if="r$.$fields.preferred_language?.$error"
+                            severity="error"
+                            size="small"
+                            variant="simple"
+                        >
+                            {{ r$.$fields.preferred_language?.$errors[0] }}
+                        </Message>
+                    </div>
+                </b-col>
+                <b-col sm="6" md="4" lg="3">
+                    <div class="d-flex flex-column">
+                        <label for="has_campus_france_experience">Procédure Campus France antérieure ?</label>
+                        <div class="flex items-center gap-2 mt-2">
+                            <Checkbox
+                                input-id="has_campus_france_experience"
+                                v-model="r$.$value.has_campus_france_experience"
+                                :disabled="store.processing"
+                                :binary="true"
+                            />
+                            <label for="has_campus_france_experience" class="ms-2">
+                                Oui, j'ai déjà fait une procédure
+                            </label>
+                        </div>
                     </div>
                 </b-col>
             </div>

@@ -2,6 +2,7 @@
 import AppHead from '@/Components/AppHead.vue';
 import PartnerCoupon from '@/Components/PartnerCoupon.vue';
 import CustomerSearchInfo from '@/Pages/CustomSearch/components/CustomerSearchInfo.vue';
+import CustomSearchDocuments from '@/Pages/CustomSearch/components/CustomSearchDocuments.vue';
 import CustomSearchPersonalInfo from '@/Pages/CustomSearch/components/CustomSearchPersonalInfo.vue';
 import CustomSearchSelectBar from '@/Pages/CustomSearch/components/CustomSearchSelectBar.vue';
 import { useCustomSearchStore } from '@/Stores/customSearch';
@@ -9,6 +10,7 @@ import {
     Category,
     City,
     Country,
+    DegreeLevel,
     Layout,
     Partner,
     PropertyType,
@@ -42,6 +44,7 @@ interface Props {
     countries: Country[];
     partners: Partner[];
     rentalDeposits: RentalDeposit[];
+    degreeLevels: DegreeLevel[];
     stripeKey: string;
     intent: string;
 }
@@ -325,6 +328,7 @@ const submit = async () => {
                 :partners
                 :rentalDeposits
                 :countries
+                :degreeLevels
                 class="mb-4"
             />
             <CustomSearchPersonalInfo
@@ -333,6 +337,7 @@ const submit = async () => {
                 :partners
                 :rentalDeposits
             />
+            <CustomSearchDocuments class="my-4" />
 
             <b-card no-body class="payment-card mt-4 shadow">
                 <b-card-header class="payment-header p-4">

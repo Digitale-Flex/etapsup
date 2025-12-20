@@ -10,6 +10,7 @@ use App\Models\Country;
 use App\Models\RealEstate\Category;
 use App\Models\RealEstate\Layout;
 use App\Models\RealEstate\PropertyType;
+use App\Models\Settings\DegreeLevel;
 use App\Rules\ValidateHashid;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -33,6 +34,7 @@ class CustomSearchRequest extends FormRequest
         return [
             'category_id' => ['required', new ValidateHashid(Category::class)],
             'city_id' => ['required', new ValidateHashid(City::class)],
+            'destination_country_id' => ['nullable', new ValidateHashid(Country::class)], // Bug 6 Fix
             'partner_id' => ['required', new ValidateHashid(Partner::class)],
             'coupon_id' => ['nullable', new ValidateHashid(Coupon::class)],
             'paid' => ['nullable', 'numeric', 'not_in:0'],
@@ -57,6 +59,19 @@ class CustomSearchRequest extends FormRequest
             'rental_start' => 'required|date',
             'duration' => 'required',
             'note' => 'nullable',
+
+            // 10 nouveaux champs questionnaire (tous optionnels)
+            'gender' => 'nullable|in:M,F',
+            'passport_expiry_date' => 'nullable|date',
+            'address' => 'nullable|string|max:500',
+            'current_level_id' => ['nullable', new ValidateHashid(DegreeLevel::class)],
+            'preferred_language' => 'nullable|in:FR,EN',
+            'has_campus_france_experience' => 'nullable|boolean',
+            'has_diploma' => 'nullable|boolean',
+            'has_transcript' => 'nullable|boolean',
+            'has_cv' => 'nullable|boolean',
+            'has_motivation_letter' => 'nullable|boolean',
+            'has_conduct_certificate' => 'nullable|boolean',
         ];
     }
 
@@ -65,6 +80,7 @@ class CustomSearchRequest extends FormRequest
         return [
             'category_id' => 'catégorie',
             'city_id' => 'ville',
+            'destination_country_id' => 'pays de destination', // Bug 6 Fix
             'partner_id' => 'partenaire',
             'coupon_id' => 'coupon',
             'paid' => 'montant payé',
@@ -86,6 +102,19 @@ class CustomSearchRequest extends FormRequest
             'rental_start' => 'début de location',
             'duration' => 'durée',
             'note' => 'notes',
+
+            // 10 nouveaux champs
+            'gender' => 'sexe',
+            'passport_expiry_date' => 'date d\'expiration du passeport',
+            'address' => 'adresse complète',
+            'current_level_id' => 'niveau d\'études actuel',
+            'preferred_language' => 'langue préférée',
+            'has_campus_france_experience' => 'expérience Campus France',
+            'has_diploma' => 'dernier diplôme',
+            'has_transcript' => 'relevés de notes',
+            'has_cv' => 'CV',
+            'has_motivation_letter' => 'lettre de motivation',
+            'has_conduct_certificate' => 'attestation de bonne vie et moeurs',
         ];
     }
 }

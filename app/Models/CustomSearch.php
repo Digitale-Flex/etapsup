@@ -8,6 +8,7 @@ use App\Models\Certificate\RentalDeposit;
 use App\Models\RealEstate\Category;
 use App\Models\RealEstate\Layout;
 use App\Models\RealEstate\PropertyType;
+use App\Models\Settings\DegreeLevel;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -23,6 +24,7 @@ class CustomSearch extends Model
         'user_id',
         'category_id',
         'city_id',
+        'destination_country_id', // Bug 6 Fix: Pays de destination
         'partner_id',
         'coupon_id',
         'budget',
@@ -32,12 +34,31 @@ class CustomSearch extends Model
         'paid',
         'stripe_payment_intent',
         'state',
+        // 10 nouveaux champs questionnaire
+        'gender',
+        'passport_expiry_date',
+        'address',
+        'current_level_id',
+        'preferred_language',
+        'has_campus_france_experience',
+        'has_diploma',
+        'has_transcript',
+        'has_cv',
+        'has_motivation_letter',
+        'has_conduct_certificate',
     ];
 
     protected function casts(): array
     {
         return [
             'rental_start' => 'date',
+            'passport_expiry_date' => 'date',
+            'has_campus_france_experience' => 'boolean',
+            'has_diploma' => 'boolean',
+            'has_transcript' => 'boolean',
+            'has_cv' => 'boolean',
+            'has_motivation_letter' => 'boolean',
+            'has_conduct_certificate' => 'boolean',
         ];
     }
 
@@ -55,6 +76,22 @@ class CustomSearch extends Model
     public function city(): BelongsTo
     {
         return $this->belongsTo(City::class);
+    }
+
+    /**
+     * Bug 6 Fix: Relation pays de destination
+     */
+    public function destinationCountry(): BelongsTo
+    {
+        return $this->belongsTo(Country::class, 'destination_country_id');
+    }
+
+    /**
+     * Relation niveau d'études actuel
+     */
+    public function currentLevel(): BelongsTo
+    {
+        return $this->belongsTo(DegreeLevel::class, 'current_level_id');
     }
 
     public function partner(): BelongsTo

@@ -10,6 +10,7 @@ interface FormState {
     layout_ids: string[];
     category_id: string;
     city_id: string;
+    destination_country_id: string; // Bug 6 Fix: Pays de destination
     name: string;
     surname: string;
     email: string;
@@ -28,6 +29,18 @@ interface FormState {
     rental_start: Date | null;
     duration: number | null;
     note: string;
+    // 10 nouveaux champs questionnaire
+    gender: string;
+    passport_expiry_date: Date | null;
+    address: string;
+    current_level_id: string;
+    preferred_language: string;
+    has_campus_france_experience: boolean;
+    has_diploma: boolean;
+    has_transcript: boolean;
+    has_cv: boolean;
+    has_motivation_letter: boolean;
+    has_conduct_certificate: boolean;
 }
 
 export const useCustomSearchStore = defineStore('customSearchStore', () => {
@@ -39,6 +52,7 @@ export const useCustomSearchStore = defineStore('customSearchStore', () => {
         layout_ids: [],
         category_id: '',
         city_id: '',
+        destination_country_id: '', // Bug 6 Fix: Pays de destination
         name: '',
         surname: '',
         email: '',
@@ -57,6 +71,18 @@ export const useCustomSearchStore = defineStore('customSearchStore', () => {
         rental_start: null,
         duration: null,
         note: '',
+        // 10 nouveaux champs questionnaire
+        gender: '',
+        passport_expiry_date: null,
+        address: '',
+        current_level_id: '',
+        preferred_language: '',
+        has_campus_france_experience: false,
+        has_diploma: false,
+        has_transcript: false,
+        has_cv: false,
+        has_motivation_letter: false,
+        has_conduct_certificate: false,
     };
 
     // Définition des erreurs externes avec le bon typage
@@ -91,7 +117,21 @@ export const useCustomSearchStore = defineStore('customSearchStore', () => {
             email: { email }, // optionnel mais doit être valide si rempli
             country_birth_id: {}, // optionnel
             country_id: {}, // optionnel
+            destination_country_id: {}, // Bug 6 Fix: optionnel
             paid: {}, // optionnel
+
+            // 10 nouveaux champs questionnaire (tous optionnels sauf gender)
+            gender: {}, // optionnel - M ou F
+            passport_expiry_date: {}, // optionnel
+            address: {}, // optionnel
+            current_level_id: {}, // optionnel
+            preferred_language: {}, // optionnel - FR ou EN
+            has_campus_france_experience: {}, // optionnel
+            has_diploma: {}, // optionnel
+            has_transcript: {}, // optionnel
+            has_cv: {}, // optionnel
+            has_motivation_letter: {}, // optionnel
+            has_conduct_certificate: {}, // optionnel
         },
         {
             externalErrors, // Passage des erreurs externes
@@ -150,6 +190,10 @@ export const useCustomSearchStore = defineStore('customSearchStore', () => {
             r$.$value.passport_number = user.passport_number || '';
             r$.$value.country_birth_id = user.country_birth_id || '';
             r$.$value.country_id = user.country_id || '';
+            // Nouveaux champs
+            r$.$value.gender = user.gender || '';
+            r$.$value.passport_expiry_date = user.passport_expiry_date ? new Date(user.passport_expiry_date) : null;
+            r$.$value.address = user.address || '';
         }
     };
 

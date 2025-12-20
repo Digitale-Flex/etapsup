@@ -185,6 +185,12 @@ export interface Partner {
     name: string;
 }
 
+export interface DegreeLevel {
+    id: string;
+    label: string;
+    description?: string;
+}
+
 export interface User {
     id: string;
     surname: string;

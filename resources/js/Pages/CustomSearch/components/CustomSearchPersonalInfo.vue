@@ -86,6 +86,29 @@ const { r$ } = storeToRefs(store);
                 </b-col>
                 <b-col sm="6" md="4" lg="3">
                     <div class="d-flex flex-column">
+                        <label for="gender">Sexe</label>
+                        <Select
+                            input-id="gender"
+                            v-model="r$.$value.gender"
+                            :options="[{ label: 'Masculin', value: 'M' }, { label: 'Féminin', value: 'F' }]"
+                            :disabled="store.processing"
+                            :invalid="r$.$fields.gender?.$error"
+                            option-label="label"
+                            option-value="value"
+                            placeholder="Sélectionner"
+                        />
+                        <Message
+                            v-if="r$.$fields.gender?.$error"
+                            severity="error"
+                            size="small"
+                            variant="simple"
+                        >
+                            {{ r$.$fields.gender?.$errors[0] }}
+                        </Message>
+                    </div>
+                </b-col>
+                <b-col sm="6" md="4" lg="3">
+                    <div class="d-flex flex-column">
                         <label for="email">Adresse email</label>
                         <input-text
                             v-model="r$.$value.email"
@@ -221,6 +244,49 @@ const { r$ } = storeToRefs(store);
                             variant="simple"
                         >
                             {{ r$.$fields.passport_number.$errors[0] }}
+                        </Message>
+                    </div>
+                </b-col>
+                <b-col sm="6" md="4" lg="3">
+                    <div class="d-flex flex-column">
+                        <label for="passport_expiry_date">Date d'expiration du passeport</label>
+                        <Calendar
+                            input-id="passport_expiry_date"
+                            v-model="r$.$value.passport_expiry_date"
+                            :disabled="store.processing"
+                            :invalid="r$.$fields.passport_expiry_date?.$error"
+                            dateFormat="dd/mm/yy"
+                            showIcon
+                            iconDisplay="input"
+                        />
+                        <Message
+                            v-if="r$.$fields.passport_expiry_date?.$error"
+                            severity="error"
+                            size="small"
+                            variant="simple"
+                        >
+                            {{ r$.$fields.passport_expiry_date?.$errors[0] }}
+                        </Message>
+                    </div>
+                </b-col>
+                <b-col sm="12" md="6">
+                    <div class="d-flex flex-column">
+                        <label for="address">Adresse complète</label>
+                        <Textarea
+                            id="address"
+                            v-model="r$.$value.address"
+                            :disabled="store.processing"
+                            :invalid="r$.$fields.address?.$error"
+                            rows="2"
+                            placeholder="Numéro, rue, ville, code postal, pays"
+                        />
+                        <Message
+                            v-if="r$.$fields.address?.$error"
+                            severity="error"
+                            size="small"
+                            variant="simple"
+                        >
+                            {{ r$.$fields.address?.$errors[0] }}
                         </Message>
                     </div>
                 </b-col>

@@ -24,6 +24,7 @@ use App\Models\RealEstate\Equipment;
 use App\Models\RealEstate\Layout;
 use App\Models\RealEstate\PropertyType;
 use App\Models\RealEstate\Regulation;
+use App\Models\Settings\DegreeLevel;
 use App\Services\PaymentService;
 use App\Services\UserService;
 use Illuminate\Http\JsonResponse;
@@ -54,6 +55,14 @@ class CustomSearchController extends Controller
             'cities' => Inertia::defer(fn() => CityResource::collection(City::minimal()->get())),
             'partners' => fn() => PartnerResource::collection(Partner::minimal()->get()),
             'rentalDeposits' => fn() => RentalDepositesource::collection(RentalDeposit::minimal()->get()),
+            'degreeLevels' => fn() => DegreeLevel::select('id', 'label', 'description')
+                ->where('is_published', true)
+                ->get()
+                ->map(fn($level) => [
+                    'id' => $level->hashid(),
+                    'label' => $level->label,
+                    'description' => $level->description,
+                ]),
             'intent' => $this->paymentService->createSetupIntent($user),
             'stripeKey' => config('cashier.key'),
         ]);
@@ -70,12 +79,14 @@ class CustomSearchController extends Controller
             $validatedData = ArrayHelper::decodeHashIds([
                 'category_id',
                 'city_id',
+                'destination_country_id',
                 'partner_id',
                 'property_type_ids',
                 'layout_ids',
                 'rental_deposit_ids',
                 'country_birth_id',
-                'coupon_id'
+                'coupon_id',
+                'current_level_id',
             ], $request->validated());
 
             $updateResult = $this->userService->update($validatedData);

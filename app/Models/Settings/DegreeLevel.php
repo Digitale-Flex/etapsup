@@ -6,10 +6,12 @@ use App\Traits\ClearsResponseCache;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Mtvs\EloquentHashids\HasHashid;
+use Mtvs\EloquentHashids\HashidRouting;
 
 class DegreeLevel extends Model
 {
-    use ClearsResponseCache, HasFactory, SoftDeletes;
+    use ClearsResponseCache, HasFactory, HasHashid, HashidRouting, SoftDeletes;
 
     protected $fillable = [
         'label',
