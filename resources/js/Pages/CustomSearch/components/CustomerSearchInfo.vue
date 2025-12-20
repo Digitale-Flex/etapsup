@@ -123,31 +123,6 @@ const onSubmit = async () => {
                         </Message>
                     </div>
                 </b-col>
-                <!-- Bug 6 Fix: Ajout pays de destination -->
-                <b-col sm="6" md="4" lg="3">
-                    <div class="d-flex flex-column">
-                        <label for="destination_country_id">Pays de destination *</label>
-                        <Select
-                            input-id="destination_country_id"
-                            v-model="r$.$value.destination_country_id"
-                            :options="countries"
-                            :disabled="store.processing"
-                            :invalid="r$.$fields.destination_country_id?.$error"
-                            filter
-                            option-label="name"
-                            option-value="id"
-                            placeholder="Où souhaitez-vous étudier ?"
-                        />
-                        <Message
-                            v-if="r$.$fields.destination_country_id?.$error"
-                            severity="error"
-                            size="small"
-                            variant="simple"
-                        >
-                            {{ r$.$fields.destination_country_id?.$errors[0] }}
-                        </Message>
-                    </div>
-                </b-col>
                 <b-col sm="6" md="4" lg="3">
                     <div class="d-flex flex-column">
                         <label for="rental_deposit_ids"

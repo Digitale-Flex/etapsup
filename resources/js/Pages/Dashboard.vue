@@ -2,6 +2,11 @@
 // Refonte: Dashboard Étudiant EtatSup
 // Sprint1 Update: Feature 1.1.1 — Espace Étudiant (Connexion & Profil)
 // Quick Win: Logo EtapSup
+// FIX: Désactiver le layout par défaut car Dashboard a son propre header
+defineOptions({
+    layout: false
+});
+
 import { Head, Link, usePage, router } from '@inertiajs/vue3';
 import { BContainer, BRow, BCol, BCard, BCardBody, BCardTitle, BCardText, BBadge, BButton, BProgress } from 'bootstrap-vue-next';
 import { computed, ref } from 'vue';
@@ -141,8 +146,9 @@ const getStatusLabel = (status: string) => {
     <div class="dashboard-header">
         <BContainer fluid="xl">
             <div class="d-flex justify-content-between align-items-center py-3">
-                <Link href="/" class="logo-link">
-                    <Logo size="md" variant="gradient" />
+                <Link href="/" class="logo-link d-flex align-items-center gap-2">
+                    <img src="/images/logo.png" alt="EtapSup" class="dashboard-logo" style="height: 40px; width: auto;" onerror="this.style.display='none'" />
+                    <span class="logo-text-fallback">EtapSup</span>
                 </Link>
                 <UserMenu />
             </div>
@@ -289,24 +295,29 @@ const getStatusLabel = (status: string) => {
                                 <p class="text-muted">Aucun document téléversé</p>
                             </div>
                             <div v-else class="documents-list">
-                                <div
+                                <a
                                     v-for="doc in props.documents"
                                     :key="doc.id"
+                                    :href="doc.file_url || '#'"
+                                    :target="doc.file_url ? '_blank' : undefined"
                                     class="document-item"
+                                    :class="{ 'document-clickable': doc.file_url }"
+                                    @click="!doc.file_url && $event.preventDefault()"
                                 >
                                     <div class="document-info">
                                         <div class="document-icon">📄</div>
                                         <div>
                                             <p class="document-name">{{ doc.type }}</p>
-                                            <p class="document-meta">{{ doc.uploaded_at }}</p>
+                                            <p class="document-meta">{{ doc.uploaded_at }} • {{ doc.establishment }}</p>
                                         </div>
                                     </div>
                                     <div class="document-status">
                                         <BBadge :variant="doc.verified ? 'success' : 'secondary'" class="status-badge-sm">
                                             {{ doc.verified ? '✓ Vérifié' : 'En attente' }}
                                         </BBadge>
+                                        <span v-if="doc.file_url" class="view-link">👁 Voir</span>
                                     </div>
-                                </div>
+                                </a>
                             </div>
                         </div>
 
@@ -320,10 +331,14 @@ const getStatusLabel = (status: string) => {
                                 <p class="text-muted">Aucun paiement effectué</p>
                             </div>
                             <div v-else class="payments-list">
-                                <div
+                                <a
                                     v-for="payment in props.payments"
                                     :key="payment.id"
+                                    :href="payment.receipt_url || '#'"
+                                    :target="payment.receipt_url ? '_blank' : undefined"
                                     class="payment-item"
+                                    :class="{ 'payment-clickable': payment.receipt_url }"
+                                    @click="!payment.receipt_url && $event.preventDefault()"
                                 >
                                     <div class="payment-info">
                                         <p class="payment-description">{{ payment.description }}</p>
@@ -334,8 +349,9 @@ const getStatusLabel = (status: string) => {
                                         <BBadge :variant="payment.status === 'succeeded' ? 'success' : 'warning'" class="status-badge-sm">
                                             {{ payment.status_label }}
                                         </BBadge>
+                                        <span v-if="payment.receipt_url" class="receipt-link">📄 Voir le reçu</span>
                                     </div>
-                                </div>
+                                </a>
                             </div>
                         </div>
 
@@ -431,6 +447,17 @@ const getStatusLabel = (status: string) => {
 
 .logo-link {
     text-decoration: none;
+}
+
+.logo-text-fallback {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #1e3a8a;
+    letter-spacing: -0.5px;
+}
+
+.dashboard-logo {
+    object-fit: contain;
 }
 
 .logo-text {
@@ -773,6 +800,44 @@ const getStatusLabel = (status: string) => {
     padding: 0.25rem 0.625rem;
     font-size: 0.75rem;
     font-weight: 600;
+}
+
+/* Bug 2 Fix: Factures cliquables */
+.payment-clickable {
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.payment-clickable:hover {
+    border-color: #1e3a8a !important;
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.15) !important;
+    transform: translateX(4px);
+}
+
+.receipt-link {
+    font-size: 0.8rem;
+    color: #1e3a8a;
+    font-weight: 600;
+    margin-top: 0.25rem;
+}
+
+/* Bug 3 Fix: Documents cliquables */
+.document-clickable {
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.document-clickable:hover {
+    border-color: #1e3a8a !important;
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.15) !important;
+    transform: translateX(4px);
+}
+
+.view-link {
+    font-size: 0.8rem;
+    color: #1e3a8a;
+    font-weight: 600;
+    margin-top: 0.25rem;
 }
 
 .empty-state {

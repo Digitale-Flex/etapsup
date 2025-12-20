@@ -323,7 +323,7 @@ const submit = async () => {
                 </b-row>
             </b-card>
 
-            <CustomSearchSelectBar :types :categories :layouts :cities />
+            <CustomSearchSelectBar :types :categories :layouts :countries />
             <CustomerSearchInfo
                 :partners
                 :rentalDeposits

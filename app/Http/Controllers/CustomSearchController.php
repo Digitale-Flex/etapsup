@@ -79,7 +79,7 @@ class CustomSearchController extends Controller
             $validatedData = ArrayHelper::decodeHashIds([
                 'category_id',
                 'city_id',
-                'destination_country_id',
+                'destination_country_ids', // Pays visés (multi)
                 'partner_id',
                 'property_type_ids',
                 'layout_ids',
@@ -115,6 +115,7 @@ class CustomSearchController extends Controller
             $model->rentalDeposits()->attach($validatedData['rental_deposit_ids']);
             $model->layouts()->attach($validatedData['layout_ids']);
             $model->propertyTypes()->attach($validatedData['property_type_ids']);
+            $model->destinationCountries()->attach($validatedData['destination_country_ids']);
 
             $user->createOrGetStripeCustomer();
             $user->refresh();

@@ -33,8 +33,9 @@ class CustomSearchRequest extends FormRequest
     {
         return [
             'category_id' => ['required', new ValidateHashid(Category::class)],
-            'city_id' => ['required', new ValidateHashid(City::class)],
-            'destination_country_id' => ['nullable', new ValidateHashid(Country::class)], // Bug 6 Fix
+            'city_id' => ['nullable', new ValidateHashid(City::class)], // Optionnel (remplacé par pays ciblés)
+            'destination_country_ids' => ['required', 'array', 'min:1'], // Pays ciblés (remplace Ville)
+            'destination_country_ids.*' => ['required', new ValidateHashid(Country::class)],
             'partner_id' => ['required', new ValidateHashid(Partner::class)],
             'coupon_id' => ['nullable', new ValidateHashid(Coupon::class)],
             'paid' => ['nullable', 'numeric', 'not_in:0'],
@@ -80,7 +81,8 @@ class CustomSearchRequest extends FormRequest
         return [
             'category_id' => 'catégorie',
             'city_id' => 'ville',
-            'destination_country_id' => 'pays de destination', // Bug 6 Fix
+            'destination_country_ids' => 'pays ciblés',
+            'destination_country_ids.*' => 'pays ciblé',
             'partner_id' => 'partenaire',
             'coupon_id' => 'coupon',
             'paid' => 'montant payé',

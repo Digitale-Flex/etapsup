@@ -1,19 +1,20 @@
 <script setup lang="ts">
 import { useCustomSearchStore } from '@/Stores/customSearch';
-import { Category, City, Layout, PropertyType } from '@/Types/index';
+import { Category, Country, Layout, PropertyType } from '@/Types/index';
 import {
     BIconHouseAdd,
     BIconHouseCheck,
-    BIconPinMap,
+    BIconGlobe,
     BIconTag,
 } from 'bootstrap-icons-vue';
+import MultiSelect from 'primevue/multiselect';
 import { storeToRefs } from 'pinia';
 
 interface Props {
     types: PropertyType[];
     categories: Category[];
     layouts: Layout[];
-    cities?: City[];
+    countries: Country[];
 }
 
 defineProps<Props>();
@@ -146,35 +147,35 @@ const { r$ } = storeToRefs(store);
                                 </b-col>
                                 <b-col sm="6" lg="3">
                                     <label class="h6 fw-normal mb-0">
-                                        <BIconPinMap
+                                        <BIconGlobe
                                             class="text-primary me-1"
                                         />
-                                        Ville</label
+                                        Pays ciblés</label
                                     >
                                     <div
                                         class="form-control-transparent form-fs-lg mt-2"
                                     >
-                                        <Select
-                                            v-model="r$.$value.city_id"
-                                            :options="cities"
+                                        <MultiSelect
+                                            v-model="r$.$value.destination_country_ids"
+                                            :options="countries"
                                             :invalid="
-                                                r$.$fields.city_id.$invalid
+                                                r$.$fields.destination_country_ids.$invalid
                                             "
-                                            :virtualScrollerOptions="{ itemSize: 30 }"
+                                            :maxSelectedLabels="2"
                                             filter
                                             showClear
                                             option-label="name"
                                             option-value="id"
                                             class="w-full"
-                                            placeholder="Dans quelle ville ?"
+                                            placeholder="Sélectionnez un ou plusieurs pays"
                                         />
                                         <Message
-                                            v-show="r$.$fields.city_id.$invalid"
+                                            v-show="r$.$fields.destination_country_ids.$invalid"
                                             severity="error"
                                             size="small"
                                             variant="simple"
                                         >
-                                            {{ r$.$fields.city_id.$errors[0] }}
+                                            {{ r$.$fields.destination_country_ids.$errors[0] }}
                                         </Message>
                                     </div>
                                 </b-col>

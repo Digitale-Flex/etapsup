@@ -24,7 +24,6 @@ class CustomSearch extends Model
         'user_id',
         'category_id',
         'city_id',
-        'destination_country_id', // Bug 6 Fix: Pays de destination
         'partner_id',
         'coupon_id',
         'budget',
@@ -79,11 +78,16 @@ class CustomSearch extends Model
     }
 
     /**
-     * Bug 6 Fix: Relation pays de destination
+     * Pays visés (multi-sélection)
      */
-    public function destinationCountry(): BelongsTo
+    public function destinationCountries(): BelongsToMany
     {
-        return $this->belongsTo(Country::class, 'destination_country_id');
+        return $this->belongsToMany(
+            Country::class,
+            'custom_search_destination_country',
+            'custom_search_id',
+            'country_id'
+        );
     }
 
     /**

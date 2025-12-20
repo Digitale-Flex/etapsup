@@ -10,7 +10,7 @@ interface FormState {
     layout_ids: string[];
     category_id: string;
     city_id: string;
-    destination_country_id: string; // Bug 6 Fix: Pays de destination
+    destination_country_ids: string[]; // Pays visés (multi-sélection)
     name: string;
     surname: string;
     email: string;
@@ -52,7 +52,7 @@ export const useCustomSearchStore = defineStore('customSearchStore', () => {
         layout_ids: [],
         category_id: '',
         city_id: '',
-        destination_country_id: '', // Bug 6 Fix: Pays de destination
+        destination_country_ids: [], // Pays visés (multi-sélection)
         name: '',
         surname: '',
         email: '',
@@ -95,7 +95,7 @@ export const useCustomSearchStore = defineStore('customSearchStore', () => {
             property_type_ids: { required },
             layout_ids: { required },
             category_id: { required },
-            city_id: { required },
+            destination_country_ids: { required }, // Pays ciblés (remplace Ville)
 
             // Informations personnelles (requis)
             name: { required, minLength: minLength(2) },
@@ -117,7 +117,7 @@ export const useCustomSearchStore = defineStore('customSearchStore', () => {
             email: { email }, // optionnel mais doit être valide si rempli
             country_birth_id: {}, // optionnel
             country_id: {}, // optionnel
-            destination_country_id: {}, // Bug 6 Fix: optionnel
+            city_id: {}, // optionnel (remplacé par destination_country_ids)
             paid: {}, // optionnel
 
             // 10 nouveaux champs questionnaire (tous optionnels sauf gender)
