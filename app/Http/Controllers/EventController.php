@@ -78,8 +78,23 @@ class EventController extends Controller
                 'registered_at' => now()
             ]);
 
-            // Send confirmation email (async)
-            \App\Jobs\SendEventConfirmationEmail::dispatch($registration);
+            // Send confirmation email directement (sans job pour debug)
+            try {
+                \Illuminate\Support\Facades\Mail::to($validated['email'])
+                    ->send(new \App\Mail\EventConfirmationMail($registration));
+
+                \Illuminate\Support\Facades\Log::info('Event email sent successfully', [
+                    'to' => $validated['email'],
+                    'registration_id' => $registration->id
+                ]);
+            } catch (\Exception $mailError) {
+                \Illuminate\Support\Facades\Log::error('Event email FAILED', [
+                    'to' => $validated['email'],
+                    'error' => $mailError->getMessage(),
+                    'trace' => $mailError->getTraceAsString()
+                ]);
+                // Continue même si email échoue - l'inscription est réussie
+            }
 
             // Track conversion in analytics
             \Illuminate\Support\Facades\Log::info('Event registration successful', [
