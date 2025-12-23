@@ -38,18 +38,6 @@ jobs:
           REMOTE_USER: ${{ secrets.REMOTE_USER }}
           TARGET: "/home/etapsup-dev/htdocs/dev.etapsup.org"
 
-      - name: Upload production environment file
-        uses: appleboy/ssh-action@v1
-        with:
-          host: ${{ secrets.REMOTE_HOST }}
-          username: ${{ secrets.REMOTE_USER }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          script: |
-            cat <<'EOF' > /home/etapsup-dev/htdocs/dev.etapsup.org/.env
-            ${{ secrets.ENV_FILE }}
-            EOF
-            chmod 640 /home/etapsup-dev/htdocs/dev.etapsup.org/.env
-
       - name: Run Remote/Artisan commands
         uses: appleboy/ssh-action@v1
         with:
